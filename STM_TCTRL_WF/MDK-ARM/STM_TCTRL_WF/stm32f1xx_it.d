@@ -40,6 +40,7 @@ stm_tctrl_wf\stm32f1xx_it.o: ../Inc/i2c.h
 stm_tctrl_wf\stm32f1xx_it.o: ../../Inc/eeprom.h
 stm_tctrl_wf\stm32f1xx_it.o: ../../Inc/7seg.h
 stm_tctrl_wf\stm32f1xx_it.o: ../Inc/spi.h
+stm_tctrl_wf\stm32f1xx_it.o: ../Inc/drive.h
 stm_tctrl_wf\stm32f1xx_it.o: ../../Inc/ds18b20.h
 stm_tctrl_wf\stm32f1xx_it.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm_tctrl_wf\stm32f1xx_it.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

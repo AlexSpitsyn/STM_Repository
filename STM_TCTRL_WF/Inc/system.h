@@ -38,7 +38,8 @@ typedef struct {
   int16_t temp_update;
   int16_t error_check;
   int16_t temp_ctrl;
-  int16_t blink;
+	int16_t drv_move;
+	int16_t blink;
 //  int16_t view_mode;
 }SysCouners_t;
 

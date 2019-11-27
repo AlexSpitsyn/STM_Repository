@@ -110,7 +110,7 @@ void SysInit(void) {
   SysCnt.temp_ctrl = 0;
   SysCnt.temp_update = 0;
   SysCnt.timeout = 0;
-
+  SysCnt.drv_move = 0;
   drv_m1.fail_f = 0;
   drv_m1.run_f = 0;
 	
@@ -161,8 +161,8 @@ void SysInit(void) {
 //	
 //	SysVarRW(RD,&SV[vn_DRIVE_STEPS]);
 	
-	drv_m1.dest_pos = drv_m1.position;
-
+	
+	drv_m1.start_pos=0;
 
 
   if (ds18b20_Init(RESOLUTION_9BIT)) {
@@ -180,10 +180,14 @@ void SysInit(void) {
   
 
   //Start timer1 IT
-  HAL_TIM_Base_Start_IT( &htim1);
+  HAL_TIM_Base_Start_IT( &htim1);//system tymer
+	
+	//Start timer 3 
+	//TIM3->CNT - motor encoder counter (position)
+	TIM3->CNT=0;
 	HAL_TIM_Base_Start_IT( &htim3);
-	// HAL_TIM_Encoder_Start( &htim3, TIM_CHANNEL_ALL);
- //HAL_TIM_IC_Start_IT( &htim3, TIM_CHANNEL_1 );
+	
+	
 	Drive_HomeInit();
 	
 	
@@ -274,8 +278,8 @@ void SystemTask(void) {
 			
             if (!drv_m1.run_f) {
 							//OPEN
-              if ((DS_TEMP > SysState.set_temp + SysState.t_hyst) & (drv_m1.position < drv_m1.max_pos)) {	
-                if (drv_m1.position +  drv_m1.steps < drv_m1.max_pos) {
+              if ((DS_TEMP > SysState.set_temp + SysState.t_hyst) & (DRV_POS < drv_m1.max_pos)) {	
+                if (DRV_POS +  drv_m1.steps < drv_m1.max_pos) {
                   drv_m1.dest_pos +=  drv_m1.steps;
                 } else {
                   drv_m1.dest_pos = drv_m1.max_pos;
@@ -283,8 +287,8 @@ void SystemTask(void) {
 
               }
 							//CLOSE
-              if ((DS_TEMP < SysState.set_temp - SysState.t_hyst) & (drv_m1.position > 0)) {
-                if (drv_m1.position > drv_m1.steps) {
+              if ((DS_TEMP < SysState.set_temp - SysState.t_hyst) & (DRV_POS > 0)) {
+                if (DRV_POS > drv_m1.steps) {
                   drv_m1.dest_pos -= drv_m1.steps;
                 } else {
                   drv_m1.dest_pos = 0;
@@ -295,25 +299,14 @@ void SystemTask(void) {
 
       }
       //----------------      MOTO CONTROL     --------------------------------------
-			uint32_t t;				
-			int16_t temp_pos;
-      if (drv_m1.run_f) {				
-
-        if((HAL_GetTick()-t)>2000){
-          if(temp_pos==drv_m1.position){
-						DRV_STOP();
-						drv_m1.fail_f=1;						
-					}else{
-						t=HAL_GetTick();
-					}
-        }
-      } else if (!SysState.error_f) {
-        if (drv_m1.dest_pos > drv_m1.position) {
-					t=HAL_GetTick();
-					temp_pos=drv_m1.position;
+					
+		
+       if (!SysState.error_f) {
+        if (drv_m1.dest_pos > DRV_POS) {				
+					
           DRV_OPEN();
 
-        } else if (drv_m1.dest_pos < drv_m1.position) {
+        } else if (drv_m1.dest_pos < DRV_POS) {
           DRV_CLOSE();
         }
 //				if(drv_m1.end_sens_f){

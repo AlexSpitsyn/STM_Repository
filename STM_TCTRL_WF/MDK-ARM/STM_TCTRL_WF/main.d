@@ -42,9 +42,10 @@ stm_tctrl_wf\main.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm_tctrl_wf\main.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 stm_tctrl_wf\main.o: ../../Inc/7seg.h
 stm_tctrl_wf\main.o: ../Inc/drive.h
-stm_tctrl_wf\main.o: ../../Inc/io_expander.h
 stm_tctrl_wf\main.o: ../Inc/system.h
+stm_tctrl_wf\main.o: ../../Inc/io_expander.h
 stm_tctrl_wf\main.o: ../../Inc/eeprom.h
+stm_tctrl_wf\main.o: ../Inc/drive.h
 stm_tctrl_wf\main.o: ../Inc/uart_cmd_parser.h
 stm_tctrl_wf\main.o: ../../Inc/nrf24.h
 stm_tctrl_wf\main.o: ../../Inc/wireless_ctrl.h

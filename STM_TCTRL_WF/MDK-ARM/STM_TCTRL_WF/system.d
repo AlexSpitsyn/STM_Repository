@@ -39,6 +39,7 @@ stm_tctrl_wf\system.o: ../../Inc/7seg.h
 stm_tctrl_wf\system.o: ../Inc/spi.h
 stm_tctrl_wf\system.o: ../Inc/drive.h
 stm_tctrl_wf\system.o: ../Inc/usart.h
+stm_tctrl_wf\system.o: ../Inc/system.h
 stm_tctrl_wf\system.o: ../../Inc/ds18b20.h
 stm_tctrl_wf\system.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm_tctrl_wf\system.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

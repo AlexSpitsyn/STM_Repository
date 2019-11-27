@@ -312,6 +312,19 @@ void TIM1_UP_IRQHandler(void)
 					SS_OE_Toggle();
 			}
 	}
+	if(drv_m1.run_f){
+		SysCnt.drv_move++;
+		if(SysCnt.drv_move>200){
+			if(drv_m1.start_pos==(int16_t)DRV_POS){
+				DRV_STOP();
+				drv_m1.fail_f=1;
+				printf("DRV MOVE FAIL\r\n");
+			}else{
+				drv_m1.start_pos=DRV_POS;
+				SysCnt.drv_move=0;
+			}
+     }
+	}
 
 
   /* USER CODE END TIM1_UP_IRQn 0 */
@@ -328,7 +341,7 @@ void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
 	//printf("IRQ TIM 3\r\n");
-	drv_m1.position++;
+	
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */

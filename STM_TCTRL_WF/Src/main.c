@@ -108,8 +108,7 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 	
-//Start timer1 IT
-HAL_TIM_Base_Start_IT(&htim1); //system tymer
+
 
 //Arm UART1
 HAL_UART_Receive_IT(&huart1, &receive_val, 1);
