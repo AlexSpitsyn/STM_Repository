@@ -118,37 +118,36 @@ SysInit();
 //putsUSART("=====================SysInit======================\r\n");
 printf("=====================SysInit======================\r\n");
 
-if(!NRF24_Init()){
-	if(WL_Check_Addr(0xC0)){ 	
-	//0 - addr free READY
-	//1 - init fail
-	//2 - addr busy
-	//3 - timeout	
-		SysState.nrf24_en_f=0;
-		putcSS(SEV_SEG_A);
-		PrintDecSevSeg(0);
-		
-	}else{
-		SysState.nrf24_en_f=1;
-		putcSS(SEV_SEG_A);
-		PrintDecSevSeg(NRF_RX_ADDR[0]);
-	}
-	SS_LATCH();
-	uint8_t t=5;
-	while(t--){
+//if(!NRF24_Init()){
+//	if(WL_Check_Addr(0xC0)){ 	
+//	//0 - addr free READY
+//	//1 - init fail
+//	//2 - addr busy
+//	//3 - timeout	
+//		SysState.nrf24_en_f=0;
+//		putcSS(SEV_SEG_A);
+//		PrintDecSevSeg(0);
+//		
+//	}else{
+//		SysState.nrf24_en_f=1;
+//		putcSS(SEV_SEG_A);
+//		PrintDecSevSeg(NRF_RX_ADDR[0]);
+//	}
+//	SS_LATCH();
+//	uint8_t t=5;
+//	while(t--){
 
-	HAL_Delay(300);
-		SS_OE(1);
-	HAL_Delay(300);
-	SS_OE(0);	
-	}
-
-	
-}
+//	HAL_Delay(300);
+//		SS_OE(1);
+//	HAL_Delay(300);
+//	SS_OE(0);	
+//	}	
+//}
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	
   while (1)
   {
 		SystemTask();
@@ -156,14 +155,15 @@ if(!NRF24_Init()){
 			switch (Buttons_GetCode()) {
 				case BTN_DOWN:
 					printf("DOWN\r\n");	
-					SetTemp();
-	        
+					SetTemp();	        
 	        SysCnt.temp_update = 0;
 	        SysCnt.temp_ctrl = 0;
 				break;
 				case BTN_UP:
+					SetTemp();
 					printf("UP\r\n");
-					
+					SysCnt.temp_update = 0;
+	        SysCnt.temp_ctrl = 0;
 				break;
 						
 			}

@@ -111,10 +111,14 @@ void SysInit(void) {
   SysCnt.temp_update = 0;
   SysCnt.timeout = 0;
   SysCnt.drv_move = 0;
-  drv_m1.fail_f = 0;
+  
+	drv_m1.fail_f = 0;
   drv_m1.run_f = 0;
 	
-
+	drv_m1.max_pos=20;
+	drv_m1.steps=2;
+	
+SysState.set_temp=35;
 	
 	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 	SevSegInit();
@@ -168,10 +172,12 @@ void SysInit(void) {
   if (ds18b20_Init(RESOLUTION_9BIT)) {
     SysState.error_code |= TEMP_SENSOR_READING_ERROR;
     SysState.error_f = 1;
+		SS_PRINT_T_NONE();
     printf("TEMP SENSOR ERROR\r\n");
   }else{
 		ds18b20_GetTemp();
-		printf("TEMP SENSOR OK\r\n");	
+		SS_PRINT_TEMP(DS_TEMP);
+		printf("TEMP SENSOR OK\r\n");			
 		sprintf(sprintf_str, "Temp = %d\r\n", DS_TEMP);		
 		printf(sprintf_str);	
 	}
@@ -275,19 +281,22 @@ void SystemTask(void) {
 
           if (SysCnt.temp_ctrl >= SysState.t_ctrl_time) {            
             SysCnt.temp_ctrl = 0;
-			
+						printf("TEMP CONTROL\r\n");
             if (!drv_m1.run_f) {
 							//OPEN
-              if ((DS_TEMP > SysState.set_temp + SysState.t_hyst) & (DRV_POS < drv_m1.max_pos)) {	
+							
+              if ((DS_TEMP < SysState.set_temp + SysState.t_hyst) & (DRV_POS < drv_m1.max_pos)) {	
+								printf("OPEN\r\n");	
                 if (DRV_POS +  drv_m1.steps < drv_m1.max_pos) {
                   drv_m1.dest_pos +=  drv_m1.steps;
                 } else {
                   drv_m1.dest_pos = drv_m1.max_pos;
                 }
-
               }
 							//CLOSE
-              if ((DS_TEMP < SysState.set_temp - SysState.t_hyst) & (DRV_POS > 0)) {
+							
+              if ((DS_TEMP > SysState.set_temp - SysState.t_hyst) & (DRV_POS > 0)) {
+								printf("CLOSE\r\n");
                 if (DRV_POS > drv_m1.steps) {
                   drv_m1.dest_pos -= drv_m1.steps;
                 } else {
@@ -302,13 +311,16 @@ void SystemTask(void) {
 					
 		
        if (!SysState.error_f) {
+				if(!drv_m1.run_f){
         if (drv_m1.dest_pos > DRV_POS) {				
-					
+					printf("DRV OPEN\r\n");
           DRV_OPEN();
 
         } else if (drv_m1.dest_pos < DRV_POS) {
+					printf("DRV CLOSE\r\n");
           DRV_CLOSE();
         }
+			}
 //				if(drv_m1.end_sens_f){
 //					Drive_HomeInit();				
 //				}
@@ -343,32 +355,36 @@ void SystemTask(void) {
 
         //Check temp sensor
         if (SysState.error_code & TEMP_SENSOR_READING_ERROR) {
-          if (ds18b20_Reset())
+          if (ds18b20_Reset()){
             SysState.error_code |= TEMP_SENSOR_READING_ERROR;
-          else {
+					}else {
             SysState.error_code &= ~TEMP_SENSOR_READING_ERROR;
-            DS_TEMP = ds18b20_GetTemp();
+            ds18b20_GetTemp();
+						HAL_Delay(10);
+						DS_TEMP = ds18b20_GetTemp();
+						
           }
         }
 				
 				
         //Check io_expander
         if (HAL_I2C_IsDeviceReady( & hi2c2, PCF8574A_ADDR, 3, HAL_MAX_DELAY)) {
-
-          SysState.error_code |= IO_EXPANDER_READING_ERROR;
-          SysState.error_f = 1;          
+          SysState.error_code |= IO_EXPANDER_READING_ERROR;  					
         } else {
           SysState.error_code &= ~IO_EXPANDER_READING_ERROR;
-
-        }
-				
-				
-
+        }		
+				if(SysState.error_code){
+					SS_PRINT_ERROR_CODE(SysState.error_code);
+				}else{
+					SS_PRINT_TEMP(DS_TEMP);
+				}
       }
 
 			
       if (SysState.error_code) {
         SysState.error_f = 1;
+        
+
       } else {
         SysState.error_f = 0;
       }
@@ -394,54 +410,7 @@ void SystemTask(void) {
 }
 //========================     SYS TASK END    =====================
 		
-		
-		
-//void SetMaxPosition(void) {
-//      int16_t tmp = drv_m1.max_pos;
-//      SS_PRINT_POS(tmp);
-//      SS_BLINK(ON);
-//      SysCnt.timeout = 0;
-//      while (1) {
-//        if (btn_pressed_f) {
-//          switch (Buttons_GetCode()) {
-//          case BTN_UP:
-//            if (tmp <= DRIVE_MAX_POS_LIMIT-50) {
-//              tmp += drv_m1.steps;
-//            }else{
-//							tmp=DRIVE_MAX_POS_LIMIT;
-//            }
-//            SS_PRINT_POS(tmp);
-//            SysCnt.timeout = 0;
-
-//            break;
-//          case BTN_DOWN:
-//						if (tmp >= drv_m1.steps) {
-//              tmp -= drv_m1.steps;
-//            }else{
-//							tmp=0;
-//            }
-//            SS_PRINT_POS(tmp);
-//            SysCnt.timeout = 0;
-//            break;
-
-//          case BTN_SEL:
-//            drv_m1.max_pos = tmp;
-//            SS_BLINK(OFF);
-//            trulala();
-//            SysVarRW(WR,&SV[vn_DRIVE_MAX_POS]);                   
-//            return;
-
-//          }
-//        }
-//        if (SysCnt.timeout > SS_VIEW_MODE_TIME) {
-//          SS_BLINK(OFF);
-
-//          return;
-//        }
-//      }
-//}
-
-		
+	
 		
   void SetTemp(void) {
 
@@ -454,7 +423,7 @@ void SystemTask(void) {
        switch (Buttons_GetCode()) {
        case BTN_UP:
 
-         if (tmp < DRIVE_MAX_POS_LIMIT) {
+         if (tmp < TEMP_MAX_LIMIT) {
            tmp ++;
            SS_PRINT_TEMP(tmp);
          }
@@ -462,7 +431,7 @@ void SystemTask(void) {
 
          break;
        case BTN_DOWN:
-         if (tmp > DRIVE_MIN_POS_LIMIT) {
+         if (tmp > TEMP_MIN_LIMIT) {
            tmp --;
            SS_PRINT_TEMP(tmp);
          }
@@ -479,8 +448,13 @@ void SystemTask(void) {
        }
      }
      if (SysCnt.timeout > SS_SET_MODE_TIME) {
+			 SysState.set_temp = tmp;
        SS_BLINK(OFF);
-				SS_PRINT_TEMP(DS_TEMP);
+				if(SysState.error_f){
+					SS_PRINT_ERROR_CODE(SysState.error_code);
+				}else{
+					SS_PRINT_TEMP(DS_TEMP);
+				}
        return;
      }
    }

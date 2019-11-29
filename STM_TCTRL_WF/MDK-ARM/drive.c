@@ -41,8 +41,11 @@ void Drive_HomeInit(void){
 					DRV_STOP();
 					printf("DRV HOME DETECT\r\n");
 					DRV_POS=0;
-					break;
-				}					
+					return;
+				}
+				if(drv_m1.fail_f){
+					return;
+				}
 		
 			}
 			

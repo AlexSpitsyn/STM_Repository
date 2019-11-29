@@ -27,11 +27,20 @@ Project File Date:  11/26/2019
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'STM_TCTRL_WF'
-compiling stm32f1xx_it.c...
+compiling system.c...
+system.c(91): warning:  #1215-D: #warning directive: "SET TEMP NOT STORED IN EEPROM"
+  #warning "SET TEMP NOT STORED IN EEPROM"
+system.c(336): warning:  #1215-D: #warning directive: "Check rotation not set"
+  				#warning "Check rotation not set"
+system.c(419): warning:  #188-D: enumerated type mixed with another type
+     SS_BLINK(ON);
+system.c(452): warning:  #188-D: enumerated type mixed with another type
+         SS_BLINK(OFF);
+system.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=25988 RO-data=644 RW-data=88 ZI-data=4872  
+Program Size: Code=26180 RO-data=656 RW-data=88 ZI-data=4872  
 FromELF: creating hex file...
-"STM_TCTRL_WF\STM_TCTRL_WF.axf" - 0 Error(s), 0 Warning(s).
+"STM_TCTRL_WF\STM_TCTRL_WF.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 

@@ -225,10 +225,10 @@ void EXTI2_IRQHandler(void)
   /* USER CODE BEGIN EXTI2_IRQn 0 */
 	if(HAL_GPIO_ReadPin(MAX_SENS_GPIO_Port, MAX_SENS_Pin)){
 		printf("IRQ MAX_SENS 1\r\n");
-		drv_m1.max_sens_f=0;
+		drv_m1.max_sens_f=1;
 	}else{
 		printf("IRQ MAX_SENS 0\r\n");
-		drv_m1.max_sens_f=1;
+		drv_m1.max_sens_f=0;
 		DRV_STOP();
 	}
   /* USER CODE END EXTI2_IRQn 0 */
@@ -246,10 +246,10 @@ void EXTI3_IRQHandler(void)
   /* USER CODE BEGIN EXTI3_IRQn 0 */
 	if(HAL_GPIO_ReadPin(MIN_SENS_GPIO_Port, MIN_SENS_Pin)){
 		printf("IRQ MIN_SENS 1\r\n");
-		drv_m1.min_sens_f=0;
+		drv_m1.min_sens_f=1;
 	}else{
 		printf("IRQ MIN_SENS 0\r\n");
-		drv_m1.min_sens_f=1;
+		drv_m1.min_sens_f=0;
 		DRV_STOP();
 	}
 
@@ -297,6 +297,7 @@ void TIM1_UP_IRQHandler(void)
   /* USER CODE BEGIN TIM1_UP_IRQn 0 */
   SysCnt.temp_update++;
   SysCnt.timeout++;
+	SysCnt.temp_ctrl++;
 	
 	packet_handler_timer++;
 

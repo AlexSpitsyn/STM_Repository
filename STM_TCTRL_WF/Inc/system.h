@@ -200,11 +200,19 @@ uint8_t Buttons_GetCode(void);
 
 #define SS_BLINK_TIME 							10
 #define SS_SET_MODE_TIME 					120
-//#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);PrintDecSevSeg(drv_m1.position);
-//#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);PrintDecSevSeg(x);
+
+#ifdef BLUE_BOARD
 #define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); PrintDecSevSeg(x);
 #define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); PrintDecSevSeg(x);
 #define SS_PRINT_T_NONE() 					putcSS(SEV_SEG_t); putcSS(0); putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); SS_LATCH();
+#endif
+
+#ifdef GREEN_BOARD
+#define SS_PRINT_TEMP(x) 						PrintDecSevSeg(x);putcSS(SEV_SEG_t);SS_LATCH();
+#define SS_PRINT_ERROR_CODE(x) 			PrintDecSevSeg(x);putcSS(SEV_SEG_E); SS_LATCH();
+#define SS_PRINT_T_NONE() 					putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); SS_LATCH();
+#endif
+
 #define SS_BLINK(x) 								SysState.ss_blink_f = x; SS_OE(x); SysCnt.blink=0;
 //#define TEMP_VIEW 									0
 //#define POSITION_VIEW 							1
@@ -215,7 +223,8 @@ uint8_t Buttons_GetCode(void);
 
 //========================     TEMP SENSOR======================
 # ifdef DS18B20
-
+#define TEMP_MAX_LIMIT 					50
+#define TEMP_MIN_LIMIT 					10
 
 # endif
 //==============================================================
@@ -241,8 +250,8 @@ uint8_t Buttons_GetCode(void);
 # ifdef DRIVE_CTRL
 
 
-#define DRIVE_MAX_POS_LIMIT 					20
-#define DRIVE_MIN_POS_LIMIT 					0
+//#define DRIVE_MAX_POS_LIMIT 					20
+//#define DRIVE_MIN_POS_LIMIT 					0
 
 # endif
 //==============================================================

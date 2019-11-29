@@ -152,18 +152,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>318</LineNumber>
+          <LineNumber>283</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134235184</Address>
+          <Address>134234930</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Src/stm32f1xx_it.c</Filename>
+          <Filename>.\system.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\STM_TCTRL_WF\../Src/stm32f1xx_it.c\318</Expression>
+          <Expression>\\STM_TCTRL_WF\system.c\283</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
