@@ -1,10 +1,10 @@
 stm_tctrl_new\uart_dbg.o: UART_DBG.c
 stm_tctrl_new\uart_dbg.o: ../Inc/uart_cmd_parser.h
-stm_tctrl_new\uart_dbg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-stm_tctrl_new\uart_dbg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-stm_tctrl_new\uart_dbg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-stm_tctrl_new\uart_dbg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
-stm_tctrl_new\uart_dbg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+stm_tctrl_new\uart_dbg.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm_tctrl_new\uart_dbg.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm_tctrl_new\uart_dbg.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm_tctrl_new\uart_dbg.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
+stm_tctrl_new\uart_dbg.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 stm_tctrl_new\uart_dbg.o: ../Inc/system.h
 stm_tctrl_new\uart_dbg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 stm_tctrl_new\uart_dbg.o: ../Inc/stm32f1xx_hal_conf.h
@@ -14,7 +14,7 @@ stm_tctrl_new\uart_dbg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.
 stm_tctrl_new\uart_dbg.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
 stm_tctrl_new\uart_dbg.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h
 stm_tctrl_new\uart_dbg.o: ../Drivers/CMSIS/Include/core_cm3.h
-stm_tctrl_new\uart_dbg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm_tctrl_new\uart_dbg.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm_tctrl_new\uart_dbg.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 stm_tctrl_new\uart_dbg.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 stm_tctrl_new\uart_dbg.o: ../Drivers/CMSIS/Include/core_cmFunc.h

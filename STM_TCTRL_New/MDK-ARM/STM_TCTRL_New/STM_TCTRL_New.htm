@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM_TCTRL_New\STM_TCTRL_New.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM_TCTRL_New\STM_TCTRL_New.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Nov 13 15:37:00 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Nov 29 13:30:06 2019
 <BR><P>
 <H3>Maximum Stack Usage =        584 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1359,7 +1359,7 @@ Global Symbols
 <P><STRONG><a name="[8]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(RESET)
 </UL>
-<P><STRONG><a name="[c2]"></a>PrintDecSevSeg</STRONG> (Thumb, 234 bytes, Stack size 24 bytes, 7seg.o(i.PrintDecSevSeg))
+<P><STRONG><a name="[c2]"></a>PrintDecSevSeg</STRONG> (Thumb, 232 bytes, Stack size 24 bytes, 7seg.o(i.PrintDecSevSeg))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = PrintDecSevSeg &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
@@ -1376,7 +1376,7 @@ Global Symbols
 <P><STRONG><a name="[6]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_it.o(i.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(RESET)
 </UL>
-<P><STRONG><a name="[c4]"></a>SetMaxPosition</STRONG> (Thumb, 224 bytes, Stack size 40 bytes, system.o(i.SetMaxPosition))
+<P><STRONG><a name="[c4]"></a>SetMaxPosition</STRONG> (Thumb, 232 bytes, Stack size 40 bytes, system.o(i.SetMaxPosition))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = SetMaxPosition &rArr; SysVarRW &rArr; EEPROM_Read &rArr; HAL_I2C_Mem_Read &rArr; I2C_RequestMemoryRead &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
@@ -1402,7 +1402,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c8]"></a>SevSegInit</STRONG> (Thumb, 154 bytes, Stack size 48 bytes, 7seg.o(i.SevSegInit))
+<P><STRONG><a name="[c8]"></a>SevSegInit</STRONG> (Thumb, 156 bytes, Stack size 48 bytes, 7seg.o(i.SevSegInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = SevSegInit &rArr; trulala &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
@@ -1476,7 +1476,7 @@ Global Symbols
 <P><STRONG><a name="[36]"></a>SystemInit</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, system_stm32f1xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(.text)
 </UL>
-<P><STRONG><a name="[d2]"></a>SystemTask</STRONG> (Thumb, 942 bytes, Stack size 40 bytes, system.o(i.SystemTask))
+<P><STRONG><a name="[d2]"></a>SystemTask</STRONG> (Thumb, 906 bytes, Stack size 40 bytes, system.o(i.SystemTask))
 <BR><BR>[Stack]<UL><LI>Max Depth = 576<LI>Call Chain = SystemTask &rArr; parseCommand &rArr; NRF24_Init &rArr; NRF24_Read_Buf &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
@@ -1496,7 +1496,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[23]"></a>TIM1_UP_IRQHandler</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, stm32f1xx_it.o(i.TIM1_UP_IRQHandler))
+<P><STRONG><a name="[23]"></a>TIM1_UP_IRQHandler</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, stm32f1xx_it.o(i.TIM1_UP_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TIM1_UP_IRQHandler &rArr; HAL_TIM_IRQHandler
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
@@ -1611,7 +1611,7 @@ Global Symbols
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Handler
 </UL>
 
-<P><STRONG><a name="[dd]"></a>WL_Set_Var</STRONG> (Thumb, 488 bytes, Stack size 40 bytes, wireless_ctrl.o(i.WL_Set_Var))
+<P><STRONG><a name="[dd]"></a>WL_Set_Var</STRONG> (Thumb, 484 bytes, Stack size 40 bytes, wireless_ctrl.o(i.WL_Set_Var))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = WL_Set_Var &rArr; SysVarRW &rArr; EEPROM_Read &rArr; HAL_I2C_Mem_Read &rArr; I2C_RequestMemoryRead &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
@@ -1821,7 +1821,7 @@ Global Symbols
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Get_Packet
 </UL>
 
-<P><STRONG><a name="[35]"></a>main</STRONG> (Thumb, 1266 bytes, Stack size 8 bytes, main.o(i.main))
+<P><STRONG><a name="[35]"></a>main</STRONG> (Thumb, 1270 bytes, Stack size 8 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 584<LI>Call Chain = main &rArr; SystemTask &rArr; parseCommand &rArr; NRF24_Init &rArr; NRF24_Read_Buf &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
@@ -1919,7 +1919,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 </UL>
 
-<P><STRONG><a name="[c5]"></a>trulala</STRONG> (Thumb, 110 bytes, Stack size 56 bytes, 7seg.o(i.trulala))
+<P><STRONG><a name="[c5]"></a>trulala</STRONG> (Thumb, 102 bytes, Stack size 56 bytes, 7seg.o(i.trulala))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = trulala &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit

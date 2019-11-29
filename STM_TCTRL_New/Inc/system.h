@@ -214,7 +214,8 @@ uint8_t Buttons_GetCode(void);
 
 //========================     TEMP SENSOR======================
 # ifdef DS18B20
-
+#define TEMP_MAX_LIMIT 					45
+#define TEMP_MIN_LIMIT 					0
 
 # endif
 //==============================================================

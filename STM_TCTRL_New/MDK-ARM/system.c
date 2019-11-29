@@ -396,7 +396,7 @@ void SetMaxPosition(void) {
         if (btn_pressed_f) {
           switch (Buttons_GetCode()) {
           case BTN_UP:
-            if (tmp <= DRIVE_MAX_POS_LIMIT-50) {
+            if (tmp < DRIVE_MAX_POS_LIMIT - drv_m1.steps) {
               tmp += drv_m1.steps;
             }else{
 							tmp=DRIVE_MAX_POS_LIMIT;
@@ -406,11 +406,12 @@ void SetMaxPosition(void) {
 
             break;
           case BTN_DOWN:
-						if (tmp >= drv_m1.steps) {
+						if (tmp > DRIVE_MIN_POS_LIMIT + drv_m1.steps) {
               tmp -= drv_m1.steps;
             }else{
-							tmp=0;
+							tmp=DRIVE_MIN_POS_LIMIT;
             }
+
             SS_PRINT_POS(tmp);
             SysCnt.timeout = 0;
             break;
@@ -445,7 +446,7 @@ void SetMaxPosition(void) {
        switch (Buttons_GetCode()) {
        case BTN_UP:
 
-         if (tmp < DRIVE_MAX_POS_LIMIT) {
+         if (tmp < TEMP_MAX_LIMIT) {
            tmp ++;
            SS_PRINT_TEMP(tmp);
          }
@@ -453,7 +454,7 @@ void SetMaxPosition(void) {
 
          break;
        case BTN_DOWN:
-         if (tmp > DRIVE_MIN_POS_LIMIT) {
+         if (tmp > TEMP_MIN_LIMIT) {
            tmp --;
            SS_PRINT_TEMP(tmp);
          }

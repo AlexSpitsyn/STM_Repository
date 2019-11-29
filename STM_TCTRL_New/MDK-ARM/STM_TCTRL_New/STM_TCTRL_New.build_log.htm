@@ -3,62 +3,139 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: µVision V5.28.0.0
-Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Spitsyn Alex, home, LIC=----
+IDE-Version: µVision V5.26.2.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: a s, i, LIC=4ZLPC-78RBK-BVW1G-VHDXT-X0RQT-WHN3D
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: 5.28.0.0
-Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+Toolchain:       MDK-ARM Professional  Version: 5.26.2.0
+Toolchain Path:  d:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 6 (build 750)
 Assembler:       Armasm.exe V5.06 update 6 (build 750)
 Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
 Library Manager: ArmAr.exe V5.06 update 6 (build 750)
 Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
-CPU DLL:         SARMCM3.DLL V5.28.0.0
-Dialog DLL:      DCM.DLL V1.17.3.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.6.0
-Dialog DLL:      TCM.DLL V1.36.2.0
+CPU DLL:         SARMCM3.DLL V5.26.2.0
+Dialog DLL:      DCM.DLL V1.17.2.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.5.0
+Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
-E:\STM\workspace\STM_TCTRL_New\MDK-ARM\STM_TCTRL_New.uvprojx
+D:\STM\workspace\STM_Repository\STM_TCTRL_New\MDK-ARM\STM_TCTRL_New.uvprojx
 Project File Date:  07/02/2019
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'STM_TCTRL_New'
-compiling stm32f1xx_it.c...
-compiling system.c...
-system.c(393): warning:  #188-D: enumerated type mixed with another type
-        SS_BLINK(ON);
-system.c(420): warning:  #188-D: enumerated type mixed with another type
-              SS_BLINK(OFF);
-system.c(428): warning:  #188-D: enumerated type mixed with another type
-            SS_BLINK(OFF);
-system.c(441): warning:  #188-D: enumerated type mixed with another type
-     SS_BLINK(ON);
-system.c(465): warning:  #188-D: enumerated type mixed with another type
-           SS_BLINK(OFF);
-system.c(473): warning:  #188-D: enumerated type mixed with another type
-         SS_BLINK(OFF);
-system.c: 6 warnings, 0 errors
+assembling startup_stm32f103xb.s...
+compiling system_stm32f1xx.c...
+compiling stm32f1xx_hal_cortex.c...
+compiling stm32f1xx_hal_spi_ex.c...
+compiling stm32f1xx_hal_rcc.c...
+compiling stm32f1xx_hal_flash.c...
+compiling stm32f1xx_hal_flash_ex.c...
+compiling stm32f1xx_hal_tim_ex.c...
+compiling stm32f1xx_hal_uart.c...
+compiling stm32f1xx_hal_gpio_ex.c...
+compiling stm32f1xx_hal_pwr.c...
+compiling stm32f1xx_hal_dma.c...
+compiling stm32f1xx_hal_i2c.c...
+compiling stm32f1xx_hal_rcc_ex.c...
+compiling stm32f1xx_hal.c...
+compiling stm32f1xx_hal_gpio.c...
+compiling stm32f1xx_hal_spi.c...
+compiling stm32f1xx_hal_crc.c...
 compiling main.c...
 ../Src/main.c(165): warning:  #188-D: enumerated type mixed with another type
   		SS_OE(1);
 ../Src/main.c(167): warning:  #188-D: enumerated type mixed with another type
   	SS_OE(0);	
 ../Src/main.c: 2 warnings, 0 errors
+compiling stm32f1xx_it.c...
+compiling stm32f1xx_hal_tim.c...
+compiling stm32f1xx_hal_msp.c...
+compiling system.c...
+system.c(393): warning:  #188-D: enumerated type mixed with another type
+        SS_BLINK(ON);
+system.c(421): warning:  #188-D: enumerated type mixed with another type
+              SS_BLINK(OFF);
+system.c(429): warning:  #188-D: enumerated type mixed with another type
+            SS_BLINK(OFF);
+system.c(442): warning:  #188-D: enumerated type mixed with another type
+     SS_BLINK(ON);
+system.c(466): warning:  #188-D: enumerated type mixed with another type
+           SS_BLINK(OFF);
+system.c(474): warning:  #188-D: enumerated type mixed with another type
+         SS_BLINK(OFF);
+system.c: 6 warnings, 0 errors
 compiling ds18b20.c...
-ds18b20.c(63): warning:  #177-D: variable "s"  was declared but never referenced
-  	uint8_t s[16];
-ds18b20.c: 1 warning, 0 errors
+compiling 7seg.c...
+7seg.c(31): warning:  #188-D: enumerated type mixed with another type
+    SS_OE(0);
+compiling eeprom.c...
+compiling io_expander.c...
+compiling gpio.c...
+compiling nrf24.c...
+nrf24.c(282): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(286): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(290): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(294): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(298): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(302): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(307): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(312): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(316): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(320): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  			dbg_print(dbg_str);
+nrf24.c(416): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  				dbg_print(dbg_str);
+nrf24.c(480): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(484): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(488): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(492): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(496): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(500): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(505): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(509): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(512): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c(515): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		dbg_print(dbg_str);
+nrf24.c: 21 warnings, 0 errors
+compiling spi.c...
+compiling i2c.c...
+compiling usart.c...
+compiling drive.c...
+drive.c(74): warning:  #1-D: last line of file ends without a newline
+  }
+drive.c: 1 warning, 0 errors
+compiling tim.c...
 compiling UART_DBG.c...
+compiling crc.c...
+compiling retarget_io.c...
 compiling uart_cmd_parser.c...
 compiling wireless_ctrl.c...
 linking...
-Program Size: Code=30440 RO-data=868 RW-data=364 ZI-data=4876  
+Program Size: Code=30404 RO-data=868 RW-data=364 ZI-data=4876  
 FromELF: creating hex file...
-"STM_TCTRL_New\STM_TCTRL_New.axf" - 0 Error(s), 9 Warning(s).
+"STM_TCTRL_New\STM_TCTRL_New.axf" - 0 Error(s), 31 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -69,8 +146,8 @@ Package Vendor: ARM
    * Component: CORE Version: 5.2.0
 
 Package Vendor: Keil
-                http://www.keil.com/pack/Keil.ARM_Compiler.1.6.1.pack
-                Keil.ARM_Compiler.1.6.1
+                http://www.keil.com/pack/Keil.ARM_Compiler.1.6.0.pack
+                Keil.ARM_Compiler.1.6.0
                 Keil ARM Compiler extensions for ARM Compiler 5 and ARM Compiler 6
    * Component: STDERR Variant: ITM Version: 1.2.0
    * Component: STDIN Variant: ITM Version: 1.2.0
@@ -83,8 +160,8 @@ Package Vendor: Keil
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_STM_TCTRL_New
-  C:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include
-  C:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include
+  d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include
+  d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
 
@@ -98,7 +175,7 @@ Package Vendor: Keil
 
    * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:ITM:1.2.0
       Source file:   Source\retarget_io.c
-Build Time Elapsed:  00:00:28
+Build Time Elapsed:  00:00:10
 </pre>
 </body>
 </html>
