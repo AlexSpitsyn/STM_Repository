@@ -1,5 +1,5 @@
 stm_tctrl_wf\io_expander.o: ..\..\Src\io_expander.c
-stm_tctrl_wf\io_expander.o: ../../Inc/io_expander.h
+stm_tctrl_wf\io_expander.o: ../Inc/io_expander.h
 stm_tctrl_wf\io_expander.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 stm_tctrl_wf\io_expander.o: ../Inc/stm32f1xx_hal_conf.h
 stm_tctrl_wf\io_expander.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h

@@ -72,8 +72,8 @@ void Error_Handler(void);
 #define MIN_SENS_EXTI_IRQn EXTI3_IRQn
 #define CS1_Pin GPIO_PIN_4
 #define CS1_GPIO_Port GPIOA
-#define ENC_Pin GPIO_PIN_0
-#define ENC_GPIO_Port GPIOB
+#define RELEY_CTRL_Pin GPIO_PIN_0
+#define RELEY_CTRL_GPIO_Port GPIOB
 #define SW_INT_Pin GPIO_PIN_1
 #define SW_INT_GPIO_Port GPIOB
 #define SW_INT_EXTI_IRQn EXTI1_IRQn
@@ -85,6 +85,8 @@ void Error_Handler(void);
 #define CE2_GPIO_Port GPIOA
 #define GPIO2_Pin GPIO_PIN_15
 #define GPIO2_GPIO_Port GPIOA
+#define PHOTOSENSOR_Pin GPIO_PIN_4
+#define PHOTOSENSOR_GPIO_Port GPIOB
 #define CE1_Pin GPIO_PIN_6
 #define CE1_GPIO_Port GPIOB
 #define IRQ2_Pin GPIO_PIN_7

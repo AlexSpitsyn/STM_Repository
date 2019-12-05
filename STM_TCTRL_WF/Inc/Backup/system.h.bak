@@ -38,7 +38,8 @@ typedef struct {
   int16_t temp_update;
   int16_t error_check;
   int16_t temp_ctrl;
-  int16_t blink;
+	int16_t drv_move;
+	int16_t blink;
 //  int16_t view_mode;
 }SysCouners_t;
 
@@ -48,7 +49,7 @@ typedef struct {
   //				Seven Seg
   _Bool ss_blink_f;
 //  _Bool view_mode_f;
-  _Bool ss_update_f;
+//  _Bool ss_update_f;
   //				TEMP
   int16_t set_temp;
 //  int16_t temp_ctrl_f;
@@ -57,7 +58,7 @@ typedef struct {
 	int16_t t_hyst;
   //				ERROR
   int8_t error_code;
-  _Bool error_f;
+//  _Bool error_f;
 	//				UART DBG
 	_Bool uart_en_f;
 	_Bool uart_dbg_f;
@@ -109,6 +110,7 @@ typedef struct {
 #define TEMP_SENSOR_READING_ERROR 	0x04
 #define IO_EXPANDER_READING_ERROR 	0x08
 #define EEPROM_READING_ERROR 				0x10
+#define OVERTEMP_ERROR 							0x20
 
 #define ERROR_CHECK_TIME						100
 
@@ -199,11 +201,19 @@ uint8_t Buttons_GetCode(void);
 
 #define SS_BLINK_TIME 							10
 #define SS_SET_MODE_TIME 					120
-//#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);PrintDecSevSeg(drv_m1.position);
-//#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);PrintDecSevSeg(x);
+
+#ifdef BLUE_BOARD
 #define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); PrintDecSevSeg(x);
 #define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); PrintDecSevSeg(x);
 #define SS_PRINT_T_NONE() 					putcSS(SEV_SEG_t); putcSS(0); putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); SS_LATCH();
+#endif
+
+#ifdef GREEN_BOARD
+#define SS_PRINT_TEMP(x) 						PrintDecSevSeg(x);putcSS(SEV_SEG_t);SS_LATCH();
+#define SS_PRINT_ERROR_CODE(x) 			PrintDecSevSeg(x);putcSS(SEV_SEG_E); SS_LATCH();
+#define SS_PRINT_T_NONE() 					putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); SS_LATCH();
+#endif
+
 #define SS_BLINK(x) 								SysState.ss_blink_f = x; SS_OE(x); SysCnt.blink=0;
 //#define TEMP_VIEW 									0
 //#define POSITION_VIEW 							1
@@ -214,7 +224,8 @@ uint8_t Buttons_GetCode(void);
 
 //========================     TEMP SENSOR======================
 # ifdef DS18B20
-
+#define TEMP_MAX_LIMIT 					50
+#define TEMP_MIN_LIMIT 					10
 
 # endif
 //==============================================================
@@ -239,9 +250,10 @@ uint8_t Buttons_GetCode(void);
 //========================     DRIVE_CTRL   ====================
 # ifdef DRIVE_CTRL
 
-
-#define DRIVE_MAX_POS_LIMIT 					20
+#define DRIVE_STEPS					 					10
+#define DRIVE_MAX_POS_LIMIT 					100
 #define DRIVE_MIN_POS_LIMIT 					0
+#define DRIVE_ROTATION_TIMEOUT 				20	
 
 # endif
 //==============================================================

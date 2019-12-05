@@ -70,7 +70,9 @@
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 uint8_t nrf_init_state=0;
-uint16_t pump_check_timer=0;
+uint16_t pump_on_timer=0;
+_Bool pump_fail_f=0;
+#define MAX_PUMP_ON_TIME	6000//60 sec
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -129,8 +131,8 @@ uartInit();
 nrf_init_state = NRF24_Init();
 HAL_Delay(200);
 //putsUSART("3\r\n>");
-HAL_TIM_Base_Start_IT( &htim1);
-HAL_TIM_PWM_Start_IT(&htim4,TIM_CHANNEL_1);
+HAL_TIM_Base_Start_IT( &htim4);
+//HAL_TIM_PWM_Start_IT(&htim1,TIM_CHANNEL_2);
 //putsUSART("4\r\n>");
 
 if(nrf_init_state){
@@ -138,13 +140,13 @@ if(nrf_init_state){
 }
 
 uint8_t cdc_init=0;
-pump_check_timer=0;
+pump_on_timer=0;
 if(nrf_init_state==0){
 	nrf_init_state=WL_Check_Addr(0xB0);	
 	
 }
 HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
-HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);  
+//HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);  
 
   /* USER CODE END 2 */
 
@@ -187,7 +189,7 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
       }
 			HAL_Delay(2000);	
 			
-			if(packet_handler_timer>1000){
+			if(packet_handler_timer>500){// every 5 sec
 				packet_handler_timer=0;
 				if (nrf_init_state == 1){
 					nrf_init_state = NRF24_Init();
@@ -203,13 +205,24 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 			WL_Handler();	
 		}
 		
-	//	if(HAL_GPIO_ReadPin(DQ_GPIO_Port,DQ_Pin)==GPIO_PIN_RESET){
-	//		HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
-	//	}
-		HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,HAL_GPIO_ReadPin(DQ_GPIO_Port,DQ_Pin));
+		
 
-		if(pump_check_timer>1){
+		
+		if(pump_on_timer>MAX_PUMP_ON_TIME){
+			pump_fail_f=1;
+			HAL_TIM_PWM_Start_IT(&htim1,TIM_CHANNEL_2);
+			
+			HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
+		}else{
+			pump_fail_f=0;
+			HAL_TIM_PWM_Stop_IT(&htim1,TIM_CHANNEL_2);
+			HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
 		}
+		if(pump_on_timer>MAX_PUMP_ON_TIME+300){
+		pump_on_timer=MAX_PUMP_ON_TIME-200;
+		}
+			
+
 	}
   /* USER CODE END WHILE */
 

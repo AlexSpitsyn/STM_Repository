@@ -8,6 +8,7 @@
 "stm_tctrl_wf\system.o"
 "stm_tctrl_wf\drive.o"
 "stm_tctrl_wf\7seg.o"
+"stm_tctrl_wf\eeprom.o"
 "stm_tctrl_wf\main.o"
 "stm_tctrl_wf\gpio.o"
 "stm_tctrl_wf\crc.o"

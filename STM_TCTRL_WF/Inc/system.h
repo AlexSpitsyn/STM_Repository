@@ -49,7 +49,7 @@ typedef struct {
   //				Seven Seg
   _Bool ss_blink_f;
 //  _Bool view_mode_f;
-  _Bool ss_update_f;
+//  _Bool ss_update_f;
   //				TEMP
   int16_t set_temp;
 //  int16_t temp_ctrl_f;
@@ -58,7 +58,7 @@ typedef struct {
 	int16_t t_hyst;
   //				ERROR
   int8_t error_code;
-  _Bool error_f;
+//  _Bool error_f;
 	//				UART DBG
 	_Bool uart_en_f;
 	_Bool uart_dbg_f;
@@ -110,6 +110,7 @@ typedef struct {
 #define TEMP_SENSOR_READING_ERROR 	0x04
 #define IO_EXPANDER_READING_ERROR 	0x08
 #define EEPROM_READING_ERROR 				0x10
+#define OVERTEMP_ERROR 							0x20
 
 #define ERROR_CHECK_TIME						100
 
@@ -249,9 +250,10 @@ uint8_t Buttons_GetCode(void);
 //========================     DRIVE_CTRL   ====================
 # ifdef DRIVE_CTRL
 
-
-//#define DRIVE_MAX_POS_LIMIT 					20
-//#define DRIVE_MIN_POS_LIMIT 					0
+#define DRIVE_STEPS					 					10
+#define DRIVE_MAX_POS_LIMIT 					100
+#define DRIVE_MIN_POS_LIMIT 					0
+#define DRIVE_ROTATION_TIMEOUT 				20	
 
 # endif
 //==============================================================

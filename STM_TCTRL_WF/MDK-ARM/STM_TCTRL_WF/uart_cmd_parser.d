@@ -35,12 +35,12 @@ stm_tctrl_wf\uart_cmd_parser.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 stm_tctrl_wf\uart_cmd_parser.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 stm_tctrl_wf\uart_cmd_parser.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
 stm_tctrl_wf\uart_cmd_parser.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-stm_tctrl_wf\uart_cmd_parser.o: ../../Inc/wireless_ctrl.h
-stm_tctrl_wf\uart_cmd_parser.o: ../../Inc/nrf24.h
+stm_tctrl_wf\uart_cmd_parser.o: ../Inc/wireless_ctrl.h
+stm_tctrl_wf\uart_cmd_parser.o: ../Inc/nrf24.h
 stm_tctrl_wf\uart_cmd_parser.o: ../Inc/spi.h
 stm_tctrl_wf\uart_cmd_parser.o: ../Inc/main.h
 stm_tctrl_wf\uart_cmd_parser.o: ../Inc/usart.h
 stm_tctrl_wf\uart_cmd_parser.o: ../Inc/crc.h
-stm_tctrl_wf\uart_cmd_parser.o: ../../Inc/ds18b20.h
-stm_tctrl_wf\uart_cmd_parser.o: ../../Inc/io_expander.h
+stm_tctrl_wf\uart_cmd_parser.o: ../Inc/ds18b20.h
+stm_tctrl_wf\uart_cmd_parser.o: ../Inc/io_expander.h
 stm_tctrl_wf\uart_cmd_parser.o: ../Inc/i2c.h

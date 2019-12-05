@@ -61,7 +61,6 @@
 
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim3;
 extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
 
@@ -226,10 +225,13 @@ void EXTI2_IRQHandler(void)
 	if(HAL_GPIO_ReadPin(MAX_SENS_GPIO_Port, MAX_SENS_Pin)){
 		printf("IRQ MAX_SENS 1\r\n");
 		drv_m1.max_sens_f=1;
+		DRV_STOP();		
+		drv_m1.max_pos=drv_m1.pos;
+		drv_m1.dest_pos=drv_m1.pos;
 	}else{
 		printf("IRQ MAX_SENS 0\r\n");
-		drv_m1.max_sens_f=0;
-		DRV_STOP();
+		drv_m1.max_sens_f=0;		
+		
 	}
   /* USER CODE END EXTI2_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
@@ -247,10 +249,13 @@ void EXTI3_IRQHandler(void)
 	if(HAL_GPIO_ReadPin(MIN_SENS_GPIO_Port, MIN_SENS_Pin)){
 		printf("IRQ MIN_SENS 1\r\n");
 		drv_m1.min_sens_f=1;
+		DRV_STOP();
+		drv_m1.pos=0;
+		drv_m1.dest_pos=0;
 	}else{
 		printf("IRQ MIN_SENS 0\r\n");
 		drv_m1.min_sens_f=0;
-		DRV_STOP();
+		
 	}
 
   /* USER CODE END EXTI3_IRQn 0 */
@@ -303,7 +308,7 @@ void TIM1_UP_IRQHandler(void)
 
 	//printf("timeout: %d\r\n", SysCnt.timeout);
 	//printf("temp_update: %d\r\n", SysCnt.temp_update);
-	if (SysState.error_f)
+	if (SysState.error_code)
 			SysCnt.error_check++;
 
 	if (SysState.ss_blink_f) {					
@@ -315,17 +320,36 @@ void TIM1_UP_IRQHandler(void)
 	}
 	if(drv_m1.run_f){
 		SysCnt.drv_move++;
-		if(SysCnt.drv_move>200){
-			if(drv_m1.start_pos==(int16_t)DRV_POS){
-				DRV_STOP();
-				drv_m1.fail_f=1;
-				printf("DRV MOVE FAIL\r\n");
+		
+		if(HAL_GPIO_ReadPin(PHOTOSENSOR_GPIO_Port, PHOTOSENSOR_Pin)!=drv_m1.photosensor_state){
+			drv_m1.photosensor_state^=1;
+			SysCnt.drv_move=0;
+			
+			if(drv_m1.direction){
+				drv_m1.pos++;
 			}else{
-				drv_m1.start_pos=DRV_POS;
-				SysCnt.drv_move=0;
+				drv_m1.pos--;
 			}
-     }
+			if(drv_m1.pos==drv_m1.dest_pos){
+				DRV_STOP();
+			}
+			
+		}		
+		if(SysCnt.drv_move>DRIVE_ROTATION_TIMEOUT){			
+			DRV_STOP();
+			drv_m1.fail_f=1;	
+			DRV_STOP();
+			if (drv_m1.direction) {
+				SysState.error_code |= DRV_CLOSE_ERROR;
+			} else{
+				SysState.error_code |= DRV_OPEN_ERROR;
+			}
+          
+			printf("DRV MOVE FAIL\r\n");
+
+    }
 	}
+	
 
 
   /* USER CODE END TIM1_UP_IRQn 0 */
@@ -333,21 +357,6 @@ void TIM1_UP_IRQHandler(void)
   /* USER CODE BEGIN TIM1_UP_IRQn 1 */
 
   /* USER CODE END TIM1_UP_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM3 global interrupt.
-  */
-void TIM3_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM3_IRQn 0 */
-	//printf("IRQ TIM 3\r\n");
-	
-  /* USER CODE END TIM3_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim3);
-  /* USER CODE BEGIN TIM3_IRQn 1 */
-
-  /* USER CODE END TIM3_IRQn 1 */
 }
 
 /**

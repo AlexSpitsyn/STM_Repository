@@ -85,21 +85,20 @@ void SysInit(void) {
 	//---------------------Sys State-------------------------------
 	
   SysState.error_code = 0;
-  SysState.error_f = 0;
+  //SysState.error_f = 0;
 	
-  SysState.set_temp = 25; //EEPROM
-#warning "SET TEMP NOT STORED IN EEPROM"
+  SysState.set_temp = 40; //EEPROM
+
   SysState.ss_blink_f = 0;
-  SysState.ss_update_f = 0;
-	
+ 	
 	SysState.t_ctrl_time=2000;
 	SysState.t_updt_time=1000;
+	
 	SysState.t_hyst=2;
  
-	SysState.uart_dbg_f=0;
-	
+	SysState.uart_dbg_f=0;	
 	SysState.nrf24_en_f=0;
-//if counters not stored in eeprom
+
 	
 	
  
@@ -111,34 +110,35 @@ void SysInit(void) {
   SysCnt.temp_update = 0;
   SysCnt.timeout = 0;
   SysCnt.drv_move = 0;
-  
+  //---------------------DRIVER-------------------------------
 	drv_m1.fail_f = 0;
   drv_m1.run_f = 0;
 	
-	drv_m1.max_pos=20;
-	drv_m1.steps=2;
+	drv_m1.max_pos=DRIVE_MAX_POS_LIMIT;
+	drv_m1.steps=DRIVE_STEPS;
 	
-SysState.set_temp=35;
-	
+
+	HAL_GPIO_WritePin(RELEY_CTRL_GPIO_Port,RELEY_CTRL_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 	SevSegInit();
 	
   res = HAL_I2C_IsDeviceReady( &hi2c2, EEPROM_ADDR, 3, HAL_MAX_DELAY);
   if (res != HAL_OK) {
     SysState.error_code |= EEPROM_READING_ERROR;
-    SysState.error_f = 1;
+    //SysState.error_f = 1;
     printf("EEPROM READ ERROR!\r\n");
     printf("I2C STATUS CODE: %d\r\n", res);
     printf("I2C ERROR CODE: %d\r\n", HAL_I2C_GetError( &hi2c2));
 
   }else{
 		printf("EEPROM OK\r\n");
+		EEPROM_Read(0, 2, (uint8_t*)&SysState.set_temp);
 	}
 	
   res = HAL_I2C_IsDeviceReady( &hi2c2, PCF8574A_ADDR, 3, HAL_MAX_DELAY);
   if (res != HAL_OK) {
     SysState.error_code |= IO_EXPANDER_READING_ERROR;
-    SysState.error_f = 1;
+    //SysState.error_f = 1;
     printf("PCF8574A READ ERROR!\r\n");
     printf("I2C STATUS CODE: %d\r\n", res);
     printf("I2C ERROR CODE: %d\r\n", HAL_I2C_GetError( &hi2c2));
@@ -147,31 +147,16 @@ SysState.set_temp=35;
 		printf("PCF8574A OK\r\n");
 	}
 	Buttons_Reset();
-
+	
+	//Read SET TEMP - SysState.set_temp	
+	//EEPROM_Write(0, 2, (uint8_t*)&SysState.set_temp);
+	
 		
-//	SysVarRW(RD,&SV[vn_T_CTRL_F]);
-//	
-//	SysVarRW(RD,&SV[vn_T_SET]);
-//	
-//	SysVarRW(RD,&SV[vn_T_CTRL_TIME]);
-//	
-//	SysVarRW(RD,&SV[vn_T_UPDT_TIME]);
-//	
-//	SysVarRW(RD,&SV[vn_T_HYST]);
-//	
-//	SysVarRW(RD,&SV[vn_DRIVE_POS]);
-//	
-//	SysVarRW(RD,&SV[vn_DRIVE_MAX_POS]);
-//	
-//	SysVarRW(RD,&SV[vn_DRIVE_STEPS]);
-	
-	
-	drv_m1.start_pos=0;
 
 
   if (ds18b20_Init(RESOLUTION_9BIT)) {
     SysState.error_code |= TEMP_SENSOR_READING_ERROR;
-    SysState.error_f = 1;
+    //SysState.error_f = 1;
 		SS_PRINT_T_NONE();
     printf("TEMP SENSOR ERROR\r\n");
   }else{
@@ -183,16 +168,27 @@ SysState.set_temp=35;
 	}
 	//printf("stage 4\r\n");
   
-  
+  drv_m1.photosensor_state=HAL_GPIO_ReadPin(PHOTOSENSOR_GPIO_Port, PHOTOSENSOR_Pin);
 
   //Start timer1 IT
   HAL_TIM_Base_Start_IT( &htim1);//system tymer
 	
 	//Start timer 3 
 	//TIM3->CNT - motor encoder counter (position)
-	TIM3->CNT=0;
-	HAL_TIM_Base_Start_IT( &htim3);
+	//TIM3->CNT=0;
+	//HAL_TIM_Base_Start_IT( &htim3);
 	
+	if (Drive_CheckRotation(1)) {
+		SysState.error_code |= DRV_CLOSE_ERROR;
+		printf("DRIVE CLOSE ERROR!\r\n");
+	} 
+
+	HAL_Delay(1000);
+
+	if (Drive_CheckRotation(0)) {
+		SysState.error_code |= DRV_OPEN_ERROR;
+		printf("DRIVE OPEN ERROR!\r\n");
+	}
 	
 	Drive_HomeInit();
 	
@@ -222,62 +218,44 @@ SysState.set_temp=35;
 
   //HAL_I2C_IsDeviceReady(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint32_t Trials, uint32_t Timeout);
 
-	SysState.ss_update_f = 1;
 	LED_GREEN_Toggle();
 	
 }
 
 void SystemTask(void) {
-    // unsigned int i;
 
-//    //----------------      DISPLAY        --------------------------------------
-//    if (SysState.ss_update_f) {
-//      SysState.ss_update_f = 0;
-//			//printf("SS update\r\n");
-//      if (SysState.error_f) {
-//        SS_PRINT_ERROR_CODE(SysState.error_code);
-//      } else {
-//        if (SysState.view_mode_f) {
-//          SS_PRINT_CUR_POS();
-//        } else {
-//          if (SysState.temp_ctrl_f) {
-//            SS_PRINT_TEMP(DS_TEMP);
-//          } else {
-
-//            SS_PRINT_T_NONE();
-//          }
-
-//        }
-//      }
-//    }
 
     //----------------      TEMP UPDATE     --------------------------------------
 
-    if (!SysState.error_f) {
+    if (!(SysState.error_code & TEMP_SENSOR_READING_ERROR)) {
 
       if (SysCnt.temp_update >= SysState.t_updt_time){
 					printf("TEMP update\r\n");
           SysCnt.temp_update = 0;
-          SysState.ss_update_f = 1;
+          //SysState.ss_update_f = 1;
 				
           LED_GREEN_Toggle(); 				
 
 
           if (ds18b20_GetTemp()) {
-            SysState.error_f = 1;
+            //SysState.error_f = 1;
             SysState.error_code |= TEMP_SENSOR_READING_ERROR;
           }	else {
             SysState.error_code &= ~TEMP_SENSOR_READING_ERROR;
-						SS_PRINT_TEMP(DS_TEMP);
+						SS_PRINT_TEMP(DS_TEMP);						
 						sprintf(sprintf_str, "Temp = %d\r\n", DS_TEMP);		
 						printf(sprintf_str);	
+						if(DS_TEMP>55){
+							//HAL_GPIO_WritePin(RELEY_CTRL_GPIO_Port,RELEY_CTRL_Pin,GPIO_PIN_SET);
+							SysState.error_code |= OVERTEMP_ERROR;
+						}
           }
 					
         }
       }
 
       //----------------      TEMP CONTROL     --------------------------------------
-      if (!SysState.error_f) {
+      if (!SysState.error_code) {
 
           if (SysCnt.temp_ctrl >= SysState.t_ctrl_time) {            
             SysCnt.temp_ctrl = 0;
@@ -310,14 +288,14 @@ void SystemTask(void) {
       //----------------      MOTO CONTROL     --------------------------------------
 					
 		
-       if (!SysState.error_f) {
+       if (!drv_m1.fail_f) {
 				if(!drv_m1.run_f){
         if (drv_m1.dest_pos > DRV_POS) {				
-					printf("DRV OPEN\r\n");
+					printf("DRV MOVE OPEN\r\n");
           DRV_OPEN();
 
         } else if (drv_m1.dest_pos < DRV_POS) {
-					printf("DRV CLOSE\r\n");
+					printf("DRV MOVE CLOSE\r\n");
           DRV_CLOSE();
         }
 			}
@@ -330,64 +308,82 @@ void SystemTask(void) {
 
       //---------------------------   ERROR routine --------------------------------
 
-      if (SysCnt.error_check > ERROR_CHECK_TIME) {
-        SysCnt.error_check = 0;
-
-				#warning "Check rotation not set"
-//        //Check moto for rotation
-//        if ((SysState.error_code & DRV_CLOSE_ERROR) | (SysState.error_code & DRV_OPEN_ERROR)) {
-
-//          DRV_OPEN();
-//          if (Drive_CheckRotation()) {
-//            SysState.error_code |= DRV_CLOSE_ERROR;
-//          } else
-//            SysState.error_code &= ~DRV_CLOSE_ERROR;
-//          DRV_STOP();
-//          HAL_Delay(1000);
-//          DRV_CLOSE();
-//          if (Drive_CheckRotation()) {
-//            SysState.error_code |= DRV_OPEN_ERROR;
-//          } else
-//            SysState.error_code &= ~DRV_OPEN_ERROR;
-//          DRV_STOP();
-//        }
-				
-
-        //Check temp sensor
-        if (SysState.error_code & TEMP_SENSOR_READING_ERROR) {
-          if (ds18b20_Reset()){
-            SysState.error_code |= TEMP_SENSOR_READING_ERROR;
-					}else {
-            SysState.error_code &= ~TEMP_SENSOR_READING_ERROR;
-            ds18b20_GetTemp();
-						HAL_Delay(10);
-						DS_TEMP = ds18b20_GetTemp();
+     
+			if(SysState.error_code){ 
+			
+				if (SysCnt.error_check > ERROR_CHECK_TIME) {
+        
+					SysCnt.error_check = 0;
+					
+					//Check moto for rotation        
+					if ((SysState.error_code & DRV_CLOSE_ERROR) | (SysState.error_code & DRV_OPEN_ERROR)) {          
+						if (Drive_CheckRotation(1)) {
+							SysState.error_code |= DRV_CLOSE_ERROR;
+						} else{
+							SysState.error_code &= ~DRV_CLOSE_ERROR;
+						}						
 						
-          }
-        }
+						HAL_Delay(1000);  						
+					
+						if (Drive_CheckRotation(0)) {            
+							SysState.error_code |= DRV_OPEN_ERROR;          
+						} else{            
+							SysState.error_code &= ~DRV_OPEN_ERROR; 					
+						}	
+					}
 				
-				
-        //Check io_expander
-        if (HAL_I2C_IsDeviceReady( & hi2c2, PCF8574A_ADDR, 3, HAL_MAX_DELAY)) {
-          SysState.error_code |= IO_EXPANDER_READING_ERROR;  					
-        } else {
-          SysState.error_code &= ~IO_EXPANDER_READING_ERROR;
-        }		
-				if(SysState.error_code){
-					SS_PRINT_ERROR_CODE(SysState.error_code);
-				}else{
-					SS_PRINT_TEMP(DS_TEMP);
-				}
-      }
+
+					//Check temp sensor
+					if (SysState.error_code & TEMP_SENSOR_READING_ERROR) {
+						if (ds18b20_Reset()){
+							SysState.error_code |= TEMP_SENSOR_READING_ERROR;
+						}else {
+							SysState.error_code &= ~TEMP_SENSOR_READING_ERROR;
+							ds18b20_GetTemp();
+							HAL_Delay(100);
+							ds18b20_GetTemp();							
+							
+						}
+					}
+								
+					//Check io_expander
+					if (HAL_I2C_IsDeviceReady( & hi2c2, PCF8574A_ADDR, 3, HAL_MAX_DELAY)) {
+						SysState.error_code |= IO_EXPANDER_READING_ERROR;  					
+					} else {
+						SysState.error_code &= ~IO_EXPANDER_READING_ERROR;
+					}	
+
+					//Check overtemp
+					if ((SysState.error_code & OVERTEMP_ERROR)&(SysState.error_code & TEMP_SENSOR_READING_ERROR)){
+						ds18b20_GetTemp();
+						if(DS_TEMP<50){
+							SysState.error_code &= ~OVERTEMP_ERROR; 					
+						} 
+					}
+					
+					//PUMP RELEY CONTROL
+					if ((SysState.error_code & OVERTEMP_ERROR) | (SysState.error_code & TEMP_SENSOR_READING_ERROR)) {
+						HAL_GPIO_WritePin(RELEY_CTRL_GPIO_Port,RELEY_CTRL_Pin,GPIO_PIN_RESET);						
+					} else {
+						HAL_GPIO_WritePin(RELEY_CTRL_GPIO_Port,RELEY_CTRL_Pin,GPIO_PIN_SET);
+					}	
+					
+					
+					
+					if(SysState.error_code){
+						SS_PRINT_ERROR_CODE(SysState.error_code);
+					}else{
+						SS_PRINT_TEMP(DS_TEMP);
+					}  					
+				}		
+			}
 
 			
-      if (SysState.error_code) {
-        SysState.error_f = 1;
-        
-
-      } else {
-        SysState.error_f = 0;
-      }
+//      if (SysState.error_code) {
+//        SysState.error_f = 1; 
+//      } else {
+//        SysState.error_f = 0;
+//      }
 			// --------------- END ERROR routine -------------------------------
 			//---------------------------   UART --------------------------------
 			if(SysState.uart_en_f){
@@ -450,7 +446,8 @@ void SystemTask(void) {
      if (SysCnt.timeout > SS_SET_MODE_TIME) {
 			 SysState.set_temp = tmp;
        SS_BLINK(OFF);
-				if(SysState.error_f){
+			 EEPROM_Write(0, 2, (uint8_t*)&SysState.set_temp);
+				if(SysState.error_code){
 					SS_PRINT_ERROR_CODE(SysState.error_code);
 				}else{
 					SS_PRINT_TEMP(DS_TEMP);

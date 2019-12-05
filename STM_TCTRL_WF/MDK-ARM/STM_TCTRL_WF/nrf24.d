@@ -1,5 +1,5 @@
 stm_tctrl_wf\nrf24.o: ..\..\Src\nrf24.c
-stm_tctrl_wf\nrf24.o: ../../Inc/nrf24.h
+stm_tctrl_wf\nrf24.o: ../Inc/nrf24.h
 stm_tctrl_wf\nrf24.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 stm_tctrl_wf\nrf24.o: ../Inc/stm32f1xx_hal_conf.h
 stm_tctrl_wf\nrf24.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h

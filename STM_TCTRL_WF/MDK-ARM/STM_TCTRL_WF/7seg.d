@@ -1,5 +1,5 @@
 stm_tctrl_wf\7seg.o: ..\..\Src\7seg.c
-stm_tctrl_wf\7seg.o: ../../Inc/7seg.h
+stm_tctrl_wf\7seg.o: ../Inc/7seg.h
 stm_tctrl_wf\7seg.o: ../Inc/spi.h
 stm_tctrl_wf\7seg.o: ../Inc/main.h
 stm_tctrl_wf\7seg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h

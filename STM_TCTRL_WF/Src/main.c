@@ -105,7 +105,6 @@ int main(void)
   MX_I2C2_Init();
   MX_TIM1_Init();
   MX_CRC_Init();
-  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 	
 
@@ -113,7 +112,7 @@ int main(void)
 //Arm UART1
 HAL_UART_Receive_IT(&huart1, &receive_val, 1);
 
-int16_t temp_pos	=0;
+
 SysInit();
 //putsUSART("=====================SysInit======================\r\n");
 printf("=====================SysInit======================\r\n");

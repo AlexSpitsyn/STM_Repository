@@ -497,12 +497,11 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=stm_pump_monitor\startup_stm32f103xb.d -ostm_pump_monitor\startup_
-stm32f103xb.o -I.\RTE\_STM_Pump_Monitor -IC:\Users\Alexander\AppData\Local\Arm\
-Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include -IC:\Users\Alexander\AppData\Local\Arm
-\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --pr
-edefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 528" --predefin
-e="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=startup_stm32f103xb.l
-st startup_stm32f103xb.s
+stm32f103xb.o -I.\RTE\_STM_Pump_Monitor -Id:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\C
+MSIS\Core\Include -Id:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include
+ --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 526" --pre
+define="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=startup_stm32f10
+3xb.lst startup_stm32f103xb.s
 
 
 
@@ -1209,4 +1208,4 @@ Symbol: __main
       At line 152 in file startup_stm32f103xb.s
 Comment: __main used once
 2 symbols
-407 symbols in table
+406 symbols in table

@@ -1,5 +1,5 @@
 stm_tctrl_wf\ds18b20.o: ..\..\Src\ds18b20.c
-stm_tctrl_wf\ds18b20.o: ../../Inc/ds18b20.h
+stm_tctrl_wf\ds18b20.o: ../Inc/ds18b20.h
 stm_tctrl_wf\ds18b20.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 stm_tctrl_wf\ds18b20.o: ../Inc/stm32f1xx_hal_conf.h
 stm_tctrl_wf\ds18b20.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h

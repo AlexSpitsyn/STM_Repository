@@ -1,5 +1,5 @@
 stm_tctrl_wf\wireless_ctrl.o: ..\..\Src\wireless_ctrl.c
-stm_tctrl_wf\wireless_ctrl.o: ../../Inc/wireless_ctrl.h
+stm_tctrl_wf\wireless_ctrl.o: ../Inc/wireless_ctrl.h
 stm_tctrl_wf\wireless_ctrl.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 stm_tctrl_wf\wireless_ctrl.o: ../Inc/stm32f1xx_hal_conf.h
 stm_tctrl_wf\wireless_ctrl.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
@@ -30,14 +30,14 @@ stm_tctrl_wf\wireless_ctrl.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_
 stm_tctrl_wf\wireless_ctrl.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 stm_tctrl_wf\wireless_ctrl.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 stm_tctrl_wf\wireless_ctrl.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
-stm_tctrl_wf\wireless_ctrl.o: ../../Inc/nrf24.h
+stm_tctrl_wf\wireless_ctrl.o: ../Inc/nrf24.h
 stm_tctrl_wf\wireless_ctrl.o: ../Inc/spi.h
 stm_tctrl_wf\wireless_ctrl.o: ../Inc/main.h
 stm_tctrl_wf\wireless_ctrl.o: ../Inc/usart.h
 stm_tctrl_wf\wireless_ctrl.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm_tctrl_wf\wireless_ctrl.o: ../Inc/crc.h
-stm_tctrl_wf\wireless_ctrl.o: ../../Inc/ds18b20.h
+stm_tctrl_wf\wireless_ctrl.o: ../Inc/ds18b20.h
 stm_tctrl_wf\wireless_ctrl.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-stm_tctrl_wf\wireless_ctrl.o: ../../Inc/io_expander.h
+stm_tctrl_wf\wireless_ctrl.o: ../Inc/io_expander.h
 stm_tctrl_wf\wireless_ctrl.o: ../Inc/i2c.h
 stm_tctrl_wf\wireless_ctrl.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

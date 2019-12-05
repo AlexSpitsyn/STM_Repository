@@ -231,10 +231,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 void TIM1_UP_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_IRQn 0 */
-	extern uint16_t pump_check_timer;
-	
-	packet_handler_timer++;
-	pump_check_timer++;
+
 	
   /* USER CODE END TIM1_UP_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
@@ -249,11 +246,20 @@ void TIM1_UP_IRQHandler(void)
 void TIM4_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM4_IRQn 0 */
-
+//TIM4 freq - 100Hz
   /* USER CODE END TIM4_IRQn 0 */
   HAL_TIM_IRQHandler(&htim4);
   /* USER CODE BEGIN TIM4_IRQn 1 */
-
+	
+	extern uint16_t pump_on_timer;
+	
+	packet_handler_timer++;
+	if(HAL_GPIO_ReadPin(DQ_GPIO_Port,DQ_Pin)==GPIO_PIN_RESET){
+		pump_on_timer++;
+	}else{
+		pump_on_timer=0;
+	}
+	
   /* USER CODE END TIM4_IRQn 1 */
 }
 
