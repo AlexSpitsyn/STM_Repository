@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM_WTS\STM_WTS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM_WTS\STM_WTS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Nov 13 16:11:38 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Dec 26 10:01:16 2019
 <BR><P>
 <H3>Maximum Stack Usage =        424 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -302,6 +302,7 @@ Global Symbols
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_IRQ_Callback
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Handler
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Check_Addr
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_Init
 </UL>
 
@@ -387,6 +388,7 @@ Global Symbols
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartInit
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Handler
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Check_Addr
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_Init
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -402,13 +404,6 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(RESET)
 </UL>
-<P><STRONG><a name="[112]"></a>HAL_CRC_Calculate</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, stm32f1xx_hal_crc.o(i.HAL_CRC_Calculate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_CRC_Calculate
-</UL>
-<BR>[Called By]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Get_Packet
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Send_Packet
-</UL>
-
 <P><STRONG><a name="[65]"></a>HAL_CRC_Init</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, stm32f1xx_hal_crc.o(i.HAL_CRC_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_CRC_Init &rArr; HAL_CRC_MspInit
 </UL>
@@ -1014,12 +1009,20 @@ Global Symbols
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartInit
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Handler
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Check_Addr
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_Init
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[c2]"></a>HAL_UART_TxCpltCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(i.HAL_UART_TxCpltCallback))
 <BR><BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
+</UL>
+
+<P><STRONG><a name="[112]"></a>HW_CRC32</STRONG> (Thumb, 144 bytes, Stack size 8 bytes, hw_crc32.o(i.HW_CRC32))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HW_CRC32
+</UL>
+<BR>[Called By]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Get_Packet
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Send_Packet
 </UL>
 
 <P><STRONG><a name="[17]"></a>HardFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_it.o(i.HardFault_Handler))
@@ -1650,10 +1653,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_EP_Transmit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_TransmitPacket
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlSendStatus
+<BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlSendStatus
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlContinueSendData
 <LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlSendData
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_TransmitPacket
 </UL>
 
 <P><STRONG><a name="[106]"></a>USBD_ParseSetupRequest</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, usbd_ctlreq.o(i.USBD_ParseSetupRequest))
@@ -1824,12 +1827,16 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(RESET)
 </UL>
-<P><STRONG><a name="[10f]"></a>WL_Check_Addr</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, wireless_ctrl.o(i.WL_Check_Addr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = WL_Check_Addr &rArr; NRF24_Send &rArr; NRF24_Transmit &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[10f]"></a>WL_Check_Addr</STRONG> (Thumb, 230 bytes, Stack size 32 bytes, wireless_ctrl.o(i.WL_Check_Addr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = WL_Check_Addr &rArr; NRF24_Send &rArr; NRF24_Transmit &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_Send
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CDC_Transmit_FS
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1838,10 +1845,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = WL_Get_Packet &rArr; add_packet &rArr; CDC_Transmit_FS &rArr; USBD_CDC_TransmitPacket &rArr; USBD_LL_Transmit &rArr; HAL_PCD_EP_Transmit &rArr; USB_EPStartXfer &rArr; USB_WritePMA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_CRC32
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_packet
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_packet
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CDC_Transmit_FS
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CRC_Calculate
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
@@ -1886,14 +1893,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Handler
 </UL>
 
-<P><STRONG><a name="[118]"></a>WL_Send_Packet</STRONG> (Thumb, 570 bytes, Stack size 40 bytes, wireless_ctrl.o(i.WL_Send_Packet))
+<P><STRONG><a name="[118]"></a>WL_Send_Packet</STRONG> (Thumb, 592 bytes, Stack size 40 bytes, wireless_ctrl.o(i.WL_Send_Packet))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = WL_Send_Packet &rArr; NRF24_Send &rArr; NRF24_Transmit &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_CRC32
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_Send
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CDC_Transmit_FS
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CRC_Calculate
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
@@ -1947,6 +1954,7 @@ Global Symbols
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_IRQ_Callback
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Handler
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WL_Check_Addr
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NRF24_Init
 </UL>
 
@@ -2122,7 +2130,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_packet
 </UL>
 
-<P><STRONG><a name="[130]"></a>parseCommand</STRONG> (Thumb, 878 bytes, Stack size 224 bytes, uart_cmd_parser.o(i.parseCommand))
+<P><STRONG><a name="[130]"></a>parseCommand</STRONG> (Thumb, 922 bytes, Stack size 224 bytes, uart_cmd_parser.o(i.parseCommand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 424<LI>Call Chain = parseCommand &rArr; NRF24_Init &rArr; NRF24_Read_Buf &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
@@ -2321,8 +2329,8 @@ Local Symbols
 <P><STRONG><a name="[7]"></a>CDC_Init_FS</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, usbd_cdc_if.o(i.CDC_Init_FS))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = CDC_Init_FS
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_SetTxBuffer
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_SetRxBuffer
+<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_SetRxBuffer
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_SetTxBuffer
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> usbd_cdc_if.o(.data)
 </UL>

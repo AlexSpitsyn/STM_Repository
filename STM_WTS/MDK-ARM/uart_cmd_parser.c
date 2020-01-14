@@ -199,12 +199,12 @@ putsUSART("get state\r\n"
             if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_RX_ADDR[0],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[1],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[2],0, 255)){
 							putsUSART("wrong addr value. [0-255]");		
 						}else{
-							sprintf(answer, "Set NRF_TX_ADDR: 0x%02X, 0x%02X, 0x%02X\r\n",
+							sprintf(answer, "Set NRF_RX_ADDR: 0x%02X, 0x%02X, 0x%02X\r\n",
               NRF_RX_ADDR[0], NRF_RX_ADDR[1], NRF_RX_ADDR[2]);
 							putsUSART(answer);
 						}	
           }
-        } else if (strncmp(pArg1, "rf_ch", 7) == 0) {
+        } else if (strncmp(pArg1, "rf_ch", 5) == 0) {
           pArg2 = pArg1 + 8;
           if (*(pArg2) == 0) {
             putsUSART("wrong addr");

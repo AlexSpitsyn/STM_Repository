@@ -192,6 +192,10 @@ void SysInit(void) {
 	
 	Drive_HomeInit();
 	
+	//SET MIDDLE POSITION
+	drv_m1.dest_pos=20;
+	DRV_OPEN();
+	
 	
  // HAL_Delay(1000);	
 	

@@ -250,8 +250,8 @@ uint8_t Buttons_GetCode(void);
 //========================     DRIVE_CTRL   ====================
 # ifdef DRIVE_CTRL
 
-#define DRIVE_STEPS					 					10
-#define DRIVE_MAX_POS_LIMIT 					100
+#define DRIVE_STEPS					 					4
+#define DRIVE_MAX_POS_LIMIT 					50
 #define DRIVE_MIN_POS_LIMIT 					0
 #define DRIVE_ROTATION_TIMEOUT 				20	
 

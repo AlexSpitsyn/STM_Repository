@@ -1,9 +1,7 @@
-#include "nrf24.h"
-
-//------------------------------------------------
 #define NRF_DBG
-
 #ifdef NRF_DBG
+
+#include "nrf24.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,14 +10,19 @@ uint8_t dt_reg;
 char dbg_str[64];
 //#define dbg_print(s) printf(s)
 #define dbg_print(s) putsUSART(s)
-#endif
-//------------------------------------------------
 
-uint8_t NRF_TX_ADDR[ADR_WIDTH] = { 0xb7, 0xb5, 0xa1 }; //HOST ADDRESS s0
-uint8_t NRF_RX_ADDR[ADR_WIDTH] = { 0xb5, 0xb5, 0xa1 }; //SELF ADDRESS S1
+//------------------------------------------------
+uint8_t NRF_TX_ADDR[ADR_WIDTH] = "WTSH"; //HOST ADDRESS s0
+uint8_t NRF_RX_ADDR[ADR_WIDTH] = "WTS0"; //SELF ADDRESS S1
+
+//uint8_t NRF_TX_ADDR[ADR_WIDTH] = { 160, 160, 160 }; //HOST ADDRESS s0
+//uint8_t NRF_RX_ADDR[ADR_WIDTH] = { 120, 120, 120 }; //SELF ADDRESS S1
+
+//uint8_t NRF_TX_ADDR[ADR_WIDTH] = { 0xc3, 0xc3, 0xc3 }; //HOST ADDRESS s0
+//uint8_t NRF_RX_ADDR[ADR_WIDTH] = { 0xbf, 0xbf, 0xbf }; //SELF ADDRESS S1
 
 uint8_t NRF_RX_BUF[TX_PLOAD_WIDTH + 1] = { 0 };
-uint8_t NRF_RF_CH= 76; //2476 MHz
+uint8_t NRF_RF_CH= 100; //2476 MHz
 
 
 volatile uint8_t nrf_rx_flag = 0, nrf_tx_flag = 0, nrf_tx_fail=0;
@@ -260,9 +263,13 @@ uint8_t NRF24_Init(void) {
 	NRF24_ToggleFeatures();
 	NRF24_WriteReg(FEATURE, 0);
 	NRF24_WriteReg(DYNPD, 0);
+	//NRF24_WriteReg(FEATURE, 0x06);
+	//NRF24_WriteReg(DYNPD, 0x01);
 	NRF24_WriteReg(STATUS, 0x70); //Reset flags for IRQ
-	NRF24_WriteReg(RF_CH, 76); // 2476 MHz
-	NRF24_WriteReg(RF_SETUP, 0x06); //TX_PWR:0dBm, Datarate:1Mbps
+	NRF24_WriteReg(RF_CH, NRF_RF_CH); // 
+	NRF24_WriteReg(RF_SETUP, 0x26); //TX_PWR:0dBm (MAX), Datarate:250Kbps
+	//NRF24_WriteReg(RF_SETUP, 0x06); //TX_PWR:0dBm (MAX), Datarate:1Mbps
+	//NRF24_WriteReg(RF_SETUP, 0x0E); //TX_PWR:0dBm, Datarate:2Mbps
 
 	//PIPE CONF
 	NRF24_Write_Buf(TX_ADDR, NRF_TX_ADDR, ADR_WIDTH);
@@ -457,6 +464,7 @@ void NRF24_IRQ_Callback(void) {
 	else if (status & MAX_RT) {
 #ifdef NRF_DBG
 		
+		
 		if(NRF_DBG_PRINT_F){		
 			dbg_print("\r\nIRQ: MAX_RT\r\n");
 		}
@@ -517,4 +525,4 @@ void NRF24_Get_State(void) {
 
 }
 
-
+#endif

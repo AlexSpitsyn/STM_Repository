@@ -40,23 +40,27 @@ uint8_t WL_Check_Addr(uint8_t base_addr){
 	base_addr |= HAL_GPIO_ReadPin(GPIOB,A2_Pin)<<1;
 	base_addr |= HAL_GPIO_ReadPin(GPIOB,A3_Pin)<<2;
 	base_addr |= HAL_GPIO_ReadPin(GPIOB,A4_Pin)<<3;
-	NRF_RX_ADDR[0]=base_addr;
-	NRF_TX_ADDR[0]=base_addr;
+	NRF_RX_ADDR[ADR_WIDTH-1]=base_addr;
+	NRF_TX_ADDR[ADR_WIDTH-1]=base_addr;
 
-if(NRF_TX_ADDR[0]!=temp_addr){	
+if(NRF_TX_ADDR[ADR_WIDTH-1]!=temp_addr){	
 	NRF24_Send("Hi");	
 	temp_addr=base_addr;
 	t=HAL_GetTick();
 	while(1){		
 		if(nrf_tx_flag){
 			nrf_tx_flag=0;
+			putsUSART("NRF: ADDR BUSY\r\n>");
 			return 2;
 		}	
 		if(nrf_tx_fail){
 			nrf_tx_fail=0;
+			sprintf(str,"NRF SET TX_ADDR[2]: 0x%02X\r\n", NRF_TX_ADDR[ADR_WIDTH-1]);
+			putsUSART(str);
 			return 0;		
 		}		
 		if((HAL_GetTick()-t)>2000){
+			putsUSART("NRF: ADDR TIMEOUT\r\n>");
 			return 3;
 		}			
 	}
@@ -255,7 +259,18 @@ void WL_Set_Var(void){
 				break;
 			}
 }
-
+//Retutned
+//	PS_NEW,									//0
+//	PS_DONE,								//1
+//	PS_CMD_NOT_SUPPORTED,		//2
+//	PS_VAR_NOT_SUPPORTED,		//3
+//	PS_VAL_NOT_SUPPORTED,		//4
+//	PS_SEND_OK,							//5
+//	PS_NO_ACK,							//6
+//	PS_NOT_FOUND,						//7
+//	PS_CRC_OK,							//8
+//	PS_CRC_BAD,							//9
+//	PS_ERROR		
 
 uint8_t WL_Send_Packet(void){	
 	uint32_t t;
@@ -270,9 +285,9 @@ uint8_t WL_Send_Packet(void){
 	TX_packet.host_addr=NRF_RX_ADDR[0];
 	NRF_TX_ADDR[0]=pack_info->host_addr;
 	
-	
-	
-	TX_packet.crc=HAL_CRC_Calculate(&hcrc,(uint32_t*)&TX_packet,2);
+
+	TX_packet.crc=HW_CRC32((uint8_t*)&TX_packet, 8, 0xFFFFFFFF);
+	//TX_packet.crc=HAL_CRC_Calculate(&hcrc,(uint32_t*)&TX_packet,2);
 
 		if(NRF_DBG_PRINT_F){
 		sprintf(str,"\r\nTX Packet CMD: 0x%02X\r\n", TX_packet.cmd);
@@ -282,8 +297,12 @@ uint8_t WL_Send_Packet(void){
 		sprintf(str,"\r\nTX Packet VAL: 0x%02X\r\n", TX_packet.val);
 		putsUSART(str);
 		sprintf(str,"\r\nTX Packet P_ID: 0x%02X\r\n", TX_packet.pack_ID);
-		putsUSART(str);		
-		sprintf(str,"\r\nTX Packet HOST ADDR: 0x%02X\r\n", TX_packet.host_addr);
+		putsUSART(str);	
+			
+		//sprintf(str,"\r\nTX Packet HOST ADDR: 0x%02X\r\n", TX_packet.host_addr);
+		//putsUSART(str);
+		
+			sprintf(str,"\r\nTX Packet HOST ADDR: 0x%02X%02X%02X\r\n", NRF_TX_ADDR[0],NRF_TX_ADDR[1],NRF_TX_ADDR[2]);
 		putsUSART(str);
 		sprintf(str,"\r\nTX Packet STATE: 0x%02X\r\n", TX_packet.state);
 		putsUSART(str);
@@ -295,21 +314,26 @@ uint8_t WL_Send_Packet(void){
 	t=HAL_GetTick();
 	while(1){
 		if(nrf_tx_flag){
-			nrf_tx_flag=0;			
-			if(NRF_DBG_PRINT_F){
-				sprintf(str,"\r\nPacket Send CRC: 0x%02X\r\n", TX_packet.crc);
-				putsUSART(str);
-			}
+			nrf_tx_flag=0;		
 			pack_info->pack_state=PS_SEND_OK;
+			if(NRF_DBG_PRINT_F){				
+				putsUSART("\r\nPacket State: PS_SEND_OK\r\n");				
+			}			
 			break;
 		}
 		if(nrf_tx_fail){
 			nrf_tx_fail=0;
 			pack_info->pack_state = PS_NO_ACK;
+			if(NRF_DBG_PRINT_F){				
+				putsUSART("\r\nPacket State: PS_NO_ACK\r\n");	
+			}			
 			break;
 		}
 
 		if((HAL_GetTick()-t)>1000){
+			if(NRF_DBG_PRINT_F){				
+				putsUSART("\r\nSend timeout! Packet State: PS_ERROR\r\n");	
+			}	
 			return PS_ERROR;
 		}
 	}
@@ -325,7 +349,8 @@ uint8_t WL_Get_Packet(){
 	uint32_t crc;
 
 	memcpy(	&RX_packet,NRF_RX_BUF,12);
-	crc=HAL_CRC_Calculate(&hcrc,(uint32_t*)	&RX_packet,2);	
+	crc=HW_CRC32((uint8_t*)&RX_packet, 8, 0xFFFFFFFF);
+	//crc=HAL_CRC_Calculate(&hcrc,(uint32_t*)	&RX_packet,2);	
 	
 
 	if(NRF_DBG_PRINT_F){
@@ -384,6 +409,16 @@ void WL_Packet_Handler(void){
 	
 		//printf("pack_cnt: %d\r\n",pack_cnt);
 		while(i--){
+			if(NRF_DBG_PRINT_F){				
+				sprintf(str,"\r\nPack Num: %d\r\n", i+1);
+				putsUSART(str);
+				sprintf(str,"P_ID: 0x%02X\r\n", RX_packet.pack_ID);
+				putsUSART(str);		
+				sprintf(str,"STATE: 0x%02X\r\n", RX_packet.state);
+				putsUSART(str);
+
+	
+			}
 			
 //			if(pack_info->pack_state==PS_DONE){
 //				remove_packet(pack_info->pack_ID);
@@ -396,17 +431,7 @@ void WL_Packet_Handler(void){
 					remove_packet(pack_info->pack_ID);
 				}
 			}		
-			if(NRF_DBG_PRINT_F){
-				
-				sprintf(str,"\r\nPack Num: 0x%02X\r\n", i);
-				putsUSART(str);
-				sprintf(str,"P_ID: 0x%02X\r\n", RX_packet.pack_ID);
-				putsUSART(str);		
-				sprintf(str,"STATE: 0x%02X\r\n", RX_packet.state);
-				putsUSART(str);
 
-	
-			}
 			pack_info=pack_info->next;
 		}
 //		if(pack_cnt>0){

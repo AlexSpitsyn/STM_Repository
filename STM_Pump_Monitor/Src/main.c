@@ -234,12 +234,13 @@ HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
 		if(pump_on_timer>PUMP_SHUTDOWN_TIME){
 			printf("PUMP SHUTDOWN\r\n");
 			HAL_GPIO_WritePin(RELEY_CTRL_GPIO_Port,RELEY_CTRL_Pin,GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
 			reset_f=1;
+			beep_f=0;
 		}
 		//PUMP RESET
 		if(reset_timer>PUMP_RESET_TIME){
-			printf("PUMP RESET\r\n");
-			HAL_GPIO_WritePin(RELEY_CTRL_GPIO_Port,RELEY_CTRL_Pin,GPIO_PIN_SET);
+			printf("PUMP RESET\r\n");			
 			reset_timer=0;
 			reset_f=0;
 			beep_f=0;

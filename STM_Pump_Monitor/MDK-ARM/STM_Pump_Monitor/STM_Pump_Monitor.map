@@ -2107,17 +2107,17 @@ Image Symbol Table
     i.free                                   0x08005708   Section        0  malloc.o(i.free)
     i.get_packet                             0x08005758   Section        0  wireless_ctrl.o(i.get_packet)
     i.main                                   0x08005780   Section        0  main.o(i.main)
-    i.malloc                                 0x080059e0   Section        0  malloc.o(i.malloc)
-    i.parseCommand                           0x08005a4c   Section        0  uart_cmd_parser.o(i.parseCommand)
-    i.remove_packet                          0x08005e84   Section        0  wireless_ctrl.o(i.remove_packet)
-    i.strtodec                               0x08005f30   Section        0  uart_cmd_parser.o(i.strtodec)
-    i.uartInit                               0x08005f54   Section        0  uart_cmd_parser.o(i.uartInit)
-    .constdata                               0x08006564   Section       96  uart_cmd_parser.o(.constdata)
-    .constdata                               0x080065c4   Section       16  system_stm32f1xx.o(.constdata)
-    .constdata                               0x080065d4   Section      129  ctype_o.o(.constdata)
-    .constdata                               0x08006658   Section        4  ctype_o.o(.constdata)
-    table                                    0x08006658   Data           4  ctype_o.o(.constdata)
-    .conststring                             0x0800665c   Section      118  uart_cmd_parser.o(.conststring)
+    i.malloc                                 0x080059f0   Section        0  malloc.o(i.malloc)
+    i.parseCommand                           0x08005a5c   Section        0  uart_cmd_parser.o(i.parseCommand)
+    i.remove_packet                          0x08005e94   Section        0  wireless_ctrl.o(i.remove_packet)
+    i.strtodec                               0x08005f40   Section        0  uart_cmd_parser.o(i.strtodec)
+    i.uartInit                               0x08005f64   Section        0  uart_cmd_parser.o(i.uartInit)
+    .constdata                               0x08006574   Section       96  uart_cmd_parser.o(.constdata)
+    .constdata                               0x080065d4   Section       16  system_stm32f1xx.o(.constdata)
+    .constdata                               0x080065e4   Section      129  ctype_o.o(.constdata)
+    .constdata                               0x08006668   Section        4  ctype_o.o(.constdata)
+    table                                    0x08006668   Data           4  ctype_o.o(.constdata)
+    .conststring                             0x0800666c   Section      118  uart_cmd_parser.o(.conststring)
     .data                                    0x20000000   Section       11  nrf24.o(.data)
     .data                                    0x2000000b   Section        1  nrf24.o(.data)
     .data                                    0x2000000c   Section        8  wireless_ctrl.o(.data)
@@ -2485,16 +2485,16 @@ Image Symbol Table
     fputc                                    0x080056f5   Thumb Code    16  retarget_io.o(i.fputc)
     free                                     0x08005709   Thumb Code    76  malloc.o(i.free)
     get_packet                               0x08005759   Thumb Code    34  wireless_ctrl.o(i.get_packet)
-    main                                     0x08005781   Thumb Code   464  main.o(i.main)
-    malloc                                   0x080059e1   Thumb Code    92  malloc.o(i.malloc)
-    parseCommand                             0x08005a4d   Thumb Code   610  uart_cmd_parser.o(i.parseCommand)
-    remove_packet                            0x08005e85   Thumb Code   126  wireless_ctrl.o(i.remove_packet)
-    strtodec                                 0x08005f31   Thumb Code    34  uart_cmd_parser.o(i.strtodec)
-    uartInit                                 0x08005f55   Thumb Code  1298  uart_cmd_parser.o(i.uartInit)
-    AHBPrescTable                            0x080065c4   Data          16  system_stm32f1xx.o(.constdata)
-    __ctype_table                            0x080065d4   Data         129  ctype_o.o(.constdata)
-    Region$$Table$$Base                      0x080066d4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080066f4   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08005781   Thumb Code   478  main.o(i.main)
+    malloc                                   0x080059f1   Thumb Code    92  malloc.o(i.malloc)
+    parseCommand                             0x08005a5d   Thumb Code   610  uart_cmd_parser.o(i.parseCommand)
+    remove_packet                            0x08005e95   Thumb Code   126  wireless_ctrl.o(i.remove_packet)
+    strtodec                                 0x08005f41   Thumb Code    34  uart_cmd_parser.o(i.strtodec)
+    uartInit                                 0x08005f65   Thumb Code  1298  uart_cmd_parser.o(i.uartInit)
+    AHBPrescTable                            0x080065d4   Data          16  system_stm32f1xx.o(.constdata)
+    __ctype_table                            0x080065e4   Data         129  ctype_o.o(.constdata)
+    Region$$Table$$Base                      0x080066e4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08006704   Number         0  anon$$obj.o(Region$$Table)
     nrf_rx_flag                              0x20000000   Data           1  nrf24.o(.data)
     nrf_tx_flag                              0x20000001   Data           1  nrf24.o(.data)
     nrf_tx_fail                              0x20000002   Data           1  nrf24.o(.data)
@@ -2558,9 +2558,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000068b8, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x000067c0])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000068c8, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x000067d0])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000066f4, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00006704, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2838,24 +2838,24 @@ Memory Map of the image
     0x080056f4   0x080056f4   0x00000014   Code   RO         4350    i.fputc             retarget_io.o
     0x08005708   0x08005708   0x00000050   Code   RO         4697    i.free              mc_w.l(malloc.o)
     0x08005758   0x08005758   0x00000028   Code   RO          335    i.get_packet        wireless_ctrl.o
-    0x08005780   0x08005780   0x00000260   Code   RO          414    i.main              main.o
-    0x080059e0   0x080059e0   0x0000006c   Code   RO         4698    i.malloc            mc_w.l(malloc.o)
-    0x08005a4c   0x08005a4c   0x00000438   Code   RO          264    i.parseCommand      uart_cmd_parser.o
-    0x08005e84   0x08005e84   0x000000ac   Code   RO          336    i.remove_packet     wireless_ctrl.o
-    0x08005f30   0x08005f30   0x00000022   Code   RO          265    i.strtodec          uart_cmd_parser.o
-    0x08005f52   0x08005f52   0x00000002   PAD
-    0x08005f54   0x08005f54   0x00000610   Code   RO          266    i.uartInit          uart_cmd_parser.o
-    0x08006564   0x08006564   0x00000060   Data   RO          267    .constdata          uart_cmd_parser.o
-    0x080065c4   0x080065c4   0x00000010   Data   RO         1167    .constdata          system_stm32f1xx.o
-    0x080065d4   0x080065d4   0x00000081   Data   RO         4746    .constdata          mc_w.l(ctype_o.o)
-    0x08006655   0x08006655   0x00000003   PAD
-    0x08006658   0x08006658   0x00000004   Data   RO         4747    .constdata          mc_w.l(ctype_o.o)
-    0x0800665c   0x0800665c   0x00000076   Data   RO          268    .conststring        uart_cmd_parser.o
-    0x080066d2   0x080066d2   0x00000002   PAD
-    0x080066d4   0x080066d4   0x00000020   Data   RO         4805    Region$$Table       anon$$obj.o
+    0x08005780   0x08005780   0x00000270   Code   RO          414    i.main              main.o
+    0x080059f0   0x080059f0   0x0000006c   Code   RO         4698    i.malloc            mc_w.l(malloc.o)
+    0x08005a5c   0x08005a5c   0x00000438   Code   RO          264    i.parseCommand      uart_cmd_parser.o
+    0x08005e94   0x08005e94   0x000000ac   Code   RO          336    i.remove_packet     wireless_ctrl.o
+    0x08005f40   0x08005f40   0x00000022   Code   RO          265    i.strtodec          uart_cmd_parser.o
+    0x08005f62   0x08005f62   0x00000002   PAD
+    0x08005f64   0x08005f64   0x00000610   Code   RO          266    i.uartInit          uart_cmd_parser.o
+    0x08006574   0x08006574   0x00000060   Data   RO          267    .constdata          uart_cmd_parser.o
+    0x080065d4   0x080065d4   0x00000010   Data   RO         1167    .constdata          system_stm32f1xx.o
+    0x080065e4   0x080065e4   0x00000081   Data   RO         4746    .constdata          mc_w.l(ctype_o.o)
+    0x08006665   0x08006665   0x00000003   PAD
+    0x08006668   0x08006668   0x00000004   Data   RO         4747    .constdata          mc_w.l(ctype_o.o)
+    0x0800666c   0x0800666c   0x00000076   Data   RO          268    .conststring        uart_cmd_parser.o
+    0x080066e2   0x080066e2   0x00000002   PAD
+    0x080066e4   0x080066e4   0x00000020   Data   RO         4805    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080066f4, Size: 0x00001c48, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000cc])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08006704, Size: 0x00001c48, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000cc])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2903,7 +2903,7 @@ Image component sizes
 
         76         18          0          8          0       1439   crc.o
        192         16          0          0          0        915   gpio.o
-       722        144          0         16          0       3000   main.o
+       738        146          0         16          0       3004   main.o
       2712        806          0         12         77     448287   nrf24.o
         56          8          0          0          0       3207   retarget_io.o
        184         24          0          0         88       1601   spi.o
@@ -2936,7 +2936,7 @@ Image component sizes
       2632       1028          0          8         56       8294   wireless_ctrl.o
 
     ----------------------------------------------------------------------
-     23560       4384        500        436       6788     644021   Object Totals
+     23576       4386        500        436       6788     644025   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         34          0          2          6          7          0   (incl. Padding)
 
@@ -2992,15 +2992,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     25720       4488        636        452       6788     633545   Grand Totals
-     25720       4488        636        204       6788     633545   ELF Image Totals (compressed)
-     25720       4488        636        204          0          0   ROM Totals
+     25736       4490        636        452       6788     633549   Grand Totals
+     25736       4490        636        204       6788     633549   ELF Image Totals (compressed)
+     25736       4490        636        204          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                26356 (  25.74kB)
+    Total RO  Size (Code + RO Data)                26372 (  25.75kB)
     Total RW  Size (RW Data + ZI Data)              7240 (   7.07kB)
-    Total ROM Size (Code + RO Data + RW Data)      26560 (  25.94kB)
+    Total ROM Size (Code + RO Data + RW Data)      26576 (  25.95kB)
 
 ==============================================================================
 

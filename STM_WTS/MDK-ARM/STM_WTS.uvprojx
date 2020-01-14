@@ -582,6 +582,11 @@
               <FileType>1</FileType>
               <FilePath>../Src/usbd_conf.c</FilePath>
             </File>
+            <File>
+              <FileName>hw_crc32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hw_crc32.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

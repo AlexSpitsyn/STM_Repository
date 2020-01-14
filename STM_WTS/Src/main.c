@@ -83,6 +83,8 @@ void SystemClock_Config(void);
 
 /* USER CODE BEGIN 0 */
 
+
+
 /* USER CODE END 0 */
 
 /**
@@ -120,6 +122,12 @@ int main(void)
   MX_CRC_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
+//test
+
+//endtest
+
+
+
 
 HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
 HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
@@ -151,7 +159,7 @@ uint8_t cdc_init=0;
 
 
 if(nrf_init_state==0){
-	nrf_init_state=WL_Check_Addr(0xB0);	
+	nrf_init_state=WL_Check_Addr(0x00);	
 	
 }
 HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);

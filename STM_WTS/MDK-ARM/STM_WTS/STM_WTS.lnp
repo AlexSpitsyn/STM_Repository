@@ -36,6 +36,7 @@
 "stm_wts\usbd_desc.o"
 "stm_wts\usbd_cdc_if.o"
 "stm_wts\usbd_conf.o"
+"stm_wts\hw_crc32.o"
 "stm_wts\usbd_cdc.o"
 "stm_wts\usbd_ioreq.o"
 "stm_wts\usbd_ctlreq.o"

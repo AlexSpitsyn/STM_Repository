@@ -271,7 +271,7 @@ void TIM4_IRQHandler(void)
   /* USER CODE BEGIN TIM4_IRQn 1 */
 	
 	extern uint32_t pump_on_timer;
-	extern uint16_t reset_timer;
+	extern uint32_t reset_timer;
 	extern uint16_t beep_on_timer;
 	extern _Bool reset_f;
 	extern _Bool pump_fail_f;

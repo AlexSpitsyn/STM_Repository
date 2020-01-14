@@ -149,7 +149,7 @@
 #define OBSERVE_TX 0x08 //'Transmit observe' register
 
 //--------------------------------------------------
-#define ADR_WIDTH 3
+#define ADR_WIDTH 4
 
 #define TX_PLOAD_WIDTH 12 //bite in packet
 extern volatile uint8_t nrf_rx_flag, nrf_tx_flag, nrf_tx_fail;

@@ -2,13 +2,13 @@ stm_wts\usbd_ctlreq.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_
 stm_wts\usbd_ctlreq.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
 stm_wts\usbd_ctlreq.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
 stm_wts\usbd_ctlreq.o: ../Inc/usbd_conf.h
-stm_wts\usbd_ctlreq.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-stm_wts\usbd_ctlreq.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-stm_wts\usbd_ctlreq.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm_wts\usbd_ctlreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm_wts\usbd_ctlreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm_wts\usbd_ctlreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm_wts\usbd_ctlreq.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
 stm_wts\usbd_ctlreq.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h
 stm_wts\usbd_ctlreq.o: ../Drivers/CMSIS/Include/core_cm3.h
-stm_wts\usbd_ctlreq.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm_wts\usbd_ctlreq.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm_wts\usbd_ctlreq.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 stm_wts\usbd_ctlreq.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 stm_wts\usbd_ctlreq.o: ../Drivers/CMSIS/Include/core_cmFunc.h

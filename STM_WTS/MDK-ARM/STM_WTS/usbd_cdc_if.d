@@ -4,13 +4,13 @@ stm_wts\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/
 stm_wts\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 stm_wts\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
 stm_wts\usbd_cdc_if.o: ../Inc/usbd_conf.h
-stm_wts\usbd_cdc_if.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-stm_wts\usbd_cdc_if.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-stm_wts\usbd_cdc_if.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm_wts\usbd_cdc_if.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm_wts\usbd_cdc_if.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm_wts\usbd_cdc_if.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm_wts\usbd_cdc_if.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
 stm_wts\usbd_cdc_if.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h
 stm_wts\usbd_cdc_if.o: ../Drivers/CMSIS/Include/core_cm3.h
-stm_wts\usbd_cdc_if.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm_wts\usbd_cdc_if.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm_wts\usbd_cdc_if.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 stm_wts\usbd_cdc_if.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 stm_wts\usbd_cdc_if.o: ../Drivers/CMSIS/Include/core_cmFunc.h

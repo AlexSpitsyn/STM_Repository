@@ -6,7 +6,7 @@
 #include "crc.h"
 #include "ds18b20.h"
 #include "usart.h"
-
+#include "hw_crc32.h"
 
 
 typedef struct {//__attribute__((__packed__)){
