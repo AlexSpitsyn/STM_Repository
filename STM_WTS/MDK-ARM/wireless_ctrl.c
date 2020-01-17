@@ -26,7 +26,7 @@ uint8_t WL_Check_Addr(uint8_t base_addr){
 	//2 - addr busy
 	//3 - timeout	
 	
-	static uint8_t temp_addr=0;
+	uint8_t temp_addr=NRF_TX_ADDR[ADR_WIDTH-1];
 	uint32_t t;
 
 	base_addr &=0xF0;
@@ -36,16 +36,18 @@ uint8_t WL_Check_Addr(uint8_t base_addr){
 	//base_addr |= PCF8574A_reg>>4;
 	
 	//If GPIO set addr	
-	base_addr |= HAL_GPIO_ReadPin(GPIOB,A1_Pin);
-	base_addr |= HAL_GPIO_ReadPin(GPIOB,A2_Pin)<<1;
-	base_addr |= HAL_GPIO_ReadPin(GPIOB,A3_Pin)<<2;
-	base_addr |= HAL_GPIO_ReadPin(GPIOB,A4_Pin)<<3;
-	NRF_RX_ADDR[ADR_WIDTH-1]=base_addr;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A1_Pin);
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A2_Pin)<<1;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A3_Pin)<<2;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A4_Pin)<<3;
+	base_addr+=48;
+	
+	//NRF_RX_ADDR[ADR_WIDTH-1]=base_addr;
 	NRF_TX_ADDR[ADR_WIDTH-1]=base_addr;
 
-if(NRF_TX_ADDR[ADR_WIDTH-1]!=temp_addr){	
-	NRF24_Send("Hi");	
-	temp_addr=base_addr;
+//if(NRF_TX_ADDR[ADR_WIDTH-1]!=temp_addr){	
+	NRF24_Send("HI");	
+	//temp_addr=base_addr;
 	t=HAL_GetTick();
 	while(1){		
 		if(nrf_tx_flag){
@@ -55,8 +57,11 @@ if(NRF_TX_ADDR[ADR_WIDTH-1]!=temp_addr){
 		}	
 		if(nrf_tx_fail){
 			nrf_tx_fail=0;
-			sprintf(str,"NRF SET TX_ADDR[2]: 0x%02X\r\n", NRF_TX_ADDR[ADR_WIDTH-1]);
-			putsUSART(str);
+			NRF_RX_ADDR[ADR_WIDTH-1]=base_addr;
+			NRF_TX_ADDR[ADR_WIDTH-1]=temp_addr;
+			NRF24_Init();
+			//sprintf(str,"NRF SET TX_ADDR[2]: 0x%02X\r\n", NRF_TX_ADDR[ADR_WIDTH-1]);
+			//putsUSART(str);
 			return 0;		
 		}		
 		if((HAL_GetTick()-t)>2000){
@@ -64,9 +69,9 @@ if(NRF_TX_ADDR[ADR_WIDTH-1]!=temp_addr){
 			return 3;
 		}			
 	}
-}
+//}
 
-return 2;
+//return 2;
 
 }
 
@@ -282,31 +287,39 @@ uint8_t WL_Send_Packet(void){
 	TX_packet.pack_ID=pack_info->pack_ID;
 	
 	
-	TX_packet.host_addr=NRF_RX_ADDR[0];
-	NRF_TX_ADDR[0]=pack_info->host_addr;
+	TX_packet.host_addr=NRF_RX_ADDR[ADR_WIDTH-1];
+	NRF_TX_ADDR[ADR_WIDTH-1]=pack_info->host_addr;
 	
 
 	TX_packet.crc=HW_CRC32((uint8_t*)&TX_packet, 8, 0xFFFFFFFF);
 	//TX_packet.crc=HAL_CRC_Calculate(&hcrc,(uint32_t*)&TX_packet,2);
 
 		if(NRF_DBG_PRINT_F){
-		sprintf(str,"\r\nTX Packet CMD: 0x%02X\r\n", TX_packet.cmd);
-		putsUSART(str);
-		sprintf(str,"\r\nTX Packet VAR: 0x%02X\r\n", TX_packet.var);
-		putsUSART(str);
-		sprintf(str,"\r\nTX Packet VAL: 0x%02X\r\n", TX_packet.val);
-		putsUSART(str);
-		sprintf(str,"\r\nTX Packet P_ID: 0x%02X\r\n", TX_packet.pack_ID);
+		putsUSART("\r\nPacket Send to:");		
+				#if (ADR_WIDTH==3)
+			sprintf(str,"0x%02X%02X%02X\r\n", NRF_TX_ADDR[0],NRF_TX_ADDR[1],NRF_TX_ADDR[2]);
+		#endif
+		#if (ADR_WIDTH==4)
+			sprintf(str,"0x%02X%02X%02X%02X\r\n", NRF_TX_ADDR[0],NRF_TX_ADDR[1],NRF_TX_ADDR[2],NRF_TX_ADDR[3]);
+		#endif
+		#if (ADR_WIDTH==5)
+			sprintf(str,"0x%02X%02X%02X%02X%02X\r\n", NRF_TX_ADDR[0],NRF_TX_ADDR[1],NRF_TX_ADDR[2],NRF_TX_ADDR[3],NRF_TX_ADDR[4]);
+		#endif
 		putsUSART(str);	
 			
-		//sprintf(str,"\r\nTX Packet HOST ADDR: 0x%02X\r\n", TX_packet.host_addr);
-		//putsUSART(str);
-		
-			sprintf(str,"\r\nTX Packet HOST ADDR: 0x%02X%02X%02X\r\n", NRF_TX_ADDR[0],NRF_TX_ADDR[1],NRF_TX_ADDR[2]);
+		sprintf(str,"TX Packet CMD: 0x%02X\r\n", TX_packet.cmd);
 		putsUSART(str);
-		sprintf(str,"\r\nTX Packet STATE: 0x%02X\r\n", TX_packet.state);
+		sprintf(str,"TX Packet VAR: 0x%02X\r\n", TX_packet.var);
 		putsUSART(str);
-		sprintf(str,"\r\nTX Packet CRC: 0x%02X\r\n", TX_packet.crc);
+		sprintf(str,"TX Packet VAL: 0x%02X\r\n", TX_packet.val);
+		putsUSART(str);
+		sprintf(str,"TX Packet P_ID: 0x%02X\r\n", TX_packet.pack_ID);
+		putsUSART(str);	
+		sprintf(str,"TX Packet HOST ADDR: 0x%02X\r\n", TX_packet.host_addr);
+		putsUSART(str);	
+		sprintf(str,"TX Packet STATE: 0x%02X\r\n", TX_packet.state);
+		putsUSART(str);
+		sprintf(str,"TX Packet CRC: 0x%02X\r\n", TX_packet.crc);
 		putsUSART(str);
 
 	}
@@ -354,29 +367,29 @@ uint8_t WL_Get_Packet(){
 	
 
 	if(NRF_DBG_PRINT_F){
-		sprintf(str,"\r\nRecieve Packet CMD: 0x%02X\r\n", RX_packet.cmd);
+		sprintf(str,"Recieve Packet CMD: 0x%02X\r\n", RX_packet.cmd);
 		putsUSART(str);
-		sprintf(str,"\r\nRecieve Packet VAR: 0x%02X\r\n", RX_packet.var);
+		sprintf(str,"Recieve Packet VAR: 0x%02X\r\n", RX_packet.var);
 		putsUSART(str);
-		sprintf(str,"\r\nRecieve Packet VAL: 0x%02X\r\n", RX_packet.val);
+		sprintf(str,"Recieve Packet VAL: 0x%02X\r\n", RX_packet.val);
 		putsUSART(str);
-		sprintf(str,"\r\nRecieve Packet P_ID: 0x%02X\r\n", RX_packet.pack_ID);
+		sprintf(str,"Recieve Packet P_ID: 0x%02X\r\n", RX_packet.pack_ID);
 		putsUSART(str);		
-		sprintf(str,"\r\nRecieve Packet HOST ADDR: 0x%02X\r\n", RX_packet.host_addr);
+		sprintf(str,"Recieve Packet HOST ADDR: 0x%02X\r\n", RX_packet.host_addr);
 		putsUSART(str);
-		sprintf(str,"\r\nRecieve Packet STATE: 0x%02X\r\n", RX_packet.state);
+		sprintf(str,"Recieve Packet STATE: 0x%02X\r\n", RX_packet.state);
 		putsUSART(str);
-		sprintf(str,"\r\nRecieve Packet CRC: 0x%02X\r\n", RX_packet.crc);
+		sprintf(str,"Recieve Packet CRC: 0x%02X\r\n", RX_packet.crc);
 		putsUSART(str);
-		sprintf(str,"\r\nCalc CRC: 0x%02X\r\n", crc);
+		sprintf(str,"Calc CRC: 0x%02X\r\n", crc);
 		putsUSART(str);
 	}
 	
 	if(crc!=RX_packet.crc){	
-		putsUSART("\r\nCRC: BAD\r\n");
+		putsUSART("CRC: BAD\r\n");
 		return PS_CRC_BAD;
 	}else{
-		putsUSART("\r\nCRC: OK\r\n");
+		putsUSART("CRC: OK\r\n");
 		//pack_info->pack_state= PS_CRC_OK;
 		
 		

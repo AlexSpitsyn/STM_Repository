@@ -27,26 +27,44 @@ Project File Date:  12/19/2019
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'STM_WTS'
-compiling nrf24.c...
-nrf24.c(283): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
-  			dbg_print("NRF Init OK\r\n");
-nrf24.c(332): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
-  			dbg_print("NRF Init FAIL\r\n");
-nrf24.c(423): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
-  				dbg_print(dbg_str);
-nrf24.c(430): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
-  					dbg_print("\r\nIRQ: PIPE0 Receive\r\n");
-nrf24.c(449): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
-  			dbg_print("\r\nIRQ: TX_DS\r\n");
-nrf24.c(466): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
-  			dbg_print("\r\nIRQ: MAX_RT\r\n");
-nrf24.c(486): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
-  		dbg_print(dbg_str);
-nrf24.c: 7 warnings, 0 errors
+compiling wireless_ctrl.c...
+wireless_ctrl.c(55): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  			putsUSART("NRF: ADDR BUSY\r\n>");
+wireless_ctrl.c(68): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  			putsUSART("NRF: ADDR TIMEOUT\r\n>");
+wireless_ctrl.c(101): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  		putsUSART(str);
+wireless_ctrl.c(132): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  				putsUSART(str);
+wireless_ctrl.c(144): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  						putsUSART(str);
+wireless_ctrl.c(298): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  		putsUSART("\r\nPacket Send to:");		
+wireless_ctrl.c(333): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  				putsUSART("\r\nPacket State: PS_SEND_OK\r\n");				
+wireless_ctrl.c(341): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  				putsUSART("\r\nPacket State: PS_NO_ACK\r\n");	
+wireless_ctrl.c(348): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  				putsUSART("\r\nSend timeout! Packet State: PS_ERROR\r\n");	
+wireless_ctrl.c(371): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  		putsUSART(str);
+wireless_ctrl.c(389): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  		putsUSART("CRC: BAD\r\n");
+wireless_ctrl.c(392): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  		putsUSART("CRC: OK\r\n");
+wireless_ctrl.c(427): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  				putsUSART(str);
+wireless_ctrl.c(474): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  						putsUSART("\r\nRSP: OK\r\n");
+wireless_ctrl.c(546): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  				putsUSART("\r\nRecieve Packet: CRC BAD\r\n");
+wireless_ctrl.c(549): warning:  #223-D: function "CDC_Transmit_FS" declared implicitly
+  				putsUSART("\r\nRecieve Packet: ERROR\r\n");
+wireless_ctrl.c: 16 warnings, 0 errors
 linking...
-Program Size: Code=28860 RO-data=644 RW-data=436 ZI-data=6756  
+Program Size: Code=29896 RO-data=672 RW-data=432 ZI-data=6760  
 FromELF: creating hex file...
-"STM_WTS\STM_WTS.axf" - 0 Error(s), 7 Warning(s).
+"STM_WTS\STM_WTS.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -82,7 +100,7 @@ Package Vendor: Keil
 
    * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:ITM:1.2.0
       Source file:   Source\retarget_io.c
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

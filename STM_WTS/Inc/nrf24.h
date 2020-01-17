@@ -157,7 +157,8 @@ extern volatile uint8_t nrf_rx_flag, nrf_tx_flag, nrf_tx_fail;
 extern uint8_t NRF_TX_ADDR[ADR_WIDTH];// = { 0xb7, 0xb5, 0xa1 };
 extern uint8_t NRF_RX_ADDR[ADR_WIDTH];// = { 0xb5, 0xb5, 0xa1 };
 extern uint8_t NRF_RX_BUF[TX_PLOAD_WIDTH+1];
-extern uint8_t NRF_RF_CH;
+//extern uint8_t NRF_RF_CH;
+
 
 extern uint8_t NRF_DBG_PRINT_F;
 

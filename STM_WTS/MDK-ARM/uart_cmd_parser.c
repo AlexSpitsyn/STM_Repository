@@ -87,6 +87,7 @@ void parseCommand(char *buf) {
 	uint8_t var;
 	uint16_t val;
 	uint8_t addr;
+	uint8_t tmp;
 
 #define CMD_CNT 6
 
@@ -137,9 +138,18 @@ void parseCommand(char *buf) {
 putsUSART(
           "\r\n"
           "help\r\n"          
-          "init\r\n"
-          "send addr[0-255] cmd[0-1] var[0-1] val\r\n"					
-          "set [rx_addr/tx_add] [0-255] [0-255] [0-255], [rf_ch] [0-127]\r\n");
+          "init\r\n"	
+					"send addr[0-255] cmd[0-1] var[0-1] val\r\n"					
+#if (ADR_WIDTH==3)
+					"set [rx_addr/tx_add] [0-255] [0-255] [0-255], [rf_ch] [0-127], [data_rate] [0-2]\r\n");
+#endif	
+#if (ADR_WIDTH==4)
+					"set [rx_addr/tx_add] [0-255] [0-255] [0-255] [0-255], [rf_ch] [0-127], [data_rate] [0-2]\r\n");
+#endif	
+#if (ADR_WIDTH==5)
+					"set [rx_addr/tx_add] [0-255] [0-255] [0-255] [0-255] [0-255], [rf_ch] [0-127], [data_rate] [0-2]\r\n");
+#endif	          					
+          
 putsUSART("get state\r\n"
 					"cmd 0 - present addr\r\n"
 					"cmd 1 - get\r\n"
@@ -172,7 +182,7 @@ putsUSART("get state\r\n"
       }
       break;
 
-    case 3:  // nrf set addr
+    case 3:  // nrf set 
       if (*(pArg1) == 0) {
         putsUSART("wrong var");
       } else {
@@ -181,14 +191,35 @@ putsUSART("get state\r\n"
           if (*(pArg2) == 0) {
             putsUSART("wrong addr");
           } else {
-						
+					#if (ADR_WIDTH==3)
 						if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_TX_ADDR[0],0, 255) | strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[1],0, 255) | strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[2],0, 255)){
-							putsUSART("wrong addr value. [0-255]");		
+													putsUSART("wrong addr value. [0-255]");		
 						}else{
 							sprintf(answer, "Set NRF_TX_ADDR: 0x%02X, 0x%02X, 0x%02X\r\n",
               NRF_TX_ADDR[0], NRF_TX_ADDR[1], NRF_TX_ADDR[2]);
 							putsUSART(answer);
-						}	
+						}
+					#endif	
+					#if (ADR_WIDTH==4)
+						if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_TX_ADDR[0],0, 255) | strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[1],0, 255) | strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[2],0, 255)
+							| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[3],0, 255)){
+													putsUSART("wrong addr value. [0-255]");		
+						}else{
+							sprintf(answer, "Set NRF_TX_ADDR: 0x%02X, 0x%02X, 0x%02X, 0x%02X,\r\n",
+              NRF_TX_ADDR[0], NRF_TX_ADDR[1], NRF_TX_ADDR[2], NRF_TX_ADDR[3]);
+							putsUSART(answer);
+						}
+					#endif	
+					#if (ADR_WIDTH==5)
+						if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_TX_ADDR[0],0, 255) | strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[1],0, 255) | strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[2],0, 255)
+								| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[3],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_TX_ADDR[4],0, 255)){
+												putsUSART("wrong addr value. [0-255]");		
+						}else{
+							sprintf(answer, "Set NRF_TX_ADDR: 0x%02X, 0x%02X, 0x%02X, 0x%02X, 0x%02X\r\n",
+              NRF_TX_ADDR[0], NRF_TX_ADDR[1], NRF_TX_ADDR[2], NRF_TX_ADDR[3], NRF_TX_ADDR[4]);
+							putsUSART(answer);
+						}
+						#endif							
             
           }
         } else if (strncmp(pArg1, "rx_addr", 7) == 0) {
@@ -196,29 +227,82 @@ putsUSART("get state\r\n"
           if (*(pArg2) == 0) {
             putsUSART("wrong addr");
           } else {
+						#if (ADR_WIDTH==3)
             if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_RX_ADDR[0],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[1],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[2],0, 255)){
 							putsUSART("wrong addr value. [0-255]");		
 						}else{
 							sprintf(answer, "Set NRF_RX_ADDR: 0x%02X, 0x%02X, 0x%02X\r\n",
-              NRF_RX_ADDR[0], NRF_RX_ADDR[1], NRF_RX_ADDR[2]);
+              NRF_TX_ADDR[0], NRF_TX_ADDR[1], NRF_TX_ADDR[2]);
 							putsUSART(answer);
-						}	
+						}
+						#endif
+						#if (ADR_WIDTH==4)
+            if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_RX_ADDR[0],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[1],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[2],0, 255)
+							| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[3],0, 255)){						
+							putsUSART("wrong addr value. [0-255]");		
+						}else{
+							sprintf(answer, "Set NRF_RX_ADDR: 0x%02X, 0x%02X, 0x%02X, 0x%02X\r\n",
+              NRF_TX_ADDR[0], NRF_TX_ADDR[1], NRF_TX_ADDR[2], NRF_TX_ADDR[3]);
+							putsUSART(answer);
+						}
+						#endif
+						#if (ADR_WIDTH==5)
+            if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_RX_ADDR[0],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[1],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[2],0, 255)
+								| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[3],0, 255)| strtodec(pEnd,&pEnd,(uint16_t*)&NRF_RX_ADDR[4],0, 255)){
+								putsUSART("wrong addr value. [0-255]");		
+						}else{
+							sprintf(answer, "Set NRF_RX_ADDR: 0x%02X, 0x%02X, 0x%02X, 0x%02X, 0x%02X\r\n",
+              NRF_TX_ADDR[0], NRF_TX_ADDR[1], NRF_TX_ADDR[2], NRF_TX_ADDR[3], NRF_TX_ADDR[4]);
+							putsUSART(answer);
+						}
+						#endif
+				
           }
         } else if (strncmp(pArg1, "rf_ch", 5) == 0) {
-          pArg2 = pArg1 + 8;
+          pArg2 = pArg1 + 6;
           if (*(pArg2) == 0) {
-            putsUSART("wrong addr");
+            putsUSART("wrong var");
           } else {
 						
-						if(strtodec(pArg2,&pEnd,(uint16_t*)&NRF_RF_CH,0, 127)){
-							putsUSART("wrong RF_CH value. [0-127]");		
+						if(strtodec(pArg2,&pEnd,(uint16_t*)&tmp,0, 127)){
+							putsUSART("wrong rf_ch value. [0-127]");		
 						}else{
-							NRF24_WriteReg(RF_CH, 76);
-							printf(answer, "Set NRF_RF_CH: 0x%02X\r\n", NRF_RF_CH);
+							NRF24_WriteReg(RF_CH, tmp);
+							printf(answer, "Set NRF_RF_CH: 0x%02X\r\n", tmp);
 							putsUSART(answer);
 						}	
           }
-        } else {
+        }else if (strncmp(pArg1, "data_rate", 9) == 0) {
+          pArg2 = pArg1 + 10;
+          if (*(pArg2) == 0) {
+            putsUSART("wrong var");
+          } else {
+						
+						if(strtodec(pArg2,&pEnd,(uint16_t*)&tmp,0, 2)){
+							putsUSART("wrong data_rate value. [0-2]");		
+						}else{
+							var=NRF24_ReadReg(RF_SETUP);
+							putsUSART("Set NRF_DR: ");
+							if (tmp==0){
+								var|=0x20;
+								var&=0xF7;
+								NRF24_WriteReg(RF_SETUP, var );
+								putsUSART("250KBps\r\n");
+							}
+							if (tmp==1){								
+								var&=0xD7;
+								NRF24_WriteReg(RF_SETUP, var );
+								putsUSART("1MBps\r\n");
+							}
+							if (tmp==2){
+								var|=0x08;
+								var&=0xDF;
+								NRF24_WriteReg(RF_SETUP, var );
+								putsUSART("2MBps\r\n");
+							}
+						}	
+          }
+        }				else {
           putsUSART("wrong addr type");
         }
       }
@@ -229,10 +313,10 @@ putsUSART("get state\r\n"
       NRF24_Get_State();
 			putsUSART("\r\n-----  DS STATE  ----\r\n");
 				if(ds18b20_Reset()){
-					putsUSART("DS STATE: FAIL\r\n");
+					putsUSART("STATE: FAIL\r\n");
 				}else{
 					ds18b20_GetTemp();
-					sprintf(answer, "DS STATE: OK\r\nDS TEMP: %d'C\r\n", DS_TEMP);
+					sprintf(answer, "STATE: OK\r\nTEMP: %d'C\r\n", DS_TEMP);
 					putsUSART(answer);
 				}
 			
