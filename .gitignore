@@ -1,0 +1,8 @@
+*.[oad]
+*.bak
+*.crf
+*.hex
+*.map
+*.html
+*.dep
+*~
