@@ -277,9 +277,9 @@ uint8_t NRF24_Init(void) {
 	//NRF24_WriteReg(DYNPD, 0x01);
 	NRF24_WriteReg(STATUS, 0x70); //Reset flags for IRQ
 	NRF24_WriteReg(RF_CH, NRF_RF_CH); // 
-	//NRF24_WriteReg(RF_SETUP, 0x26); //TX_PWR:0dBm (MAX), Datarate:250Kbps
+	NRF24_WriteReg(RF_SETUP, 0x26); //TX_PWR:0dBm (MAX), Datarate:250Kbps
 	//NRF24_WriteReg(RF_SETUP, 0x06); //TX_PWR:0dBm (MAX), Datarate:1Mbps
-	NRF24_WriteReg(RF_SETUP, 0x0E); //TX_PWR:0dBm, Datarate:2Mbps
+	//NRF24_WriteReg(RF_SETUP, 0x0E); //TX_PWR:0dBm, Datarate:2Mbps
 
 	//PIPE CONF
 	NRF24_Write_Buf(TX_ADDR, NRF_TX_ADDR, ADR_WIDTH);

@@ -40,12 +40,13 @@ uint8_t WL_Check_Addr(uint8_t base_addr){
 	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A2_Pin)<<1;
 	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A3_Pin)<<2;
 	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A4_Pin)<<3;
-	base_addr+=48;
+	base_addr+=1;
 	
 	//NRF_RX_ADDR[ADR_WIDTH-1]=base_addr;
 	NRF_TX_ADDR[ADR_WIDTH-1]=base_addr;
 
 //if(NRF_TX_ADDR[ADR_WIDTH-1]!=temp_addr){	
+
 	NRF24_Send("HI");	
 	//temp_addr=base_addr;
 	t=HAL_GetTick();
@@ -392,7 +393,9 @@ uint8_t WL_Get_Packet(){
 		putsUSART("CRC: OK\r\n");
 		//pack_info->pack_state= PS_CRC_OK;
 		
-		
+		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+		HAL_Delay(500);
+		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 			
 		if(RX_packet.state==PS_NEW){					
 			if(pack_cnt<MAX_PACK_CNT){

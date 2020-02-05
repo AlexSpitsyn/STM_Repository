@@ -221,7 +221,7 @@ HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
 				HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 				HAL_Delay(1000);
 				HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-				HAL_Delay(1000);				
+				HAL_Delay(300);				
       }
 			
 			
