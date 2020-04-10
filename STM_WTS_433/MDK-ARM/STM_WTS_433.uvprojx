@@ -413,11 +413,6 @@
               <FilePath>..\Src\SX1278.c</FilePath>
             </File>
             <File>
-              <FileName>uart_cmd_parser.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\Alexander\Documents\STM\workspace\STM_Repository\STM_WTS_433\Src\uart_cmd_parser.c</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/main.c</FilePath>
@@ -486,6 +481,11 @@
               <FileName>stm32f1xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/stm32f1xx_hal_msp.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_cmd_parser.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\uart_cmd_parser.c</FilePath>
             </File>
           </Files>
         </Group>

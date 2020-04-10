@@ -151,12 +151,12 @@ uint8_t cdc_init=0;
 //	
 //}
 
-	SX1278_LoRaEntryRx( 20, 2000); 
+SX1278_LoRaEntryRx( 20, 2000); 
 HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
 char dbg_str[32];
 
-sprintf(dbg_str, "WL ADDR: %d", WL_Check_Addr(0x30));
-putsUSART(dbg_str);
+//sprintf(dbg_str, "WL ADDR: %d", WL_Check_Addr(0x30));
+//putsUSART(dbg_str);
 
  while (1){
 //Blinking 

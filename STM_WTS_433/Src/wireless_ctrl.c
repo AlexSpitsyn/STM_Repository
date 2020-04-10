@@ -99,7 +99,7 @@ void print_pack_info(WL_Packet* packet){
 			putsUSART(str);
 			sprintf(str,"VAR: 0x%02X\r\n", packet->var);
 			putsUSART(str);
-			sprintf(str,"VAL: 0x%02X\r\n", packet->val);
+			sprintf(str,"VAL: 0x%04X\r\n", packet->val);
 			putsUSART(str);
 			sprintf(str,"P_ID: 0x%02X\r\n", packet->pack_ID);
 			putsUSART(str);	
@@ -351,7 +351,8 @@ uint8_t WL_Send_Packet(uint16_t PID, uint8_t pack_state, uint32_t dest_addr, uin
 				putsUSART("\r\nPacket Send: OK\r\n");				
 		}			
 
-		SX1278_RX_Mode();
+		//SX1278_RX_Mode();
+		 SX1278_LoRaEntryRx(WL_PLOAD_WIDTH,3000);
 
 		return PS_SEND_OK;
 	}else{
@@ -526,10 +527,10 @@ void WL_Handler(void){
 	
 		if(WL_RECEIVE){
 			WL_RECEIVE=0;	
-			
+			putsUSART("\r\n   Packet Received\r\n");
 			state= WL_Check_Packet();
 			
-			if(state==PS_ADDR_MATCH && rx_handler){		
+			if((state==PS_ADDR_MATCH) && rx_handler){		
 				HAL_Delay(1000);
 				
 				state = WL_Run_CMD(RX_packet.cmd);

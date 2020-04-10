@@ -394,6 +394,19 @@ void SX1278_Get_State(void){
 		sprintf(dbg_str, "RegIrqFlags: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 	
+	
+		dt_reg = SX1278_SPIReadReg(LR_RegFrMsb);
+		sprintf(dbg_str, "RegFrMsb: 0x%02X\r\n", dt_reg);
+		dbg_print(dbg_str);
+	
+		dt_reg = SX1278_SPIReadReg(LR_RegFrMid);
+		sprintf(dbg_str, "RegFrMid: 0x%02X\r\n", dt_reg);
+		dbg_print(dbg_str);
+	
+		dt_reg = SX1278_SPIReadReg(LR_RegFrLsb);
+		sprintf(dbg_str, "RegFrLsb: 0x%02X\r\n", dt_reg);
+		dbg_print(dbg_str);
+	
 		dt_reg = SX1278_SPIReadReg(LR_RegOpMode);
 		sprintf(dbg_str, "RegOpMode: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
