@@ -386,50 +386,40 @@ void SX1278_IRQ_Callback(void) {
 void SX1278_Get_State(void){
 	dbg_print("SX1278 STATE:\r\n");
 	
-		dt_reg = SX1278_SPIReadReg(LR_RegIrqFlagsMask);
-		sprintf(dbg_str, "RegIrqFlagsMask: 0x%02X\r\n", dt_reg);
-		dbg_print(dbg_str);
-	
 		dt_reg = SX1278_SPIReadReg(LR_RegIrqFlags);
-		sprintf(dbg_str, "RegIrqFlags: 0x%02X\r\n", dt_reg);
+		sprintf(dbg_str, "REG_IRQ_FLAGS: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 	
 	
 		dt_reg = SX1278_SPIReadReg(LR_RegFrMsb);
-		sprintf(dbg_str, "RegFrMsb: 0x%02X\r\n", dt_reg);
+		sprintf(dbg_str, "REG_FR_MSB: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 	
 		dt_reg = SX1278_SPIReadReg(LR_RegFrMid);
-		sprintf(dbg_str, "RegFrMid: 0x%02X\r\n", dt_reg);
+		sprintf(dbg_str, "REG_FR_MID: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 	
 		dt_reg = SX1278_SPIReadReg(LR_RegFrLsb);
-		sprintf(dbg_str, "RegFrLsb: 0x%02X\r\n", dt_reg);
+		sprintf(dbg_str, "REG_FR_LSB: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 	
 		dt_reg = SX1278_SPIReadReg(LR_RegOpMode);
-		sprintf(dbg_str, "RegOpMode: 0x%02X\r\n", dt_reg);
-		dbg_print(dbg_str);
-		
-		dt_reg = SX1278_SPIReadReg(LR_RegFrMsb);
-		sprintf(dbg_str, "RegFrMsb: 0x%02X\r\n", dt_reg);
-		dbg_print(dbg_str);
+		sprintf(dbg_str, "REG_OP_MODE: 0x%02X\r\n", dt_reg);
+		dbg_print(dbg_str);	
+
 		
 		dt_reg = SX1278_SPIReadReg(LR_RegPaConfig);
-		sprintf(dbg_str, "RegPaConfig: 0x%02X\r\n", dt_reg);
+		sprintf(dbg_str, "REG_PA_CONFIG: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 		
 		dt_reg = SX1278_SPIReadReg(LR_RegModemConfig1);
-		sprintf(dbg_str, "RegModemConfig1: 0x%02X\r\n", dt_reg);
+		sprintf(dbg_str, "REG_MODEM_CONFIG_1: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 		
 		dt_reg = SX1278_SPIReadReg(LR_RegModemConfig2);
-		sprintf(dbg_str, "RegModemConfig2: 0x%02X\r\n", dt_reg);
+		sprintf(dbg_str, "REG_MODEM_CONFIG_2: 0x%02X\r\n", dt_reg);
 		dbg_print(dbg_str);
 		
-		
-		sprintf(dbg_str, "SF: %d\r\n", SX1278_SpreadFactor[SX1278.SF]);
-		dbg_print(dbg_str);
 
 		sprintf(dbg_str, "BW: %s\r\n", SX1278_LoRaBandwidth_s[SX1278.BW]);
 		dbg_print(dbg_str);

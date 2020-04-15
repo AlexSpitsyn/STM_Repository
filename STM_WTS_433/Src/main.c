@@ -21,7 +21,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "crc.h"
-#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -109,7 +108,6 @@ int main(void)
   MX_TIM1_Init();
   MX_CRC_Init();
   MX_USB_DEVICE_Init();
-  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 //test
 
@@ -119,15 +117,16 @@ int main(void)
 
 
 HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
-HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
+HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_SET);
 HAL_Delay(200);
+
 uartInit();
 
 //putsUSART("1\r\n>");
 ds_init_state= ds18b20_Init(RESOLUTION_9BIT);
 //putsUSART("2\r\n>");
 
-SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
+SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_125KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
 HAL_Delay(200);
 //putsUSART("3\r\n>");
 HAL_TIM_Base_Start_IT( &htim1);
@@ -147,16 +146,18 @@ uint8_t cdc_init=0;
 
 
 //if(sx1278_init_state==0){
-//	nrf_init_state=WL_Check_Addr(0x00);	
+	wl_init_state=WL_Check_Addr(0x00);	
 //	
 //}
 
 SX1278_LoRaEntryRx( 20, 2000); 
-HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
+HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_RESET);
 char dbg_str[32];
 
 //sprintf(dbg_str, "WL ADDR: %d", WL_Check_Addr(0x30));
 //putsUSART(dbg_str);
+
+
 
  while (1){
 //Blinking 
@@ -181,19 +182,20 @@ char dbg_str[32];
 				uartInit();
 				cdc_init=1;					
 			}
+
 			vcp_rx_flag = 0;
 		}
 		
 		if(ds_init_state){
-			HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_RESET);
 			HAL_Delay(1000);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			HAL_Delay(200);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			if(ds_check_timer>500){
 				ds_check_timer=0;
 				ds_init_state= ds18b20_Init(RESOLUTION_9BIT);

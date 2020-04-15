@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "crc.h"
 #include "spi.h"
 #include "tim.h"
@@ -108,6 +109,7 @@ int main(void)
   MX_TIM1_Init();
   MX_CRC_Init();
   MX_USB_DEVICE_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 //test
 
@@ -117,8 +119,9 @@ int main(void)
 
 
 HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
-HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
+HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_SET);
 HAL_Delay(200);
+
 uartInit();
 
 //putsUSART("1\r\n>");
@@ -145,16 +148,18 @@ uint8_t cdc_init=0;
 
 
 //if(sx1278_init_state==0){
-//	nrf_init_state=WL_Check_Addr(0x00);	
+	wl_init_state=WL_Check_Addr(0x00);	
 //	
 //}
 
-	SX1278_LoRaEntryRx( 20, 2000); 
-HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
+SX1278_LoRaEntryRx( 20, 2000); 
+HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_RESET);
 char dbg_str[32];
 
-sprintf(dbg_str, "WL ADDR: %d", WL_Check_Addr(0x30));
-putsUSART(dbg_str);
+//sprintf(dbg_str, "WL ADDR: %d", WL_Check_Addr(0x30));
+//putsUSART(dbg_str);
+
+
 
  while (1){
 //Blinking 
@@ -179,19 +184,20 @@ putsUSART(dbg_str);
 				uartInit();
 				cdc_init=1;					
 			}
+
 			vcp_rx_flag = 0;
 		}
 		
 		if(ds_init_state){
-			HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_RESET);
 			HAL_Delay(1000);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			HAL_Delay(200);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
 			if(ds_check_timer>500){
 				ds_check_timer=0;
 				ds_init_state= ds18b20_Init(RESOLUTION_9BIT);
@@ -252,7 +258,8 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC|RCC_PERIPHCLK_USB;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV8;
   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV1_5;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {

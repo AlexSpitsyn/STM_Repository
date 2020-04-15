@@ -1,6 +1,6 @@
 
 #include "wireless_ctrl.h"
-#include "i2c.h"
+
 
 
 _Bool dbg_f=1;
@@ -10,7 +10,7 @@ char str[64];
 uint16_t packet_handler_timer=0;
 uint16_t ds_check_timer=0;
 
-uint8_t nrf_init_state=0;
+uint8_t wl_init_state=0;
 uint8_t ds_init_state=0;
 
 struct packet_buf *pack_info =NULL;
@@ -35,29 +35,46 @@ uint8_t WL_Check_Addr(uint8_t base_addr){
 	
 	uint8_t state=0xFF;
 	uint32_t t;
-	//base_addr &=0xF0;
+	uint32_t tmp_addr;	
+
 	
 	//If PCF8754 set addr
 //	PCF8574_ReadReg();
 //	base_addr |= PCF8574A_reg>>4;
-	HAL_StatusTypeDef res;
-	res = HAL_I2C_Master_Transmit(&hi2c2, 0x40, &state, 1, HAL_MAX_DELAY);
-	res = HAL_I2C_Master_Receive(&hi2c2, 0x40, &base_addr, 1, HAL_MAX_DELAY);
-	printf("I2C STATUS CODE: %d\r\n",res);
-	printf("I2C ERROR CODE: %d\r\n",HAL_I2C_GetError(&hi2c2));
+
 	//base_addr |= base_addr>>4;
 	//If GPIO set addr	
-//	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A1_Pin);
-//	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A2_Pin)<<1;
-//	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A3_Pin)<<2;
-//	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A4_Pin)<<3;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A1_Pin)<<4;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A2_Pin)<<3;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A3_Pin)<<2;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A4_Pin)<<1;
+	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A5_Pin)<<0;
+	
+	base_addr+=1;	
+	tmp_addr=WL_ADDR.Val;	
+	WL_ADDR.Val=(WL_ADDR.Val & 0x00FFFFFF) | (uint32_t)base_addr<<24;
 	
 	
-	//base_addr+=48;
+	sprintf(str,"SX1278 temp ADDR: 0x%08X", WL_ADDR.Val);
+	putsUSART(str);
 	
+	t = base_addr*1000;
+	while(t--){	
+		if(WL_RECEIVE){				
+			WL_RECEIVE=0;	
+			state= WL_Check_Packet();
+			if(state==PS_ADDR_MATCH){	
+				if(RX_packet.pack_ID == 0xDEAD){
+					sprintf(str,"ADDR request: 0x%08X\r\nSET COMMON ADDR: 0x%08X\r\n", WL_ADDR.Val, tmp_addr);
+					putsUSART(str);
+					WL_ADDR.Val = tmp_addr;
+					return 2;
+				}				
+			}
+		}
 	
-	WL_ADDR.S[WL_ADR_WIDTH-1]=base_addr;
-	
+		HAL_Delay(10);
+	}
 
 state= WL_Send_Packet(0xDEAD, PS_NEW, WL_ADDR.Val, CMD_PRESENT, 0, 0);
 	
@@ -68,10 +85,12 @@ state= WL_Send_Packet(0xDEAD, PS_NEW, WL_ADDR.Val, CMD_PRESENT, 0, 0);
 				WL_RECEIVE=0;	
 				state= WL_Check_Packet();
 			
+				
 				if(state==PS_ADDR_MATCH){				
 					if(RX_packet.pack_ID == 0xDEAD){						
-						sprintf(str,"SX1278 ADDR: 0x%02X - BUSY\r\nSET COMMON ADDR: 0x%02X\r\n", WL_ADDR.Val+base_addr, WL_ADDR.Val);
+						sprintf(str,"SX1278 ADDR: 0x%08X - BUSY\r\nSET COMMON ADDR: 0x%08X\r\n", WL_ADDR.Val, tmp_addr);
 						putsUSART(str);
+						WL_ADDR.Val = tmp_addr;
 						return 2;
 						
 					}
@@ -82,8 +101,8 @@ state= WL_Send_Packet(0xDEAD, PS_NEW, WL_ADDR.Val, CMD_PRESENT, 0, 0);
 		if((HAL_GetTick()-t)>2000){
 			
 			putsUSART("ADDR FREE\r\n>");			
-			WL_ADDR.Val+=base_addr;	
-			sprintf(str,"SX1278 ADDR: 0x%02X \r\n", WL_ADDR.Val);
+				
+			sprintf(str,"SX1278 ADDR: 0x%08X \r\n", WL_ADDR.Val);
 			putsUSART(str);
 			return 3;
 			}	
@@ -101,11 +120,11 @@ void print_pack_info(WL_Packet* packet){
 			putsUSART(str);
 			sprintf(str,"VAL: 0x%04X\r\n", packet->val);
 			putsUSART(str);
-			sprintf(str,"P_ID: 0x%02X\r\n", packet->pack_ID);
+			sprintf(str,"P_ID: 0x%04X\r\n", packet->pack_ID);
 			putsUSART(str);	
-			sprintf(str,"DEST ADDR: 0x%02X\r\n", packet->dest_addr);
+			sprintf(str,"DEST ADDR: 0x%08X\r\n", packet->dest_addr);
 			putsUSART(str);
-			sprintf(str,"SRC ADDR: 0x%02X\r\n", packet->src_addr);
+			sprintf(str,"SRC ADDR: 0x%08X\r\n", packet->src_addr);
 			putsUSART(str);	
 //			sprintf(str,"STATE: 0x%02X\r\n", packet->state);
 //			putsUSART(str);

@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include "stm32f1xx_hal.h"
 #include <stdint.h>
+//#include "main.h"
 
 
 #define SX1278_SPI_PORT &hspi1
@@ -12,10 +13,10 @@
 
 #define NSS_Port		GPIOA
 #define NSS_Pin			GPIO_PIN_4
-#define RESET_Port 	GPIOB
-#define RESET_Pin		GPIO_PIN_6
+#define RESET_Port 	GPIOA
+#define RESET_Pin		GPIO_PIN_8
 #define DIO0_Port		GPIOB
-#define DIO0_Pin		GPIO_PIN_8
+#define DIO0_Pin		GPIO_PIN_1
 
 
 #define SX1278_NSS_RESET HAL_GPIO_WritePin(NSS_Port, NSS_Pin, GPIO_PIN_RESET)

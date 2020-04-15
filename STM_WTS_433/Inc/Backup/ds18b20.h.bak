@@ -16,7 +16,11 @@
 #include <stdint.h>
 //--------------------------------------------------
 #define DS_PORT 	GPIOB
-#define DS_PIN		GPIO_PIN_9
+#define DS_PIN		GPIO_PIN_1
+
+#define ODR_REG 	GPIO_ODR_ODR1
+#define	IDR_REG		GPIO_IDR_IDR1
+//#define	CR_REG		GPIO_IDR_ODR1
 
 extern uint8_t DS_SCRATCHPAD[8];
 extern int8_t DS_TEMP;

@@ -8,7 +8,7 @@
 #include "ds18b20.h"
 //#include "usart.h"
 
-//#define putsUSART(x)	HAL_UART_Transmit(&huart1, (uint8_t*)x, strlen(x), 0xFFFF);
+
 
 uint8_t DS_SCRATCHPAD[8];
 int8_t DS_TEMP = 0;
@@ -24,20 +24,25 @@ __STATIC_INLINE void DelayMicro(__IO uint32_t micros) {
 //--------------------------------------------------
 void port_init(void) {
 	HAL_GPIO_DeInit(GPIOB, DS_PIN);
-	GPIOB->CRH |= GPIO_CRH_MODE9;
-	GPIOB->CRH |= GPIO_CRH_CNF9_0;
-	GPIOB->CRH &= ~GPIO_CRH_CNF9_1;
+//	GPIOB->CRL |= GPIO_CRH_MODE11;
+//	GPIOB->CRL |= GPIO_CRH_CNF9_0;
+//	GPIOB->CRL &= ~GPIO_CRH_CNF9_1;
+	
+	 // 50MHz output open-drain
+  GPIOB->CRL |= GPIO_CRL_MODE1;
+  GPIOB->CRL |= GPIO_CRL_CNF1_0;
+  GPIOB->CRL &= ~GPIO_CRL_CNF1_1;
 
 }
 //--------------------------------------------------
 uint8_t ds18b20_Reset(void) {
 	uint16_t status;
 
-	GPIOB->ODR &= ~GPIO_ODR_ODR9;
+	GPIOB->ODR &= ~ODR_REG;
 	DelayMicro(485);
-	GPIOB->ODR |= GPIO_ODR_ODR9;
+	GPIOB->ODR |= ODR_REG;
 	DelayMicro(65);
-	status = GPIOB->IDR & GPIO_IDR_IDR9;
+	status = GPIOB->IDR & ODR_REG;
 	DelayMicro(500);
 
 	return (status ? 1 : 0);
@@ -49,11 +54,11 @@ uint8_t ds18b20_Reset(void) {
 uint8_t ds18b20_ReadBit(void) {
 	uint8_t bit = 0;
 
-	GPIOB->ODR &= ~GPIO_ODR_ODR9;
+	GPIOB->ODR &= ~ODR_REG;
 	DelayMicro(2);
-	GPIOB->ODR |= GPIO_ODR_ODR9;
+	GPIOB->ODR |= ODR_REG;
 	DelayMicro(13);
-	bit = (GPIOB->IDR & GPIO_IDR_IDR9 ? 1 : 0);
+	bit = (GPIOB->IDR & IDR_REG ? 1 : 0);
 
 	DelayMicro(45);
 	return bit;
@@ -72,9 +77,9 @@ uint8_t ds18b20_ReadByte(void) {
 //-----------------------------------------------
 void ds18b20_WriteBit(uint8_t bit) {
 
-	GPIOB->ODR &= ~GPIO_ODR_ODR9;
+	GPIOB->ODR &= ~ODR_REG;
 	DelayMicro(bit ? 3 : 65);
-	GPIOB->ODR |= GPIO_ODR_ODR9;
+	GPIOB->ODR |= ODR_REG;
 	DelayMicro(bit ? 65 : 3);
 
 }

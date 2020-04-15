@@ -57,7 +57,7 @@ uint32_t crc;
 extern uint16_t packet_handler_timer;
 extern uint16_t ds_check_timer;
 extern uint8_t ds_init_state;
-extern uint8_t nrf_init_state;
+extern uint8_t wl_init_state;
 
 enum CMD_STATE{
 	CMD_PRESENT,
