@@ -67,7 +67,6 @@ uint8_t ds18b20_ReadBit(void) {
 uint8_t ds18b20_ReadByte(void) {
 	uint8_t data = 0;
 	uint8_t i=0;
-	uint8_t s[16];
 	
 	for (i = 0; i <= 7; i++){
 		data += ds18b20_ReadBit() << i;

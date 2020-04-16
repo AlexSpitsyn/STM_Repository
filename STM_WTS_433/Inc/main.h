@@ -60,8 +60,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define USB_INT_Pin GPIO_PIN_0
 #define USB_INT_GPIO_Port GPIOA
-#define LED_GREEN_Pin GPIO_PIN_1
-#define LED_GREEN_GPIO_Port GPIOA
+#define LED_RED_Pin GPIO_PIN_1
+#define LED_RED_GPIO_Port GPIOA
 #define USB_PULLUP_Pin GPIO_PIN_3
 #define USB_PULLUP_GPIO_Port GPIOA
 #define NSS_Pin GPIO_PIN_4

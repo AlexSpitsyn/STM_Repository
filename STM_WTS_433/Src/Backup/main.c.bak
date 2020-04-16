@@ -20,7 +20,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "adc.h"
 #include "crc.h"
 #include "spi.h"
 #include "tim.h"
@@ -109,7 +108,6 @@ int main(void)
   MX_TIM1_Init();
   MX_CRC_Init();
   MX_USB_DEVICE_Init();
-  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 //test
 
@@ -128,7 +126,7 @@ uartInit();
 ds_init_state= ds18b20_Init(RESOLUTION_9BIT);
 //putsUSART("2\r\n>");
 
-SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
+SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_125KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
 HAL_Delay(200);
 //putsUSART("3\r\n>");
 HAL_TIM_Base_Start_IT( &htim1);
@@ -258,8 +256,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC|RCC_PERIPHCLK_USB;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV8;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV1_5;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {

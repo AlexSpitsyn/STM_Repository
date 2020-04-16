@@ -282,7 +282,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 	static uint8_t csi_rx_len = 0;
 	static uint8_t CSI = 0;
 	
- USBD_HandleTypeDef usb_cdc;// = hUsbDeviceFS;	
+ 
 	
 	//ECHO
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);

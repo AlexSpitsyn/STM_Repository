@@ -7,6 +7,8 @@
 #include "ds18b20.h"
 #include "usart.h"
 #include "hw_crc32.h"
+#include <stdio.h>
+#include <stdio.h>
 
 extern _Bool dbg_f;
 extern _Bool rx_handler;
@@ -46,7 +48,7 @@ uint8_t state;
 uint8_t cmd;
 uint8_t var;
 	
-uint16_t val;	
+int16_t val;	
 uint16_t pack_ID;
 	
 uint32_t crc;	

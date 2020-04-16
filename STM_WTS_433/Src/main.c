@@ -57,6 +57,8 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+uint8_t cdc_init=0;
+
 
 /* USER CODE END PV */
 
@@ -109,63 +111,42 @@ int main(void)
   MX_CRC_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-//test
-
-//endtest
-
-
-
 
 HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
-HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_SET);
+
 HAL_Delay(200);
-
 uartInit();
-
-//putsUSART("1\r\n>");
 ds_init_state= ds18b20_Init(RESOLUTION_9BIT);
-//putsUSART("2\r\n>");
-
 SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_125KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
 HAL_Delay(200);
-//putsUSART("3\r\n>");
 HAL_TIM_Base_Start_IT( &htim1);
-//putsUSART("4\r\n>");
+HAL_UART_Receive_IT( &huart1, &receive_val, 1);
+
+
 if(ds_init_state){
 	putsUSART("DS init FAIL\r\n>");
 }	
+HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_SET);
+wl_init_state=WL_Check_Addr(0x00);
+putsUSART("ADDR check code: ");
+if(wl_init_state==1){
+	putsUSART("1\r\n");
+}
+if(wl_init_state==2){
+	putsUSART( "2\r\n");
+}
+HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_RESET);
 
-HAL_UART_Receive_IT( &huart1, &receive_val, 1);
+SX1278_LoRaEntryRx( 20, 2000); 
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-uint8_t cdc_init=0;
-
-
-
-//if(sx1278_init_state==0){
-	wl_init_state=WL_Check_Addr(0x00);	
-//	
-//}
-
-SX1278_LoRaEntryRx( 20, 2000); 
-HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_RESET);
-char dbg_str[32];
-
-//sprintf(dbg_str, "WL ADDR: %d", WL_Check_Addr(0x30));
-//putsUSART(dbg_str);
-
-
-
  while (1){
 //Blinking 
 //DS18B20 init error ..
-//NRF24 init error	 -
-//NRF24 addr busy		 - -
-//NRF24 timeout			 - - -
-
+//WL addr busy		 - -
 			
 		if (uart1_rx_flag) {
 			parseCommand(uart_rx_buf);
@@ -174,7 +155,7 @@ char dbg_str[32];
 		}
 		if (vcp_rx_flag) {
 			if(cdc_init){
-			CDC_Transmit_FS((uint8_t*)"\r\n>", 3);
+				CDC_Transmit_FS((uint8_t*)"\r\n>", 3);
 			//CDC_Transmit_FS((uint8_t*)"OK\n\r", 4);
 			//putsUSART("\r\nOK\n\r");
 			parseCommand(vcp_rx_buf);			
@@ -187,15 +168,16 @@ char dbg_str[32];
 		}
 		
 		if(ds_init_state){
-			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin,GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_RESET);
 			HAL_Delay(1000);
-			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
 			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
 			HAL_Delay(200);
-			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
 			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port,LED_GREEN_Pin);
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
+			HAL_Delay(1000);
 			if(ds_check_timer>500){
 				ds_check_timer=0;
 				ds_init_state= ds18b20_Init(RESOLUTION_9BIT);
@@ -206,9 +188,23 @@ char dbg_str[32];
 				ds_init_state= ds18b20_Reset();
 			}
 		}
-		
+		if(wl_init_state){
+			HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_RESET);
+			HAL_Delay(1000);
+			
 
-			WL_Handler();	
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
+			HAL_Delay(1000);
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
+			HAL_Delay(300);		
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
+			HAL_Delay(1000);
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
+			HAL_Delay(300);					
+      
+		}
+
+		WL_Handler();	
 	
 		
 

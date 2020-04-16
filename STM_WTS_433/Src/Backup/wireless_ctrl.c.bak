@@ -219,7 +219,7 @@ void print_pack_info(WL_Packet* packet){
 
 
 
-uint8_t WL_Get_Var(uint8_t var, uint16_t* val){
+uint8_t WL_Get_Var(uint8_t var, int16_t* val){
 uint8_t state;
 	switch (var){
 				case VAR_TEMP: 
@@ -227,7 +227,7 @@ uint8_t state;
 						state=PS_ERROR;
 					}else{
 						ds18b20_GetTemp();
-						*val=DS_TEMP;				
+						*val=(int16_t)DS_TEMP;				
 						state=PS_DONE;
 					}
 
