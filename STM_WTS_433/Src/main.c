@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "crc.h"
+#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -36,6 +37,7 @@
 #include "SX1278.h"
 #include "ds18b20.h"
 #include "wireless_ctrl.h"
+#include "sys_config.h"
 
 /* USER CODE END Includes */
 
@@ -57,7 +59,6 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint8_t cdc_init=0;
 
 
 /* USER CODE END PV */
@@ -85,7 +86,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -110,104 +110,23 @@ int main(void)
   MX_TIM1_Init();
   MX_CRC_Init();
   MX_USB_DEVICE_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
-HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
-
-HAL_Delay(200);
-uartInit();
-ds_init_state= ds18b20_Init(RESOLUTION_9BIT);
-SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_125KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
-HAL_Delay(200);
-HAL_TIM_Base_Start_IT( &htim1);
-HAL_UART_Receive_IT( &huart1, &receive_val, 1);
+SysInit();
 
 
-if(ds_init_state){
-	putsUSART("DS init FAIL\r\n>");
-}	
-HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_SET);
-wl_init_state=WL_Check_Addr(0x00);
-putsUSART("ADDR check code: ");
-if(wl_init_state==1){
-	putsUSART("1\r\n");
-}
-if(wl_init_state==2){
-	putsUSART( "2\r\n");
-}
-HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_RESET);
-
-SX1278_LoRaEntryRx( 20, 2000); 
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
  while (1){
-//Blinking 
-//DS18B20 init error ..
-//WL addr busy		 - -
-			
-		if (uart1_rx_flag) {
-			parseCommand(uart_rx_buf);
-			uart1_rx_flag = 0;
-
-		}
-		if (vcp_rx_flag) {
-			if(cdc_init){
-				CDC_Transmit_FS((uint8_t*)"\r\n>", 3);
-			//CDC_Transmit_FS((uint8_t*)"OK\n\r", 4);
-			//putsUSART("\r\nOK\n\r");
-			parseCommand(vcp_rx_buf);			
-			}else{
-				uartInit();
-				cdc_init=1;					
-			}
-
-			vcp_rx_flag = 0;
-		}
-		
-		if(ds_init_state){
-			HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_RESET);
-			HAL_Delay(1000);
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(200);
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(100);
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(1000);
-			if(ds_check_timer>500){
-				ds_check_timer=0;
-				ds_init_state= ds18b20_Init(RESOLUTION_9BIT);
-			}
-		}else{
-			if(ds_check_timer>500){
-				ds_check_timer=0;
-				ds_init_state= ds18b20_Reset();
-			}
-		}
-		if(wl_init_state){
-			HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin,GPIO_PIN_RESET);
-			HAL_Delay(1000);
-			
-
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(1000);
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(300);		
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(1000);
-			HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-			HAL_Delay(300);					
-      
-		}
-
-		WL_Handler();	
 	
-		
-
+//HAL_I2C_Mem_Write (EEPROM_I2C_PORT, (uint16_t) EEPROM_ADDR, 0, I2C_MEMADD_SIZE_8BIT, d, 4, HAL_MAX_DELAY);	
+	// EEPROM_Write(EEPROM_WL_ADDR, WL_ADR_WIDTH, d);
+		SystemTask();	
+	 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

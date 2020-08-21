@@ -2,7 +2,6 @@
 #include "wireless_ctrl.h"
 
 
-
 _Bool dbg_f=1;
 _Bool rx_handler=1;
 WL_Packet RX_packet;
@@ -17,33 +16,22 @@ struct packet_buf *pack_info =NULL;
 
 WL_ADDRESS WL_ADDR = { .S = "WTS0" };
 
-
-
-#define MAX_PACK_CNT 10
 uint8_t pack_cnt=0;
 
-//uint8_t WL_RX_ADDR[WL_ADR_WIDTH] = "WTS0"; //SELF ADDRESS S1
 
 uint8_t WL_Check_Packet(void);
 
 uint8_t WL_Check_Addr(uint8_t base_addr){
 	
 	//0 - addr free READY
-	//1 - init fail
-	//2 - addr busy
-	//3 - timeout	
+	//1 - addr busy
+	//2 - error
 	
 	uint8_t state=0xFF;
 	uint32_t t;
 	uint32_t tmp_addr;	
-
 	
-	//If PCF8754 set addr
-//	PCF8574_ReadReg();
-//	base_addr |= PCF8574A_reg>>4;
 
-	//base_addr |= base_addr>>4;
-	//If GPIO set addr	
 	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A1_Pin)<<4;
 	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A2_Pin)<<3;
 	base_addr |= !HAL_GPIO_ReadPin(GPIOB,A3_Pin)<<2;
@@ -55,7 +43,7 @@ uint8_t WL_Check_Addr(uint8_t base_addr){
 	WL_ADDR.Val=(WL_ADDR.Val & 0x00FFFFFF) | (uint32_t)base_addr<<24;
 	
 	
-	sprintf(str,"SX1278 temp ADDR: 0x%08X", WL_ADDR.Val);
+	sprintf(str,"SX1278 temp ADDR: 0x%08X\r\n", WL_ADDR.Val);
 	putsUSART(str);
 	
 	t = base_addr*1000;
@@ -68,7 +56,7 @@ uint8_t WL_Check_Addr(uint8_t base_addr){
 					sprintf(str,"ADDR request: 0x%08X\r\nSET COMMON ADDR: 0x%08X\r\n", WL_ADDR.Val, tmp_addr);
 					putsUSART(str);
 					WL_ADDR.Val = tmp_addr;
-					return 2;
+					return 1;
 				}				
 			}
 		}
@@ -84,43 +72,39 @@ state= WL_Send_Packet(0xDEAD, PS_NEW, WL_ADDR.Val, CMD_PRESENT, 0, 0);
 			if(WL_RECEIVE){
 				WL_RECEIVE=0;	
 				state= WL_Check_Packet();
-			
-				
 				if(state==PS_ADDR_MATCH){				
 					if(RX_packet.pack_ID == 0xDEAD){						
 						sprintf(str,"SX1278 ADDR: 0x%08X - BUSY\r\nSET COMMON ADDR: 0x%08X\r\n", WL_ADDR.Val, tmp_addr);
 						putsUSART(str);
 						WL_ADDR.Val = tmp_addr;
-						return 2;
-						
+						return 2;						
 					}
 				}	
-		}
+			}
 			
 			
-		if((HAL_GetTick()-t)>2000){
-			
-			putsUSART("ADDR FREE\r\n>");			
-				
+		if((HAL_GetTick()-t)>2000){			
+			putsUSART("ADDR FREE\r\n>");
 			sprintf(str,"SX1278 ADDR: 0x%08X \r\n", WL_ADDR.Val);
 			putsUSART(str);
-			return 3;
+			return 0;
 			}	
 		}
 	}
-
-
+	return 2;
 }
 
 void print_pack_info(WL_Packet* packet){
-
+	
+			sprintf(str,"STATE: 0x%02X\r\n", packet->state);
+			putsUSART(str);
 			sprintf(str,"CMD: 0x%02X\r\n", packet->cmd);
 			putsUSART(str);
 			sprintf(str,"VAR: 0x%02X\r\n", packet->var);
 			putsUSART(str);
 			sprintf(str,"VAL: 0x%04X\r\n", packet->val);
 			putsUSART(str);
-			sprintf(str,"P_ID: 0x%04X\r\n", packet->pack_ID);
+			sprintf(str,"PID: 0x%04X\r\n", packet->pack_ID);
 			putsUSART(str);	
 			sprintf(str,"DEST ADDR: 0x%08X\r\n", packet->dest_addr);
 			putsUSART(str);
@@ -128,7 +112,7 @@ void print_pack_info(WL_Packet* packet){
 			putsUSART(str);	
 //			sprintf(str,"STATE: 0x%02X\r\n", packet->state);
 //			putsUSART(str);
-			sprintf(str,"CRC: 0x%02X\r\n", packet->crc);
+			sprintf(str,"CRC: 0x%08X\r\n", packet->crc);
 			putsUSART(str); 
 }
 
@@ -331,7 +315,6 @@ uint8_t state;
 
 uint8_t WL_Send_Packet(uint16_t PID, uint8_t pack_state, uint32_t dest_addr, uint8_t cmd, uint8_t var, uint16_t val){	
 	
-	uint32_t t;	
 	WL_Packet TX_packet;
 	uint8_t buf[WL_PLOAD_WIDTH+1]; 
 	
@@ -466,34 +449,35 @@ uint8_t WL_Check_Packet(void){
 }
 
 uint8_t WL_Run_CMD(uint8_t cmd){
+	uint8_t state;
 	switch (cmd){
 				
 		case CMD_PRESENT:
-			return PS_DONE;
+			state = PS_DONE;
 		break;
 				
 		case CMD_GET: 
-				return WL_Get_Var(RX_packet.var, &RX_packet.val);
+				state = WL_Get_Var(RX_packet.var, &RX_packet.val);
 		break;
 				
 		case CMD_SET: 
-				return WL_Set_Var(RX_packet.var, RX_packet.val);
+				state = WL_Set_Var(RX_packet.var, RX_packet.val);
 		break;
 				
 		case CMD_EEPROM_WR: 	
-				return PS_CMD_NOT_SUPPORTED;
+				state = PS_CMD_NOT_SUPPORTED;
 		break;
 				
 		case CMD_ERR_CLR: 	
-				return PS_CMD_NOT_SUPPORTED;			
+				state = PS_CMD_NOT_SUPPORTED;			
 		break;
 				
 		default:
-			return PS_CMD_NOT_SUPPORTED;
-		break;
-			
+			state = PS_CMD_NOT_SUPPORTED;
+		break;		
 			
 	}
+	return state;
 }
 
 //void WL_Packet_Handler(void){

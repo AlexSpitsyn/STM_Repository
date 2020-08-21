@@ -1,0 +1,258 @@
+
+#include "wireless_ctrl.h"
+
+
+_Bool dbg_f=1;
+_Bool rx_handler=1;
+WL_Packet RX_packet;
+char str[64]; 
+uint16_t packet_handler_timer=0;
+uint16_t ds_check_timer=0;
+
+uint8_t wl_init_state=0;
+uint8_t ds_init_state=0;
+
+struct packet_buf *pack_info =NULL;
+
+WL_ADDRESS WL_ADDR;// = { .S = "WTS0" };
+
+uint8_t pack_cnt=0;
+
+uint8_t WL_Init(void){
+	uint8_t res;
+	SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
+
+	HAL_Delay(200);
+	
+	res = EEPROM_Read(WL_EEPROM_ADDR, WL_ADR_WIDTH, (uint8_t*)WL_ADDR.S);
+	
+	return res;	
+	
+}
+void print_pack_info(WL_Packet* packet){
+	
+			sprintf(str,"STATE: 0x%02X\r\n", packet->state);
+			putsUSART(str);
+			sprintf(str,"CMD: 0x%02X\r\n", packet->cmd);
+			putsUSART(str);
+			sprintf(str,"VAR: 0x%02X\r\n", packet->var);
+			putsUSART(str);
+			sprintf(str,"VAL: 0x%04X\r\n", packet->val);
+			putsUSART(str);
+			sprintf(str,"PID: 0x%04X\r\n", packet->pack_ID);
+			putsUSART(str);	
+			sprintf(str,"DEST ADDR: 0x%08X\r\n", packet->dest_addr);
+			putsUSART(str);
+			sprintf(str,"SRC ADDR: 0x%08X\r\n", packet->src_addr);
+			putsUSART(str);	
+//			sprintf(str,"STATE: 0x%02X\r\n", packet->state);
+//			putsUSART(str);
+			sprintf(str,"CRC: 0x%08X\r\n", packet->crc);
+			putsUSART(str); 
+}
+
+
+uint8_t WL_Get_Var(uint8_t var, int16_t* val){
+uint8_t state;
+	
+	if(var>= SYS_VAR_CNT){
+		*val=0;				
+		state=PS_VAR_NOT_SUPPORTED;
+	}else{
+		*val=(int16_t)*SV[var].pVal;				
+		state=PS_DONE;
+					
+	}
+	
+
+	return state;
+}
+
+uint8_t WL_Set_Var(uint8_t var, uint16_t val){
+uint8_t state;	
+	
+	if(var>= SYS_VAR_CNT){		
+		state=PS_VAR_NOT_SUPPORTED;
+	}else{
+		if(SV[var].we){
+			if(val<=SV[var].vmax && val>=SV[var].vmin){
+				*SV[var].pVal = (uint16_t)val;				
+			}else{
+				state=PS_VAL_NOT_SUPPORTED;
+			}
+			
+		}else{
+			state=PS_CMD_NOT_SUPPORTED;
+		}
+	}
+				
+
+	return state;
+}
+
+
+uint8_t WL_Write_EEPROM(){
+	for(int i; i<SYS_VAR_CNT; i++){
+		SysVarRW(WR,&SV[i]);
+	}
+	return 0;
+}
+
+uint8_t WL_Send_Packet(uint16_t PID, uint8_t pack_state, uint32_t dest_addr, uint8_t cmd, uint8_t var, uint16_t val){	
+	
+	WL_Packet TX_packet;
+	uint8_t buf[WL_PLOAD_WIDTH+1]; 
+	
+	TX_packet.src_addr =WL_ADDR.Val;
+	TX_packet.dest_addr=dest_addr;
+	
+	TX_packet.cmd=cmd;
+	TX_packet.var=var;
+	TX_packet.val=val;
+	
+	TX_packet.state=pack_state;
+	if(PID){
+		TX_packet.pack_ID=PID;	
+	}else{
+		TX_packet.pack_ID=(uint16_t)HAL_GetTick();	
+	}
+	
+	TX_packet.crc=HW_CRC32((uint8_t*)&TX_packet, WL_PLOAD_WIDTH-4, 0xFFFFFFFF);
+			
+	if(WL_DEBUG_PRINT){
+			sprintf(str,"\r\nTry Send Packet to: 0x%08X\r\n", dest_addr );
+			putsUSART(str);		
+			putsUSART("TX Packet Info\r\n");	
+			print_pack_info(&TX_packet);
+	}
+		
+	memcpy(buf,&TX_packet, WL_PLOAD_WIDTH);
+	
+	if(WL_SEND_BUF(buf)){
+		if(WL_DEBUG_PRINT){				
+				putsUSART("\r\nPacket Send: OK\r\n");				
+		}			
+
+		SX1278_LoRaEntryRx(WL_PLOAD_WIDTH,3000);
+
+		return PS_SEND_OK;
+	}else{
+		if(WL_DEBUG_PRINT){				
+				putsUSART("\r\nPacket Send: Timeout\r\n");				
+		}			
+		return PS_TIMEOUT;
+	}	
+}
+
+
+
+
+
+uint8_t WL_Check_Packet(void){
+	
+	uint32_t crc;
+	//WL_Packet RX_packet;
+	memcpy(	&RX_packet, &WL_PACKET_BUF ,WL_PLOAD_WIDTH);
+	crc=HW_CRC32((uint8_t*)&RX_packet, WL_PLOAD_WIDTH-4 , 0xFFFFFFFF);
+	//crc=HAL_CRC_Calculate(&hcrc,(uint32_t*)	&RX_packet,2);	
+
+	if(WL_DEBUG_PRINT){		
+			putsUSART("RX Packet Info\r\n");	
+			print_pack_info(&RX_packet);
+			sprintf(str,"CRC CALK: 0x%08X\r\n",crc);
+			putsUSART(str);
+	}
+	
+	if(crc!=RX_packet.crc){
+		if(WL_DEBUG_PRINT){		
+			sprintf(str,"CRC check: %d / %s\r\n",PS_CRC_BAD, PACK_STATE_STR[PS_CRC_BAD]);
+			putsUSART(str);
+		}		
+		return PS_CRC_BAD;
+		
+	}else{
+		
+		if(WL_DEBUG_PRINT){		
+			sprintf(str,"CRC check: %d / %s\r\n",PS_CRC_BAD, PACK_STATE_STR[PS_CRC_OK]);
+			putsUSART(str);
+		}	
+		
+		if(RX_packet.dest_addr == WL_ADDR.Val){
+			if(WL_DEBUG_PRINT){		
+				sprintf(str,"ADDR check: %d / %s\r\n",PS_ADDR_MATCH, PACK_STATE_STR[PS_ADDR_MATCH]);
+				putsUSART(str);
+			}
+			return PS_ADDR_MATCH;	
+		}	else{
+			if(WL_DEBUG_PRINT){		
+				sprintf(str,"ADDR check: %d / %s\r\n",PS_ADDR_MISMATCH, PACK_STATE_STR[PS_ADDR_MISMATCH]);
+				putsUSART(str);
+			}
+			return PS_ADDR_MISMATCH;	
+		}
+		
+	}	
+}
+
+uint8_t WL_Run_CMD(uint8_t cmd){
+	uint8_t state;
+	switch (cmd){
+				
+		case CMD_PRESENT:
+			state = PS_DONE;
+		break;
+				
+		case CMD_GET: 
+				state = WL_Get_Var(RX_packet.var, &RX_packet.val);
+		break;
+				
+		case CMD_SET: 
+				state = WL_Set_Var(RX_packet.var, RX_packet.val);
+		break;
+				
+		case CMD_EEPROM_WR: 	
+				state = WL_Write_EEPROM();
+		break;
+				
+		case CMD_ERR_CLR: 	
+				state = PS_CMD_NOT_SUPPORTED;			
+		break;
+				
+		default:
+			state = PS_CMD_NOT_SUPPORTED;
+		break;		
+			
+	}
+	return state;
+}
+
+
+
+void WL_Handler(void){
+	
+	uint8_t state=0;
+	
+		if(WL_RECEIVE){
+			WL_RECEIVE=0;	
+			putsUSART("\r\n   Packet Received\r\n");
+			state= WL_Check_Packet();
+			
+			if((state==PS_ADDR_MATCH) && rx_handler){		
+				HAL_Delay(500);
+				
+				state = WL_Run_CMD(RX_packet.cmd);
+				if(WL_DEBUG_PRINT){		
+						sprintf(str,"RUN CMD STATE: %s\r\n",PACK_STATE_STR[state]);
+						putsUSART(str);
+				}
+				state = WL_Send_Packet(RX_packet.pack_ID, state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val);
+				if(WL_DEBUG_PRINT){		
+					sprintf(str,"SEND PACKET STATE: %s\r\n",PACK_STATE_STR[state]);
+					putsUSART(str);
+				}
+			}	
+		}		
+}
+
+
+

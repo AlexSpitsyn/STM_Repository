@@ -237,8 +237,11 @@ void TIM1_UP_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_IRQn 0 */
 
-	packet_handler_timer++;
-	ds_check_timer++;
+	//SysCnt.wl_handler++;
+	//ds_check_timer++;
+	SysCnt.temp_update++;
+	if(SysState.error_f)
+		SysCnt.error_check++;
 	
   /* USER CODE END TIM1_UP_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
