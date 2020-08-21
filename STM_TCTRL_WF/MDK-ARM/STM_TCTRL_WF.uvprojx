@@ -393,26 +393,6 @@
           <GroupName>Application/User</GroupName>
           <Files>
             <File>
-              <FileName>ds18b20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Src\ds18b20.c</FilePath>
-            </File>
-            <File>
-              <FileName>io_expander.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Src\io_expander.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Src\nrf24.c</FilePath>
-            </File>
-            <File>
-              <FileName>wireless_ctrl.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Src\wireless_ctrl.c</FilePath>
-            </File>
-            <File>
               <FileName>uart_cmd_parser.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\uart_cmd_parser.c</FilePath>
@@ -426,11 +406,6 @@
               <FileName>drive.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\drive.c</FilePath>
-            </File>
-            <File>
-              <FileName>7seg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Src\7seg.c</FilePath>
             </File>
             <File>
               <FileName>eeprom.c</FileName>
@@ -586,6 +561,36 @@
               <FileName>system_stm32f1xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/system_stm32f1xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>../</GroupName>
+          <Files>
+            <File>
+              <FileName>7seg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\7seg.c</FilePath>
+            </File>
+            <File>
+              <FileName>wireless_ctrl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\wireless_ctrl.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrf24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\nrf24.c</FilePath>
+            </File>
+            <File>
+              <FileName>io_expander.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\io_expander.c</FilePath>
+            </File>
+            <File>
+              <FileName>ds18b20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ds18b20.c</FilePath>
             </File>
           </Files>
         </Group>

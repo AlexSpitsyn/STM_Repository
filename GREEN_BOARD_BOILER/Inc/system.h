@@ -55,7 +55,7 @@ typedef struct {
 	int16_t 	burner;
   //				ERROR
   int8_t error_code;
-  _Bool error_f;
+//  _Bool error_f;
 	//				UART DBG
 	_Bool uart_en_f;
 	_Bool uart_dbg_f;
@@ -146,10 +146,10 @@ void SetMaxPosition(void);
 
 #define SS_BLINK_TIME 							10
 #define SS_VIEW_MODE_TIME 					120
-#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);PrintDecSevSeg(drv_m1.position);
-#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);PrintDecSevSeg(x);
-#define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); PrintDecSevSeg(x);
-#define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); PrintDecSevSeg(x);
+#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);SevSeg_PrintDec(drv_m1.position);
+#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);SevSeg_PrintDec(x);
+#define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); SevSeg_PrintDec(x);
+#define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); SevSeg_PrintDec(x);
 #define SS_PRINT_T_NONE() 					putcSS(SEV_SEG_t); putcSS(0); putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); SS_LATCH();
 #define SS_BLINK(x) 								SysState.ss_blink_f = x; SS_OE(x); SysCnt.blink=0;
 #define TEMP_VIEW 									0

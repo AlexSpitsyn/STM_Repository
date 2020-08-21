@@ -84,14 +84,14 @@ volatile SysCouners_t SysCnt={0};
 void SysInit(void) {
 	
 	
-	SevSegInit();
+	SevSeg_Init();
 	
   SysState.error_code =0;
 	SysState.error_code |= EEPROM_IsDeviceReady()<< EEPROM_READING_ERROR;
   SysState.error_code |= PCF8574_IsDeviceReady()<< IO_EXPANDER_READING_ERROR;  
   SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
 	
-	Buttons_Reset();
+
 	ds18b20_Init(1,RESOLUTION_9BIT);
   ds18b20_GetTemp(0);
 		
@@ -117,6 +117,7 @@ void SysInit(void) {
 
 
 	SysState.ss_update_f = 1;
+	Buttons_Init();			  
 	SysCnt.temp_ctrl = SysState.t_ctrl_time;
 
 			
@@ -125,33 +126,38 @@ void SysInit(void) {
 
 
 	WL_Init();
+	if(SYS_DBG_PRINT_F){
+		dbg_print("===== INIT DONE ======\r\n");
+	}				 
 }
 
 void SystemTask(void) {
     // unsigned int i;
 
     //----------------      DISPLAY        --------------------------------------
-    if (SysState.ss_update_f) {
-      SysState.ss_update_f = 0;
-			printf("SS update\r\n");
-      if (SysState.error_f) {
-        SS_PRINT_ERROR_CODE(SysState.error_code);
-      } else {
-        
-				if (SysState.temp_ctrl_f) {
-					SS_PRINT_TEMP(DS18B20_TEMP);
-				} else {
-
-					SS_PRINT_T_NONE();
+    	if (SysState.error_code) {
+		if (SysState.ss_update_f) {
+			SS_PRINT_ERROR_CODE(SysState.error_code);
+			SysState.ss_update_f = 0;
+		}
+	} else {
+		if(SysState.temp_ctrl_f){
+			if (SysState.ss_update_f) {
+				SysState.ss_update_f = 0;
+				if(SYS_DBG_PRINT_F){
+					dbg_print("SS update\r\n");
 				}
-
-        
-      }
-    }
-
+				SS_PRINT_TEMP(DS18B20_TEMP);
+		
+			}	
+		}				
+		else{
+			SevSeg_Idle();
+		}
+	}	
     //----------------      TEMP UPDATE     --------------------------------------
 
-    if (!SysState.error_f) {
+    if (!SysState.error_code) {
 
       if (SysCnt.temp_update >= SysState.t_updt_time){
 				
@@ -172,7 +178,7 @@ void SystemTask(void) {
       }
 
       //----------------      TEMP CONTROL     --------------------------------------
-      if (!SysState.error_f) {
+      if (!SysState.error_code) {
         if (SysState.temp_ctrl_f){
 					if (SysCnt.temp_ctrl >= SysState.t_ctrl_time) {
 						SysState.ss_update_f = 1;
@@ -251,15 +257,9 @@ void SystemTask(void) {
 			
 //---------------------------   ERROR check --------------------------------
 			if (SysState.error_code) {
-				SysState.error_f = 1;
-				LED_ON(LED_RED);
-			} else {
-				SysState.error_f = 0;
-				LED_OFF(LED_RED);
-			}
-			
-			if(SysState.error_f){
+				
 				SysErrorCheck();
+				SysState.ss_update_f=1;
 			}
 }
 		
@@ -299,75 +299,75 @@ void SysErrorCheck(void){
 				SysState.error_code &= ~(1<<EEPROM_READING_ERROR);				
 			}
 		}
-
+		if(SysState.error_code){				
+			LED_ON(LED_RED);			
+		}else{
+			LED_OFF(LED_RED);	
+		}
 	}
-
 }
 // --------------- END ERROR -------------------------------		
 
 
 		
 		
- void SetTemp(void) {
+ void SetTemp(void) {	
 	#define SET_MODE_TIME 120
-	 
-   int16_t tmp = SysState.set_temp;
-   SS_PRINT_TEMP(tmp);
-   SS_BLINK(ON);
-   SysCnt.timeout = 0;
-   while (1) {
-     if (btn_pressed_f) {
-       switch (Buttons_GetCode()) {
-       case BTN_UP:
-
-         if (tmp < TEMP_MAX_LIMIT) {
-           tmp ++;
-           SS_PRINT_TEMP(tmp);
-         }
-         SysCnt.timeout = 0;
-
-         break;
-       case BTN_DOWN:
-         if (tmp > TEMP_MIN_LIMIT) {
-           tmp --;
-           SS_PRINT_TEMP(tmp);
-         }
-         SysCnt.timeout = 0;
-         break;
-
-       case BTN_SEL:
-         SysState.set_temp = tmp;
-         SS_BLINK(OFF);
-         trulala();
-         SysVarRW(WR,&SV[vn_T_SET]);                   
-         return;
-
-       }
+	int16_t tmp = SysState.set_temp;
+	SS_PRINT_TEMP(tmp);
+	SS_BLINK(ON);
+	SysCnt.timeout = 0;
+	while (1) {
+		buttons_handler();
+		if(BTN_DOWN==SHORT_PRESS){
+			BTN_DOWN=0;
+			if (tmp > TEMP_MIN_LIMIT) {
+				tmp --;
+				SS_PRINT_TEMP(tmp);
+			}
+			SysCnt.timeout = 0;			
+			
+		}
+		if(BTN_UP==SHORT_PRESS){
+			BTN_UP=0;
+			if (tmp < TEMP_MAX_LIMIT) {
+				tmp ++;
+				SS_PRINT_TEMP(tmp);
+			}
+			SysCnt.timeout = 0;					
+		}
+		if(BTN_SEL==SHORT_PRESS){
+			BTN_SEL=0;
+			SysState.set_temp = tmp;
+			SS_BLINK(OFF);
+			trulala();
+			SysVarRW(WR,&SV[vn_T_SET]);                   
+			return;		
+		}    
+     
+    if (SysCnt.timeout > SET_MODE_TIME) {
+			SysState.set_temp = tmp;
+			SS_BLINK(OFF);
+			SysVarRW(WR,&SV[vn_T_SET]); 
+			if(SysState.error_code){
+				SS_PRINT_ERROR_CODE(SysState.error_code);
+			}else{
+				 SS_PRINT_TEMP(DS18B20_TEMP);
+			}
+      return;
      }
-     if (SysCnt.timeout > SET_MODE_TIME) {
-			 SysState.set_temp = tmp;
-       SS_BLINK(OFF);
-			 SysVarRW(WR,&SV[vn_T_SET]); 
-			 
-				if(SysState.error_code){
-					SS_PRINT_ERROR_CODE(SysState.error_code);
-				}else{
-					SS_PRINT_TEMP(DS18B20_TEMP);
-				}
-       return;
-     }
-   }
- }
+	 }   
+}
+ 
 
 
  
  
 uint32_t SysVarRW(_Bool rw, SysVar* sv) {
- 
-if (rw){
-		return EEPROM_Write(sv->mem_addr*EEPROM_OFFSET, 2, (uint8_t*)sv->pVal);		
+	if (rw){
+			return EEPROM_Write(sv->mem_addr*EEPROM_OFFSET, 2, (uint8_t*)sv->pVal);		
 	} else {
-		return EEPROM_Read(sv->mem_addr*EEPROM_OFFSET, 2, (uint8_t*)sv->pVal);
+			return EEPROM_Read(sv->mem_addr*EEPROM_OFFSET, 2, (uint8_t*)sv->pVal);
 	}	
 }
 

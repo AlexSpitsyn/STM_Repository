@@ -156,6 +156,7 @@ int main(void)
 			BTN_SEL=0;
 			SysState.temp_ctrl_f^=1;
 			SysState.ss_update_f = 1;
+			SysVarRW(WR,&SV[vn_T_CTRL_F]); 
 			//printf("SEL long press\r\n");				
 		}
 	

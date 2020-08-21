@@ -23,255 +23,63 @@ Section Cross References
     startup_stm32f103xb.o(RESET) refers to stm32f1xx_it.o(i.USART1_IRQHandler) for USART1_IRQHandler
     startup_stm32f103xb.o(.text) refers to system_stm32f1xx.o(i.SystemInit) for SystemInit
     startup_stm32f103xb.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
-    ds18b20.o(i.DelayMicro) refers to system_stm32f1xx.o(.data) for SystemCoreClock
-    ds18b20.o(i.ds18b20_Convert_int8) refers to ds18b20.o(.data) for .data
-    ds18b20.o(i.ds18b20_GetTemp) refers to ds18b20.o(i.ds18b20_MeasureTemperCmd) for ds18b20_MeasureTemperCmd
-    ds18b20.o(i.ds18b20_GetTemp) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
-    ds18b20.o(i.ds18b20_GetTemp) refers to ds18b20.o(i.ds18b20_ReadStratcpad) for ds18b20_ReadStratcpad
-    ds18b20.o(i.ds18b20_GetTemp) refers to ds18b20.o(i.ds18b20_Convert_int8) for ds18b20_Convert_int8
-    ds18b20.o(i.ds18b20_Init) refers to ds18b20.o(i.port_init) for port_init
-    ds18b20.o(i.ds18b20_Init) refers to ds18b20.o(i.DelayMicro) for DelayMicro
-    ds18b20.o(i.ds18b20_Init) refers to ds18b20.o(i.ds18b20_Reset) for ds18b20_Reset
-    ds18b20.o(i.ds18b20_Init) refers to ds18b20.o(i.ds18b20_WriteByte) for ds18b20_WriteByte
-    ds18b20.o(i.ds18b20_MeasureTemperCmd) refers to ds18b20.o(i.ds18b20_Reset) for ds18b20_Reset
-    ds18b20.o(i.ds18b20_MeasureTemperCmd) refers to ds18b20.o(i.ds18b20_WriteByte) for ds18b20_WriteByte
-    ds18b20.o(i.ds18b20_ReadBit) refers to ds18b20.o(i.DelayMicro) for DelayMicro
-    ds18b20.o(i.ds18b20_ReadByte) refers to ds18b20.o(i.ds18b20_ReadBit) for ds18b20_ReadBit
-    ds18b20.o(i.ds18b20_ReadStratcpad) refers to ds18b20.o(i.ds18b20_Reset) for ds18b20_Reset
-    ds18b20.o(i.ds18b20_ReadStratcpad) refers to ds18b20.o(i.ds18b20_WriteByte) for ds18b20_WriteByte
-    ds18b20.o(i.ds18b20_ReadStratcpad) refers to ds18b20.o(i.ds18b20_ReadByte) for ds18b20_ReadByte
-    ds18b20.o(i.ds18b20_ReadStratcpad) refers to ds18b20.o(.data) for .data
-    ds18b20.o(i.ds18b20_Reset) refers to ds18b20.o(i.DelayMicro) for DelayMicro
-    ds18b20.o(i.ds18b20_WriteBit) refers to ds18b20.o(i.DelayMicro) for DelayMicro
-    ds18b20.o(i.ds18b20_WriteByte) refers to ds18b20.o(i.ds18b20_WriteBit) for ds18b20_WriteBit
-    ds18b20.o(i.ds18b20_WriteByte) refers to ds18b20.o(i.DelayMicro) for DelayMicro
-    ds18b20.o(i.port_init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_DeInit) for HAL_GPIO_DeInit
-    io_expander.o(i.PCF8574_Init) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Master_Transmit) for HAL_I2C_Master_Transmit
-    io_expander.o(i.PCF8574_Init) refers to printfa.o(i.__0printf) for __2printf
-    io_expander.o(i.PCF8574_Init) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_GetError) for HAL_I2C_GetError
-    io_expander.o(i.PCF8574_Init) refers to i2c.o(.bss) for hi2c2
-    io_expander.o(i.PCF8574_ReadReg) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Master_Receive) for HAL_I2C_Master_Receive
-    io_expander.o(i.PCF8574_ReadReg) refers to printfa.o(i.__0printf) for __2printf
-    io_expander.o(i.PCF8574_ReadReg) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_GetError) for HAL_I2C_GetError
-    io_expander.o(i.PCF8574_ReadReg) refers to io_expander.o(.data) for .data
-    io_expander.o(i.PCF8574_ReadReg) refers to i2c.o(.bss) for hi2c2
-    nrf24.o(i.DelayMicro) refers to system_stm32f1xx.o(.data) for SystemCoreClock
-    nrf24.o(i.NRF24_FlushRX) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_FlushRX) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    nrf24.o(i.NRF24_FlushRX) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_FlushRX) refers to spi.o(.bss) for hspi1
-    nrf24.o(i.NRF24_FlushTX) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_FlushTX) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    nrf24.o(i.NRF24_FlushTX) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_FlushTX) refers to spi.o(.bss) for hspi1
-    nrf24.o(i.NRF24_Get_State) refers to nrf24.o(i.NRF24_ReadReg) for NRF24_ReadReg
-    nrf24.o(i.NRF24_Get_State) refers to printfa.o(i.__0sprintf) for __2sprintf
-    nrf24.o(i.NRF24_Get_State) refers to strlen.o(.text) for strlen
-    nrf24.o(i.NRF24_Get_State) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    nrf24.o(i.NRF24_Get_State) refers to nrf24.o(i.NRF24_Read_Buf) for NRF24_Read_Buf
-    nrf24.o(i.NRF24_Get_State) refers to nrf24.o(.data) for .data
-    nrf24.o(i.NRF24_Get_State) refers to nrf24.o(.bss) for .bss
-    nrf24.o(i.NRF24_Get_State) refers to usart.o(.bss) for huart1
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(i.NRF24_ReadReg) for NRF24_ReadReg
-    nrf24.o(i.NRF24_IRQ_Callback) refers to printfa.o(i.__0sprintf) for __2sprintf
-    nrf24.o(i.NRF24_IRQ_Callback) refers to strlen.o(.text) for strlen
-    nrf24.o(i.NRF24_IRQ_Callback) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(i.NRF24_Read_Buf) for NRF24_Read_Buf
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(i.NRF24_WriteReg) for NRF24_WriteReg
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(i.NRF24_RX_Mode) for NRF24_RX_Mode
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(i.NRF24_FlushTX) for NRF24_FlushTX
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(.data) for .data
-    nrf24.o(i.NRF24_IRQ_Callback) refers to nrf24.o(.bss) for .bss
-    nrf24.o(i.NRF24_IRQ_Callback) refers to usart.o(.bss) for huart1
-    nrf24.o(i.NRF24_Init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_DeInit) for HAL_GPIO_DeInit
-    nrf24.o(i.NRF24_Init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_Init) for HAL_GPIO_Init
-    nrf24.o(i.NRF24_Init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(i.NRF24_WriteReg) for NRF24_WriteReg
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(i.NRF24_ToggleFeatures) for NRF24_ToggleFeatures
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(i.NRF24_Write_Buf) for NRF24_Write_Buf
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(i.NRF24_RX_Mode) for NRF24_RX_Mode
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(i.NRF24_ReadReg) for NRF24_ReadReg
-    nrf24.o(i.NRF24_Init) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    nrf24.o(i.NRF24_Init) refers to printfa.o(i.__0sprintf) for __2sprintf
-    nrf24.o(i.NRF24_Init) refers to strlen.o(.text) for strlen
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(i.NRF24_Read_Buf) for NRF24_Read_Buf
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(.data) for .data
-    nrf24.o(i.NRF24_Init) refers to usart.o(.bss) for huart1
-    nrf24.o(i.NRF24_Init) refers to nrf24.o(.bss) for .bss
-    nrf24.o(i.NRF24_RX_Mode) refers to nrf24.o(i.NRF24_ReadReg) for NRF24_ReadReg
-    nrf24.o(i.NRF24_RX_Mode) refers to nrf24.o(i.NRF24_WriteReg) for NRF24_WriteReg
-    nrf24.o(i.NRF24_RX_Mode) refers to nrf24.o(i.NRF24_Write_Buf) for NRF24_Write_Buf
-    nrf24.o(i.NRF24_RX_Mode) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_RX_Mode) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_RX_Mode) refers to nrf24.o(i.NRF24_FlushRX) for NRF24_FlushRX
-    nrf24.o(i.NRF24_RX_Mode) refers to nrf24.o(i.NRF24_FlushTX) for NRF24_FlushTX
-    nrf24.o(i.NRF24_RX_Mode) refers to nrf24.o(.data) for .data
-    nrf24.o(i.NRF24_ReadReg) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_ReadReg) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_TransmitReceive) for HAL_SPI_TransmitReceive
-    nrf24.o(i.NRF24_ReadReg) refers to spi.o(.bss) for hspi1
-    nrf24.o(i.NRF24_Read_Buf) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_Read_Buf) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    nrf24.o(i.NRF24_Read_Buf) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Receive) for HAL_SPI_Receive
-    nrf24.o(i.NRF24_Read_Buf) refers to spi.o(.bss) for hspi1
-    nrf24.o(i.NRF24_Send) refers to nrf24.o(i.NRF24_TX_Mode) for NRF24_TX_Mode
-    nrf24.o(i.NRF24_Send) refers to nrf24.o(i.NRF24_ReadReg) for NRF24_ReadReg
-    nrf24.o(i.NRF24_Send) refers to nrf24.o(i.NRF24_WriteReg) for NRF24_WriteReg
-    nrf24.o(i.NRF24_Send) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_Send) refers to nrf24.o(i.NRF24_Transmit) for NRF24_Transmit
-    nrf24.o(i.NRF24_Send) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_TX_Mode) refers to nrf24.o(i.NRF24_Write_Buf) for NRF24_Write_Buf
-    nrf24.o(i.NRF24_TX_Mode) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_TX_Mode) refers to nrf24.o(i.NRF24_FlushRX) for NRF24_FlushRX
-    nrf24.o(i.NRF24_TX_Mode) refers to nrf24.o(i.NRF24_FlushTX) for NRF24_FlushTX
-    nrf24.o(i.NRF24_TX_Mode) refers to nrf24.o(.data) for .data
-    nrf24.o(i.NRF24_ToggleFeatures) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_ToggleFeatures) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    nrf24.o(i.NRF24_ToggleFeatures) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_ToggleFeatures) refers to spi.o(.bss) for hspi1
-    nrf24.o(i.NRF24_Transmit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_Transmit) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    nrf24.o(i.NRF24_Transmit) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_Transmit) refers to spi.o(.bss) for hspi1
-    nrf24.o(i.NRF24_WriteReg) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_WriteReg) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    nrf24.o(i.NRF24_WriteReg) refers to spi.o(.bss) for hspi1
-    nrf24.o(i.NRF24_Write_Buf) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    nrf24.o(i.NRF24_Write_Buf) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    nrf24.o(i.NRF24_Write_Buf) refers to nrf24.o(i.DelayMicro) for DelayMicro
-    nrf24.o(i.NRF24_Write_Buf) refers to spi.o(.bss) for hspi1
-    wireless_ctrl.o(i.WL_Check_Addr) refers to io_expander.o(i.PCF8574_ReadReg) for PCF8574_ReadReg
-    wireless_ctrl.o(i.WL_Check_Addr) refers to nrf24.o(i.NRF24_Send) for NRF24_Send
-    wireless_ctrl.o(i.WL_Check_Addr) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
-    wireless_ctrl.o(i.WL_Check_Addr) refers to io_expander.o(.data) for PCF8574A_reg
-    wireless_ctrl.o(i.WL_Check_Addr) refers to nrf24.o(.data) for NRF_RX_ADDR
-    wireless_ctrl.o(i.WL_Check_Addr) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.WL_Get_Packet) refers to stm32f1xx_hal_crc.o(i.HAL_CRC_Calculate) for HAL_CRC_Calculate
-    wireless_ctrl.o(i.WL_Get_Packet) refers to printfa.o(i.__0sprintf) for __2sprintf
-    wireless_ctrl.o(i.WL_Get_Packet) refers to strlen.o(.text) for strlen
-    wireless_ctrl.o(i.WL_Get_Packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    wireless_ctrl.o(i.WL_Get_Packet) refers to wireless_ctrl.o(i.get_packet) for get_packet
-    wireless_ctrl.o(i.WL_Get_Packet) refers to wireless_ctrl.o(i.add_packet) for add_packet
-    wireless_ctrl.o(i.WL_Get_Packet) refers to wireless_ctrl.o(.bss) for .bss
-    wireless_ctrl.o(i.WL_Get_Packet) refers to nrf24.o(.bss) for NRF_RX_BUF
-    wireless_ctrl.o(i.WL_Get_Packet) refers to crc.o(.data) for hcrc
-    wireless_ctrl.o(i.WL_Get_Packet) refers to nrf24.o(.data) for NRF_DBG_PRINT_F
-    wireless_ctrl.o(i.WL_Get_Packet) refers to usart.o(.bss) for huart1
-    wireless_ctrl.o(i.WL_Get_Packet) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.WL_Get_Var) refers to ds18b20.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
-    wireless_ctrl.o(i.WL_Get_Var) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.WL_Get_Var) refers to ds18b20.o(.data) for DS_TEMP
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(i.WL_Get_Packet) for WL_Get_Packet
-    wireless_ctrl.o(i.WL_Handler) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    wireless_ctrl.o(i.WL_Handler) refers to printfa.o(i.__0sprintf) for __2sprintf
-    wireless_ctrl.o(i.WL_Handler) refers to strlen.o(.text) for strlen
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(i.WL_Send_Packet) for WL_Send_Packet
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(i.WL_Get_Var) for WL_Get_Var
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(i.WL_Set_Var) for WL_Set_Var
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(i.remove_packet) for remove_packet
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(i.WL_Packet_Handler) for WL_Packet_Handler
-    wireless_ctrl.o(i.WL_Handler) refers to nrf24.o(.data) for nrf_rx_flag
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.WL_Handler) refers to usart.o(.bss) for huart1
-    wireless_ctrl.o(i.WL_Handler) refers to wireless_ctrl.o(.bss) for .bss
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to wireless_ctrl.o(i.remove_packet) for remove_packet
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to printfa.o(i.__0sprintf) for __2sprintf
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to strlen.o(.text) for strlen
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to nrf24.o(.data) for NRF_DBG_PRINT_F
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to wireless_ctrl.o(.bss) for .bss
-    wireless_ctrl.o(i.WL_Packet_Handler) refers to usart.o(.bss) for huart1
-    wireless_ctrl.o(i.WL_Send_Packet) refers to stm32f1xx_hal_crc.o(i.HAL_CRC_Calculate) for HAL_CRC_Calculate
-    wireless_ctrl.o(i.WL_Send_Packet) refers to printfa.o(i.__0sprintf) for __2sprintf
-    wireless_ctrl.o(i.WL_Send_Packet) refers to strlen.o(.text) for strlen
-    wireless_ctrl.o(i.WL_Send_Packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    wireless_ctrl.o(i.WL_Send_Packet) refers to nrf24.o(i.NRF24_Send) for NRF24_Send
-    wireless_ctrl.o(i.WL_Send_Packet) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
-    wireless_ctrl.o(i.WL_Send_Packet) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.WL_Send_Packet) refers to wireless_ctrl.o(.bss) for .bss
-    wireless_ctrl.o(i.WL_Send_Packet) refers to nrf24.o(.data) for NRF_RX_ADDR
-    wireless_ctrl.o(i.WL_Send_Packet) refers to crc.o(.data) for hcrc
-    wireless_ctrl.o(i.WL_Send_Packet) refers to usart.o(.bss) for huart1
-    wireless_ctrl.o(i.WL_Set_Var) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.add_packet) refers to malloc.o(i.malloc) for malloc
-    wireless_ctrl.o(i.add_packet) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
-    wireless_ctrl.o(i.add_packet) refers to printfa.o(i.__0sprintf) for __2sprintf
-    wireless_ctrl.o(i.add_packet) refers to strlen.o(.text) for strlen
-    wireless_ctrl.o(i.add_packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    wireless_ctrl.o(i.add_packet) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.add_packet) refers to nrf24.o(.data) for NRF_DBG_PRINT_F
-    wireless_ctrl.o(i.add_packet) refers to wireless_ctrl.o(.bss) for .bss
-    wireless_ctrl.o(i.add_packet) refers to usart.o(.bss) for huart1
-    wireless_ctrl.o(i.get_packet) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.remove_packet) refers to wireless_ctrl.o(i.get_packet) for get_packet
-    wireless_ctrl.o(i.remove_packet) refers to malloc.o(i.free) for free
-    wireless_ctrl.o(i.remove_packet) refers to printfa.o(i.__0sprintf) for __2sprintf
-    wireless_ctrl.o(i.remove_packet) refers to strlen.o(.text) for strlen
-    wireless_ctrl.o(i.remove_packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    wireless_ctrl.o(i.remove_packet) refers to wireless_ctrl.o(.data) for .data
-    wireless_ctrl.o(i.remove_packet) refers to nrf24.o(.data) for NRF_DBG_PRINT_F
-    wireless_ctrl.o(i.remove_packet) refers to wireless_ctrl.o(.bss) for .bss
-    wireless_ctrl.o(i.remove_packet) refers to usart.o(.bss) for huart1
     uart_cmd_parser.o(i.parseCommand) refers to memseta.o(.text) for __aeabi_memclr4
     uart_cmd_parser.o(i.parseCommand) refers to memcpya.o(.text) for __aeabi_memcpy4
     uart_cmd_parser.o(i.parseCommand) refers to strlen.o(.text) for strlen
     uart_cmd_parser.o(i.parseCommand) refers to strncmp.o(.text) for strncmp
     uart_cmd_parser.o(i.parseCommand) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
-    uart_cmd_parser.o(i.parseCommand) refers to nrf24.o(i.NRF24_Init) for NRF24_Init
+    uart_cmd_parser.o(i.parseCommand) refers to nrf24_1.o(i.NRF24_Init) for NRF24_Init
     uart_cmd_parser.o(i.parseCommand) refers to uart_cmd_parser.o(i.strtodec) for strtodec
     uart_cmd_parser.o(i.parseCommand) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
-    uart_cmd_parser.o(i.parseCommand) refers to wireless_ctrl.o(i.add_packet) for add_packet
+    uart_cmd_parser.o(i.parseCommand) refers to wireless_ctrl_1.o(i.add_packet) for add_packet
     uart_cmd_parser.o(i.parseCommand) refers to printfa.o(i.__0sprintf) for __2sprintf
-    uart_cmd_parser.o(i.parseCommand) refers to wireless_ctrl.o(i.WL_Send_Packet) for WL_Send_Packet
-    uart_cmd_parser.o(i.parseCommand) refers to nrf24.o(i.NRF24_WriteReg) for NRF24_WriteReg
+    uart_cmd_parser.o(i.parseCommand) refers to wireless_ctrl_1.o(i.WL_Send_Packet) for WL_Send_Packet
+    uart_cmd_parser.o(i.parseCommand) refers to nrf24_1.o(i.NRF24_WriteReg) for NRF24_WriteReg
     uart_cmd_parser.o(i.parseCommand) refers to printfa.o(i.__0printf) for __2printf
-    uart_cmd_parser.o(i.parseCommand) refers to nrf24.o(i.NRF24_Get_State) for NRF24_Get_State
-    uart_cmd_parser.o(i.parseCommand) refers to ds18b20.o(i.ds18b20_Reset) for ds18b20_Reset
-    uart_cmd_parser.o(i.parseCommand) refers to ds18b20.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
+    uart_cmd_parser.o(i.parseCommand) refers to nrf24_1.o(i.NRF24_Get_State) for NRF24_Get_State
+    uart_cmd_parser.o(i.parseCommand) refers to ds18b20_1.o(i.ds18b20_Reset) for ds18b20_Reset
+    uart_cmd_parser.o(i.parseCommand) refers to ds18b20_1.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
     uart_cmd_parser.o(i.parseCommand) refers to uart_cmd_parser.o(.constdata) for .constdata
     uart_cmd_parser.o(i.parseCommand) refers to uart_cmd_parser.o(.conststring) for .conststring
     uart_cmd_parser.o(i.parseCommand) refers to usart.o(.bss) for huart1
-    uart_cmd_parser.o(i.parseCommand) refers to wireless_ctrl.o(.bss) for TX_packet
-    uart_cmd_parser.o(i.parseCommand) refers to nrf24.o(.data) for NRF_TX_ADDR
-    uart_cmd_parser.o(i.parseCommand) refers to nrf24.o(.data) for NRF_RF_CH
-    uart_cmd_parser.o(i.parseCommand) refers to ds18b20.o(.data) for DS_TEMP
+    uart_cmd_parser.o(i.parseCommand) refers to wireless_ctrl_1.o(.bss) for TX_packet
+    uart_cmd_parser.o(i.parseCommand) refers to nrf24_1.o(.data) for NRF_TX_ADDR
+    uart_cmd_parser.o(i.parseCommand) refers to nrf24_1.o(.data) for NRF_RF_CH
+    uart_cmd_parser.o(i.parseCommand) refers to ds18b20_1.o(.data) for DS_TEMP
     uart_cmd_parser.o(i.strtodec) refers to strtol.o(.text) for strtol
     uart_cmd_parser.o(i.uartInit) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
     uart_cmd_parser.o(i.uartInit) refers to usart.o(.bss) for huart1
-    system.o(i.Buttons_GetCode) refers to io_expander.o(i.PCF8574_ReadReg) for PCF8574_ReadReg
+    system.o(i.Buttons_GetCode) refers to io_expander_1.o(i.PCF8574_ReadReg) for PCF8574_ReadReg
     system.o(i.Buttons_GetCode) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
-    system.o(i.Buttons_GetCode) refers to io_expander.o(.data) for PCF8574A_reg
+    system.o(i.Buttons_GetCode) refers to io_expander_1.o(.data) for PCF8574A_reg
     system.o(i.Buttons_GetCode) refers to system.o(.data) for .data
-    system.o(i.Buttons_Reset) refers to io_expander.o(i.PCF8574_Init) for PCF8574_Init
-    system.o(i.Buttons_Reset) refers to io_expander.o(i.PCF8574_ReadReg) for PCF8574_ReadReg
+    system.o(i.Buttons_Reset) refers to io_expander_1.o(i.PCF8574_Init) for PCF8574_Init
+    system.o(i.Buttons_Reset) refers to io_expander_1.o(i.PCF8574_ReadReg) for PCF8574_ReadReg
     system.o(i.Buttons_Reset) refers to system.o(.data) for .data
-    system.o(i.SetTemp) refers to 7seg.o(i.PrintDecSevSeg) for PrintDecSevSeg
+    system.o(i.SetTemp) refers to 7seg_1.o(i.PrintDecSevSeg) for PrintDecSevSeg
     system.o(i.SetTemp) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
     system.o(i.SetTemp) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
     system.o(i.SetTemp) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
     system.o(i.SetTemp) refers to system.o(i.Buttons_GetCode) for Buttons_GetCode
     system.o(i.SetTemp) refers to eeprom.o(i.EEPROM_Write) for EEPROM_Write
     system.o(i.SetTemp) refers to system.o(.bss) for .bss
-    system.o(i.SetTemp) refers to 7seg.o(.data) for SS_CH
+    system.o(i.SetTemp) refers to 7seg_1.o(.data) for SS_CH
     system.o(i.SetTemp) refers to spi.o(.bss) for hspi1
     system.o(i.SetTemp) refers to system.o(.data) for .data
-    system.o(i.SetTemp) refers to ds18b20.o(.data) for DS_TEMP
+    system.o(i.SetTemp) refers to ds18b20_1.o(.data) for DS_TEMP
     system.o(i.SysInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_TogglePin) for HAL_GPIO_TogglePin
     system.o(i.SysInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    system.o(i.SysInit) refers to 7seg.o(i.SevSegInit) for SevSegInit
+    system.o(i.SysInit) refers to 7seg_1.o(i.SevSegInit) for SevSegInit
     system.o(i.SysInit) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_IsDeviceReady) for HAL_I2C_IsDeviceReady
     system.o(i.SysInit) refers to printfa.o(i.__0printf) for __2printf
     system.o(i.SysInit) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_GetError) for HAL_I2C_GetError
     system.o(i.SysInit) refers to eeprom.o(i.EEPROM_Read) for EEPROM_Read
     system.o(i.SysInit) refers to system.o(i.Buttons_Reset) for Buttons_Reset
-    system.o(i.SysInit) refers to ds18b20.o(i.ds18b20_Init) for ds18b20_Init
+    system.o(i.SysInit) refers to ds18b20_1.o(i.ds18b20_Init) for ds18b20_Init
     system.o(i.SysInit) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
     system.o(i.SysInit) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
-    system.o(i.SysInit) refers to ds18b20.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
-    system.o(i.SysInit) refers to 7seg.o(i.PrintDecSevSeg) for PrintDecSevSeg
+    system.o(i.SysInit) refers to ds18b20_1.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
+    system.o(i.SysInit) refers to 7seg_1.o(i.PrintDecSevSeg) for PrintDecSevSeg
     system.o(i.SysInit) refers to printfa.o(i.__0sprintf) for __2sprintf
     system.o(i.SysInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_ReadPin) for HAL_GPIO_ReadPin
     system.o(i.SysInit) refers to stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Start_IT) for HAL_TIM_Base_Start_IT
@@ -280,27 +88,27 @@ Section Cross References
     system.o(i.SysInit) refers to system.o(.bss) for .bss
     system.o(i.SysInit) refers to drive.o(.bss) for drv_m1
     system.o(i.SysInit) refers to i2c.o(.bss) for hi2c2
-    system.o(i.SysInit) refers to 7seg.o(.data) for SS_CH
+    system.o(i.SysInit) refers to 7seg_1.o(.data) for SS_CH
     system.o(i.SysInit) refers to spi.o(.bss) for hspi1
-    system.o(i.SysInit) refers to ds18b20.o(.data) for DS_TEMP
+    system.o(i.SysInit) refers to ds18b20_1.o(.data) for DS_TEMP
     system.o(i.SysInit) refers to usart.o(.bss) for sprintf_str
     system.o(i.SysInit) refers to tim.o(.bss) for htim1
     system.o(i.SystemTask) refers to printfa.o(i.__0printf) for __2printf
     system.o(i.SystemTask) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_TogglePin) for HAL_GPIO_TogglePin
-    system.o(i.SystemTask) refers to ds18b20.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
-    system.o(i.SystemTask) refers to 7seg.o(i.PrintDecSevSeg) for PrintDecSevSeg
+    system.o(i.SystemTask) refers to ds18b20_1.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
+    system.o(i.SystemTask) refers to 7seg_1.o(i.PrintDecSevSeg) for PrintDecSevSeg
     system.o(i.SystemTask) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
     system.o(i.SystemTask) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
     system.o(i.SystemTask) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
     system.o(i.SystemTask) refers to printfa.o(i.__0sprintf) for __2sprintf
     system.o(i.SystemTask) refers to drive.o(i.Drive_CheckRotation) for Drive_CheckRotation
-    system.o(i.SystemTask) refers to ds18b20.o(i.ds18b20_Reset) for ds18b20_Reset
+    system.o(i.SystemTask) refers to ds18b20_1.o(i.ds18b20_Reset) for ds18b20_Reset
     system.o(i.SystemTask) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_IsDeviceReady) for HAL_I2C_IsDeviceReady
     system.o(i.SystemTask) refers to uart_cmd_parser.o(i.parseCommand) for parseCommand
-    system.o(i.SystemTask) refers to wireless_ctrl.o(i.WL_Handler) for WL_Handler
+    system.o(i.SystemTask) refers to wireless_ctrl_1.o(i.WL_Handler) for WL_Handler
     system.o(i.SystemTask) refers to system.o(.bss) for .bss
-    system.o(i.SystemTask) refers to 7seg.o(.data) for SS_CH
-    system.o(i.SystemTask) refers to ds18b20.o(.data) for DS_TEMP
+    system.o(i.SystemTask) refers to 7seg_1.o(.data) for SS_CH
+    system.o(i.SystemTask) refers to ds18b20_1.o(.data) for DS_TEMP
     system.o(i.SystemTask) refers to spi.o(.bss) for hspi1
     system.o(i.SystemTask) refers to usart.o(.bss) for sprintf_str
     system.o(i.SystemTask) refers to drive.o(.bss) for drv_m1
@@ -319,21 +127,6 @@ Section Cross References
     drive.o(i.Drive_HomeInit) refers to drive.o(.bss) for .bss
     drive.o(i.Drive_HomeInit) refers to system.o(.bss) for SysCnt
     drive.o(i.Drive_HomeInit) refers to usart.o(.bss) for sprintf_str
-    7seg.o(i.PrintDecSevSeg) refers to 7seg.o(i.decode_7SEG) for decode_7SEG
-    7seg.o(i.PrintDecSevSeg) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    7seg.o(i.PrintDecSevSeg) refers to spi.o(.bss) for hspi1
-    7seg.o(i.SevSegInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_DeInit) for HAL_GPIO_DeInit
-    7seg.o(i.SevSegInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_Init) for HAL_GPIO_Init
-    7seg.o(i.SevSegInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    7seg.o(i.SevSegInit) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    7seg.o(i.SevSegInit) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
-    7seg.o(i.SevSegInit) refers to 7seg.o(i.trulala) for trulala
-    7seg.o(i.SevSegInit) refers to spi.o(.bss) for hspi1
-    7seg.o(i.trulala) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
-    7seg.o(i.trulala) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    7seg.o(i.trulala) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
-    7seg.o(i.trulala) refers to 7seg.o(.constdata) for .constdata
-    7seg.o(i.trulala) refers to spi.o(.bss) for hspi1
     eeprom.o(i.EEPROM_Read) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Mem_Read) for HAL_I2C_Mem_Read
     eeprom.o(i.EEPROM_Read) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_GetError) for HAL_I2C_GetError
     eeprom.o(i.EEPROM_Read) refers to printfa.o(i.__0printf) for __2printf
@@ -424,7 +217,7 @@ Section Cross References
     stm32f1xx_it.o(i.TIM1_UP_IRQHandler) refers to printfa.o(i.__0printf) for __2printf
     stm32f1xx_it.o(i.TIM1_UP_IRQHandler) refers to stm32f1xx_hal_tim.o(i.HAL_TIM_IRQHandler) for HAL_TIM_IRQHandler
     stm32f1xx_it.o(i.TIM1_UP_IRQHandler) refers to system.o(.bss) for SysCnt
-    stm32f1xx_it.o(i.TIM1_UP_IRQHandler) refers to wireless_ctrl.o(.data) for packet_handler_timer
+    stm32f1xx_it.o(i.TIM1_UP_IRQHandler) refers to wireless_ctrl_1.o(.data) for packet_handler_timer
     stm32f1xx_it.o(i.TIM1_UP_IRQHandler) refers to drive.o(.bss) for drv_m1
     stm32f1xx_it.o(i.TIM1_UP_IRQHandler) refers to tim.o(.bss) for htim1
     stm32f1xx_it.o(i.USART1_IRQHandler) refers to stm32f1xx_hal_uart.o(i.HAL_UART_IRQHandler) for HAL_UART_IRQHandler
@@ -1003,6 +796,213 @@ Section Cross References
     stm32f1xx_hal_uart.o(i.UART_WaitOnFlagUntilTimeout) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
     system_stm32f1xx.o(i.SystemCoreClockUpdate) refers to system_stm32f1xx.o(.data) for .data
     system_stm32f1xx.o(i.SystemCoreClockUpdate) refers to system_stm32f1xx.o(.constdata) for .constdata
+    7seg_1.o(i.PrintDecSevSeg) refers to 7seg_1.o(i.decode_7SEG) for decode_7SEG
+    7seg_1.o(i.PrintDecSevSeg) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    7seg_1.o(i.PrintDecSevSeg) refers to spi.o(.bss) for hspi1
+    7seg_1.o(i.SevSegInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_DeInit) for HAL_GPIO_DeInit
+    7seg_1.o(i.SevSegInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_Init) for HAL_GPIO_Init
+    7seg_1.o(i.SevSegInit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    7seg_1.o(i.SevSegInit) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    7seg_1.o(i.SevSegInit) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
+    7seg_1.o(i.SevSegInit) refers to 7seg_1.o(i.trulala) for trulala
+    7seg_1.o(i.SevSegInit) refers to spi.o(.bss) for hspi1
+    7seg_1.o(i.trulala) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    7seg_1.o(i.trulala) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    7seg_1.o(i.trulala) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
+    7seg_1.o(i.trulala) refers to 7seg_1.o(.constdata) for .constdata
+    7seg_1.o(i.trulala) refers to spi.o(.bss) for hspi1
+    wireless_ctrl_1.o(i.WL_Check_Addr) refers to io_expander_1.o(i.PCF8574_ReadReg) for PCF8574_ReadReg
+    wireless_ctrl_1.o(i.WL_Check_Addr) refers to nrf24_1.o(i.NRF24_Send) for NRF24_Send
+    wireless_ctrl_1.o(i.WL_Check_Addr) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
+    wireless_ctrl_1.o(i.WL_Check_Addr) refers to io_expander_1.o(.data) for PCF8574A_reg
+    wireless_ctrl_1.o(i.WL_Check_Addr) refers to nrf24_1.o(.data) for NRF_RX_ADDR
+    wireless_ctrl_1.o(i.WL_Check_Addr) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to stm32f1xx_hal_crc.o(i.HAL_CRC_Calculate) for HAL_CRC_Calculate
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to printfa.o(i.__0sprintf) for __2sprintf
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to strlen.o(.text) for strlen
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to wireless_ctrl_1.o(i.get_packet) for get_packet
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to wireless_ctrl_1.o(i.add_packet) for add_packet
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to wireless_ctrl_1.o(.bss) for .bss
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to nrf24_1.o(.bss) for NRF_RX_BUF
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to crc.o(.data) for hcrc
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to nrf24_1.o(.data) for NRF_DBG_PRINT_F
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to usart.o(.bss) for huart1
+    wireless_ctrl_1.o(i.WL_Get_Packet) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.WL_Get_Var) refers to ds18b20_1.o(i.ds18b20_GetTemp) for ds18b20_GetTemp
+    wireless_ctrl_1.o(i.WL_Get_Var) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.WL_Get_Var) refers to ds18b20_1.o(.data) for DS_TEMP
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(i.WL_Get_Packet) for WL_Get_Packet
+    wireless_ctrl_1.o(i.WL_Handler) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    wireless_ctrl_1.o(i.WL_Handler) refers to printfa.o(i.__0sprintf) for __2sprintf
+    wireless_ctrl_1.o(i.WL_Handler) refers to strlen.o(.text) for strlen
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(i.WL_Send_Packet) for WL_Send_Packet
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(i.WL_Get_Var) for WL_Get_Var
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(i.WL_Set_Var) for WL_Set_Var
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(i.remove_packet) for remove_packet
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(i.WL_Packet_Handler) for WL_Packet_Handler
+    wireless_ctrl_1.o(i.WL_Handler) refers to nrf24_1.o(.data) for nrf_rx_flag
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.WL_Handler) refers to usart.o(.bss) for huart1
+    wireless_ctrl_1.o(i.WL_Handler) refers to wireless_ctrl_1.o(.bss) for .bss
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to wireless_ctrl_1.o(i.remove_packet) for remove_packet
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to printfa.o(i.__0sprintf) for __2sprintf
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to strlen.o(.text) for strlen
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to nrf24_1.o(.data) for NRF_DBG_PRINT_F
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to wireless_ctrl_1.o(.bss) for .bss
+    wireless_ctrl_1.o(i.WL_Packet_Handler) refers to usart.o(.bss) for huart1
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to stm32f1xx_hal_crc.o(i.HAL_CRC_Calculate) for HAL_CRC_Calculate
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to printfa.o(i.__0sprintf) for __2sprintf
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to strlen.o(.text) for strlen
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to nrf24_1.o(i.NRF24_Send) for NRF24_Send
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to wireless_ctrl_1.o(.bss) for .bss
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to nrf24_1.o(.data) for NRF_RX_ADDR
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to crc.o(.data) for hcrc
+    wireless_ctrl_1.o(i.WL_Send_Packet) refers to usart.o(.bss) for huart1
+    wireless_ctrl_1.o(i.WL_Set_Var) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.add_packet) refers to malloc.o(i.malloc) for malloc
+    wireless_ctrl_1.o(i.add_packet) refers to stm32f1xx_hal.o(i.HAL_GetTick) for HAL_GetTick
+    wireless_ctrl_1.o(i.add_packet) refers to printfa.o(i.__0sprintf) for __2sprintf
+    wireless_ctrl_1.o(i.add_packet) refers to strlen.o(.text) for strlen
+    wireless_ctrl_1.o(i.add_packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    wireless_ctrl_1.o(i.add_packet) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.add_packet) refers to nrf24_1.o(.data) for NRF_DBG_PRINT_F
+    wireless_ctrl_1.o(i.add_packet) refers to wireless_ctrl_1.o(.bss) for .bss
+    wireless_ctrl_1.o(i.add_packet) refers to usart.o(.bss) for huart1
+    wireless_ctrl_1.o(i.get_packet) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.remove_packet) refers to wireless_ctrl_1.o(i.get_packet) for get_packet
+    wireless_ctrl_1.o(i.remove_packet) refers to malloc.o(i.free) for free
+    wireless_ctrl_1.o(i.remove_packet) refers to printfa.o(i.__0sprintf) for __2sprintf
+    wireless_ctrl_1.o(i.remove_packet) refers to strlen.o(.text) for strlen
+    wireless_ctrl_1.o(i.remove_packet) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    wireless_ctrl_1.o(i.remove_packet) refers to wireless_ctrl_1.o(.data) for .data
+    wireless_ctrl_1.o(i.remove_packet) refers to nrf24_1.o(.data) for NRF_DBG_PRINT_F
+    wireless_ctrl_1.o(i.remove_packet) refers to wireless_ctrl_1.o(.bss) for .bss
+    wireless_ctrl_1.o(i.remove_packet) refers to usart.o(.bss) for huart1
+    nrf24_1.o(i.DelayMicro) refers to system_stm32f1xx.o(.data) for SystemCoreClock
+    nrf24_1.o(i.NRF24_FlushRX) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_FlushRX) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    nrf24_1.o(i.NRF24_FlushRX) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_FlushRX) refers to spi.o(.bss) for hspi1
+    nrf24_1.o(i.NRF24_FlushTX) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_FlushTX) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    nrf24_1.o(i.NRF24_FlushTX) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_FlushTX) refers to spi.o(.bss) for hspi1
+    nrf24_1.o(i.NRF24_Get_State) refers to nrf24_1.o(i.NRF24_ReadReg) for NRF24_ReadReg
+    nrf24_1.o(i.NRF24_Get_State) refers to printfa.o(i.__0sprintf) for __2sprintf
+    nrf24_1.o(i.NRF24_Get_State) refers to strlen.o(.text) for strlen
+    nrf24_1.o(i.NRF24_Get_State) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    nrf24_1.o(i.NRF24_Get_State) refers to nrf24_1.o(i.NRF24_Read_Buf) for NRF24_Read_Buf
+    nrf24_1.o(i.NRF24_Get_State) refers to nrf24_1.o(.data) for .data
+    nrf24_1.o(i.NRF24_Get_State) refers to nrf24_1.o(.bss) for .bss
+    nrf24_1.o(i.NRF24_Get_State) refers to usart.o(.bss) for huart1
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(i.NRF24_ReadReg) for NRF24_ReadReg
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to printfa.o(i.__0sprintf) for __2sprintf
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to strlen.o(.text) for strlen
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(i.NRF24_Read_Buf) for NRF24_Read_Buf
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(i.NRF24_WriteReg) for NRF24_WriteReg
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(i.NRF24_RX_Mode) for NRF24_RX_Mode
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(i.NRF24_FlushTX) for NRF24_FlushTX
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(.data) for .data
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to nrf24_1.o(.bss) for .bss
+    nrf24_1.o(i.NRF24_IRQ_Callback) refers to usart.o(.bss) for huart1
+    nrf24_1.o(i.NRF24_Init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_DeInit) for HAL_GPIO_DeInit
+    nrf24_1.o(i.NRF24_Init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_Init) for HAL_GPIO_Init
+    nrf24_1.o(i.NRF24_Init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(i.NRF24_WriteReg) for NRF24_WriteReg
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(i.NRF24_ToggleFeatures) for NRF24_ToggleFeatures
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(i.NRF24_Write_Buf) for NRF24_Write_Buf
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(i.NRF24_RX_Mode) for NRF24_RX_Mode
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(i.NRF24_ReadReg) for NRF24_ReadReg
+    nrf24_1.o(i.NRF24_Init) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
+    nrf24_1.o(i.NRF24_Init) refers to printfa.o(i.__0sprintf) for __2sprintf
+    nrf24_1.o(i.NRF24_Init) refers to strlen.o(.text) for strlen
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(i.NRF24_Read_Buf) for NRF24_Read_Buf
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(.data) for .data
+    nrf24_1.o(i.NRF24_Init) refers to usart.o(.bss) for huart1
+    nrf24_1.o(i.NRF24_Init) refers to nrf24_1.o(.bss) for .bss
+    nrf24_1.o(i.NRF24_RX_Mode) refers to nrf24_1.o(i.NRF24_ReadReg) for NRF24_ReadReg
+    nrf24_1.o(i.NRF24_RX_Mode) refers to nrf24_1.o(i.NRF24_WriteReg) for NRF24_WriteReg
+    nrf24_1.o(i.NRF24_RX_Mode) refers to nrf24_1.o(i.NRF24_Write_Buf) for NRF24_Write_Buf
+    nrf24_1.o(i.NRF24_RX_Mode) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_RX_Mode) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_RX_Mode) refers to nrf24_1.o(i.NRF24_FlushRX) for NRF24_FlushRX
+    nrf24_1.o(i.NRF24_RX_Mode) refers to nrf24_1.o(i.NRF24_FlushTX) for NRF24_FlushTX
+    nrf24_1.o(i.NRF24_RX_Mode) refers to nrf24_1.o(.data) for .data
+    nrf24_1.o(i.NRF24_ReadReg) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_ReadReg) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_TransmitReceive) for HAL_SPI_TransmitReceive
+    nrf24_1.o(i.NRF24_ReadReg) refers to spi.o(.bss) for hspi1
+    nrf24_1.o(i.NRF24_Read_Buf) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_Read_Buf) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    nrf24_1.o(i.NRF24_Read_Buf) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Receive) for HAL_SPI_Receive
+    nrf24_1.o(i.NRF24_Read_Buf) refers to spi.o(.bss) for hspi1
+    nrf24_1.o(i.NRF24_Send) refers to nrf24_1.o(i.NRF24_TX_Mode) for NRF24_TX_Mode
+    nrf24_1.o(i.NRF24_Send) refers to nrf24_1.o(i.NRF24_ReadReg) for NRF24_ReadReg
+    nrf24_1.o(i.NRF24_Send) refers to nrf24_1.o(i.NRF24_WriteReg) for NRF24_WriteReg
+    nrf24_1.o(i.NRF24_Send) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_Send) refers to nrf24_1.o(i.NRF24_Transmit) for NRF24_Transmit
+    nrf24_1.o(i.NRF24_Send) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_TX_Mode) refers to nrf24_1.o(i.NRF24_Write_Buf) for NRF24_Write_Buf
+    nrf24_1.o(i.NRF24_TX_Mode) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_TX_Mode) refers to nrf24_1.o(i.NRF24_FlushRX) for NRF24_FlushRX
+    nrf24_1.o(i.NRF24_TX_Mode) refers to nrf24_1.o(i.NRF24_FlushTX) for NRF24_FlushTX
+    nrf24_1.o(i.NRF24_TX_Mode) refers to nrf24_1.o(.data) for .data
+    nrf24_1.o(i.NRF24_ToggleFeatures) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_ToggleFeatures) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    nrf24_1.o(i.NRF24_ToggleFeatures) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_ToggleFeatures) refers to spi.o(.bss) for hspi1
+    nrf24_1.o(i.NRF24_Transmit) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_Transmit) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    nrf24_1.o(i.NRF24_Transmit) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_Transmit) refers to spi.o(.bss) for hspi1
+    nrf24_1.o(i.NRF24_WriteReg) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_WriteReg) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    nrf24_1.o(i.NRF24_WriteReg) refers to spi.o(.bss) for hspi1
+    nrf24_1.o(i.NRF24_Write_Buf) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    nrf24_1.o(i.NRF24_Write_Buf) refers to stm32f1xx_hal_spi.o(i.HAL_SPI_Transmit) for HAL_SPI_Transmit
+    nrf24_1.o(i.NRF24_Write_Buf) refers to nrf24_1.o(i.DelayMicro) for DelayMicro
+    nrf24_1.o(i.NRF24_Write_Buf) refers to spi.o(.bss) for hspi1
+    io_expander_1.o(i.PCF8574_Init) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Master_Transmit) for HAL_I2C_Master_Transmit
+    io_expander_1.o(i.PCF8574_Init) refers to printfa.o(i.__0printf) for __2printf
+    io_expander_1.o(i.PCF8574_Init) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_GetError) for HAL_I2C_GetError
+    io_expander_1.o(i.PCF8574_Init) refers to i2c.o(.bss) for hi2c2
+    io_expander_1.o(i.PCF8574_ReadReg) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Master_Receive) for HAL_I2C_Master_Receive
+    io_expander_1.o(i.PCF8574_ReadReg) refers to printfa.o(i.__0printf) for __2printf
+    io_expander_1.o(i.PCF8574_ReadReg) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_GetError) for HAL_I2C_GetError
+    io_expander_1.o(i.PCF8574_ReadReg) refers to io_expander_1.o(.data) for .data
+    io_expander_1.o(i.PCF8574_ReadReg) refers to i2c.o(.bss) for hi2c2
+    ds18b20_1.o(i.DelayMicro) refers to system_stm32f1xx.o(.data) for SystemCoreClock
+    ds18b20_1.o(i.ds18b20_Convert_int8) refers to ds18b20_1.o(.data) for .data
+    ds18b20_1.o(i.ds18b20_GetTemp) refers to ds18b20_1.o(i.ds18b20_MeasureTemperCmd) for ds18b20_MeasureTemperCmd
+    ds18b20_1.o(i.ds18b20_GetTemp) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
+    ds18b20_1.o(i.ds18b20_GetTemp) refers to ds18b20_1.o(i.ds18b20_ReadStratcpad) for ds18b20_ReadStratcpad
+    ds18b20_1.o(i.ds18b20_GetTemp) refers to ds18b20_1.o(i.ds18b20_Convert_int8) for ds18b20_Convert_int8
+    ds18b20_1.o(i.ds18b20_Init) refers to ds18b20_1.o(i.port_init) for port_init
+    ds18b20_1.o(i.ds18b20_Init) refers to ds18b20_1.o(i.DelayMicro) for DelayMicro
+    ds18b20_1.o(i.ds18b20_Init) refers to ds18b20_1.o(i.ds18b20_Reset) for ds18b20_Reset
+    ds18b20_1.o(i.ds18b20_Init) refers to ds18b20_1.o(i.ds18b20_WriteByte) for ds18b20_WriteByte
+    ds18b20_1.o(i.ds18b20_MeasureTemperCmd) refers to ds18b20_1.o(i.ds18b20_Reset) for ds18b20_Reset
+    ds18b20_1.o(i.ds18b20_MeasureTemperCmd) refers to ds18b20_1.o(i.ds18b20_WriteByte) for ds18b20_WriteByte
+    ds18b20_1.o(i.ds18b20_ReadBit) refers to ds18b20_1.o(i.DelayMicro) for DelayMicro
+    ds18b20_1.o(i.ds18b20_ReadByte) refers to ds18b20_1.o(i.ds18b20_ReadBit) for ds18b20_ReadBit
+    ds18b20_1.o(i.ds18b20_ReadStratcpad) refers to ds18b20_1.o(i.ds18b20_Reset) for ds18b20_Reset
+    ds18b20_1.o(i.ds18b20_ReadStratcpad) refers to ds18b20_1.o(i.ds18b20_WriteByte) for ds18b20_WriteByte
+    ds18b20_1.o(i.ds18b20_ReadStratcpad) refers to ds18b20_1.o(i.ds18b20_ReadByte) for ds18b20_ReadByte
+    ds18b20_1.o(i.ds18b20_ReadStratcpad) refers to ds18b20_1.o(.data) for .data
+    ds18b20_1.o(i.ds18b20_Reset) refers to ds18b20_1.o(i.DelayMicro) for DelayMicro
+    ds18b20_1.o(i.ds18b20_WriteBit) refers to ds18b20_1.o(i.DelayMicro) for DelayMicro
+    ds18b20_1.o(i.ds18b20_WriteByte) refers to ds18b20_1.o(i.ds18b20_WriteBit) for ds18b20_WriteBit
+    ds18b20_1.o(i.ds18b20_WriteByte) refers to ds18b20_1.o(i.DelayMicro) for DelayMicro
+    ds18b20_1.o(i.port_init) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_DeInit) for HAL_GPIO_DeInit
     retarget_io.o(i.ITM_ReceiveChar) refers to retarget_io.o(.data) for .data
     retarget_io.o(i.__aeabi_assert) refers to fputs.o(i.fputs) for fputs
     retarget_io.o(i.__aeabi_assert) refers to retarget_io.o(i.abort) for abort
@@ -1338,24 +1338,6 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
-    Removing ds18b20.o(.rev16_text), (4 bytes).
-    Removing ds18b20.o(.revsh_text), (4 bytes).
-    Removing ds18b20.o(.rrx_text), (6 bytes).
-    Removing ds18b20.o(.bss), (16 bytes).
-    Removing io_expander.o(.rev16_text), (4 bytes).
-    Removing io_expander.o(.revsh_text), (4 bytes).
-    Removing io_expander.o(.rrx_text), (6 bytes).
-    Removing nrf24.o(.rev16_text), (4 bytes).
-    Removing nrf24.o(.revsh_text), (4 bytes).
-    Removing nrf24.o(.rrx_text), (6 bytes).
-    Removing nrf24.o(i.NRF24_IRQ_Callback), (272 bytes).
-    Removing nrf24.o(.bss), (64 bytes).
-    Removing wireless_ctrl.o(.rev16_text), (4 bytes).
-    Removing wireless_ctrl.o(.revsh_text), (4 bytes).
-    Removing wireless_ctrl.o(.rrx_text), (6 bytes).
-    Removing wireless_ctrl.o(i.WL_Check_Addr), (124 bytes).
-    Removing wireless_ctrl.o(.data), (2 bytes).
-    Removing wireless_ctrl.o(.data), (1 bytes).
     Removing uart_cmd_parser.o(.rev16_text), (4 bytes).
     Removing uart_cmd_parser.o(.revsh_text), (4 bytes).
     Removing uart_cmd_parser.o(.rrx_text), (6 bytes).
@@ -1366,9 +1348,6 @@ Removing Unused input sections from the image.
     Removing drive.o(.rev16_text), (4 bytes).
     Removing drive.o(.revsh_text), (4 bytes).
     Removing drive.o(.rrx_text), (6 bytes).
-    Removing 7seg.o(.rev16_text), (4 bytes).
-    Removing 7seg.o(.revsh_text), (4 bytes).
-    Removing 7seg.o(.rrx_text), (6 bytes).
     Removing eeprom.o(.rev16_text), (4 bytes).
     Removing eeprom.o(.revsh_text), (4 bytes).
     Removing eeprom.o(.rrx_text), (6 bytes).
@@ -1859,6 +1838,27 @@ Removing Unused input sections from the image.
     Removing system_stm32f1xx.o(.revsh_text), (4 bytes).
     Removing system_stm32f1xx.o(.rrx_text), (6 bytes).
     Removing system_stm32f1xx.o(i.SystemCoreClockUpdate), (104 bytes).
+    Removing 7seg_1.o(.rev16_text), (4 bytes).
+    Removing 7seg_1.o(.revsh_text), (4 bytes).
+    Removing 7seg_1.o(.rrx_text), (6 bytes).
+    Removing wireless_ctrl_1.o(.rev16_text), (4 bytes).
+    Removing wireless_ctrl_1.o(.revsh_text), (4 bytes).
+    Removing wireless_ctrl_1.o(.rrx_text), (6 bytes).
+    Removing wireless_ctrl_1.o(i.WL_Check_Addr), (124 bytes).
+    Removing wireless_ctrl_1.o(.data), (2 bytes).
+    Removing wireless_ctrl_1.o(.data), (1 bytes).
+    Removing nrf24_1.o(.rev16_text), (4 bytes).
+    Removing nrf24_1.o(.revsh_text), (4 bytes).
+    Removing nrf24_1.o(.rrx_text), (6 bytes).
+    Removing nrf24_1.o(i.NRF24_IRQ_Callback), (272 bytes).
+    Removing nrf24_1.o(.bss), (64 bytes).
+    Removing io_expander_1.o(.rev16_text), (4 bytes).
+    Removing io_expander_1.o(.revsh_text), (4 bytes).
+    Removing io_expander_1.o(.rrx_text), (6 bytes).
+    Removing ds18b20_1.o(.rev16_text), (4 bytes).
+    Removing ds18b20_1.o(.revsh_text), (4 bytes).
+    Removing ds18b20_1.o(.rrx_text), (6 bytes).
+    Removing ds18b20_1.o(.bss), (16 bytes).
     Removing retarget_io.o(i.ITM_ReceiveChar), (28 bytes).
     Removing retarget_io.o(i.__aeabi_assert), (144 bytes).
     Removing retarget_io.o(i.__backspace), (40 bytes).
@@ -1904,79 +1904,74 @@ Image Symbol Table
     ../Src/system_stm32f1xx.c                0x00000000   Number         0  system_stm32f1xx.o ABSOLUTE
     ../Src/tim.c                             0x00000000   Number         0  tim.o ABSOLUTE
     ../Src/usart.c                           0x00000000   Number         0  usart.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isxdigit_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  islower_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isgraph_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isdigit_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  iscntrl_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  ispunct_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isblank_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  ctype_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isalnum_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isprint_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isdigit_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isgraph_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isspace_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isalpha_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isupper_o.o ABSOLUTE
-    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isalpha_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isspace_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  ispunct_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isprint_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isxdigit_o.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
     ../clib/microlib/errno.c                 0x00000000   Number         0  errno.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
-    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocra.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloca.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocr.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloc.o ABSOLUTE
+    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocra.o ABSOLUTE
     ../clib/microlib/malloc/mvars.c          0x00000000   Number         0  mvars.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/fputs.c           0x00000000   Number         0  fputs.o ABSOLUTE
     ../clib/microlib/stdio/fputs.c           0x00000000   Number         0  fputs_e.o ABSOLUTE
-    ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdin.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stderr.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/string/strlen.c         0x00000000   Number         0  strlen.o ABSOLUTE
     ../clib/microlib/string/strncmp.c        0x00000000   Number         0  strncmp.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  _chval.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  strtol.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  _strtoul.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  strtol.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
-    ..\..\Src\7seg.c                         0x00000000   Number         0  7seg.o ABSOLUTE
-    ..\..\Src\ds18b20.c                      0x00000000   Number         0  ds18b20.o ABSOLUTE
-    ..\..\Src\io_expander.c                  0x00000000   Number         0  io_expander.o ABSOLUTE
-    ..\..\Src\nrf24.c                        0x00000000   Number         0  nrf24.o ABSOLUTE
-    ..\..\Src\wireless_ctrl.c                0x00000000   Number         0  wireless_ctrl.o ABSOLUTE
     ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c 0x00000000   Number         0  stm32f1xx_hal.o ABSOLUTE
     ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c 0x00000000   Number         0  stm32f1xx_hal_cortex.o ABSOLUTE
     ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_crc.c 0x00000000   Number         0  stm32f1xx_hal_crc.o ABSOLUTE
@@ -2005,25 +2000,30 @@ Image Symbol Table
     ..\Src\system_stm32f1xx.c                0x00000000   Number         0  system_stm32f1xx.o ABSOLUTE
     ..\Src\tim.c                             0x00000000   Number         0  tim.o ABSOLUTE
     ..\Src\usart.c                           0x00000000   Number         0  usart.o ABSOLUTE
-    ..\\..\\Src\\7seg.c                      0x00000000   Number         0  7seg.o ABSOLUTE
-    ..\\..\\Src\\ds18b20.c                   0x00000000   Number         0  ds18b20.o ABSOLUTE
-    ..\\..\\Src\\io_expander.c               0x00000000   Number         0  io_expander.o ABSOLUTE
-    ..\\..\\Src\\nrf24.c                     0x00000000   Number         0  nrf24.o ABSOLUTE
-    ..\\..\\Src\\wireless_ctrl.c             0x00000000   Number         0  wireless_ctrl.o ABSOLUTE
+    7seg.c                                   0x00000000   Number         0  7seg_1.o ABSOLUTE
+    7seg.c                                   0x00000000   Number         0  7seg_1.o ABSOLUTE
+    C:\Users\Alexander\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.1\Source\retarget_io.c 0x00000000   Number         0  retarget_io.o ABSOLUTE
     cdrcmple.s                               0x00000000   Number         0  cdrcmple.o ABSOLUTE
-    d:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.6.0\Source\retarget_io.c 0x00000000   Number         0  retarget_io.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     drive.c                                  0x00000000   Number         0  drive.o ABSOLUTE
     drive.c                                  0x00000000   Number         0  drive.o ABSOLUTE
+    ds18b20.c                                0x00000000   Number         0  ds18b20_1.o ABSOLUTE
+    ds18b20.c                                0x00000000   Number         0  ds18b20_1.o ABSOLUTE
     eeprom.c                                 0x00000000   Number         0  eeprom.o ABSOLUTE
     eeprom.c                                 0x00000000   Number         0  eeprom.o ABSOLUTE
     handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
     init.s                                   0x00000000   Number         0  init.o ABSOLUTE
+    io_expander.c                            0x00000000   Number         0  io_expander_1.o ABSOLUTE
+    io_expander.c                            0x00000000   Number         0  io_expander_1.o ABSOLUTE
+    nrf24.c                                  0x00000000   Number         0  nrf24_1.o ABSOLUTE
+    nrf24.c                                  0x00000000   Number         0  nrf24_1.o ABSOLUTE
     startup_stm32f103xb.s                    0x00000000   Number         0  startup_stm32f103xb.o ABSOLUTE
     system.c                                 0x00000000   Number         0  system.o ABSOLUTE
     system.c                                 0x00000000   Number         0  system.o ABSOLUTE
     uart_cmd_parser.c                        0x00000000   Number         0  uart_cmd_parser.o ABSOLUTE
     uart_cmd_parser.c                        0x00000000   Number         0  uart_cmd_parser.o ABSOLUTE
+    wireless_ctrl.c                          0x00000000   Number         0  wireless_ctrl_1.o ABSOLUTE
+    wireless_ctrl.c                          0x00000000   Number         0  wireless_ctrl_1.o ABSOLUTE
     RESET                                    0x08000000   Section      236  startup_stm32f103xb.o(RESET)
     .ARM.Collect$$$$00000000                 0x080000ec   Section        0  entry.o(.ARM.Collect$$$$00000000)
     .ARM.Collect$$$$00000001                 0x080000ec   Section        4  entry2.o(.ARM.Collect$$$$00000001)
@@ -2046,8 +2046,8 @@ Image Symbol Table
     .text                                    0x08000254   Section        0  uldiv.o(.text)
     .text                                    0x080002b8   Section        0  ctype_o.o(.text)
     .text                                    0x080002c0   Section        0  _strtoul.o(.text)
-    .text                                    0x0800035e   Section        0  iusefp.o(.text)
     .text                                    0x0800035e   Section        0  dadd.o(.text)
+    .text                                    0x0800035e   Section        0  iusefp.o(.text)
     .text                                    0x080004ac   Section        0  dmul.o(.text)
     .text                                    0x08000590   Section        0  ddiv.o(.text)
     .text                                    0x0800066e   Section        0  dfixul.o(.text)
@@ -2061,10 +2061,10 @@ Image Symbol Table
     i.Buttons_GetCode                        0x08000810   Section        0  system.o(i.Buttons_GetCode)
     i.Buttons_Reset                          0x08000874   Section        0  system.o(i.Buttons_Reset)
     i.DebugMon_Handler                       0x0800088c   Section        0  stm32f1xx_it.o(i.DebugMon_Handler)
-    i.DelayMicro                             0x08000890   Section        0  ds18b20.o(i.DelayMicro)
-    DelayMicro                               0x08000891   Thumb Code    30  ds18b20.o(i.DelayMicro)
-    i.DelayMicro                             0x080008b8   Section        0  nrf24.o(i.DelayMicro)
-    DelayMicro                               0x080008b9   Thumb Code    30  nrf24.o(i.DelayMicro)
+    i.DelayMicro                             0x08000890   Section        0  nrf24_1.o(i.DelayMicro)
+    DelayMicro                               0x08000891   Thumb Code    30  nrf24_1.o(i.DelayMicro)
+    i.DelayMicro                             0x080008b8   Section        0  ds18b20_1.o(i.DelayMicro)
+    DelayMicro                               0x080008b9   Thumb Code    30  ds18b20_1.o(i.DelayMicro)
     i.Drive_CheckRotation                    0x080008e0   Section        0  drive.o(i.Drive_CheckRotation)
     i.Drive_HomeInit                         0x08000994   Section        0  drive.o(i.Drive_HomeInit)
     i.EEPROM_Read                            0x08000af4   Section        0  eeprom.o(i.EEPROM_Read)
@@ -2165,23 +2165,23 @@ Image Symbol Table
     i.MX_USART1_UART_Init                    0x08003568   Section        0  usart.o(i.MX_USART1_UART_Init)
     i.MemManage_Handler                      0x080035a0   Section        0  stm32f1xx_it.o(i.MemManage_Handler)
     i.NMI_Handler                            0x080035a2   Section        0  stm32f1xx_it.o(i.NMI_Handler)
-    i.NRF24_FlushRX                          0x080035a4   Section        0  nrf24.o(i.NRF24_FlushRX)
-    i.NRF24_FlushTX                          0x080035e4   Section        0  nrf24.o(i.NRF24_FlushTX)
-    i.NRF24_Get_State                        0x08003624   Section        0  nrf24.o(i.NRF24_Get_State)
-    i.NRF24_Init                             0x080038c8   Section        0  nrf24.o(i.NRF24_Init)
-    i.NRF24_RX_Mode                          0x08003cb0   Section        0  nrf24.o(i.NRF24_RX_Mode)
-    i.NRF24_ReadReg                          0x08003cfc   Section        0  nrf24.o(i.NRF24_ReadReg)
-    i.NRF24_Read_Buf                         0x08003d5c   Section        0  nrf24.o(i.NRF24_Read_Buf)
-    i.NRF24_Send                             0x08003da0   Section        0  nrf24.o(i.NRF24_Send)
-    i.NRF24_TX_Mode                          0x08003df0   Section        0  nrf24.o(i.NRF24_TX_Mode)
-    i.NRF24_ToggleFeatures                   0x08003e24   Section        0  nrf24.o(i.NRF24_ToggleFeatures)
-    i.NRF24_Transmit                         0x08003e78   Section        0  nrf24.o(i.NRF24_Transmit)
-    i.NRF24_WriteReg                         0x08003ee0   Section        0  nrf24.o(i.NRF24_WriteReg)
-    i.NRF24_Write_Buf                        0x08003f2c   Section        0  nrf24.o(i.NRF24_Write_Buf)
-    i.PCF8574_Init                           0x08003f80   Section        0  io_expander.o(i.PCF8574_Init)
-    i.PCF8574_ReadReg                        0x08003fe8   Section        0  io_expander.o(i.PCF8574_ReadReg)
+    i.NRF24_FlushRX                          0x080035a4   Section        0  nrf24_1.o(i.NRF24_FlushRX)
+    i.NRF24_FlushTX                          0x080035e4   Section        0  nrf24_1.o(i.NRF24_FlushTX)
+    i.NRF24_Get_State                        0x08003624   Section        0  nrf24_1.o(i.NRF24_Get_State)
+    i.NRF24_Init                             0x080038c8   Section        0  nrf24_1.o(i.NRF24_Init)
+    i.NRF24_RX_Mode                          0x08003cb0   Section        0  nrf24_1.o(i.NRF24_RX_Mode)
+    i.NRF24_ReadReg                          0x08003cfc   Section        0  nrf24_1.o(i.NRF24_ReadReg)
+    i.NRF24_Read_Buf                         0x08003d5c   Section        0  nrf24_1.o(i.NRF24_Read_Buf)
+    i.NRF24_Send                             0x08003da0   Section        0  nrf24_1.o(i.NRF24_Send)
+    i.NRF24_TX_Mode                          0x08003df0   Section        0  nrf24_1.o(i.NRF24_TX_Mode)
+    i.NRF24_ToggleFeatures                   0x08003e24   Section        0  nrf24_1.o(i.NRF24_ToggleFeatures)
+    i.NRF24_Transmit                         0x08003e78   Section        0  nrf24_1.o(i.NRF24_Transmit)
+    i.NRF24_WriteReg                         0x08003ee0   Section        0  nrf24_1.o(i.NRF24_WriteReg)
+    i.NRF24_Write_Buf                        0x08003f2c   Section        0  nrf24_1.o(i.NRF24_Write_Buf)
+    i.PCF8574_Init                           0x08003f80   Section        0  io_expander_1.o(i.PCF8574_Init)
+    i.PCF8574_ReadReg                        0x08003fe8   Section        0  io_expander_1.o(i.PCF8574_ReadReg)
     i.PendSV_Handler                         0x08004054   Section        0  stm32f1xx_it.o(i.PendSV_Handler)
-    i.PrintDecSevSeg                         0x08004058   Section        0  7seg.o(i.PrintDecSevSeg)
+    i.PrintDecSevSeg                         0x08004058   Section        0  7seg_1.o(i.PrintDecSevSeg)
     i.SPI_EndRxTransaction                   0x08004128   Section        0  stm32f1xx_hal_spi.o(i.SPI_EndRxTransaction)
     SPI_EndRxTransaction                     0x08004129   Thumb Code    92  stm32f1xx_hal_spi.o(i.SPI_EndRxTransaction)
     i.SPI_EndRxTxTransaction                 0x08004184   Section        0  stm32f1xx_hal_spi.o(i.SPI_EndRxTxTransaction)
@@ -2190,118 +2190,118 @@ Image Symbol Table
     SPI_WaitFlagStateUntilTimeout            0x080041a5   Thumb Code   148  stm32f1xx_hal_spi.o(i.SPI_WaitFlagStateUntilTimeout)
     i.SVC_Handler                            0x08004238   Section        0  stm32f1xx_it.o(i.SVC_Handler)
     i.SetTemp                                0x0800423c   Section        0  system.o(i.SetTemp)
-    i.SevSegInit                             0x08004394   Section        0  7seg.o(i.SevSegInit)
+    i.SevSegInit                             0x08004394   Section        0  7seg_1.o(i.SevSegInit)
     i.SysInit                                0x08004430   Section        0  system.o(i.SysInit)
-    i.SysTick_Handler                        0x08004738   Section        0  stm32f1xx_it.o(i.SysTick_Handler)
-    i.SystemClock_Config                     0x0800473c   Section        0  main.o(i.SystemClock_Config)
-    i.SystemInit                             0x0800478c   Section        0  system_stm32f1xx.o(i.SystemInit)
-    i.SystemTask                             0x080047d4   Section        0  system.o(i.SystemTask)
-    i.TIM1_UP_IRQHandler                     0x08004b3c   Section        0  stm32f1xx_it.o(i.TIM1_UP_IRQHandler)
-    i.TIM_Base_SetConfig                     0x08004c78   Section        0  stm32f1xx_hal_tim.o(i.TIM_Base_SetConfig)
-    i.TIM_ETR_SetConfig                      0x08004ce4   Section        0  stm32f1xx_hal_tim.o(i.TIM_ETR_SetConfig)
-    i.TIM_ITRx_SetConfig                     0x08004cf8   Section        0  stm32f1xx_hal_tim.o(i.TIM_ITRx_SetConfig)
-    TIM_ITRx_SetConfig                       0x08004cf9   Thumb Code    16  stm32f1xx_hal_tim.o(i.TIM_ITRx_SetConfig)
-    i.TIM_TI1_ConfigInputStage               0x08004d08   Section        0  stm32f1xx_hal_tim.o(i.TIM_TI1_ConfigInputStage)
-    TIM_TI1_ConfigInputStage                 0x08004d09   Thumb Code    34  stm32f1xx_hal_tim.o(i.TIM_TI1_ConfigInputStage)
-    i.TIM_TI2_ConfigInputStage               0x08004d2a   Section        0  stm32f1xx_hal_tim.o(i.TIM_TI2_ConfigInputStage)
-    TIM_TI2_ConfigInputStage                 0x08004d2b   Thumb Code    36  stm32f1xx_hal_tim.o(i.TIM_TI2_ConfigInputStage)
-    i.UART_DMAAbortOnError                   0x08004d4e   Section        0  stm32f1xx_hal_uart.o(i.UART_DMAAbortOnError)
-    UART_DMAAbortOnError                     0x08004d4f   Thumb Code    16  stm32f1xx_hal_uart.o(i.UART_DMAAbortOnError)
-    i.UART_EndRxTransfer                     0x08004d5e   Section        0  stm32f1xx_hal_uart.o(i.UART_EndRxTransfer)
-    UART_EndRxTransfer                       0x08004d5f   Thumb Code    28  stm32f1xx_hal_uart.o(i.UART_EndRxTransfer)
-    i.UART_Receive_IT                        0x08004d7a   Section        0  stm32f1xx_hal_uart.o(i.UART_Receive_IT)
-    UART_Receive_IT                          0x08004d7b   Thumb Code   150  stm32f1xx_hal_uart.o(i.UART_Receive_IT)
-    i.UART_SetConfig                         0x08004e10   Section        0  stm32f1xx_hal_uart.o(i.UART_SetConfig)
-    UART_SetConfig                           0x08004e11   Thumb Code   178  stm32f1xx_hal_uart.o(i.UART_SetConfig)
-    i.UART_Transmit_IT                       0x08004ec8   Section        0  stm32f1xx_hal_uart.o(i.UART_Transmit_IT)
-    UART_Transmit_IT                         0x08004ec9   Thumb Code    98  stm32f1xx_hal_uart.o(i.UART_Transmit_IT)
-    i.UART_WaitOnFlagUntilTimeout            0x08004f2a   Section        0  stm32f1xx_hal_uart.o(i.UART_WaitOnFlagUntilTimeout)
-    UART_WaitOnFlagUntilTimeout              0x08004f2b   Thumb Code    98  stm32f1xx_hal_uart.o(i.UART_WaitOnFlagUntilTimeout)
-    i.USART1_IRQHandler                      0x08004f8c   Section        0  stm32f1xx_it.o(i.USART1_IRQHandler)
-    i.UsageFault_Handler                     0x08004f98   Section        0  stm32f1xx_it.o(i.UsageFault_Handler)
-    i.WL_Get_Packet                          0x08004f9c   Section        0  wireless_ctrl.o(i.WL_Get_Packet)
-    i.WL_Get_Var                             0x08005274   Section        0  wireless_ctrl.o(i.WL_Get_Var)
-    i.WL_Handler                             0x080052ac   Section        0  wireless_ctrl.o(i.WL_Handler)
-    i.WL_Packet_Handler                      0x080054b4   Section        0  wireless_ctrl.o(i.WL_Packet_Handler)
-    i.WL_Send_Packet                         0x080055b4   Section        0  wireless_ctrl.o(i.WL_Send_Packet)
-    i.WL_Set_Var                             0x08005868   Section        0  wireless_ctrl.o(i.WL_Set_Var)
-    i.__0printf                              0x08005878   Section        0  printfa.o(i.__0printf)
-    i.__0sprintf                             0x08005898   Section        0  printfa.o(i.__0sprintf)
-    i.__NVIC_SetPriority                     0x080058c0   Section        0  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
-    __NVIC_SetPriority                       0x080058c1   Thumb Code    32  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
-    i.__aeabi_errno_addr                     0x080058e0   Section        0  errno.o(i.__aeabi_errno_addr)
-    i.__scatterload_copy                     0x080058e8   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x080058f6   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x080058f8   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i._fp_digits                             0x08005908   Section        0  printfa.o(i._fp_digits)
-    _fp_digits                               0x08005909   Thumb Code   366  printfa.o(i._fp_digits)
-    i._printf_core                           0x08005a8c   Section        0  printfa.o(i._printf_core)
-    _printf_core                             0x08005a8d   Thumb Code  1744  printfa.o(i._printf_core)
-    i._printf_post_padding                   0x08006168   Section        0  printfa.o(i._printf_post_padding)
-    _printf_post_padding                     0x08006169   Thumb Code    36  printfa.o(i._printf_post_padding)
-    i._printf_pre_padding                    0x0800618c   Section        0  printfa.o(i._printf_pre_padding)
-    _printf_pre_padding                      0x0800618d   Thumb Code    46  printfa.o(i._printf_pre_padding)
-    i._sputc                                 0x080061ba   Section        0  printfa.o(i._sputc)
-    _sputc                                   0x080061bb   Thumb Code    10  printfa.o(i._sputc)
-    i.add_packet                             0x080061c4   Section        0  wireless_ctrl.o(i.add_packet)
-    i.decode_7SEG                            0x08006278   Section        0  7seg.o(i.decode_7SEG)
-    i.ds18b20_Convert_int8                   0x080062bc   Section        0  ds18b20.o(i.ds18b20_Convert_int8)
-    i.ds18b20_GetTemp                        0x080062d4   Section        0  ds18b20.o(i.ds18b20_GetTemp)
-    i.ds18b20_Init                           0x080062f8   Section        0  ds18b20.o(i.ds18b20_Init)
-    i.ds18b20_MeasureTemperCmd               0x08006332   Section        0  ds18b20.o(i.ds18b20_MeasureTemperCmd)
-    i.ds18b20_ReadBit                        0x08006350   Section        0  ds18b20.o(i.ds18b20_ReadBit)
-    i.ds18b20_ReadByte                       0x08006388   Section        0  ds18b20.o(i.ds18b20_ReadByte)
-    i.ds18b20_ReadStratcpad                  0x080063a4   Section        0  ds18b20.o(i.ds18b20_ReadStratcpad)
-    i.ds18b20_Reset                          0x080063d8   Section        0  ds18b20.o(i.ds18b20_Reset)
-    i.ds18b20_WriteBit                       0x08006418   Section        0  ds18b20.o(i.ds18b20_WriteBit)
-    i.ds18b20_WriteByte                      0x08006450   Section        0  ds18b20.o(i.ds18b20_WriteByte)
-    i.fputc                                  0x08006474   Section        0  retarget_io.o(i.fputc)
-    i.free                                   0x08006488   Section        0  malloc.o(i.free)
-    i.get_packet                             0x080064d8   Section        0  wireless_ctrl.o(i.get_packet)
-    i.main                                   0x08006500   Section        0  main.o(i.main)
-    i.malloc                                 0x080065c8   Section        0  malloc.o(i.malloc)
-    i.parseCommand                           0x08006634   Section        0  uart_cmd_parser.o(i.parseCommand)
-    i.port_init                              0x08006af8   Section        0  ds18b20.o(i.port_init)
-    i.remove_packet                          0x08006b28   Section        0  wireless_ctrl.o(i.remove_packet)
-    i.strtodec                               0x08006be4   Section        0  uart_cmd_parser.o(i.strtodec)
-    i.trulala                                0x08006c08   Section        0  7seg.o(i.trulala)
-    .constdata                               0x08006c7c   Section       96  uart_cmd_parser.o(.constdata)
-    .constdata                               0x08006cdc   Section       13  7seg.o(.constdata)
-    .constdata                               0x08006ce9   Section       16  system_stm32f1xx.o(.constdata)
-    .constdata                               0x08006cf9   Section        8  system_stm32f1xx.o(.constdata)
-    .constdata                               0x08006d01   Section      129  ctype_o.o(.constdata)
-    .constdata                               0x08006d84   Section        4  ctype_o.o(.constdata)
-    table                                    0x08006d84   Data           4  ctype_o.o(.constdata)
-    .conststring                             0x08006d88   Section      118  uart_cmd_parser.o(.conststring)
-    .data                                    0x20000000   Section        9  ds18b20.o(.data)
-    .data                                    0x20000009   Section        1  io_expander.o(.data)
-    .data                                    0x2000000a   Section       11  nrf24.o(.data)
-    .data                                    0x20000015   Section        1  nrf24.o(.data)
-    .data                                    0x20000018   Section       12  wireless_ctrl.o(.data)
-    temp_addr                                0x2000001a   Data           1  wireless_ctrl.o(.data)
-    .data                                    0x20000024   Section        1  system.o(.data)
-    .data                                    0x20000025   Section        1  7seg.o(.data)
-    .data                                    0x20000028   Section        8  crc.o(.data)
-    .data                                    0x20000030   Section        5  usart.o(.data)
-    uart1_rx_len                             0x20000032   Data           1  usart.o(.data)
-    csi_rx_len                               0x20000033   Data           1  usart.o(.data)
-    CSI                                      0x20000034   Data           1  usart.o(.data)
-    .data                                    0x20000038   Section       12  stm32f1xx_hal.o(.data)
-    .data                                    0x20000044   Section        4  system_stm32f1xx.o(.data)
-    .data                                    0x20000048   Section        4  stdout.o(.data)
-    .data                                    0x2000004c   Section        4  mvars.o(.data)
+    i.SysTick_Handler                        0x08004774   Section        0  stm32f1xx_it.o(i.SysTick_Handler)
+    i.SystemClock_Config                     0x08004778   Section        0  main.o(i.SystemClock_Config)
+    i.SystemInit                             0x080047c8   Section        0  system_stm32f1xx.o(i.SystemInit)
+    i.SystemTask                             0x08004810   Section        0  system.o(i.SystemTask)
+    i.TIM1_UP_IRQHandler                     0x08004b78   Section        0  stm32f1xx_it.o(i.TIM1_UP_IRQHandler)
+    i.TIM_Base_SetConfig                     0x08004cb4   Section        0  stm32f1xx_hal_tim.o(i.TIM_Base_SetConfig)
+    i.TIM_ETR_SetConfig                      0x08004d20   Section        0  stm32f1xx_hal_tim.o(i.TIM_ETR_SetConfig)
+    i.TIM_ITRx_SetConfig                     0x08004d34   Section        0  stm32f1xx_hal_tim.o(i.TIM_ITRx_SetConfig)
+    TIM_ITRx_SetConfig                       0x08004d35   Thumb Code    16  stm32f1xx_hal_tim.o(i.TIM_ITRx_SetConfig)
+    i.TIM_TI1_ConfigInputStage               0x08004d44   Section        0  stm32f1xx_hal_tim.o(i.TIM_TI1_ConfigInputStage)
+    TIM_TI1_ConfigInputStage                 0x08004d45   Thumb Code    34  stm32f1xx_hal_tim.o(i.TIM_TI1_ConfigInputStage)
+    i.TIM_TI2_ConfigInputStage               0x08004d66   Section        0  stm32f1xx_hal_tim.o(i.TIM_TI2_ConfigInputStage)
+    TIM_TI2_ConfigInputStage                 0x08004d67   Thumb Code    36  stm32f1xx_hal_tim.o(i.TIM_TI2_ConfigInputStage)
+    i.UART_DMAAbortOnError                   0x08004d8a   Section        0  stm32f1xx_hal_uart.o(i.UART_DMAAbortOnError)
+    UART_DMAAbortOnError                     0x08004d8b   Thumb Code    16  stm32f1xx_hal_uart.o(i.UART_DMAAbortOnError)
+    i.UART_EndRxTransfer                     0x08004d9a   Section        0  stm32f1xx_hal_uart.o(i.UART_EndRxTransfer)
+    UART_EndRxTransfer                       0x08004d9b   Thumb Code    28  stm32f1xx_hal_uart.o(i.UART_EndRxTransfer)
+    i.UART_Receive_IT                        0x08004db6   Section        0  stm32f1xx_hal_uart.o(i.UART_Receive_IT)
+    UART_Receive_IT                          0x08004db7   Thumb Code   150  stm32f1xx_hal_uart.o(i.UART_Receive_IT)
+    i.UART_SetConfig                         0x08004e4c   Section        0  stm32f1xx_hal_uart.o(i.UART_SetConfig)
+    UART_SetConfig                           0x08004e4d   Thumb Code   178  stm32f1xx_hal_uart.o(i.UART_SetConfig)
+    i.UART_Transmit_IT                       0x08004f04   Section        0  stm32f1xx_hal_uart.o(i.UART_Transmit_IT)
+    UART_Transmit_IT                         0x08004f05   Thumb Code    98  stm32f1xx_hal_uart.o(i.UART_Transmit_IT)
+    i.UART_WaitOnFlagUntilTimeout            0x08004f66   Section        0  stm32f1xx_hal_uart.o(i.UART_WaitOnFlagUntilTimeout)
+    UART_WaitOnFlagUntilTimeout              0x08004f67   Thumb Code    98  stm32f1xx_hal_uart.o(i.UART_WaitOnFlagUntilTimeout)
+    i.USART1_IRQHandler                      0x08004fc8   Section        0  stm32f1xx_it.o(i.USART1_IRQHandler)
+    i.UsageFault_Handler                     0x08004fd4   Section        0  stm32f1xx_it.o(i.UsageFault_Handler)
+    i.WL_Get_Packet                          0x08004fd8   Section        0  wireless_ctrl_1.o(i.WL_Get_Packet)
+    i.WL_Get_Var                             0x080052b0   Section        0  wireless_ctrl_1.o(i.WL_Get_Var)
+    i.WL_Handler                             0x080052e8   Section        0  wireless_ctrl_1.o(i.WL_Handler)
+    i.WL_Packet_Handler                      0x080054f0   Section        0  wireless_ctrl_1.o(i.WL_Packet_Handler)
+    i.WL_Send_Packet                         0x080055f0   Section        0  wireless_ctrl_1.o(i.WL_Send_Packet)
+    i.WL_Set_Var                             0x080058a4   Section        0  wireless_ctrl_1.o(i.WL_Set_Var)
+    i.__0printf                              0x080058b4   Section        0  printfa.o(i.__0printf)
+    i.__0sprintf                             0x080058d4   Section        0  printfa.o(i.__0sprintf)
+    i.__NVIC_SetPriority                     0x080058fc   Section        0  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
+    __NVIC_SetPriority                       0x080058fd   Thumb Code    32  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
+    i.__aeabi_errno_addr                     0x0800591c   Section        0  errno.o(i.__aeabi_errno_addr)
+    i.__scatterload_copy                     0x08005924   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x08005932   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x08005934   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i._fp_digits                             0x08005944   Section        0  printfa.o(i._fp_digits)
+    _fp_digits                               0x08005945   Thumb Code   366  printfa.o(i._fp_digits)
+    i._printf_core                           0x08005ac8   Section        0  printfa.o(i._printf_core)
+    _printf_core                             0x08005ac9   Thumb Code  1744  printfa.o(i._printf_core)
+    i._printf_post_padding                   0x080061a4   Section        0  printfa.o(i._printf_post_padding)
+    _printf_post_padding                     0x080061a5   Thumb Code    36  printfa.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x080061c8   Section        0  printfa.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x080061c9   Thumb Code    46  printfa.o(i._printf_pre_padding)
+    i._sputc                                 0x080061f6   Section        0  printfa.o(i._sputc)
+    _sputc                                   0x080061f7   Thumb Code    10  printfa.o(i._sputc)
+    i.add_packet                             0x08006200   Section        0  wireless_ctrl_1.o(i.add_packet)
+    i.decode_7SEG                            0x080062b4   Section        0  7seg_1.o(i.decode_7SEG)
+    i.ds18b20_Convert_int8                   0x080062f8   Section        0  ds18b20_1.o(i.ds18b20_Convert_int8)
+    i.ds18b20_GetTemp                        0x08006310   Section        0  ds18b20_1.o(i.ds18b20_GetTemp)
+    i.ds18b20_Init                           0x08006334   Section        0  ds18b20_1.o(i.ds18b20_Init)
+    i.ds18b20_MeasureTemperCmd               0x0800636e   Section        0  ds18b20_1.o(i.ds18b20_MeasureTemperCmd)
+    i.ds18b20_ReadBit                        0x0800638c   Section        0  ds18b20_1.o(i.ds18b20_ReadBit)
+    i.ds18b20_ReadByte                       0x080063c4   Section        0  ds18b20_1.o(i.ds18b20_ReadByte)
+    i.ds18b20_ReadStratcpad                  0x080063e0   Section        0  ds18b20_1.o(i.ds18b20_ReadStratcpad)
+    i.ds18b20_Reset                          0x08006414   Section        0  ds18b20_1.o(i.ds18b20_Reset)
+    i.ds18b20_WriteBit                       0x08006454   Section        0  ds18b20_1.o(i.ds18b20_WriteBit)
+    i.ds18b20_WriteByte                      0x0800648c   Section        0  ds18b20_1.o(i.ds18b20_WriteByte)
+    i.fputc                                  0x080064b0   Section        0  retarget_io.o(i.fputc)
+    i.free                                   0x080064c4   Section        0  malloc.o(i.free)
+    i.get_packet                             0x08006514   Section        0  wireless_ctrl_1.o(i.get_packet)
+    i.main                                   0x0800653c   Section        0  main.o(i.main)
+    i.malloc                                 0x08006604   Section        0  malloc.o(i.malloc)
+    i.parseCommand                           0x08006670   Section        0  uart_cmd_parser.o(i.parseCommand)
+    i.port_init                              0x08006b34   Section        0  ds18b20_1.o(i.port_init)
+    i.remove_packet                          0x08006b64   Section        0  wireless_ctrl_1.o(i.remove_packet)
+    i.strtodec                               0x08006c20   Section        0  uart_cmd_parser.o(i.strtodec)
+    i.trulala                                0x08006c44   Section        0  7seg_1.o(i.trulala)
+    .constdata                               0x08006cb8   Section       96  uart_cmd_parser.o(.constdata)
+    .constdata                               0x08006d18   Section       16  system_stm32f1xx.o(.constdata)
+    .constdata                               0x08006d28   Section        8  system_stm32f1xx.o(.constdata)
+    .constdata                               0x08006d30   Section       13  7seg_1.o(.constdata)
+    .constdata                               0x08006d3d   Section      129  ctype_o.o(.constdata)
+    .constdata                               0x08006dc0   Section        4  ctype_o.o(.constdata)
+    table                                    0x08006dc0   Data           4  ctype_o.o(.constdata)
+    .conststring                             0x08006dc4   Section      118  uart_cmd_parser.o(.conststring)
+    .data                                    0x20000000   Section        1  system.o(.data)
+    .data                                    0x20000004   Section        8  crc.o(.data)
+    .data                                    0x2000000c   Section        5  usart.o(.data)
+    uart1_rx_len                             0x2000000e   Data           1  usart.o(.data)
+    csi_rx_len                               0x2000000f   Data           1  usart.o(.data)
+    CSI                                      0x20000010   Data           1  usart.o(.data)
+    .data                                    0x20000014   Section       12  stm32f1xx_hal.o(.data)
+    .data                                    0x20000020   Section        4  system_stm32f1xx.o(.data)
+    .data                                    0x20000024   Section        1  7seg_1.o(.data)
+    .data                                    0x20000028   Section       12  wireless_ctrl_1.o(.data)
+    temp_addr                                0x2000002a   Data           1  wireless_ctrl_1.o(.data)
+    .data                                    0x20000034   Section       11  nrf24_1.o(.data)
+    .data                                    0x2000003f   Section        1  nrf24_1.o(.data)
+    .data                                    0x20000040   Section        1  io_expander_1.o(.data)
+    .data                                    0x20000041   Section        9  ds18b20_1.o(.data)
+    .data                                    0x2000004c   Section        4  stdout.o(.data)
     .data                                    0x20000050   Section        4  mvars.o(.data)
-    .data                                    0x20000054   Section        4  errno.o(.data)
-    _errno                                   0x20000054   Data           4  errno.o(.data)
-    .bss                                     0x20000058   Section       77  nrf24.o(.bss)
-    .bss                                     0x200000a8   Section       56  wireless_ctrl.o(.bss)
-    .bss                                     0x200000e0   Section       26  system.o(.bss)
-    .bss                                     0x200000fa   Section       14  drive.o(.bss)
-    .bss                                     0x20000108   Section       84  i2c.o(.bss)
-    .bss                                     0x2000015c   Section      176  spi.o(.bss)
-    .bss                                     0x2000020c   Section       64  tim.o(.bss)
-    .bss                                     0x2000024c   Section      144  usart.o(.bss)
-    .bss                                     0x200002dc   Section       64  usart.o(.bss)
+    .data                                    0x20000054   Section        4  mvars.o(.data)
+    .data                                    0x20000058   Section        4  errno.o(.data)
+    _errno                                   0x20000058   Data           4  errno.o(.data)
+    .bss                                     0x2000005c   Section       26  system.o(.bss)
+    .bss                                     0x20000076   Section       14  drive.o(.bss)
+    .bss                                     0x20000084   Section       84  i2c.o(.bss)
+    .bss                                     0x200000d8   Section      176  spi.o(.bss)
+    .bss                                     0x20000188   Section       64  tim.o(.bss)
+    .bss                                     0x200001c8   Section      144  usart.o(.bss)
+    .bss                                     0x20000258   Section       64  usart.o(.bss)
+    .bss                                     0x20000298   Section       56  wireless_ctrl_1.o(.bss)
+    .bss                                     0x200002d0   Section       77  nrf24_1.o(.bss)
     HEAP                                     0x20000320   Section     2048  startup_stm32f103xb.o(HEAP)
     STACK                                    0x20000b20   Section     2048  startup_stm32f103xb.o(STACK)
 
@@ -2528,127 +2528,127 @@ Image Symbol Table
     MX_USART1_UART_Init                      0x08003569   Thumb Code    48  usart.o(i.MX_USART1_UART_Init)
     MemManage_Handler                        0x080035a1   Thumb Code     2  stm32f1xx_it.o(i.MemManage_Handler)
     NMI_Handler                              0x080035a3   Thumb Code     2  stm32f1xx_it.o(i.NMI_Handler)
-    NRF24_FlushRX                            0x080035a5   Thumb Code    52  nrf24.o(i.NRF24_FlushRX)
-    NRF24_FlushTX                            0x080035e5   Thumb Code    52  nrf24.o(i.NRF24_FlushTX)
-    NRF24_Get_State                          0x08003625   Thumb Code   396  nrf24.o(i.NRF24_Get_State)
-    NRF24_Init                               0x080038c9   Thumb Code   676  nrf24.o(i.NRF24_Init)
-    NRF24_RX_Mode                            0x08003cb1   Thumb Code    66  nrf24.o(i.NRF24_RX_Mode)
-    NRF24_ReadReg                            0x08003cfd   Thumb Code    86  nrf24.o(i.NRF24_ReadReg)
-    NRF24_Read_Buf                           0x08003d5d   Thumb Code    58  nrf24.o(i.NRF24_Read_Buf)
-    NRF24_Send                               0x08003da1   Thumb Code    76  nrf24.o(i.NRF24_Send)
-    NRF24_TX_Mode                            0x08003df1   Thumb Code    44  nrf24.o(i.NRF24_TX_Mode)
-    NRF24_ToggleFeatures                     0x08003e25   Thumb Code    72  nrf24.o(i.NRF24_ToggleFeatures)
-    NRF24_Transmit                           0x08003e79   Thumb Code    90  nrf24.o(i.NRF24_Transmit)
-    NRF24_WriteReg                           0x08003ee1   Thumb Code    66  nrf24.o(i.NRF24_WriteReg)
-    NRF24_Write_Buf                          0x08003f2d   Thumb Code    76  nrf24.o(i.NRF24_Write_Buf)
-    PCF8574_Init                             0x08003f81   Thumb Code    52  io_expander.o(i.PCF8574_Init)
-    PCF8574_ReadReg                          0x08003fe9   Thumb Code    50  io_expander.o(i.PCF8574_ReadReg)
+    NRF24_FlushRX                            0x080035a5   Thumb Code    52  nrf24_1.o(i.NRF24_FlushRX)
+    NRF24_FlushTX                            0x080035e5   Thumb Code    52  nrf24_1.o(i.NRF24_FlushTX)
+    NRF24_Get_State                          0x08003625   Thumb Code   396  nrf24_1.o(i.NRF24_Get_State)
+    NRF24_Init                               0x080038c9   Thumb Code   676  nrf24_1.o(i.NRF24_Init)
+    NRF24_RX_Mode                            0x08003cb1   Thumb Code    66  nrf24_1.o(i.NRF24_RX_Mode)
+    NRF24_ReadReg                            0x08003cfd   Thumb Code    86  nrf24_1.o(i.NRF24_ReadReg)
+    NRF24_Read_Buf                           0x08003d5d   Thumb Code    58  nrf24_1.o(i.NRF24_Read_Buf)
+    NRF24_Send                               0x08003da1   Thumb Code    76  nrf24_1.o(i.NRF24_Send)
+    NRF24_TX_Mode                            0x08003df1   Thumb Code    44  nrf24_1.o(i.NRF24_TX_Mode)
+    NRF24_ToggleFeatures                     0x08003e25   Thumb Code    72  nrf24_1.o(i.NRF24_ToggleFeatures)
+    NRF24_Transmit                           0x08003e79   Thumb Code    90  nrf24_1.o(i.NRF24_Transmit)
+    NRF24_WriteReg                           0x08003ee1   Thumb Code    66  nrf24_1.o(i.NRF24_WriteReg)
+    NRF24_Write_Buf                          0x08003f2d   Thumb Code    76  nrf24_1.o(i.NRF24_Write_Buf)
+    PCF8574_Init                             0x08003f81   Thumb Code    52  io_expander_1.o(i.PCF8574_Init)
+    PCF8574_ReadReg                          0x08003fe9   Thumb Code    50  io_expander_1.o(i.PCF8574_ReadReg)
     PendSV_Handler                           0x08004055   Thumb Code     2  stm32f1xx_it.o(i.PendSV_Handler)
-    PrintDecSevSeg                           0x08004059   Thumb Code   204  7seg.o(i.PrintDecSevSeg)
+    PrintDecSevSeg                           0x08004059   Thumb Code   204  7seg_1.o(i.PrintDecSevSeg)
     SVC_Handler                              0x08004239   Thumb Code     2  stm32f1xx_it.o(i.SVC_Handler)
     SetTemp                                  0x0800423d   Thumb Code   318  system.o(i.SetTemp)
-    SevSegInit                               0x08004395   Thumb Code   148  7seg.o(i.SevSegInit)
-    SysInit                                  0x08004431   Thumb Code   514  system.o(i.SysInit)
-    SysTick_Handler                          0x08004739   Thumb Code     4  stm32f1xx_it.o(i.SysTick_Handler)
-    SystemClock_Config                       0x0800473d   Thumb Code    78  main.o(i.SystemClock_Config)
-    SystemInit                               0x0800478d   Thumb Code    56  system_stm32f1xx.o(i.SystemInit)
-    SystemTask                               0x080047d5   Thumb Code   726  system.o(i.SystemTask)
-    TIM1_UP_IRQHandler                       0x08004b3d   Thumb Code   270  stm32f1xx_it.o(i.TIM1_UP_IRQHandler)
-    TIM_Base_SetConfig                       0x08004c79   Thumb Code    94  stm32f1xx_hal_tim.o(i.TIM_Base_SetConfig)
-    TIM_ETR_SetConfig                        0x08004ce5   Thumb Code    20  stm32f1xx_hal_tim.o(i.TIM_ETR_SetConfig)
-    USART1_IRQHandler                        0x08004f8d   Thumb Code     6  stm32f1xx_it.o(i.USART1_IRQHandler)
-    UsageFault_Handler                       0x08004f99   Thumb Code     2  stm32f1xx_it.o(i.UsageFault_Handler)
-    WL_Get_Packet                            0x08004f9d   Thumb Code   414  wireless_ctrl.o(i.WL_Get_Packet)
-    WL_Get_Var                               0x08005275   Thumb Code    46  wireless_ctrl.o(i.WL_Get_Var)
-    WL_Handler                               0x080052ad   Thumb Code   268  wireless_ctrl.o(i.WL_Handler)
-    WL_Packet_Handler                        0x080054b5   Thumb Code   184  wireless_ctrl.o(i.WL_Packet_Handler)
-    WL_Send_Packet                           0x080055b5   Thumb Code   426  wireless_ctrl.o(i.WL_Send_Packet)
-    WL_Set_Var                               0x08005869   Thumb Code    12  wireless_ctrl.o(i.WL_Set_Var)
-    __0printf                                0x08005879   Thumb Code    22  printfa.o(i.__0printf)
-    __1printf                                0x08005879   Thumb Code     0  printfa.o(i.__0printf)
-    __2printf                                0x08005879   Thumb Code     0  printfa.o(i.__0printf)
-    __c89printf                              0x08005879   Thumb Code     0  printfa.o(i.__0printf)
-    printf                                   0x08005879   Thumb Code     0  printfa.o(i.__0printf)
-    __0sprintf                               0x08005899   Thumb Code    34  printfa.o(i.__0sprintf)
-    __1sprintf                               0x08005899   Thumb Code     0  printfa.o(i.__0sprintf)
-    __2sprintf                               0x08005899   Thumb Code     0  printfa.o(i.__0sprintf)
-    __c89sprintf                             0x08005899   Thumb Code     0  printfa.o(i.__0sprintf)
-    sprintf                                  0x08005899   Thumb Code     0  printfa.o(i.__0sprintf)
-    __aeabi_errno_addr                       0x080058e1   Thumb Code     4  errno.o(i.__aeabi_errno_addr)
-    __rt_errno_addr                          0x080058e1   Thumb Code     0  errno.o(i.__aeabi_errno_addr)
-    __scatterload_copy                       0x080058e9   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x080058f7   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x080058f9   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    add_packet                               0x080061c5   Thumb Code   134  wireless_ctrl.o(i.add_packet)
-    decode_7SEG                              0x08006279   Thumb Code    68  7seg.o(i.decode_7SEG)
-    ds18b20_Convert_int8                     0x080062bd   Thumb Code    20  ds18b20.o(i.ds18b20_Convert_int8)
-    ds18b20_GetTemp                          0x080062d5   Thumb Code    36  ds18b20.o(i.ds18b20_GetTemp)
-    ds18b20_Init                             0x080062f9   Thumb Code    58  ds18b20.o(i.ds18b20_Init)
-    ds18b20_MeasureTemperCmd                 0x08006333   Thumb Code    28  ds18b20.o(i.ds18b20_MeasureTemperCmd)
-    ds18b20_ReadBit                          0x08006351   Thumb Code    50  ds18b20.o(i.ds18b20_ReadBit)
-    ds18b20_ReadByte                         0x08006389   Thumb Code    28  ds18b20.o(i.ds18b20_ReadByte)
-    ds18b20_ReadStratcpad                    0x080063a5   Thumb Code    46  ds18b20.o(i.ds18b20_ReadStratcpad)
-    ds18b20_Reset                            0x080063d9   Thumb Code    60  ds18b20.o(i.ds18b20_Reset)
-    ds18b20_WriteBit                         0x08006419   Thumb Code    50  ds18b20.o(i.ds18b20_WriteBit)
-    ds18b20_WriteByte                        0x08006451   Thumb Code    34  ds18b20.o(i.ds18b20_WriteByte)
-    fputc                                    0x08006475   Thumb Code    16  retarget_io.o(i.fputc)
-    free                                     0x08006489   Thumb Code    76  malloc.o(i.free)
-    get_packet                               0x080064d9   Thumb Code    34  wireless_ctrl.o(i.get_packet)
-    main                                     0x08006501   Thumb Code   112  main.o(i.main)
-    malloc                                   0x080065c9   Thumb Code    92  malloc.o(i.malloc)
-    parseCommand                             0x08006635   Thumb Code   692  uart_cmd_parser.o(i.parseCommand)
-    port_init                                0x08006af9   Thumb Code    42  ds18b20.o(i.port_init)
-    remove_packet                            0x08006b29   Thumb Code   138  wireless_ctrl.o(i.remove_packet)
-    strtodec                                 0x08006be5   Thumb Code    34  uart_cmd_parser.o(i.strtodec)
-    trulala                                  0x08006c09   Thumb Code   102  7seg.o(i.trulala)
-    AHBPrescTable                            0x08006ce9   Data          16  system_stm32f1xx.o(.constdata)
-    APBPrescTable                            0x08006cf9   Data           8  system_stm32f1xx.o(.constdata)
-    __ctype_table                            0x08006d01   Data         129  ctype_o.o(.constdata)
-    Region$$Table$$Base                      0x08006e00   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08006e20   Number         0  anon$$obj.o(Region$$Table)
-    DS_TEMP                                  0x20000000   Data           1  ds18b20.o(.data)
-    DS_SCRATCHPAD                            0x20000001   Data           8  ds18b20.o(.data)
-    PCF8574A_reg                             0x20000009   Data           1  io_expander.o(.data)
-    nrf_rx_flag                              0x2000000a   Data           1  nrf24.o(.data)
-    nrf_tx_flag                              0x2000000b   Data           1  nrf24.o(.data)
-    nrf_tx_fail                              0x2000000c   Data           1  nrf24.o(.data)
-    NRF_DBG_PRINT_F                          0x2000000d   Data           1  nrf24.o(.data)
-    dt_reg                                   0x2000000e   Data           1  nrf24.o(.data)
-    NRF_TX_ADDR                              0x2000000f   Data           3  nrf24.o(.data)
-    NRF_RX_ADDR                              0x20000012   Data           3  nrf24.o(.data)
-    NRF_RF_CH                                0x20000015   Data           1  nrf24.o(.data)
-    ds_init_state                            0x20000018   Data           1  wireless_ctrl.o(.data)
-    pack_cnt                                 0x20000019   Data           1  wireless_ctrl.o(.data)
-    packet_handler_timer                     0x2000001c   Data           2  wireless_ctrl.o(.data)
-    pack_info                                0x20000020   Data           4  wireless_ctrl.o(.data)
-    btn_pressed_f                            0x20000024   Data           1  system.o(.data)
-    SS_CH                                    0x20000025   Data           1  7seg.o(.data)
-    hcrc                                     0x20000028   Data           8  crc.o(.data)
-    receive_val                              0x20000030   Data           1  usart.o(.data)
-    uart1_rx_flag                            0x20000031   Data           1  usart.o(.data)
-    uwTickFreq                               0x20000038   Data           1  stm32f1xx_hal.o(.data)
-    uwTickPrio                               0x2000003c   Data           4  stm32f1xx_hal.o(.data)
-    uwTick                                   0x20000040   Data           4  stm32f1xx_hal.o(.data)
-    SystemCoreClock                          0x20000044   Data           4  system_stm32f1xx.o(.data)
-    __stdout                                 0x20000048   Data           4  stdout.o(.data)
-    __microlib_freelist                      0x2000004c   Data           4  mvars.o(.data)
-    __microlib_freelist_initialised          0x20000050   Data           4  mvars.o(.data)
-    NRF_RX_BUF                               0x20000058   Data          13  nrf24.o(.bss)
-    dbg_str                                  0x20000065   Data          64  nrf24.o(.bss)
-    TX_packet                                0x200000a8   Data          12  wireless_ctrl.o(.bss)
-    RX_packet                                0x200000b4   Data          12  wireless_ctrl.o(.bss)
-    str                                      0x200000c0   Data          32  wireless_ctrl.o(.bss)
-    SysState                                 0x200000e0   Data          14  system.o(.bss)
-    SysCnt                                   0x200000ee   Data          12  system.o(.bss)
-    drv_m1                                   0x200000fa   Data          14  drive.o(.bss)
-    hi2c2                                    0x20000108   Data          84  i2c.o(.bss)
-    hspi1                                    0x2000015c   Data          88  spi.o(.bss)
-    hspi2                                    0x200001b4   Data          88  spi.o(.bss)
-    htim1                                    0x2000020c   Data          64  tim.o(.bss)
-    uart_csi_buf                             0x2000024c   Data          16  usart.o(.bss)
-    uart_rx_buf                              0x2000025c   Data          64  usart.o(.bss)
-    huart1                                   0x2000029c   Data          64  usart.o(.bss)
-    sprintf_str                              0x200002dc   Data          64  usart.o(.bss)
+    SevSegInit                               0x08004395   Thumb Code   148  7seg_1.o(i.SevSegInit)
+    SysInit                                  0x08004431   Thumb Code   570  system.o(i.SysInit)
+    SysTick_Handler                          0x08004775   Thumb Code     4  stm32f1xx_it.o(i.SysTick_Handler)
+    SystemClock_Config                       0x08004779   Thumb Code    78  main.o(i.SystemClock_Config)
+    SystemInit                               0x080047c9   Thumb Code    56  system_stm32f1xx.o(i.SystemInit)
+    SystemTask                               0x08004811   Thumb Code   726  system.o(i.SystemTask)
+    TIM1_UP_IRQHandler                       0x08004b79   Thumb Code   270  stm32f1xx_it.o(i.TIM1_UP_IRQHandler)
+    TIM_Base_SetConfig                       0x08004cb5   Thumb Code    94  stm32f1xx_hal_tim.o(i.TIM_Base_SetConfig)
+    TIM_ETR_SetConfig                        0x08004d21   Thumb Code    20  stm32f1xx_hal_tim.o(i.TIM_ETR_SetConfig)
+    USART1_IRQHandler                        0x08004fc9   Thumb Code     6  stm32f1xx_it.o(i.USART1_IRQHandler)
+    UsageFault_Handler                       0x08004fd5   Thumb Code     2  stm32f1xx_it.o(i.UsageFault_Handler)
+    WL_Get_Packet                            0x08004fd9   Thumb Code   414  wireless_ctrl_1.o(i.WL_Get_Packet)
+    WL_Get_Var                               0x080052b1   Thumb Code    46  wireless_ctrl_1.o(i.WL_Get_Var)
+    WL_Handler                               0x080052e9   Thumb Code   268  wireless_ctrl_1.o(i.WL_Handler)
+    WL_Packet_Handler                        0x080054f1   Thumb Code   184  wireless_ctrl_1.o(i.WL_Packet_Handler)
+    WL_Send_Packet                           0x080055f1   Thumb Code   426  wireless_ctrl_1.o(i.WL_Send_Packet)
+    WL_Set_Var                               0x080058a5   Thumb Code    12  wireless_ctrl_1.o(i.WL_Set_Var)
+    __0printf                                0x080058b5   Thumb Code    22  printfa.o(i.__0printf)
+    __1printf                                0x080058b5   Thumb Code     0  printfa.o(i.__0printf)
+    __2printf                                0x080058b5   Thumb Code     0  printfa.o(i.__0printf)
+    __c89printf                              0x080058b5   Thumb Code     0  printfa.o(i.__0printf)
+    printf                                   0x080058b5   Thumb Code     0  printfa.o(i.__0printf)
+    __0sprintf                               0x080058d5   Thumb Code    34  printfa.o(i.__0sprintf)
+    __1sprintf                               0x080058d5   Thumb Code     0  printfa.o(i.__0sprintf)
+    __2sprintf                               0x080058d5   Thumb Code     0  printfa.o(i.__0sprintf)
+    __c89sprintf                             0x080058d5   Thumb Code     0  printfa.o(i.__0sprintf)
+    sprintf                                  0x080058d5   Thumb Code     0  printfa.o(i.__0sprintf)
+    __aeabi_errno_addr                       0x0800591d   Thumb Code     4  errno.o(i.__aeabi_errno_addr)
+    __rt_errno_addr                          0x0800591d   Thumb Code     0  errno.o(i.__aeabi_errno_addr)
+    __scatterload_copy                       0x08005925   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x08005933   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x08005935   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    add_packet                               0x08006201   Thumb Code   134  wireless_ctrl_1.o(i.add_packet)
+    decode_7SEG                              0x080062b5   Thumb Code    68  7seg_1.o(i.decode_7SEG)
+    ds18b20_Convert_int8                     0x080062f9   Thumb Code    20  ds18b20_1.o(i.ds18b20_Convert_int8)
+    ds18b20_GetTemp                          0x08006311   Thumb Code    36  ds18b20_1.o(i.ds18b20_GetTemp)
+    ds18b20_Init                             0x08006335   Thumb Code    58  ds18b20_1.o(i.ds18b20_Init)
+    ds18b20_MeasureTemperCmd                 0x0800636f   Thumb Code    28  ds18b20_1.o(i.ds18b20_MeasureTemperCmd)
+    ds18b20_ReadBit                          0x0800638d   Thumb Code    50  ds18b20_1.o(i.ds18b20_ReadBit)
+    ds18b20_ReadByte                         0x080063c5   Thumb Code    28  ds18b20_1.o(i.ds18b20_ReadByte)
+    ds18b20_ReadStratcpad                    0x080063e1   Thumb Code    46  ds18b20_1.o(i.ds18b20_ReadStratcpad)
+    ds18b20_Reset                            0x08006415   Thumb Code    60  ds18b20_1.o(i.ds18b20_Reset)
+    ds18b20_WriteBit                         0x08006455   Thumb Code    50  ds18b20_1.o(i.ds18b20_WriteBit)
+    ds18b20_WriteByte                        0x0800648d   Thumb Code    34  ds18b20_1.o(i.ds18b20_WriteByte)
+    fputc                                    0x080064b1   Thumb Code    16  retarget_io.o(i.fputc)
+    free                                     0x080064c5   Thumb Code    76  malloc.o(i.free)
+    get_packet                               0x08006515   Thumb Code    34  wireless_ctrl_1.o(i.get_packet)
+    main                                     0x0800653d   Thumb Code   112  main.o(i.main)
+    malloc                                   0x08006605   Thumb Code    92  malloc.o(i.malloc)
+    parseCommand                             0x08006671   Thumb Code   692  uart_cmd_parser.o(i.parseCommand)
+    port_init                                0x08006b35   Thumb Code    42  ds18b20_1.o(i.port_init)
+    remove_packet                            0x08006b65   Thumb Code   138  wireless_ctrl_1.o(i.remove_packet)
+    strtodec                                 0x08006c21   Thumb Code    34  uart_cmd_parser.o(i.strtodec)
+    trulala                                  0x08006c45   Thumb Code   102  7seg_1.o(i.trulala)
+    AHBPrescTable                            0x08006d18   Data          16  system_stm32f1xx.o(.constdata)
+    APBPrescTable                            0x08006d28   Data           8  system_stm32f1xx.o(.constdata)
+    __ctype_table                            0x08006d3d   Data         129  ctype_o.o(.constdata)
+    Region$$Table$$Base                      0x08006e3c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08006e5c   Number         0  anon$$obj.o(Region$$Table)
+    btn_pressed_f                            0x20000000   Data           1  system.o(.data)
+    hcrc                                     0x20000004   Data           8  crc.o(.data)
+    receive_val                              0x2000000c   Data           1  usart.o(.data)
+    uart1_rx_flag                            0x2000000d   Data           1  usart.o(.data)
+    uwTickFreq                               0x20000014   Data           1  stm32f1xx_hal.o(.data)
+    uwTickPrio                               0x20000018   Data           4  stm32f1xx_hal.o(.data)
+    uwTick                                   0x2000001c   Data           4  stm32f1xx_hal.o(.data)
+    SystemCoreClock                          0x20000020   Data           4  system_stm32f1xx.o(.data)
+    SS_CH                                    0x20000024   Data           1  7seg_1.o(.data)
+    ds_init_state                            0x20000028   Data           1  wireless_ctrl_1.o(.data)
+    pack_cnt                                 0x20000029   Data           1  wireless_ctrl_1.o(.data)
+    packet_handler_timer                     0x2000002c   Data           2  wireless_ctrl_1.o(.data)
+    pack_info                                0x20000030   Data           4  wireless_ctrl_1.o(.data)
+    nrf_rx_flag                              0x20000034   Data           1  nrf24_1.o(.data)
+    nrf_tx_flag                              0x20000035   Data           1  nrf24_1.o(.data)
+    nrf_tx_fail                              0x20000036   Data           1  nrf24_1.o(.data)
+    NRF_DBG_PRINT_F                          0x20000037   Data           1  nrf24_1.o(.data)
+    dt_reg                                   0x20000038   Data           1  nrf24_1.o(.data)
+    NRF_TX_ADDR                              0x20000039   Data           3  nrf24_1.o(.data)
+    NRF_RX_ADDR                              0x2000003c   Data           3  nrf24_1.o(.data)
+    NRF_RF_CH                                0x2000003f   Data           1  nrf24_1.o(.data)
+    PCF8574A_reg                             0x20000040   Data           1  io_expander_1.o(.data)
+    DS_TEMP                                  0x20000041   Data           1  ds18b20_1.o(.data)
+    DS_SCRATCHPAD                            0x20000042   Data           8  ds18b20_1.o(.data)
+    __stdout                                 0x2000004c   Data           4  stdout.o(.data)
+    __microlib_freelist                      0x20000050   Data           4  mvars.o(.data)
+    __microlib_freelist_initialised          0x20000054   Data           4  mvars.o(.data)
+    SysState                                 0x2000005c   Data          14  system.o(.bss)
+    SysCnt                                   0x2000006a   Data          12  system.o(.bss)
+    drv_m1                                   0x20000076   Data          14  drive.o(.bss)
+    hi2c2                                    0x20000084   Data          84  i2c.o(.bss)
+    hspi1                                    0x200000d8   Data          88  spi.o(.bss)
+    hspi2                                    0x20000130   Data          88  spi.o(.bss)
+    htim1                                    0x20000188   Data          64  tim.o(.bss)
+    uart_csi_buf                             0x200001c8   Data          16  usart.o(.bss)
+    uart_rx_buf                              0x200001d8   Data          64  usart.o(.bss)
+    huart1                                   0x20000218   Data          64  usart.o(.bss)
+    sprintf_str                              0x20000258   Data          64  usart.o(.bss)
+    TX_packet                                0x20000298   Data          12  wireless_ctrl_1.o(.bss)
+    RX_packet                                0x200002a4   Data          12  wireless_ctrl_1.o(.bss)
+    str                                      0x200002b0   Data          32  wireless_ctrl_1.o(.bss)
+    NRF_RX_BUF                               0x200002d0   Data          13  nrf24_1.o(.bss)
+    dbg_str                                  0x200002dd   Data          64  nrf24_1.o(.bss)
     __heap_base                              0x20000320   Data           0  startup_stm32f103xb.o(HEAP)
     __heap_limit                             0x20000b20   Data           0  startup_stm32f103xb.o(HEAP)
     __initial_sp                             0x20001320   Data           0  startup_stm32f103xb.o(STACK)
@@ -2661,9 +2661,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00006e78, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00006eb8, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00006e20, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00006e5c, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2701,249 +2701,249 @@ Memory Map of the image
     0x08000712   0x08000712   0x00000024   Code   RO         4731    .text               mc_w.l(llsshr.o)
     0x08000736   0x08000736   0x0000001c   Code   RO         4733    .text               mc_w.l(_chval.o)
     0x08000752   0x08000752   0x000000ba   Code   RO         4735    .text               mf_w.l(depilogue.o)
-    0x0800080c   0x0800080c   0x00000002   Code   RO         1037    i.BusFault_Handler  stm32f1xx_it.o
+    0x0800080c   0x0800080c   0x00000002   Code   RO          656    i.BusFault_Handler  stm32f1xx_it.o
     0x0800080e   0x0800080e   0x00000002   PAD
-    0x08000810   0x08000810   0x00000064   Code   RO          532    i.Buttons_GetCode   system.o
-    0x08000874   0x08000874   0x00000018   Code   RO          533    i.Buttons_Reset     system.o
-    0x0800088c   0x0800088c   0x00000002   Code   RO         1038    i.DebugMon_Handler  stm32f1xx_it.o
+    0x08000810   0x08000810   0x00000064   Code   RO          196    i.Buttons_GetCode   system.o
+    0x08000874   0x08000874   0x00000018   Code   RO          197    i.Buttons_Reset     system.o
+    0x0800088c   0x0800088c   0x00000002   Code   RO          657    i.DebugMon_Handler  stm32f1xx_it.o
     0x0800088e   0x0800088e   0x00000002   PAD
-    0x08000890   0x08000890   0x00000028   Code   RO           13    i.DelayMicro        ds18b20.o
-    0x080008b8   0x080008b8   0x00000028   Code   RO          250    i.DelayMicro        nrf24.o
-    0x080008e0   0x080008e0   0x000000b4   Code   RO          603    i.Drive_CheckRotation  drive.o
-    0x08000994   0x08000994   0x00000160   Code   RO          604    i.Drive_HomeInit    drive.o
-    0x08000af4   0x08000af4   0x00000054   Code   RO          692    i.EEPROM_Read       eeprom.o
-    0x08000b48   0x08000b48   0x00000054   Code   RO          693    i.EEPROM_Write      eeprom.o
-    0x08000b9c   0x08000b9c   0x00000010   Code   RO         1039    i.EXTI1_IRQHandler  stm32f1xx_it.o
-    0x08000bac   0x08000bac   0x0000007c   Code   RO         1040    i.EXTI2_IRQHandler  stm32f1xx_it.o
-    0x08000c28   0x08000c28   0x0000007c   Code   RO         1041    i.EXTI3_IRQHandler  stm32f1xx_it.o
-    0x08000ca4   0x08000ca4   0x00000020   Code   RO         1042    i.EXTI9_5_IRQHandler  stm32f1xx_it.o
-    0x08000cc4   0x08000cc4   0x00000002   Code   RO          722    i.Error_Handler     main.o
-    0x08000cc6   0x08000cc6   0x0000002e   Code   RO         1209    i.HAL_CRC_Calculate  stm32f1xx_hal_crc.o
-    0x08000cf4   0x08000cf4   0x00000022   Code   RO         1212    i.HAL_CRC_Init      stm32f1xx_hal_crc.o
+    0x08000890   0x08000890   0x00000028   Code   RO         4034    i.DelayMicro        nrf24_1.o
+    0x080008b8   0x080008b8   0x00000028   Code   RO         4186    i.DelayMicro        ds18b20_1.o
+    0x080008e0   0x080008e0   0x000000b4   Code   RO          271    i.Drive_CheckRotation  drive.o
+    0x08000994   0x08000994   0x00000160   Code   RO          272    i.Drive_HomeInit    drive.o
+    0x08000af4   0x08000af4   0x00000054   Code   RO          311    i.EEPROM_Read       eeprom.o
+    0x08000b48   0x08000b48   0x00000054   Code   RO          312    i.EEPROM_Write      eeprom.o
+    0x08000b9c   0x08000b9c   0x00000010   Code   RO          658    i.EXTI1_IRQHandler  stm32f1xx_it.o
+    0x08000bac   0x08000bac   0x0000007c   Code   RO          659    i.EXTI2_IRQHandler  stm32f1xx_it.o
+    0x08000c28   0x08000c28   0x0000007c   Code   RO          660    i.EXTI3_IRQHandler  stm32f1xx_it.o
+    0x08000ca4   0x08000ca4   0x00000020   Code   RO          661    i.EXTI9_5_IRQHandler  stm32f1xx_it.o
+    0x08000cc4   0x08000cc4   0x00000002   Code   RO          341    i.Error_Handler     main.o
+    0x08000cc6   0x08000cc6   0x0000002e   Code   RO          828    i.HAL_CRC_Calculate  stm32f1xx_hal_crc.o
+    0x08000cf4   0x08000cf4   0x00000022   Code   RO          831    i.HAL_CRC_Init      stm32f1xx_hal_crc.o
     0x08000d16   0x08000d16   0x00000002   PAD
-    0x08000d18   0x08000d18   0x00000028   Code   RO          786    i.HAL_CRC_MspInit   crc.o
-    0x08000d40   0x08000d40   0x00000098   Code   RO         1648    i.HAL_DMA_Abort_IT  stm32f1xx_hal_dma.o
-    0x08000dd8   0x08000dd8   0x00000024   Code   RO         1275    i.HAL_Delay         stm32f1xx_hal.o
-    0x08000dfc   0x08000dfc   0x000000e0   Code   RO         1580    i.HAL_GPIO_DeInit   stm32f1xx_hal_gpio.o
-    0x08000edc   0x08000edc   0x00000002   Code   RO         1581    i.HAL_GPIO_EXTI_Callback  stm32f1xx_hal_gpio.o
+    0x08000d18   0x08000d18   0x00000028   Code   RO          405    i.HAL_CRC_MspInit   crc.o
+    0x08000d40   0x08000d40   0x00000098   Code   RO         1267    i.HAL_DMA_Abort_IT  stm32f1xx_hal_dma.o
+    0x08000dd8   0x08000dd8   0x00000024   Code   RO          894    i.HAL_Delay         stm32f1xx_hal.o
+    0x08000dfc   0x08000dfc   0x000000e0   Code   RO         1199    i.HAL_GPIO_DeInit   stm32f1xx_hal_gpio.o
+    0x08000edc   0x08000edc   0x00000002   Code   RO         1200    i.HAL_GPIO_EXTI_Callback  stm32f1xx_hal_gpio.o
     0x08000ede   0x08000ede   0x00000002   PAD
-    0x08000ee0   0x08000ee0   0x00000018   Code   RO         1582    i.HAL_GPIO_EXTI_IRQHandler  stm32f1xx_hal_gpio.o
-    0x08000ef8   0x08000ef8   0x000001cc   Code   RO         1583    i.HAL_GPIO_Init     stm32f1xx_hal_gpio.o
-    0x080010c4   0x080010c4   0x0000000a   Code   RO         1585    i.HAL_GPIO_ReadPin  stm32f1xx_hal_gpio.o
-    0x080010ce   0x080010ce   0x0000000e   Code   RO         1586    i.HAL_GPIO_TogglePin  stm32f1xx_hal_gpio.o
-    0x080010dc   0x080010dc   0x0000000a   Code   RO         1587    i.HAL_GPIO_WritePin  stm32f1xx_hal_gpio.o
+    0x08000ee0   0x08000ee0   0x00000018   Code   RO         1201    i.HAL_GPIO_EXTI_IRQHandler  stm32f1xx_hal_gpio.o
+    0x08000ef8   0x08000ef8   0x000001cc   Code   RO         1202    i.HAL_GPIO_Init     stm32f1xx_hal_gpio.o
+    0x080010c4   0x080010c4   0x0000000a   Code   RO         1204    i.HAL_GPIO_ReadPin  stm32f1xx_hal_gpio.o
+    0x080010ce   0x080010ce   0x0000000e   Code   RO         1205    i.HAL_GPIO_TogglePin  stm32f1xx_hal_gpio.o
+    0x080010dc   0x080010dc   0x0000000a   Code   RO         1206    i.HAL_GPIO_WritePin  stm32f1xx_hal_gpio.o
     0x080010e6   0x080010e6   0x00000002   PAD
-    0x080010e8   0x080010e8   0x0000000c   Code   RO         1279    i.HAL_GetTick       stm32f1xx_hal.o
-    0x080010f4   0x080010f4   0x00000004   Code   RO         2251    i.HAL_I2C_GetError  stm32f1xx_hal_i2c.o
-    0x080010f8   0x080010f8   0x00000174   Code   RO         2254    i.HAL_I2C_Init      stm32f1xx_hal_i2c.o
-    0x0800126c   0x0800126c   0x0000015c   Code   RO         2255    i.HAL_I2C_IsDeviceReady  stm32f1xx_hal_i2c.o
-    0x080013c8   0x080013c8   0x0000020c   Code   RO         2260    i.HAL_I2C_Master_Receive  stm32f1xx_hal_i2c.o
-    0x080015d4   0x080015d4   0x0000012c   Code   RO         2267    i.HAL_I2C_Master_Transmit  stm32f1xx_hal_i2c.o
-    0x08001700   0x08001700   0x00000218   Code   RO         2272    i.HAL_I2C_Mem_Read  stm32f1xx_hal_i2c.o
-    0x08001918   0x08001918   0x00000130   Code   RO         2275    i.HAL_I2C_Mem_Write  stm32f1xx_hal_i2c.o
-    0x08001a48   0x08001a48   0x00000060   Code   RO          828    i.HAL_I2C_MspInit   i2c.o
-    0x08001aa8   0x08001aa8   0x00000010   Code   RO         1285    i.HAL_IncTick       stm32f1xx_hal.o
-    0x08001ab8   0x08001ab8   0x00000024   Code   RO         1286    i.HAL_Init          stm32f1xx_hal.o
-    0x08001adc   0x08001adc   0x00000040   Code   RO         1287    i.HAL_InitTick      stm32f1xx_hal.o
-    0x08001b1c   0x08001b1c   0x0000003c   Code   RO         1148    i.HAL_MspInit       stm32f1xx_hal_msp.o
-    0x08001b58   0x08001b58   0x0000001a   Code   RO         1743    i.HAL_NVIC_EnableIRQ  stm32f1xx_hal_cortex.o
+    0x080010e8   0x080010e8   0x0000000c   Code   RO          898    i.HAL_GetTick       stm32f1xx_hal.o
+    0x080010f4   0x080010f4   0x00000004   Code   RO         1870    i.HAL_I2C_GetError  stm32f1xx_hal_i2c.o
+    0x080010f8   0x080010f8   0x00000174   Code   RO         1873    i.HAL_I2C_Init      stm32f1xx_hal_i2c.o
+    0x0800126c   0x0800126c   0x0000015c   Code   RO         1874    i.HAL_I2C_IsDeviceReady  stm32f1xx_hal_i2c.o
+    0x080013c8   0x080013c8   0x0000020c   Code   RO         1879    i.HAL_I2C_Master_Receive  stm32f1xx_hal_i2c.o
+    0x080015d4   0x080015d4   0x0000012c   Code   RO         1886    i.HAL_I2C_Master_Transmit  stm32f1xx_hal_i2c.o
+    0x08001700   0x08001700   0x00000218   Code   RO         1891    i.HAL_I2C_Mem_Read  stm32f1xx_hal_i2c.o
+    0x08001918   0x08001918   0x00000130   Code   RO         1894    i.HAL_I2C_Mem_Write  stm32f1xx_hal_i2c.o
+    0x08001a48   0x08001a48   0x00000060   Code   RO          447    i.HAL_I2C_MspInit   i2c.o
+    0x08001aa8   0x08001aa8   0x00000010   Code   RO          904    i.HAL_IncTick       stm32f1xx_hal.o
+    0x08001ab8   0x08001ab8   0x00000024   Code   RO          905    i.HAL_Init          stm32f1xx_hal.o
+    0x08001adc   0x08001adc   0x00000040   Code   RO          906    i.HAL_InitTick      stm32f1xx_hal.o
+    0x08001b1c   0x08001b1c   0x0000003c   Code   RO          767    i.HAL_MspInit       stm32f1xx_hal_msp.o
+    0x08001b58   0x08001b58   0x0000001a   Code   RO         1362    i.HAL_NVIC_EnableIRQ  stm32f1xx_hal_cortex.o
     0x08001b72   0x08001b72   0x00000002   PAD
-    0x08001b74   0x08001b74   0x00000040   Code   RO         1749    i.HAL_NVIC_SetPriority  stm32f1xx_hal_cortex.o
-    0x08001bb4   0x08001bb4   0x00000024   Code   RO         1750    i.HAL_NVIC_SetPriorityGrouping  stm32f1xx_hal_cortex.o
-    0x08001bd8   0x08001bd8   0x00000138   Code   RO         1443    i.HAL_RCC_ClockConfig  stm32f1xx_hal_rcc.o
-    0x08001d10   0x08001d10   0x00000020   Code   RO         1450    i.HAL_RCC_GetPCLK1Freq  stm32f1xx_hal_rcc.o
-    0x08001d30   0x08001d30   0x00000020   Code   RO         1451    i.HAL_RCC_GetPCLK2Freq  stm32f1xx_hal_rcc.o
-    0x08001d50   0x08001d50   0x0000006c   Code   RO         1452    i.HAL_RCC_GetSysClockFreq  stm32f1xx_hal_rcc.o
-    0x08001dbc   0x08001dbc   0x00000318   Code   RO         1455    i.HAL_RCC_OscConfig  stm32f1xx_hal_rcc.o
-    0x080020d4   0x080020d4   0x0000007c   Code   RO         2676    i.HAL_SPI_Init      stm32f1xx_hal_spi.o
-    0x08002150   0x08002150   0x000000b8   Code   RO          870    i.HAL_SPI_MspInit   spi.o
-    0x08002208   0x08002208   0x0000014a   Code   RO         2679    i.HAL_SPI_Receive   stm32f1xx_hal_spi.o
-    0x08002352   0x08002352   0x0000015e   Code   RO         2684    i.HAL_SPI_Transmit  stm32f1xx_hal_spi.o
-    0x080024b0   0x080024b0   0x000001da   Code   RO         2685    i.HAL_SPI_TransmitReceive  stm32f1xx_hal_spi.o
-    0x0800268a   0x0800268a   0x00000028   Code   RO         1754    i.HAL_SYSTICK_Config  stm32f1xx_hal_cortex.o
-    0x080026b2   0x080026b2   0x00000002   Code   RO         3664    i.HAL_TIMEx_BreakCallback  stm32f1xx_hal_tim_ex.o
-    0x080026b4   0x080026b4   0x00000002   Code   RO         3665    i.HAL_TIMEx_CommutCallback  stm32f1xx_hal_tim_ex.o
-    0x080026b6   0x080026b6   0x00000042   Code   RO         3682    i.HAL_TIMEx_MasterConfigSynchronization  stm32f1xx_hal_tim_ex.o
-    0x080026f8   0x080026f8   0x00000036   Code   RO         2989    i.HAL_TIM_Base_Init  stm32f1xx_hal_tim.o
+    0x08001b74   0x08001b74   0x00000040   Code   RO         1368    i.HAL_NVIC_SetPriority  stm32f1xx_hal_cortex.o
+    0x08001bb4   0x08001bb4   0x00000024   Code   RO         1369    i.HAL_NVIC_SetPriorityGrouping  stm32f1xx_hal_cortex.o
+    0x08001bd8   0x08001bd8   0x00000138   Code   RO         1062    i.HAL_RCC_ClockConfig  stm32f1xx_hal_rcc.o
+    0x08001d10   0x08001d10   0x00000020   Code   RO         1069    i.HAL_RCC_GetPCLK1Freq  stm32f1xx_hal_rcc.o
+    0x08001d30   0x08001d30   0x00000020   Code   RO         1070    i.HAL_RCC_GetPCLK2Freq  stm32f1xx_hal_rcc.o
+    0x08001d50   0x08001d50   0x0000006c   Code   RO         1071    i.HAL_RCC_GetSysClockFreq  stm32f1xx_hal_rcc.o
+    0x08001dbc   0x08001dbc   0x00000318   Code   RO         1074    i.HAL_RCC_OscConfig  stm32f1xx_hal_rcc.o
+    0x080020d4   0x080020d4   0x0000007c   Code   RO         2295    i.HAL_SPI_Init      stm32f1xx_hal_spi.o
+    0x08002150   0x08002150   0x000000b8   Code   RO          489    i.HAL_SPI_MspInit   spi.o
+    0x08002208   0x08002208   0x0000014a   Code   RO         2298    i.HAL_SPI_Receive   stm32f1xx_hal_spi.o
+    0x08002352   0x08002352   0x0000015e   Code   RO         2303    i.HAL_SPI_Transmit  stm32f1xx_hal_spi.o
+    0x080024b0   0x080024b0   0x000001da   Code   RO         2304    i.HAL_SPI_TransmitReceive  stm32f1xx_hal_spi.o
+    0x0800268a   0x0800268a   0x00000028   Code   RO         1373    i.HAL_SYSTICK_Config  stm32f1xx_hal_cortex.o
+    0x080026b2   0x080026b2   0x00000002   Code   RO         3283    i.HAL_TIMEx_BreakCallback  stm32f1xx_hal_tim_ex.o
+    0x080026b4   0x080026b4   0x00000002   Code   RO         3284    i.HAL_TIMEx_CommutCallback  stm32f1xx_hal_tim_ex.o
+    0x080026b6   0x080026b6   0x00000042   Code   RO         3301    i.HAL_TIMEx_MasterConfigSynchronization  stm32f1xx_hal_tim_ex.o
+    0x080026f8   0x080026f8   0x00000036   Code   RO         2608    i.HAL_TIM_Base_Init  stm32f1xx_hal_tim.o
     0x0800272e   0x0800272e   0x00000002   PAD
-    0x08002730   0x08002730   0x0000003c   Code   RO          945    i.HAL_TIM_Base_MspInit  tim.o
-    0x0800276c   0x0800276c   0x00000022   Code   RO         2994    i.HAL_TIM_Base_Start_IT  stm32f1xx_hal_tim.o
-    0x0800278e   0x0800278e   0x000000d6   Code   RO         2998    i.HAL_TIM_ConfigClockSource  stm32f1xx_hal_tim.o
-    0x08002864   0x08002864   0x00000002   Code   RO         3018    i.HAL_TIM_IC_CaptureCallback  stm32f1xx_hal_tim.o
-    0x08002866   0x08002866   0x00000166   Code   RO         3032    i.HAL_TIM_IRQHandler  stm32f1xx_hal_tim.o
-    0x080029cc   0x080029cc   0x00000002   Code   RO         3035    i.HAL_TIM_OC_DelayElapsedCallback  stm32f1xx_hal_tim.o
-    0x080029ce   0x080029ce   0x00000002   Code   RO         3062    i.HAL_TIM_PWM_PulseFinishedCallback  stm32f1xx_hal_tim.o
-    0x080029d0   0x080029d0   0x00000002   Code   RO         3070    i.HAL_TIM_PeriodElapsedCallback  stm32f1xx_hal_tim.o
-    0x080029d2   0x080029d2   0x00000002   Code   RO         3075    i.HAL_TIM_TriggerCallback  stm32f1xx_hal_tim.o
-    0x080029d4   0x080029d4   0x00000002   Code   RO         3936    i.HAL_UART_ErrorCallback  stm32f1xx_hal_uart.o
+    0x08002730   0x08002730   0x0000003c   Code   RO          564    i.HAL_TIM_Base_MspInit  tim.o
+    0x0800276c   0x0800276c   0x00000022   Code   RO         2613    i.HAL_TIM_Base_Start_IT  stm32f1xx_hal_tim.o
+    0x0800278e   0x0800278e   0x000000d6   Code   RO         2617    i.HAL_TIM_ConfigClockSource  stm32f1xx_hal_tim.o
+    0x08002864   0x08002864   0x00000002   Code   RO         2637    i.HAL_TIM_IC_CaptureCallback  stm32f1xx_hal_tim.o
+    0x08002866   0x08002866   0x00000166   Code   RO         2651    i.HAL_TIM_IRQHandler  stm32f1xx_hal_tim.o
+    0x080029cc   0x080029cc   0x00000002   Code   RO         2654    i.HAL_TIM_OC_DelayElapsedCallback  stm32f1xx_hal_tim.o
+    0x080029ce   0x080029ce   0x00000002   Code   RO         2681    i.HAL_TIM_PWM_PulseFinishedCallback  stm32f1xx_hal_tim.o
+    0x080029d0   0x080029d0   0x00000002   Code   RO         2689    i.HAL_TIM_PeriodElapsedCallback  stm32f1xx_hal_tim.o
+    0x080029d2   0x080029d2   0x00000002   Code   RO         2694    i.HAL_TIM_TriggerCallback  stm32f1xx_hal_tim.o
+    0x080029d4   0x080029d4   0x00000002   Code   RO         3555    i.HAL_UART_ErrorCallback  stm32f1xx_hal_uart.o
     0x080029d6   0x080029d6   0x00000002   PAD
-    0x080029d8   0x080029d8   0x00000110   Code   RO         3939    i.HAL_UART_IRQHandler  stm32f1xx_hal_uart.o
-    0x08002ae8   0x08002ae8   0x00000062   Code   RO         3940    i.HAL_UART_Init     stm32f1xx_hal_uart.o
+    0x080029d8   0x080029d8   0x00000110   Code   RO         3558    i.HAL_UART_IRQHandler  stm32f1xx_hal_uart.o
+    0x08002ae8   0x08002ae8   0x00000062   Code   RO         3559    i.HAL_UART_Init     stm32f1xx_hal_uart.o
     0x08002b4a   0x08002b4a   0x00000002   PAD
-    0x08002b4c   0x08002b4c   0x00000080   Code   RO          987    i.HAL_UART_MspInit  usart.o
-    0x08002bcc   0x08002bcc   0x00000052   Code   RO         3945    i.HAL_UART_Receive_IT  stm32f1xx_hal_uart.o
+    0x08002b4c   0x08002b4c   0x00000080   Code   RO          606    i.HAL_UART_MspInit  usart.o
+    0x08002bcc   0x08002bcc   0x00000052   Code   RO         3564    i.HAL_UART_Receive_IT  stm32f1xx_hal_uart.o
     0x08002c1e   0x08002c1e   0x00000002   PAD
-    0x08002c20   0x08002c20   0x000000a0   Code   RO          988    i.HAL_UART_RxCpltCallback  usart.o
-    0x08002cc0   0x08002cc0   0x000000ba   Code   RO         3948    i.HAL_UART_Transmit  stm32f1xx_hal_uart.o
-    0x08002d7a   0x08002d7a   0x00000002   Code   RO         3951    i.HAL_UART_TxCpltCallback  stm32f1xx_hal_uart.o
-    0x08002d7c   0x08002d7c   0x00000002   Code   RO         1043    i.HardFault_Handler  stm32f1xx_it.o
-    0x08002d7e   0x08002d7e   0x0000002e   Code   RO         2296    i.I2C_IsAcknowledgeFailed  stm32f1xx_hal_i2c.o
-    0x08002dac   0x08002dac   0x000000d4   Code   RO         2299    i.I2C_MasterRequestRead  stm32f1xx_hal_i2c.o
-    0x08002e80   0x08002e80   0x00000088   Code   RO         2300    i.I2C_MasterRequestWrite  stm32f1xx_hal_i2c.o
-    0x08002f08   0x08002f08   0x000000e6   Code   RO         2305    i.I2C_RequestMemoryRead  stm32f1xx_hal_i2c.o
+    0x08002c20   0x08002c20   0x000000a0   Code   RO          607    i.HAL_UART_RxCpltCallback  usart.o
+    0x08002cc0   0x08002cc0   0x000000ba   Code   RO         3567    i.HAL_UART_Transmit  stm32f1xx_hal_uart.o
+    0x08002d7a   0x08002d7a   0x00000002   Code   RO         3570    i.HAL_UART_TxCpltCallback  stm32f1xx_hal_uart.o
+    0x08002d7c   0x08002d7c   0x00000002   Code   RO          662    i.HardFault_Handler  stm32f1xx_it.o
+    0x08002d7e   0x08002d7e   0x0000002e   Code   RO         1915    i.I2C_IsAcknowledgeFailed  stm32f1xx_hal_i2c.o
+    0x08002dac   0x08002dac   0x000000d4   Code   RO         1918    i.I2C_MasterRequestRead  stm32f1xx_hal_i2c.o
+    0x08002e80   0x08002e80   0x00000088   Code   RO         1919    i.I2C_MasterRequestWrite  stm32f1xx_hal_i2c.o
+    0x08002f08   0x08002f08   0x000000e6   Code   RO         1924    i.I2C_RequestMemoryRead  stm32f1xx_hal_i2c.o
     0x08002fee   0x08002fee   0x00000002   PAD
-    0x08002ff0   0x08002ff0   0x00000094   Code   RO         2306    i.I2C_RequestMemoryWrite  stm32f1xx_hal_i2c.o
-    0x08003084   0x08003084   0x0000004c   Code   RO         2309    i.I2C_WaitOnBTFFlagUntilTimeout  stm32f1xx_hal_i2c.o
-    0x080030d0   0x080030d0   0x00000068   Code   RO         2310    i.I2C_WaitOnFlagUntilTimeout  stm32f1xx_hal_i2c.o
-    0x08003138   0x08003138   0x00000098   Code   RO         2311    i.I2C_WaitOnMasterAddressFlagUntilTimeout  stm32f1xx_hal_i2c.o
-    0x080031d0   0x080031d0   0x0000006a   Code   RO         2312    i.I2C_WaitOnRXNEFlagUntilTimeout  stm32f1xx_hal_i2c.o
-    0x0800323a   0x0800323a   0x0000004c   Code   RO         2313    i.I2C_WaitOnTXEFlagUntilTimeout  stm32f1xx_hal_i2c.o
+    0x08002ff0   0x08002ff0   0x00000094   Code   RO         1925    i.I2C_RequestMemoryWrite  stm32f1xx_hal_i2c.o
+    0x08003084   0x08003084   0x0000004c   Code   RO         1928    i.I2C_WaitOnBTFFlagUntilTimeout  stm32f1xx_hal_i2c.o
+    0x080030d0   0x080030d0   0x00000068   Code   RO         1929    i.I2C_WaitOnFlagUntilTimeout  stm32f1xx_hal_i2c.o
+    0x08003138   0x08003138   0x00000098   Code   RO         1930    i.I2C_WaitOnMasterAddressFlagUntilTimeout  stm32f1xx_hal_i2c.o
+    0x080031d0   0x080031d0   0x0000006a   Code   RO         1931    i.I2C_WaitOnRXNEFlagUntilTimeout  stm32f1xx_hal_i2c.o
+    0x0800323a   0x0800323a   0x0000004c   Code   RO         1932    i.I2C_WaitOnTXEFlagUntilTimeout  stm32f1xx_hal_i2c.o
     0x08003286   0x08003286   0x00000002   PAD
     0x08003288   0x08003288   0x00000024   Code   RO         4277    i.ITM_SendChar      retarget_io.o
-    0x080032ac   0x080032ac   0x00000024   Code   RO          787    i.MX_CRC_Init       crc.o
-    0x080032d0   0x080032d0   0x00000164   Code   RO          761    i.MX_GPIO_Init      gpio.o
-    0x08003434   0x08003434   0x00000040   Code   RO          829    i.MX_I2C2_Init      i2c.o
-    0x08003474   0x08003474   0x00000048   Code   RO          871    i.MX_SPI1_Init      spi.o
-    0x080034bc   0x080034bc   0x00000044   Code   RO          872    i.MX_SPI2_Init      spi.o
-    0x08003500   0x08003500   0x00000068   Code   RO          946    i.MX_TIM1_Init      tim.o
-    0x08003568   0x08003568   0x00000038   Code   RO          989    i.MX_USART1_UART_Init  usart.o
-    0x080035a0   0x080035a0   0x00000002   Code   RO         1044    i.MemManage_Handler  stm32f1xx_it.o
-    0x080035a2   0x080035a2   0x00000002   Code   RO         1045    i.NMI_Handler       stm32f1xx_it.o
-    0x080035a4   0x080035a4   0x00000040   Code   RO          251    i.NRF24_FlushRX     nrf24.o
-    0x080035e4   0x080035e4   0x00000040   Code   RO          252    i.NRF24_FlushTX     nrf24.o
-    0x08003624   0x08003624   0x000002a4   Code   RO          253    i.NRF24_Get_State   nrf24.o
-    0x080038c8   0x080038c8   0x000003e8   Code   RO          255    i.NRF24_Init        nrf24.o
-    0x08003cb0   0x08003cb0   0x0000004c   Code   RO          256    i.NRF24_RX_Mode     nrf24.o
-    0x08003cfc   0x08003cfc   0x00000060   Code   RO          257    i.NRF24_ReadReg     nrf24.o
-    0x08003d5c   0x08003d5c   0x00000044   Code   RO          258    i.NRF24_Read_Buf    nrf24.o
-    0x08003da0   0x08003da0   0x00000050   Code   RO          259    i.NRF24_Send        nrf24.o
-    0x08003df0   0x08003df0   0x00000034   Code   RO          260    i.NRF24_TX_Mode     nrf24.o
-    0x08003e24   0x08003e24   0x00000054   Code   RO          261    i.NRF24_ToggleFeatures  nrf24.o
-    0x08003e78   0x08003e78   0x00000068   Code   RO          262    i.NRF24_Transmit    nrf24.o
-    0x08003ee0   0x08003ee0   0x0000004c   Code   RO          263    i.NRF24_WriteReg    nrf24.o
-    0x08003f2c   0x08003f2c   0x00000054   Code   RO          264    i.NRF24_Write_Buf   nrf24.o
-    0x08003f80   0x08003f80   0x00000068   Code   RO          203    i.PCF8574_Init      io_expander.o
-    0x08003fe8   0x08003fe8   0x0000006c   Code   RO          204    i.PCF8574_ReadReg   io_expander.o
-    0x08004054   0x08004054   0x00000002   Code   RO         1046    i.PendSV_Handler    stm32f1xx_it.o
+    0x080032ac   0x080032ac   0x00000024   Code   RO          406    i.MX_CRC_Init       crc.o
+    0x080032d0   0x080032d0   0x00000164   Code   RO          380    i.MX_GPIO_Init      gpio.o
+    0x08003434   0x08003434   0x00000040   Code   RO          448    i.MX_I2C2_Init      i2c.o
+    0x08003474   0x08003474   0x00000048   Code   RO          490    i.MX_SPI1_Init      spi.o
+    0x080034bc   0x080034bc   0x00000044   Code   RO          491    i.MX_SPI2_Init      spi.o
+    0x08003500   0x08003500   0x00000068   Code   RO          565    i.MX_TIM1_Init      tim.o
+    0x08003568   0x08003568   0x00000038   Code   RO          608    i.MX_USART1_UART_Init  usart.o
+    0x080035a0   0x080035a0   0x00000002   Code   RO          663    i.MemManage_Handler  stm32f1xx_it.o
+    0x080035a2   0x080035a2   0x00000002   Code   RO          664    i.NMI_Handler       stm32f1xx_it.o
+    0x080035a4   0x080035a4   0x00000040   Code   RO         4035    i.NRF24_FlushRX     nrf24_1.o
+    0x080035e4   0x080035e4   0x00000040   Code   RO         4036    i.NRF24_FlushTX     nrf24_1.o
+    0x08003624   0x08003624   0x000002a4   Code   RO         4037    i.NRF24_Get_State   nrf24_1.o
+    0x080038c8   0x080038c8   0x000003e8   Code   RO         4039    i.NRF24_Init        nrf24_1.o
+    0x08003cb0   0x08003cb0   0x0000004c   Code   RO         4040    i.NRF24_RX_Mode     nrf24_1.o
+    0x08003cfc   0x08003cfc   0x00000060   Code   RO         4041    i.NRF24_ReadReg     nrf24_1.o
+    0x08003d5c   0x08003d5c   0x00000044   Code   RO         4042    i.NRF24_Read_Buf    nrf24_1.o
+    0x08003da0   0x08003da0   0x00000050   Code   RO         4043    i.NRF24_Send        nrf24_1.o
+    0x08003df0   0x08003df0   0x00000034   Code   RO         4044    i.NRF24_TX_Mode     nrf24_1.o
+    0x08003e24   0x08003e24   0x00000054   Code   RO         4045    i.NRF24_ToggleFeatures  nrf24_1.o
+    0x08003e78   0x08003e78   0x00000068   Code   RO         4046    i.NRF24_Transmit    nrf24_1.o
+    0x08003ee0   0x08003ee0   0x0000004c   Code   RO         4047    i.NRF24_WriteReg    nrf24_1.o
+    0x08003f2c   0x08003f2c   0x00000054   Code   RO         4048    i.NRF24_Write_Buf   nrf24_1.o
+    0x08003f80   0x08003f80   0x00000068   Code   RO         4150    i.PCF8574_Init      io_expander_1.o
+    0x08003fe8   0x08003fe8   0x0000006c   Code   RO         4151    i.PCF8574_ReadReg   io_expander_1.o
+    0x08004054   0x08004054   0x00000002   Code   RO          665    i.PendSV_Handler    stm32f1xx_it.o
     0x08004056   0x08004056   0x00000002   PAD
-    0x08004058   0x08004058   0x000000d0   Code   RO          643    i.PrintDecSevSeg    7seg.o
-    0x08004128   0x08004128   0x0000005c   Code   RO         2713    i.SPI_EndRxTransaction  stm32f1xx_hal_spi.o
-    0x08004184   0x08004184   0x00000020   Code   RO         2714    i.SPI_EndRxTxTransaction  stm32f1xx_hal_spi.o
-    0x080041a4   0x080041a4   0x00000094   Code   RO         2719    i.SPI_WaitFlagStateUntilTimeout  stm32f1xx_hal_spi.o
-    0x08004238   0x08004238   0x00000002   Code   RO         1047    i.SVC_Handler       stm32f1xx_it.o
+    0x08004058   0x08004058   0x000000d0   Code   RO         3898    i.PrintDecSevSeg    7seg_1.o
+    0x08004128   0x08004128   0x0000005c   Code   RO         2332    i.SPI_EndRxTransaction  stm32f1xx_hal_spi.o
+    0x08004184   0x08004184   0x00000020   Code   RO         2333    i.SPI_EndRxTxTransaction  stm32f1xx_hal_spi.o
+    0x080041a4   0x080041a4   0x00000094   Code   RO         2338    i.SPI_WaitFlagStateUntilTimeout  stm32f1xx_hal_spi.o
+    0x08004238   0x08004238   0x00000002   Code   RO          666    i.SVC_Handler       stm32f1xx_it.o
     0x0800423a   0x0800423a   0x00000002   PAD
-    0x0800423c   0x0800423c   0x00000158   Code   RO          534    i.SetTemp           system.o
-    0x08004394   0x08004394   0x0000009c   Code   RO          644    i.SevSegInit        7seg.o
-    0x08004430   0x08004430   0x00000308   Code   RO          535    i.SysInit           system.o
-    0x08004738   0x08004738   0x00000004   Code   RO         1048    i.SysTick_Handler   stm32f1xx_it.o
-    0x0800473c   0x0800473c   0x0000004e   Code   RO          723    i.SystemClock_Config  main.o
-    0x0800478a   0x0800478a   0x00000002   PAD
-    0x0800478c   0x0800478c   0x00000048   Code   RO         4242    i.SystemInit        system_stm32f1xx.o
-    0x080047d4   0x080047d4   0x00000368   Code   RO          536    i.SystemTask        system.o
-    0x08004b3c   0x08004b3c   0x0000013c   Code   RO         1049    i.TIM1_UP_IRQHandler  stm32f1xx_it.o
-    0x08004c78   0x08004c78   0x0000006c   Code   RO         3077    i.TIM_Base_SetConfig  stm32f1xx_hal_tim.o
-    0x08004ce4   0x08004ce4   0x00000014   Code   RO         3088    i.TIM_ETR_SetConfig  stm32f1xx_hal_tim.o
-    0x08004cf8   0x08004cf8   0x00000010   Code   RO         3089    i.TIM_ITRx_SetConfig  stm32f1xx_hal_tim.o
-    0x08004d08   0x08004d08   0x00000022   Code   RO         3095    i.TIM_TI1_ConfigInputStage  stm32f1xx_hal_tim.o
-    0x08004d2a   0x08004d2a   0x00000024   Code   RO         3097    i.TIM_TI2_ConfigInputStage  stm32f1xx_hal_tim.o
-    0x08004d4e   0x08004d4e   0x00000010   Code   RO         3953    i.UART_DMAAbortOnError  stm32f1xx_hal_uart.o
-    0x08004d5e   0x08004d5e   0x0000001c   Code   RO         3963    i.UART_EndRxTransfer  stm32f1xx_hal_uart.o
-    0x08004d7a   0x08004d7a   0x00000096   Code   RO         3965    i.UART_Receive_IT   stm32f1xx_hal_uart.o
-    0x08004e10   0x08004e10   0x000000b8   Code   RO         3966    i.UART_SetConfig    stm32f1xx_hal_uart.o
-    0x08004ec8   0x08004ec8   0x00000062   Code   RO         3967    i.UART_Transmit_IT  stm32f1xx_hal_uart.o
-    0x08004f2a   0x08004f2a   0x00000062   Code   RO         3968    i.UART_WaitOnFlagUntilTimeout  stm32f1xx_hal_uart.o
-    0x08004f8c   0x08004f8c   0x0000000c   Code   RO         1050    i.USART1_IRQHandler  stm32f1xx_it.o
-    0x08004f98   0x08004f98   0x00000002   Code   RO         1051    i.UsageFault_Handler  stm32f1xx_it.o
-    0x08004f9a   0x08004f9a   0x00000002   PAD
-    0x08004f9c   0x08004f9c   0x000002d8   Code   RO          375    i.WL_Get_Packet     wireless_ctrl.o
-    0x08005274   0x08005274   0x00000038   Code   RO          376    i.WL_Get_Var        wireless_ctrl.o
-    0x080052ac   0x080052ac   0x00000208   Code   RO          377    i.WL_Handler        wireless_ctrl.o
-    0x080054b4   0x080054b4   0x00000100   Code   RO          378    i.WL_Packet_Handler  wireless_ctrl.o
-    0x080055b4   0x080055b4   0x000002b4   Code   RO          379    i.WL_Send_Packet    wireless_ctrl.o
-    0x08005868   0x08005868   0x00000010   Code   RO          380    i.WL_Set_Var        wireless_ctrl.o
-    0x08005878   0x08005878   0x00000020   Code   RO         4601    i.__0printf         mc_w.l(printfa.o)
-    0x08005898   0x08005898   0x00000028   Code   RO         4603    i.__0sprintf        mc_w.l(printfa.o)
-    0x080058c0   0x080058c0   0x00000020   Code   RO         1756    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
-    0x080058e0   0x080058e0   0x00000008   Code   RO         4707    i.__aeabi_errno_addr  mc_w.l(errno.o)
-    0x080058e8   0x080058e8   0x0000000e   Code   RO         4739    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080058f6   0x080058f6   0x00000002   Code   RO         4740    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080058f8   0x080058f8   0x0000000e   Code   RO         4741    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x08005906   0x08005906   0x00000002   PAD
-    0x08005908   0x08005908   0x00000184   Code   RO         4608    i._fp_digits        mc_w.l(printfa.o)
-    0x08005a8c   0x08005a8c   0x000006dc   Code   RO         4609    i._printf_core      mc_w.l(printfa.o)
-    0x08006168   0x08006168   0x00000024   Code   RO         4610    i._printf_post_padding  mc_w.l(printfa.o)
-    0x0800618c   0x0800618c   0x0000002e   Code   RO         4611    i._printf_pre_padding  mc_w.l(printfa.o)
-    0x080061ba   0x080061ba   0x0000000a   Code   RO         4613    i._sputc            mc_w.l(printfa.o)
-    0x080061c4   0x080061c4   0x000000b4   Code   RO          381    i.add_packet        wireless_ctrl.o
-    0x08006278   0x08006278   0x00000044   Code   RO          645    i.decode_7SEG       7seg.o
-    0x080062bc   0x080062bc   0x00000018   Code   RO           14    i.ds18b20_Convert_int8  ds18b20.o
-    0x080062d4   0x080062d4   0x00000024   Code   RO           15    i.ds18b20_GetTemp   ds18b20.o
-    0x080062f8   0x080062f8   0x0000003a   Code   RO           16    i.ds18b20_Init      ds18b20.o
-    0x08006332   0x08006332   0x0000001c   Code   RO           17    i.ds18b20_MeasureTemperCmd  ds18b20.o
-    0x0800634e   0x0800634e   0x00000002   PAD
-    0x08006350   0x08006350   0x00000038   Code   RO           18    i.ds18b20_ReadBit   ds18b20.o
-    0x08006388   0x08006388   0x0000001c   Code   RO           19    i.ds18b20_ReadByte  ds18b20.o
-    0x080063a4   0x080063a4   0x00000034   Code   RO           20    i.ds18b20_ReadStratcpad  ds18b20.o
-    0x080063d8   0x080063d8   0x00000040   Code   RO           21    i.ds18b20_Reset     ds18b20.o
-    0x08006418   0x08006418   0x00000038   Code   RO           22    i.ds18b20_WriteBit  ds18b20.o
-    0x08006450   0x08006450   0x00000022   Code   RO           23    i.ds18b20_WriteByte  ds18b20.o
-    0x08006472   0x08006472   0x00000002   PAD
-    0x08006474   0x08006474   0x00000014   Code   RO         4282    i.fputc             retarget_io.o
-    0x08006488   0x08006488   0x00000050   Code   RO         4629    i.free              mc_w.l(malloc.o)
-    0x080064d8   0x080064d8   0x00000028   Code   RO          382    i.get_packet        wireless_ctrl.o
-    0x08006500   0x08006500   0x000000c8   Code   RO          724    i.main              main.o
-    0x080065c8   0x080065c8   0x0000006c   Code   RO         4630    i.malloc            mc_w.l(malloc.o)
-    0x08006634   0x08006634   0x000004c4   Code   RO          477    i.parseCommand      uart_cmd_parser.o
-    0x08006af8   0x08006af8   0x00000030   Code   RO           24    i.port_init         ds18b20.o
-    0x08006b28   0x08006b28   0x000000bc   Code   RO          383    i.remove_packet     wireless_ctrl.o
-    0x08006be4   0x08006be4   0x00000022   Code   RO          478    i.strtodec          uart_cmd_parser.o
-    0x08006c06   0x08006c06   0x00000002   PAD
-    0x08006c08   0x08006c08   0x00000074   Code   RO          646    i.trulala           7seg.o
-    0x08006c7c   0x08006c7c   0x00000060   Data   RO          480    .constdata          uart_cmd_parser.o
-    0x08006cdc   0x08006cdc   0x0000000d   Data   RO          647    .constdata          7seg.o
-    0x08006ce9   0x08006ce9   0x00000010   Data   RO         4243    .constdata          system_stm32f1xx.o
-    0x08006cf9   0x08006cf9   0x00000008   Data   RO         4244    .constdata          system_stm32f1xx.o
-    0x08006d01   0x08006d01   0x00000081   Data   RO         4678    .constdata          mc_w.l(ctype_o.o)
-    0x08006d82   0x08006d82   0x00000002   PAD
-    0x08006d84   0x08006d84   0x00000004   Data   RO         4679    .constdata          mc_w.l(ctype_o.o)
-    0x08006d88   0x08006d88   0x00000076   Data   RO          481    .conststring        uart_cmd_parser.o
-    0x08006dfe   0x08006dfe   0x00000002   PAD
-    0x08006e00   0x08006e00   0x00000020   Data   RO         4737    Region$$Table       anon$$obj.o
+    0x0800423c   0x0800423c   0x00000158   Code   RO          198    i.SetTemp           system.o
+    0x08004394   0x08004394   0x0000009c   Code   RO         3899    i.SevSegInit        7seg_1.o
+    0x08004430   0x08004430   0x00000344   Code   RO          199    i.SysInit           system.o
+    0x08004774   0x08004774   0x00000004   Code   RO          667    i.SysTick_Handler   stm32f1xx_it.o
+    0x08004778   0x08004778   0x0000004e   Code   RO          342    i.SystemClock_Config  main.o
+    0x080047c6   0x080047c6   0x00000002   PAD
+    0x080047c8   0x080047c8   0x00000048   Code   RO         3861    i.SystemInit        system_stm32f1xx.o
+    0x08004810   0x08004810   0x00000368   Code   RO          200    i.SystemTask        system.o
+    0x08004b78   0x08004b78   0x0000013c   Code   RO          668    i.TIM1_UP_IRQHandler  stm32f1xx_it.o
+    0x08004cb4   0x08004cb4   0x0000006c   Code   RO         2696    i.TIM_Base_SetConfig  stm32f1xx_hal_tim.o
+    0x08004d20   0x08004d20   0x00000014   Code   RO         2707    i.TIM_ETR_SetConfig  stm32f1xx_hal_tim.o
+    0x08004d34   0x08004d34   0x00000010   Code   RO         2708    i.TIM_ITRx_SetConfig  stm32f1xx_hal_tim.o
+    0x08004d44   0x08004d44   0x00000022   Code   RO         2714    i.TIM_TI1_ConfigInputStage  stm32f1xx_hal_tim.o
+    0x08004d66   0x08004d66   0x00000024   Code   RO         2716    i.TIM_TI2_ConfigInputStage  stm32f1xx_hal_tim.o
+    0x08004d8a   0x08004d8a   0x00000010   Code   RO         3572    i.UART_DMAAbortOnError  stm32f1xx_hal_uart.o
+    0x08004d9a   0x08004d9a   0x0000001c   Code   RO         3582    i.UART_EndRxTransfer  stm32f1xx_hal_uart.o
+    0x08004db6   0x08004db6   0x00000096   Code   RO         3584    i.UART_Receive_IT   stm32f1xx_hal_uart.o
+    0x08004e4c   0x08004e4c   0x000000b8   Code   RO         3585    i.UART_SetConfig    stm32f1xx_hal_uart.o
+    0x08004f04   0x08004f04   0x00000062   Code   RO         3586    i.UART_Transmit_IT  stm32f1xx_hal_uart.o
+    0x08004f66   0x08004f66   0x00000062   Code   RO         3587    i.UART_WaitOnFlagUntilTimeout  stm32f1xx_hal_uart.o
+    0x08004fc8   0x08004fc8   0x0000000c   Code   RO          669    i.USART1_IRQHandler  stm32f1xx_it.o
+    0x08004fd4   0x08004fd4   0x00000002   Code   RO          670    i.UsageFault_Handler  stm32f1xx_it.o
+    0x08004fd6   0x08004fd6   0x00000002   PAD
+    0x08004fd8   0x08004fd8   0x000002d8   Code   RO         3948    i.WL_Get_Packet     wireless_ctrl_1.o
+    0x080052b0   0x080052b0   0x00000038   Code   RO         3949    i.WL_Get_Var        wireless_ctrl_1.o
+    0x080052e8   0x080052e8   0x00000208   Code   RO         3950    i.WL_Handler        wireless_ctrl_1.o
+    0x080054f0   0x080054f0   0x00000100   Code   RO         3951    i.WL_Packet_Handler  wireless_ctrl_1.o
+    0x080055f0   0x080055f0   0x000002b4   Code   RO         3952    i.WL_Send_Packet    wireless_ctrl_1.o
+    0x080058a4   0x080058a4   0x00000010   Code   RO         3953    i.WL_Set_Var        wireless_ctrl_1.o
+    0x080058b4   0x080058b4   0x00000020   Code   RO         4601    i.__0printf         mc_w.l(printfa.o)
+    0x080058d4   0x080058d4   0x00000028   Code   RO         4603    i.__0sprintf        mc_w.l(printfa.o)
+    0x080058fc   0x080058fc   0x00000020   Code   RO         1375    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
+    0x0800591c   0x0800591c   0x00000008   Code   RO         4707    i.__aeabi_errno_addr  mc_w.l(errno.o)
+    0x08005924   0x08005924   0x0000000e   Code   RO         4739    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08005932   0x08005932   0x00000002   Code   RO         4740    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08005934   0x08005934   0x0000000e   Code   RO         4741    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08005942   0x08005942   0x00000002   PAD
+    0x08005944   0x08005944   0x00000184   Code   RO         4608    i._fp_digits        mc_w.l(printfa.o)
+    0x08005ac8   0x08005ac8   0x000006dc   Code   RO         4609    i._printf_core      mc_w.l(printfa.o)
+    0x080061a4   0x080061a4   0x00000024   Code   RO         4610    i._printf_post_padding  mc_w.l(printfa.o)
+    0x080061c8   0x080061c8   0x0000002e   Code   RO         4611    i._printf_pre_padding  mc_w.l(printfa.o)
+    0x080061f6   0x080061f6   0x0000000a   Code   RO         4613    i._sputc            mc_w.l(printfa.o)
+    0x08006200   0x08006200   0x000000b4   Code   RO         3954    i.add_packet        wireless_ctrl_1.o
+    0x080062b4   0x080062b4   0x00000044   Code   RO         3900    i.decode_7SEG       7seg_1.o
+    0x080062f8   0x080062f8   0x00000018   Code   RO         4187    i.ds18b20_Convert_int8  ds18b20_1.o
+    0x08006310   0x08006310   0x00000024   Code   RO         4188    i.ds18b20_GetTemp   ds18b20_1.o
+    0x08006334   0x08006334   0x0000003a   Code   RO         4189    i.ds18b20_Init      ds18b20_1.o
+    0x0800636e   0x0800636e   0x0000001c   Code   RO         4190    i.ds18b20_MeasureTemperCmd  ds18b20_1.o
+    0x0800638a   0x0800638a   0x00000002   PAD
+    0x0800638c   0x0800638c   0x00000038   Code   RO         4191    i.ds18b20_ReadBit   ds18b20_1.o
+    0x080063c4   0x080063c4   0x0000001c   Code   RO         4192    i.ds18b20_ReadByte  ds18b20_1.o
+    0x080063e0   0x080063e0   0x00000034   Code   RO         4193    i.ds18b20_ReadStratcpad  ds18b20_1.o
+    0x08006414   0x08006414   0x00000040   Code   RO         4194    i.ds18b20_Reset     ds18b20_1.o
+    0x08006454   0x08006454   0x00000038   Code   RO         4195    i.ds18b20_WriteBit  ds18b20_1.o
+    0x0800648c   0x0800648c   0x00000022   Code   RO         4196    i.ds18b20_WriteByte  ds18b20_1.o
+    0x080064ae   0x080064ae   0x00000002   PAD
+    0x080064b0   0x080064b0   0x00000014   Code   RO         4282    i.fputc             retarget_io.o
+    0x080064c4   0x080064c4   0x00000050   Code   RO         4629    i.free              mc_w.l(malloc.o)
+    0x08006514   0x08006514   0x00000028   Code   RO         3955    i.get_packet        wireless_ctrl_1.o
+    0x0800653c   0x0800653c   0x000000c8   Code   RO          343    i.main              main.o
+    0x08006604   0x08006604   0x0000006c   Code   RO         4630    i.malloc            mc_w.l(malloc.o)
+    0x08006670   0x08006670   0x000004c4   Code   RO           13    i.parseCommand      uart_cmd_parser.o
+    0x08006b34   0x08006b34   0x00000030   Code   RO         4197    i.port_init         ds18b20_1.o
+    0x08006b64   0x08006b64   0x000000bc   Code   RO         3956    i.remove_packet     wireless_ctrl_1.o
+    0x08006c20   0x08006c20   0x00000022   Code   RO           14    i.strtodec          uart_cmd_parser.o
+    0x08006c42   0x08006c42   0x00000002   PAD
+    0x08006c44   0x08006c44   0x00000074   Code   RO         3901    i.trulala           7seg_1.o
+    0x08006cb8   0x08006cb8   0x00000060   Data   RO           16    .constdata          uart_cmd_parser.o
+    0x08006d18   0x08006d18   0x00000010   Data   RO         3862    .constdata          system_stm32f1xx.o
+    0x08006d28   0x08006d28   0x00000008   Data   RO         3863    .constdata          system_stm32f1xx.o
+    0x08006d30   0x08006d30   0x0000000d   Data   RO         3902    .constdata          7seg_1.o
+    0x08006d3d   0x08006d3d   0x00000081   Data   RO         4678    .constdata          mc_w.l(ctype_o.o)
+    0x08006dbe   0x08006dbe   0x00000002   PAD
+    0x08006dc0   0x08006dc0   0x00000004   Data   RO         4679    .constdata          mc_w.l(ctype_o.o)
+    0x08006dc4   0x08006dc4   0x00000076   Data   RO           17    .conststring        uart_cmd_parser.o
+    0x08006e3a   0x08006e3a   0x00000002   PAD
+    0x08006e3c   0x08006e3c   0x00000020   Data   RO         4737    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08006e20, Size: 0x00001320, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08006e5c, Size: 0x00001320, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08006e20   0x00000009   Data   RW           26    .data               ds18b20.o
-    0x20000009   0x08006e29   0x00000001   Data   RW          205    .data               io_expander.o
-    0x2000000a   0x08006e2a   0x0000000b   Data   RW          267    .data               nrf24.o
-    0x20000015   0x08006e35   0x00000001   Data   RW          268    .data               nrf24.o
-    0x20000016   0x08006e36   0x00000002   PAD
-    0x20000018   0x08006e38   0x0000000c   Data   RW          385    .data               wireless_ctrl.o
-    0x20000024   0x08006e44   0x00000001   Data   RW          538    .data               system.o
-    0x20000025   0x08006e45   0x00000001   Data   RW          648    .data               7seg.o
-    0x20000026   0x08006e46   0x00000002   PAD
-    0x20000028   0x08006e48   0x00000008   Data   RW          788    .data               crc.o
-    0x20000030   0x08006e50   0x00000005   Data   RW          992    .data               usart.o
-    0x20000035   0x08006e55   0x00000003   PAD
-    0x20000038   0x08006e58   0x0000000c   Data   RW         1293    .data               stm32f1xx_hal.o
-    0x20000044   0x08006e64   0x00000004   Data   RW         4245    .data               system_stm32f1xx.o
-    0x20000048   0x08006e68   0x00000004   Data   RW         4354    .data               mc_w.l(stdout.o)
-    0x2000004c   0x08006e6c   0x00000004   Data   RW         4705    .data               mc_w.l(mvars.o)
-    0x20000050   0x08006e70   0x00000004   Data   RW         4706    .data               mc_w.l(mvars.o)
-    0x20000054   0x08006e74   0x00000004   Data   RW         4710    .data               mc_w.l(errno.o)
-    0x20000058        -       0x0000004d   Zero   RW          265    .bss                nrf24.o
-    0x200000a5   0x08006e78   0x00000003   PAD
-    0x200000a8        -       0x00000038   Zero   RW          384    .bss                wireless_ctrl.o
-    0x200000e0        -       0x0000001a   Zero   RW          537    .bss                system.o
-    0x200000fa        -       0x0000000e   Zero   RW          605    .bss                drive.o
-    0x20000108        -       0x00000054   Zero   RW          830    .bss                i2c.o
-    0x2000015c        -       0x000000b0   Zero   RW          873    .bss                spi.o
-    0x2000020c        -       0x00000040   Zero   RW          947    .bss                tim.o
-    0x2000024c        -       0x00000090   Zero   RW          990    .bss                usart.o
-    0x200002dc        -       0x00000040   Zero   RW          991    .bss                usart.o
-    0x2000031c   0x08006e78   0x00000004   PAD
+    0x20000000   0x08006e5c   0x00000001   Data   RW          202    .data               system.o
+    0x20000001   0x08006e5d   0x00000003   PAD
+    0x20000004   0x08006e60   0x00000008   Data   RW          407    .data               crc.o
+    0x2000000c   0x08006e68   0x00000005   Data   RW          611    .data               usart.o
+    0x20000011   0x08006e6d   0x00000003   PAD
+    0x20000014   0x08006e70   0x0000000c   Data   RW          912    .data               stm32f1xx_hal.o
+    0x20000020   0x08006e7c   0x00000004   Data   RW         3864    .data               system_stm32f1xx.o
+    0x20000024   0x08006e80   0x00000001   Data   RW         3903    .data               7seg_1.o
+    0x20000025   0x08006e81   0x00000003   PAD
+    0x20000028   0x08006e84   0x0000000c   Data   RW         3958    .data               wireless_ctrl_1.o
+    0x20000034   0x08006e90   0x0000000b   Data   RW         4051    .data               nrf24_1.o
+    0x2000003f   0x08006e9b   0x00000001   Data   RW         4052    .data               nrf24_1.o
+    0x20000040   0x08006e9c   0x00000001   Data   RW         4152    .data               io_expander_1.o
+    0x20000041   0x08006e9d   0x00000009   Data   RW         4199    .data               ds18b20_1.o
+    0x2000004a   0x08006ea6   0x00000002   PAD
+    0x2000004c   0x08006ea8   0x00000004   Data   RW         4354    .data               mc_w.l(stdout.o)
+    0x20000050   0x08006eac   0x00000004   Data   RW         4705    .data               mc_w.l(mvars.o)
+    0x20000054   0x08006eb0   0x00000004   Data   RW         4706    .data               mc_w.l(mvars.o)
+    0x20000058   0x08006eb4   0x00000004   Data   RW         4710    .data               mc_w.l(errno.o)
+    0x2000005c        -       0x0000001a   Zero   RW          201    .bss                system.o
+    0x20000076        -       0x0000000e   Zero   RW          273    .bss                drive.o
+    0x20000084        -       0x00000054   Zero   RW          449    .bss                i2c.o
+    0x200000d8        -       0x000000b0   Zero   RW          492    .bss                spi.o
+    0x20000188        -       0x00000040   Zero   RW          566    .bss                tim.o
+    0x200001c8        -       0x00000090   Zero   RW          609    .bss                usart.o
+    0x20000258        -       0x00000040   Zero   RW          610    .bss                usart.o
+    0x20000298        -       0x00000038   Zero   RW         3957    .bss                wireless_ctrl_1.o
+    0x200002d0        -       0x0000004d   Zero   RW         4049    .bss                nrf24_1.o
+    0x2000031d   0x08006eb8   0x00000003   PAD
     0x20000320        -       0x00000800   Zero   RW            2    HEAP                startup_stm32f103xb.o
     0x20000b20        -       0x00000800   Zero   RW            1    STACK               startup_stm32f103xb.o
 
@@ -2955,43 +2955,43 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       548         36         13          1          0       2794   7seg.o
-        76         18          0          8          0       1423   crc.o
-       532        166          0          0         14       2664   drive.o
-       524         42          0          9          0     442798   ds18b20.o
-       168         76          0          0          0       1385   eeprom.o
-       356         26          0          0          0       1003   gpio.o
-       160         28          0          0         84       1561   i2c.o
-       212        110          0          1          0       1256   io_expander.o
-       280         88          0          0          0       1984   main.o
-      2564        724          0         12         77       8767   nrf24.o
-        56          8          0          0          0       3327   retarget_io.o
-       324         40          0          0        176       2214   spi.o
-        36          8        236          0       4096        796   startup_stm32f103xb.o
-       164         28          0         12          0       5837   stm32f1xx_hal.o
-       198         14          0          0          0      28863   stm32f1xx_hal_cortex.o
-        80          0          0          0          0       1743   stm32f1xx_hal_crc.o
-       152          4          0          0          0       1087   stm32f1xx_hal_dma.o
-       744         66          0          0          0       6090   stm32f1xx_hal_gpio.o
-      3674         80          0          0          0      18472   stm32f1xx_hal_i2c.o
-        60          8          0          0          0        834   stm32f1xx_hal_msp.o
-      1276        100          0          0          0       5296   stm32f1xx_hal_rcc.o
-      1550          0          0          0          0       7906   stm32f1xx_hal_spi.o
-       884         14          0          0          0      10237   stm32f1xx_hal_tim.o
-        70          0          0          0          0       2369   stm32f1xx_hal_tim_ex.o
-      1216         12          0          0          0       9275   stm32f1xx_hal_uart.o
-       644        160          0          0          0       6753   stm32f1xx_it.o
-      2116        446          0          1         26       6275   system.o
-        72         16         24          4          0       1139   system_stm32f1xx.o
-       164         18          0          0         64       1590   tim.o
-      1254        534        214          0          0       2546   uart_cmd_parser.o
-       344         36          0          5        208       2583   usart.o
-      2676       1032          0         12         56       8564   wireless_ctrl.o
+       548         36         13          1          0       2802   7seg_1.o
+        76         18          0          8          0       1487   crc.o
+       532        166          0          0         14       2728   drive.o
+       524         42          0          9          0       6766   ds18b20_1.o
+       168         76          0          0          0       1433   eeprom.o
+       356         26          0          0          0       1035   gpio.o
+       160         28          0          0         84       1625   i2c.o
+       212        110          0          1          0       1252   io_expander_1.o
+       280         88          0          0          0       2048   main.o
+      2564        724          0         12         77       8727   nrf24_1.o
+        56          8          0          0          0       3463   retarget_io.o
+       324         40          0          0        176       2294   spi.o
+        36          8        236          0       4096        812   startup_stm32f103xb.o
+       164         28          0         12          0       5965   stm32f1xx_hal.o
+       198         14          0          0          0      28959   stm32f1xx_hal_cortex.o
+        80          0          0          0          0       1791   stm32f1xx_hal_crc.o
+       152          4          0          0          0       1119   stm32f1xx_hal_dma.o
+       744         66          0          0          0       6218   stm32f1xx_hal_gpio.o
+      3674         80          0          0          0      18760   stm32f1xx_hal_i2c.o
+        60          8          0          0          0        866   stm32f1xx_hal_msp.o
+      1276        100          0          0          0       5392   stm32f1xx_hal_rcc.o
+      1550          0          0          0          0       8034   stm32f1xx_hal_spi.o
+       884         14          0          0          0      10477   stm32f1xx_hal_tim.o
+        70          0          0          0          0       2433   stm32f1xx_hal_tim_ex.o
+      1216         12          0          0          0       9483   stm32f1xx_hal_uart.o
+       644        160          0          0          0       6993   stm32f1xx_it.o
+      2176        450          0          1         26       6443   system.o
+        72         16         24          4          0       1187   system_stm32f1xx.o
+       164         18          0          0         64       1654   tim.o
+      1254        534        214          0          0     438786   uart_cmd_parser.o
+       344         36          0          5        208       2663   usart.o
+      2676       1032          0         12         56       8556   wireless_ctrl_1.o
 
     ----------------------------------------------------------------------
-     23212       3938        521         72       4808     599431   Object Totals
+     23272       3942        521         76       4804     602251   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        38          0          2          7          7          0   (incl. Padding)
+        38          0          2         11          3          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -3054,15 +3054,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     27536       4078        656         88       4808     592379   Grand Totals
-     27536       4078        656         88       4808     592379   ELF Image Totals
-     27536       4078        656         88          0          0   ROM Totals
+     27596       4082        656         92       4804     595199   Grand Totals
+     27596       4082        656         92       4804     595199   ELF Image Totals
+     27596       4082        656         92          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                28192 (  27.53kB)
+    Total RO  Size (Code + RO Data)                28252 (  27.59kB)
     Total RW  Size (RW Data + ZI Data)              4896 (   4.78kB)
-    Total ROM Size (Code + RO Data + RW Data)      28280 (  27.62kB)
+    Total ROM Size (Code + RO Data + RW Data)      28344 (  27.68kB)
 
 ==============================================================================
 

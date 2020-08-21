@@ -73,7 +73,7 @@ uint8_t state;
 	return state;
 }
 
-uint8_t WL_Set_Var(uint8_t var, uint16_t val){
+uint8_t WL_Set_Var(uint8_t var, uint16_t val, uint8_t* desc){
 uint8_t state;	
 	
 	if(var>= SYS_VAR_CNT){		
@@ -219,7 +219,7 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 		break;
 				
 		case CMD_SET: 
-				state = WL_Set_Var(RX_packet.var, RX_packet.val);
+				state = WL_Set_Var(RX_packet.var, RX_packet.val,  RX_packet.desc);
 		break;
 				
 		case CMD_EEPROM_WR: 	

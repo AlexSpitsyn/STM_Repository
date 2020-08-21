@@ -112,54 +112,60 @@ int main(void)
   while (1){
 
 		SystemTask();
-		if (btn_pressed_f) {
-			//printf("pressed\r\n");
-			switch (Buttons_GetCode()) {
-				case BTN_DOWN:
-					printf("DOWN\r\n");				
-
-					SetTemp();	        
-					SysState.ss_update_f=1;
-	        SysCnt.temp_update = 0;
-	        SysCnt.temp_ctrl = 0;
-				break;
-				
-				case BTN_UP:
-					SetTemp();
-					printf("UP\r\n");
-					SysState.ss_update_f=1;				
-					SysCnt.temp_update = 0;
-	        SysCnt.temp_ctrl = 0;
-				break;
-				
-				case LONG_PRESS(BTN_SEL):
-					//SetTemp();					
-									
-				printf("SEL\r\n");
-				SysState.ss_update_f=1;
-				SysState.temp_ctrl_f^=1;
-				SysVarRW(WR,&SV[vn_T_CTRL_F]); 
-				
-//				putcSS(SEV_SEG_P);
-//				putcSS(SEV_SEG_1);
-//				putcSS(SEV_SEG_NONE);
-//				if(SysState.pump){
-//					PUMP(OFF);
-//					putcSS(SEV_SEG_0);
-//				}else{
-//					PUMP(ON);
-//					putcSS(SEV_SEG_1);
-//				}
-//				
-//				SS_LATCH();
-//				HAL_Delay(1000);
-//				SysCnt.temp_update = 0;
-//				SysCnt.temp_ctrl = 0;		
-//				SysState.ss_update_f =1;				
-				break;
-						
-			}
+		buttons_handler();
+		
+		//---------- BTN UP ------------
+		if(BTN_UP==SHORT_PRESS){
+			BTN_UP=0;			
+			SetTemp();	        
+			SysCnt.temp_update = 0;
+			SysCnt.temp_ctrl = 0;
+			SysState.ss_update_f=1;	
+			//printf("UP short press\r\n");				
 		}
+		if(BTN_UP==LONG_PRESS){
+			BTN_UP=0;
+			//printf("UP long press\r\n");				
+		}
+		
+		//------- BTN DOWN -----------
+		if(BTN_DOWN==SHORT_PRESS){
+			BTN_DOWN=0;
+			//LED_TOGGLE(LED_BLUE); 			
+			SetTemp();	        
+			SysCnt.temp_update = 0;
+			SysCnt.temp_ctrl = 0;
+			SysState.ss_update_f=1;	
+			//printf("DOWN short press\r\n");				
+		}
+		if(BTN_DOWN==LONG_PRESS){
+			BTN_DOWN=0;
+			//printf("DOWN long press\r\n");				
+		}
+		
+		
+		//---------- BTN SELECT -------------
+		if(BTN_SEL==SHORT_PRESS){
+			BTN_SEL=0;
+//			for (uint8_t i = 0; i < SYS_VAR_CNT; i++) {	
+//					if (SV[i].mem_addr != 0) {						
+//						if(SysVarRW(WR, &SV[i])){							
+//							break;
+//						}
+//						HAL_Delay(50);
+//					}
+//			}
+			//printf("SEL short press\r\n");				
+		}
+		
+		if(BTN_SEL==LONG_PRESS){
+			BTN_SEL=0;
+			SysState.temp_ctrl_f^=1;
+			SysState.ss_update_f = 1;
+			SysVarRW(WR,&SV[vn_T_CTRL_F]); 
+			//printf("SEL long press\r\n");				
+		}
+		
 		
     /* USER CODE END WHILE */
 
