@@ -36,8 +36,7 @@ void uartInit(void) {
   print_to("    |||||     ||||    ||||| ||||    ||||\r\n");
   print_to("||||||||       ||||||||||||  |||||||||||\r\n");
   print_to("|||||||         |||||||||||   ||||||||||\r\n");
-  //#warning "fix name"
-	print_to("Boiler Temp Controler v.1\r\n> ");
+  print_to(DEV_NAME);
 
 }
 

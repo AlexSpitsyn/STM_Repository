@@ -27,6 +27,9 @@
 #include "SX1278.h"
 //#include "buttons_io_exp.h"
 
+
+#define DEV_NAME 								"Wireless Temp Sensor v.2\r\n> "
+
 //EEPROM 
 #define EEPROM_WL_ADDR 								0x40
 

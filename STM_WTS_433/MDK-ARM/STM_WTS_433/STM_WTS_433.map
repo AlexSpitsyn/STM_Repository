@@ -1108,6 +1108,7 @@ Section Cross References
     wireless_ctrl.o(i.WL_Send_Packet) refers to sx1278.o(i.SX1278_transmit) for SX1278_transmit
     wireless_ctrl.o(i.WL_Send_Packet) refers to sx1278.o(i.SX1278_LoRaEntryRx) for SX1278_LoRaEntryRx
     wireless_ctrl.o(i.WL_Send_Packet) refers to wireless_ctrl.o(.data) for .data
+    wireless_ctrl.o(i.WL_Send_Packet) refers to system.o(.data) for SysState
     wireless_ctrl.o(i.WL_Send_Packet) refers to system.o(.bss) for dbg_str
     wireless_ctrl.o(i.WL_Set_Var) refers to strcpy.o(.text) for strcpy
     wireless_ctrl.o(i.WL_Set_Var) refers to system.o(.data) for SV
@@ -2542,58 +2543,58 @@ Image Symbol Table
     i.WL_Init                                0x080056b4   Section        0  wireless_ctrl.o(i.WL_Init)
     i.WL_Run_CMD                             0x080056ec   Section        0  wireless_ctrl.o(i.WL_Run_CMD)
     i.WL_Send_Packet                         0x0800572c   Section        0  wireless_ctrl.o(i.WL_Send_Packet)
-    i.WL_Set_Var                             0x08005868   Section        0  wireless_ctrl.o(i.WL_Set_Var)
-    i.WL_Write_EEPROM                        0x080058a8   Section        0  wireless_ctrl.o(i.WL_Write_EEPROM)
-    i.__0sprintf$8                           0x080058d0   Section        0  printf8.o(i.__0sprintf$8)
-    i.__NVIC_SetPriority                     0x080058f8   Section        0  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
-    __NVIC_SetPriority                       0x080058f9   Thumb Code    32  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
-    i.__aeabi_errno_addr                     0x08005918   Section        0  errno.o(i.__aeabi_errno_addr)
-    i.__scatterload_copy                     0x08005920   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x0800592e   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x08005930   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i._printf_core                           0x08005940   Section        0  printf8.o(i._printf_core)
-    _printf_core                             0x08005941   Thumb Code   996  printf8.o(i._printf_core)
-    i._printf_post_padding                   0x08005d50   Section        0  printf8.o(i._printf_post_padding)
-    _printf_post_padding                     0x08005d51   Thumb Code    36  printf8.o(i._printf_post_padding)
-    i._printf_pre_padding                    0x08005d74   Section        0  printf8.o(i._printf_pre_padding)
-    _printf_pre_padding                      0x08005d75   Thumb Code    46  printf8.o(i._printf_pre_padding)
-    i._sputc                                 0x08005da2   Section        0  printf8.o(i._sputc)
-    _sputc                                   0x08005da3   Thumb Code    10  printf8.o(i._sputc)
-    i.ds18b20_Check_CRC                      0x08005dac   Section        0  ds18b20.o(i.ds18b20_Check_CRC)
-    i.ds18b20_Convert_int8                   0x08005df0   Section        0  ds18b20.o(i.ds18b20_Convert_int8)
-    i.ds18b20_GetTemp                        0x08005e0c   Section        0  ds18b20.o(i.ds18b20_GetTemp)
-    i.ds18b20_Init                           0x08005e34   Section        0  ds18b20.o(i.ds18b20_Init)
-    i.ds18b20_MeasureTemperCmd               0x08005f00   Section        0  ds18b20.o(i.ds18b20_MeasureTemperCmd)
-    i.ds18b20_ReadStratcpad                  0x08005f48   Section        0  ds18b20.o(i.ds18b20_ReadStratcpad)
-    i.ds18b20_SearhRom                       0x08005fa4   Section        0  ds18b20.o(i.ds18b20_SearhRom)
-    i.main                                   0x08006094   Section        0  main.o(i.main)
-    i.ow_DelayMicro                          0x080060c4   Section        0  1-wire.o(i.ow_DelayMicro)
-    i.ow_ReadBit                             0x080060ec   Section        0  1-wire.o(i.ow_ReadBit)
-    i.ow_ReadByte                            0x08006128   Section        0  1-wire.o(i.ow_ReadByte)
-    i.ow_Reset                               0x08006144   Section        0  1-wire.o(i.ow_Reset)
-    i.ow_WriteBit                            0x08006188   Section        0  1-wire.o(i.ow_WriteBit)
-    i.ow_WriteByte                           0x080061c8   Section        0  1-wire.o(i.ow_WriteByte)
-    i.ow_input                               0x080061e4   Section        0  1-wire.o(i.ow_input)
-    i.ow_output                              0x08006204   Section        0  1-wire.o(i.ow_output)
-    i.parseCommand                           0x08006224   Section        0  uart_cmd_parser.o(i.parseCommand)
-    i.print_pack_info                        0x080070e8   Section        0  wireless_ctrl.o(i.print_pack_info)
-    i.remove_spaces                          0x08007288   Section        0  uart_cmd_parser.o(i.remove_spaces)
-    i.str_to_int32                           0x080072ae   Section        0  uart_cmd_parser.o(i.str_to_int32)
-    i.uartInit                               0x080072cc   Section        0  uart_cmd_parser.o(i.uartInit)
-    .constdata                               0x08007960   Section       16  system_stm32f1xx.o(.constdata)
-    .constdata                               0x08007970   Section        8  system_stm32f1xx.o(.constdata)
-    .constdata                               0x08007978   Section       24  sx1278.o(.constdata)
-    SX1278_Frequency                         0x08007978   Data           3  sx1278.o(.constdata)
-    SX1278_Power                             0x0800797b   Data           4  sx1278.o(.constdata)
-    SX1278_SpreadFactor                      0x0800797f   Data           7  sx1278.o(.constdata)
-    SX1278_LoRaBandwidth                     0x08007986   Data          10  sx1278.o(.constdata)
-    .constdata                               0x08007990   Section        7  uart_cmd_parser.o(.constdata)
-    SX1278_SpreadFactor                      0x08007990   Data           7  uart_cmd_parser.o(.constdata)
-    .constdata                               0x08007997   Section      129  ctype_o.o(.constdata)
-    .constdata                               0x08007a18   Section        4  ctype_o.o(.constdata)
-    table                                    0x08007a18   Data           4  ctype_o.o(.constdata)
-    .conststring                             0x08007a1c   Section      108  sx1278.o(.conststring)
-    .conststring                             0x08007a88   Section      390  uart_cmd_parser.o(.conststring)
+    i.WL_Set_Var                             0x08005874   Section        0  wireless_ctrl.o(i.WL_Set_Var)
+    i.WL_Write_EEPROM                        0x080058b4   Section        0  wireless_ctrl.o(i.WL_Write_EEPROM)
+    i.__0sprintf$8                           0x080058dc   Section        0  printf8.o(i.__0sprintf$8)
+    i.__NVIC_SetPriority                     0x08005904   Section        0  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
+    __NVIC_SetPriority                       0x08005905   Thumb Code    32  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
+    i.__aeabi_errno_addr                     0x08005924   Section        0  errno.o(i.__aeabi_errno_addr)
+    i.__scatterload_copy                     0x0800592c   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0800593a   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0800593c   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i._printf_core                           0x0800594c   Section        0  printf8.o(i._printf_core)
+    _printf_core                             0x0800594d   Thumb Code   996  printf8.o(i._printf_core)
+    i._printf_post_padding                   0x08005d5c   Section        0  printf8.o(i._printf_post_padding)
+    _printf_post_padding                     0x08005d5d   Thumb Code    36  printf8.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x08005d80   Section        0  printf8.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x08005d81   Thumb Code    46  printf8.o(i._printf_pre_padding)
+    i._sputc                                 0x08005dae   Section        0  printf8.o(i._sputc)
+    _sputc                                   0x08005daf   Thumb Code    10  printf8.o(i._sputc)
+    i.ds18b20_Check_CRC                      0x08005db8   Section        0  ds18b20.o(i.ds18b20_Check_CRC)
+    i.ds18b20_Convert_int8                   0x08005dfc   Section        0  ds18b20.o(i.ds18b20_Convert_int8)
+    i.ds18b20_GetTemp                        0x08005e18   Section        0  ds18b20.o(i.ds18b20_GetTemp)
+    i.ds18b20_Init                           0x08005e40   Section        0  ds18b20.o(i.ds18b20_Init)
+    i.ds18b20_MeasureTemperCmd               0x08005f0c   Section        0  ds18b20.o(i.ds18b20_MeasureTemperCmd)
+    i.ds18b20_ReadStratcpad                  0x08005f54   Section        0  ds18b20.o(i.ds18b20_ReadStratcpad)
+    i.ds18b20_SearhRom                       0x08005fb0   Section        0  ds18b20.o(i.ds18b20_SearhRom)
+    i.main                                   0x080060a0   Section        0  main.o(i.main)
+    i.ow_DelayMicro                          0x080060d0   Section        0  1-wire.o(i.ow_DelayMicro)
+    i.ow_ReadBit                             0x080060f8   Section        0  1-wire.o(i.ow_ReadBit)
+    i.ow_ReadByte                            0x08006134   Section        0  1-wire.o(i.ow_ReadByte)
+    i.ow_Reset                               0x08006150   Section        0  1-wire.o(i.ow_Reset)
+    i.ow_WriteBit                            0x08006194   Section        0  1-wire.o(i.ow_WriteBit)
+    i.ow_WriteByte                           0x080061d4   Section        0  1-wire.o(i.ow_WriteByte)
+    i.ow_input                               0x080061f0   Section        0  1-wire.o(i.ow_input)
+    i.ow_output                              0x08006210   Section        0  1-wire.o(i.ow_output)
+    i.parseCommand                           0x08006230   Section        0  uart_cmd_parser.o(i.parseCommand)
+    i.print_pack_info                        0x080070f4   Section        0  wireless_ctrl.o(i.print_pack_info)
+    i.remove_spaces                          0x080072cc   Section        0  uart_cmd_parser.o(i.remove_spaces)
+    i.str_to_int32                           0x080072f2   Section        0  uart_cmd_parser.o(i.str_to_int32)
+    i.uartInit                               0x08007310   Section        0  uart_cmd_parser.o(i.uartInit)
+    .constdata                               0x080079a4   Section       16  system_stm32f1xx.o(.constdata)
+    .constdata                               0x080079b4   Section        8  system_stm32f1xx.o(.constdata)
+    .constdata                               0x080079bc   Section       24  sx1278.o(.constdata)
+    SX1278_Frequency                         0x080079bc   Data           3  sx1278.o(.constdata)
+    SX1278_Power                             0x080079bf   Data           4  sx1278.o(.constdata)
+    SX1278_SpreadFactor                      0x080079c3   Data           7  sx1278.o(.constdata)
+    SX1278_LoRaBandwidth                     0x080079ca   Data          10  sx1278.o(.constdata)
+    .constdata                               0x080079d4   Section        7  uart_cmd_parser.o(.constdata)
+    SX1278_SpreadFactor                      0x080079d4   Data           7  uart_cmd_parser.o(.constdata)
+    .constdata                               0x080079db   Section      129  ctype_o.o(.constdata)
+    .constdata                               0x08007a5c   Section        4  ctype_o.o(.constdata)
+    table                                    0x08007a5c   Data           4  ctype_o.o(.constdata)
+    .conststring                             0x08007a60   Section      108  sx1278.o(.conststring)
+    .conststring                             0x08007acc   Section      390  uart_cmd_parser.o(.conststring)
     .data                                    0x20000000   Section       72  system.o(.data)
     .data                                    0x20000048   Section        8  crc.o(.data)
     .data                                    0x20000050   Section        5  usart.o(.data)
@@ -2977,43 +2978,43 @@ Image Symbol Table
     WL_Handler                               0x080055b5   Thumb Code   170  wireless_ctrl.o(i.WL_Handler)
     WL_Init                                  0x080056b5   Thumb Code    50  wireless_ctrl.o(i.WL_Init)
     WL_Run_CMD                               0x080056ed   Thumb Code    58  wireless_ctrl.o(i.WL_Run_CMD)
-    WL_Send_Packet                           0x0800572d   Thumb Code   206  wireless_ctrl.o(i.WL_Send_Packet)
-    WL_Set_Var                               0x08005869   Thumb Code    60  wireless_ctrl.o(i.WL_Set_Var)
-    WL_Write_EEPROM                          0x080058a9   Thumb Code    34  wireless_ctrl.o(i.WL_Write_EEPROM)
-    __0sprintf$8                             0x080058d1   Thumb Code    34  printf8.o(i.__0sprintf$8)
-    __1sprintf$8                             0x080058d1   Thumb Code     0  printf8.o(i.__0sprintf$8)
-    __2sprintf                               0x080058d1   Thumb Code     0  printf8.o(i.__0sprintf$8)
-    __aeabi_errno_addr                       0x08005919   Thumb Code     4  errno.o(i.__aeabi_errno_addr)
-    __rt_errno_addr                          0x08005919   Thumb Code     0  errno.o(i.__aeabi_errno_addr)
-    __scatterload_copy                       0x08005921   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x0800592f   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x08005931   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    ds18b20_Check_CRC                        0x08005dad   Thumb Code    62  ds18b20.o(i.ds18b20_Check_CRC)
-    ds18b20_Convert_int8                     0x08005df1   Thumb Code    18  ds18b20.o(i.ds18b20_Convert_int8)
-    ds18b20_GetTemp                          0x08005e0d   Thumb Code    40  ds18b20.o(i.ds18b20_GetTemp)
-    ds18b20_Init                             0x08005e35   Thumb Code   194  ds18b20.o(i.ds18b20_Init)
-    ds18b20_MeasureTemperCmd                 0x08005f01   Thumb Code    62  ds18b20.o(i.ds18b20_MeasureTemperCmd)
-    ds18b20_ReadStratcpad                    0x08005f49   Thumb Code    82  ds18b20.o(i.ds18b20_ReadStratcpad)
-    ds18b20_SearhRom                         0x08005fa5   Thumb Code   236  ds18b20.o(i.ds18b20_SearhRom)
-    main                                     0x08006095   Thumb Code    46  main.o(i.main)
-    ow_DelayMicro                            0x080060c5   Thumb Code    30  1-wire.o(i.ow_DelayMicro)
-    ow_ReadBit                               0x080060ed   Thumb Code    56  1-wire.o(i.ow_ReadBit)
-    ow_ReadByte                              0x08006129   Thumb Code    28  1-wire.o(i.ow_ReadByte)
-    ow_Reset                                 0x08006145   Thumb Code    62  1-wire.o(i.ow_Reset)
-    ow_WriteBit                              0x08006189   Thumb Code    58  1-wire.o(i.ow_WriteBit)
-    ow_WriteByte                             0x080061c9   Thumb Code    26  1-wire.o(i.ow_WriteByte)
-    ow_input                                 0x080061e5   Thumb Code    26  1-wire.o(i.ow_input)
-    ow_output                                0x08006205   Thumb Code    28  1-wire.o(i.ow_output)
-    parseCommand                             0x08006225   Thumb Code  3340  uart_cmd_parser.o(i.parseCommand)
-    print_pack_info                          0x080070e9   Thumb Code   262  wireless_ctrl.o(i.print_pack_info)
-    remove_spaces                            0x08007289   Thumb Code    38  uart_cmd_parser.o(i.remove_spaces)
-    str_to_int32                             0x080072af   Thumb Code    30  uart_cmd_parser.o(i.str_to_int32)
-    uartInit                                 0x080072cd   Thumb Code  1430  uart_cmd_parser.o(i.uartInit)
-    AHBPrescTable                            0x08007960   Data          16  system_stm32f1xx.o(.constdata)
-    APBPrescTable                            0x08007970   Data           8  system_stm32f1xx.o(.constdata)
-    __ctype_table                            0x08007997   Data         129  ctype_o.o(.constdata)
-    Region$$Table$$Base                      0x08007c10   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08007c30   Number         0  anon$$obj.o(Region$$Table)
+    WL_Send_Packet                           0x0800572d   Thumb Code   214  wireless_ctrl.o(i.WL_Send_Packet)
+    WL_Set_Var                               0x08005875   Thumb Code    60  wireless_ctrl.o(i.WL_Set_Var)
+    WL_Write_EEPROM                          0x080058b5   Thumb Code    34  wireless_ctrl.o(i.WL_Write_EEPROM)
+    __0sprintf$8                             0x080058dd   Thumb Code    34  printf8.o(i.__0sprintf$8)
+    __1sprintf$8                             0x080058dd   Thumb Code     0  printf8.o(i.__0sprintf$8)
+    __2sprintf                               0x080058dd   Thumb Code     0  printf8.o(i.__0sprintf$8)
+    __aeabi_errno_addr                       0x08005925   Thumb Code     4  errno.o(i.__aeabi_errno_addr)
+    __rt_errno_addr                          0x08005925   Thumb Code     0  errno.o(i.__aeabi_errno_addr)
+    __scatterload_copy                       0x0800592d   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0800593b   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0800593d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    ds18b20_Check_CRC                        0x08005db9   Thumb Code    62  ds18b20.o(i.ds18b20_Check_CRC)
+    ds18b20_Convert_int8                     0x08005dfd   Thumb Code    18  ds18b20.o(i.ds18b20_Convert_int8)
+    ds18b20_GetTemp                          0x08005e19   Thumb Code    40  ds18b20.o(i.ds18b20_GetTemp)
+    ds18b20_Init                             0x08005e41   Thumb Code   194  ds18b20.o(i.ds18b20_Init)
+    ds18b20_MeasureTemperCmd                 0x08005f0d   Thumb Code    62  ds18b20.o(i.ds18b20_MeasureTemperCmd)
+    ds18b20_ReadStratcpad                    0x08005f55   Thumb Code    82  ds18b20.o(i.ds18b20_ReadStratcpad)
+    ds18b20_SearhRom                         0x08005fb1   Thumb Code   236  ds18b20.o(i.ds18b20_SearhRom)
+    main                                     0x080060a1   Thumb Code    46  main.o(i.main)
+    ow_DelayMicro                            0x080060d1   Thumb Code    30  1-wire.o(i.ow_DelayMicro)
+    ow_ReadBit                               0x080060f9   Thumb Code    56  1-wire.o(i.ow_ReadBit)
+    ow_ReadByte                              0x08006135   Thumb Code    28  1-wire.o(i.ow_ReadByte)
+    ow_Reset                                 0x08006151   Thumb Code    62  1-wire.o(i.ow_Reset)
+    ow_WriteBit                              0x08006195   Thumb Code    58  1-wire.o(i.ow_WriteBit)
+    ow_WriteByte                             0x080061d5   Thumb Code    26  1-wire.o(i.ow_WriteByte)
+    ow_input                                 0x080061f1   Thumb Code    26  1-wire.o(i.ow_input)
+    ow_output                                0x08006211   Thumb Code    28  1-wire.o(i.ow_output)
+    parseCommand                             0x08006231   Thumb Code  3340  uart_cmd_parser.o(i.parseCommand)
+    print_pack_info                          0x080070f5   Thumb Code   290  wireless_ctrl.o(i.print_pack_info)
+    remove_spaces                            0x080072cd   Thumb Code    38  uart_cmd_parser.o(i.remove_spaces)
+    str_to_int32                             0x080072f3   Thumb Code    30  uart_cmd_parser.o(i.str_to_int32)
+    uartInit                                 0x08007311   Thumb Code  1430  uart_cmd_parser.o(i.uartInit)
+    AHBPrescTable                            0x080079a4   Data          16  system_stm32f1xx.o(.constdata)
+    APBPrescTable                            0x080079b4   Data           8  system_stm32f1xx.o(.constdata)
+    __ctype_table                            0x080079db   Data         129  ctype_o.o(.constdata)
+    Region$$Table$$Base                      0x08007c54   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08007c74   Number         0  anon$$obj.o(Region$$Table)
     cdc_init                                 0x20000000   Data           1  system.o(.data)
     SysState                                 0x20000002   Data           6  system.o(.data)
     SysCnt                                   0x20000008   Data           6  system.o(.data)
@@ -3075,9 +3076,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00007f6c, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x00007da8])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00007fb0, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x00007df0])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00007c30, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00007c74, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3363,56 +3364,56 @@ Memory Map of the image
     0x080055b4   0x080055b4   0x00000100   Code   RO         5416    i.WL_Handler        wireless_ctrl.o
     0x080056b4   0x080056b4   0x00000038   Code   RO         5417    i.WL_Init           wireless_ctrl.o
     0x080056ec   0x080056ec   0x00000040   Code   RO         5418    i.WL_Run_CMD        wireless_ctrl.o
-    0x0800572c   0x0800572c   0x0000013c   Code   RO         5419    i.WL_Send_Packet    wireless_ctrl.o
-    0x08005868   0x08005868   0x00000040   Code   RO         5420    i.WL_Set_Var        wireless_ctrl.o
-    0x080058a8   0x080058a8   0x00000028   Code   RO         5421    i.WL_Write_EEPROM   wireless_ctrl.o
-    0x080058d0   0x080058d0   0x00000028   Code   RO         5799    i.__0sprintf$8      mc_w.l(printf8.o)
-    0x080058f8   0x080058f8   0x00000020   Code   RO         2020    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
-    0x08005918   0x08005918   0x00000008   Code   RO         5899    i.__aeabi_errno_addr  mc_w.l(errno.o)
-    0x08005920   0x08005920   0x0000000e   Code   RO         5931    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x0800592e   0x0800592e   0x00000002   Code   RO         5932    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08005930   0x08005930   0x0000000e   Code   RO         5933    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x0800593e   0x0800593e   0x00000002   PAD
-    0x08005940   0x08005940   0x00000410   Code   RO         5804    i._printf_core      mc_w.l(printf8.o)
-    0x08005d50   0x08005d50   0x00000024   Code   RO         5805    i._printf_post_padding  mc_w.l(printf8.o)
-    0x08005d74   0x08005d74   0x0000002e   Code   RO         5806    i._printf_pre_padding  mc_w.l(printf8.o)
-    0x08005da2   0x08005da2   0x0000000a   Code   RO         5808    i._sputc            mc_w.l(printf8.o)
-    0x08005dac   0x08005dac   0x00000044   Code   RO         5050    i.ds18b20_Check_CRC  ds18b20.o
-    0x08005df0   0x08005df0   0x0000001c   Code   RO         5051    i.ds18b20_Convert_int8  ds18b20.o
-    0x08005e0c   0x08005e0c   0x00000028   Code   RO         5052    i.ds18b20_GetTemp   ds18b20.o
-    0x08005e34   0x08005e34   0x000000cc   Code   RO         5053    i.ds18b20_Init      ds18b20.o
-    0x08005f00   0x08005f00   0x00000048   Code   RO         5054    i.ds18b20_MeasureTemperCmd  ds18b20.o
-    0x08005f48   0x08005f48   0x0000005c   Code   RO         5055    i.ds18b20_ReadStratcpad  ds18b20.o
-    0x08005fa4   0x08005fa4   0x000000f0   Code   RO         5056    i.ds18b20_SearhRom  ds18b20.o
-    0x08006094   0x08006094   0x0000002e   Code   RO          243    i.main              main.o
-    0x080060c2   0x080060c2   0x00000002   PAD
-    0x080060c4   0x080060c4   0x00000028   Code   RO         5017    i.ow_DelayMicro     1-wire.o
-    0x080060ec   0x080060ec   0x0000003c   Code   RO         5034    i.ow_ReadBit        1-wire.o
-    0x08006128   0x08006128   0x0000001c   Code   RO         4972    i.ow_ReadByte       1-wire.o
-    0x08006144   0x08006144   0x00000044   Code   RO         5022    i.ow_Reset          1-wire.o
-    0x08006188   0x08006188   0x00000040   Code   RO         5028    i.ow_WriteBit       1-wire.o
-    0x080061c8   0x080061c8   0x0000001a   Code   RO         4973    i.ow_WriteByte      1-wire.o
-    0x080061e2   0x080061e2   0x00000002   PAD
-    0x080061e4   0x080061e4   0x00000020   Code   RO         4975    i.ow_input          1-wire.o
-    0x08006204   0x08006204   0x00000020   Code   RO         4977    i.ow_output         1-wire.o
-    0x08006224   0x08006224   0x00000ec4   Code   RO         5361    i.parseCommand      uart_cmd_parser.o
-    0x080070e8   0x080070e8   0x000001a0   Code   RO         5422    i.print_pack_info   wireless_ctrl.o
-    0x08007288   0x08007288   0x00000026   Code   RO         5362    i.remove_spaces     uart_cmd_parser.o
-    0x080072ae   0x080072ae   0x0000001e   Code   RO         5363    i.str_to_int32      uart_cmd_parser.o
-    0x080072cc   0x080072cc   0x00000694   Code   RO         5364    i.uartInit          uart_cmd_parser.o
-    0x08007960   0x08007960   0x00000010   Data   RO         4567    .constdata          system_stm32f1xx.o
-    0x08007970   0x08007970   0x00000008   Data   RO         4568    .constdata          system_stm32f1xx.o
-    0x08007978   0x08007978   0x00000018   Data   RO         5204    .constdata          sx1278.o
-    0x08007990   0x08007990   0x00000007   Data   RO         5365    .constdata          uart_cmd_parser.o
-    0x08007997   0x08007997   0x00000081   Data   RO         5872    .constdata          mc_w.l(ctype_o.o)
-    0x08007a18   0x08007a18   0x00000004   Data   RO         5873    .constdata          mc_w.l(ctype_o.o)
-    0x08007a1c   0x08007a1c   0x0000006c   Data   RO         5205    .conststring        sx1278.o
-    0x08007a88   0x08007a88   0x00000186   Data   RO         5366    .conststring        uart_cmd_parser.o
-    0x08007c0e   0x08007c0e   0x00000002   PAD
-    0x08007c10   0x08007c10   0x00000020   Data   RO         5929    Region$$Table       anon$$obj.o
+    0x0800572c   0x0800572c   0x00000148   Code   RO         5419    i.WL_Send_Packet    wireless_ctrl.o
+    0x08005874   0x08005874   0x00000040   Code   RO         5420    i.WL_Set_Var        wireless_ctrl.o
+    0x080058b4   0x080058b4   0x00000028   Code   RO         5421    i.WL_Write_EEPROM   wireless_ctrl.o
+    0x080058dc   0x080058dc   0x00000028   Code   RO         5799    i.__0sprintf$8      mc_w.l(printf8.o)
+    0x08005904   0x08005904   0x00000020   Code   RO         2020    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
+    0x08005924   0x08005924   0x00000008   Code   RO         5899    i.__aeabi_errno_addr  mc_w.l(errno.o)
+    0x0800592c   0x0800592c   0x0000000e   Code   RO         5931    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800593a   0x0800593a   0x00000002   Code   RO         5932    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800593c   0x0800593c   0x0000000e   Code   RO         5933    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800594a   0x0800594a   0x00000002   PAD
+    0x0800594c   0x0800594c   0x00000410   Code   RO         5804    i._printf_core      mc_w.l(printf8.o)
+    0x08005d5c   0x08005d5c   0x00000024   Code   RO         5805    i._printf_post_padding  mc_w.l(printf8.o)
+    0x08005d80   0x08005d80   0x0000002e   Code   RO         5806    i._printf_pre_padding  mc_w.l(printf8.o)
+    0x08005dae   0x08005dae   0x0000000a   Code   RO         5808    i._sputc            mc_w.l(printf8.o)
+    0x08005db8   0x08005db8   0x00000044   Code   RO         5050    i.ds18b20_Check_CRC  ds18b20.o
+    0x08005dfc   0x08005dfc   0x0000001c   Code   RO         5051    i.ds18b20_Convert_int8  ds18b20.o
+    0x08005e18   0x08005e18   0x00000028   Code   RO         5052    i.ds18b20_GetTemp   ds18b20.o
+    0x08005e40   0x08005e40   0x000000cc   Code   RO         5053    i.ds18b20_Init      ds18b20.o
+    0x08005f0c   0x08005f0c   0x00000048   Code   RO         5054    i.ds18b20_MeasureTemperCmd  ds18b20.o
+    0x08005f54   0x08005f54   0x0000005c   Code   RO         5055    i.ds18b20_ReadStratcpad  ds18b20.o
+    0x08005fb0   0x08005fb0   0x000000f0   Code   RO         5056    i.ds18b20_SearhRom  ds18b20.o
+    0x080060a0   0x080060a0   0x0000002e   Code   RO          243    i.main              main.o
+    0x080060ce   0x080060ce   0x00000002   PAD
+    0x080060d0   0x080060d0   0x00000028   Code   RO         5017    i.ow_DelayMicro     1-wire.o
+    0x080060f8   0x080060f8   0x0000003c   Code   RO         5034    i.ow_ReadBit        1-wire.o
+    0x08006134   0x08006134   0x0000001c   Code   RO         4972    i.ow_ReadByte       1-wire.o
+    0x08006150   0x08006150   0x00000044   Code   RO         5022    i.ow_Reset          1-wire.o
+    0x08006194   0x08006194   0x00000040   Code   RO         5028    i.ow_WriteBit       1-wire.o
+    0x080061d4   0x080061d4   0x0000001a   Code   RO         4973    i.ow_WriteByte      1-wire.o
+    0x080061ee   0x080061ee   0x00000002   PAD
+    0x080061f0   0x080061f0   0x00000020   Code   RO         4975    i.ow_input          1-wire.o
+    0x08006210   0x08006210   0x00000020   Code   RO         4977    i.ow_output         1-wire.o
+    0x08006230   0x08006230   0x00000ec4   Code   RO         5361    i.parseCommand      uart_cmd_parser.o
+    0x080070f4   0x080070f4   0x000001d8   Code   RO         5422    i.print_pack_info   wireless_ctrl.o
+    0x080072cc   0x080072cc   0x00000026   Code   RO         5362    i.remove_spaces     uart_cmd_parser.o
+    0x080072f2   0x080072f2   0x0000001e   Code   RO         5363    i.str_to_int32      uart_cmd_parser.o
+    0x08007310   0x08007310   0x00000694   Code   RO         5364    i.uartInit          uart_cmd_parser.o
+    0x080079a4   0x080079a4   0x00000010   Data   RO         4567    .constdata          system_stm32f1xx.o
+    0x080079b4   0x080079b4   0x00000008   Data   RO         4568    .constdata          system_stm32f1xx.o
+    0x080079bc   0x080079bc   0x00000018   Data   RO         5204    .constdata          sx1278.o
+    0x080079d4   0x080079d4   0x00000007   Data   RO         5365    .constdata          uart_cmd_parser.o
+    0x080079db   0x080079db   0x00000081   Data   RO         5872    .constdata          mc_w.l(ctype_o.o)
+    0x08007a5c   0x08007a5c   0x00000004   Data   RO         5873    .constdata          mc_w.l(ctype_o.o)
+    0x08007a60   0x08007a60   0x0000006c   Data   RO         5205    .conststring        sx1278.o
+    0x08007acc   0x08007acc   0x00000186   Data   RO         5366    .conststring        uart_cmd_parser.o
+    0x08007c52   0x08007c52   0x00000002   PAD
+    0x08007c54   0x08007c54   0x00000020   Data   RO         5929    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08007c30, Size: 0x00001790, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x00000178])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08007c74, Size: 0x00001790, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x0000017c])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3492,7 +3493,7 @@ Image component sizes
        484         56          0         72         64     459807   system.o
         72         16         24          4          0       1183   system_stm32f1xx.o
        164         18          0          0         64       1646   tim.o
-      5532       2478        397        188          0      11344   uart_cmd_parser.o
+      5532       2478        397        188          0      11352   uart_cmd_parser.o
        344         36          0          5        144       2615   usart.o
         84         18          0          0        708        776   usb_device.o
        726         16          0        271          0      13230   usbd_cdc.o
@@ -3502,10 +3503,10 @@ Image component sizes
       1186         28          0          1          0       8152   usbd_ctlreq.o
        286        104          0         78        256       5853   usbd_desc.o
        132          0          0          0          0       4380   usbd_ioreq.o
-      1616        488          0         64         36       8337   wireless_ctrl.o
+      1684        520          0         64         36       8345   wireless_ctrl.o
 
     ----------------------------------------------------------------------
-     28880       4300        823        824       5204     711619   Object Totals
+     28948       4332        823        824       5204     711635   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         34          0          2         11          1          0   (incl. Padding)
 
@@ -3559,15 +3560,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     30836       4374        956        828       5204     698939   Grand Totals
-     30836       4374        956        376       5204     698939   ELF Image Totals (compressed)
-     30836       4374        956        376          0          0   ROM Totals
+     30904       4406        956        828       5204     698955   Grand Totals
+     30904       4406        956        380       5204     698955   ELF Image Totals (compressed)
+     30904       4406        956        380          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                31792 (  31.05kB)
+    Total RO  Size (Code + RO Data)                31860 (  31.11kB)
     Total RW  Size (RW Data + ZI Data)              6032 (   5.89kB)
-    Total ROM Size (Code + RO Data + RW Data)      32168 (  31.41kB)
+    Total ROM Size (Code + RO Data + RW Data)      32240 (  31.48kB)
 
 ==============================================================================
 

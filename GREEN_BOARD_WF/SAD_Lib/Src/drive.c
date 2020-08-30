@@ -25,7 +25,7 @@ void Drive_HomeInit(void){
 		if(DRIVE_DEBUG_PRINT_F){
 			dbg_print("DRV HOME MOVE START\r\n");
 		}
-		uint32_t t=0;
+		
 			while(1){		
 				if(drv_m1.min_sens_f){
 					DRV_STOP();

@@ -36,8 +36,7 @@ void uartInit(void) {
   print_to("    |||||     ||||    ||||| ||||    ||||\r\n");
   print_to("||||||||       ||||||||||||  |||||||||||\r\n");
   print_to("|||||||         |||||||||||   ||||||||||\r\n");
-  #warning "fix name"
-	print_to("Wireless Temp Sensor v.2\r\n> ");
+  print_to(DEV_NAME);
 
 }
 

@@ -28,6 +28,10 @@
 #include "buttons_io_exp.h"
 #include "drive.h"
 
+
+#define DEV_NAME 								"Water floor temp controller v.2\r\n> "
+
+
 //EEPROM 
 #define EEPROM_WL_ADDR 								0x40
 

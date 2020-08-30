@@ -27,6 +27,8 @@
 #include "SX1278.h"
 #include "buttons_io_exp.h"
 
+#define DEV_NAME 								"Boiler temp controller v.1\r\n> "
+
 //EEPROM 
 #define EEPROM_WL_ADDR 								0x40
 

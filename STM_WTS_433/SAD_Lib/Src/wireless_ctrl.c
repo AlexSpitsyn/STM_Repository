@@ -35,6 +35,8 @@ void print_pack_info(WL_Packet* packet){
 	
 			sprintf(dbg_str,"STATE: 0x%02X\r\n", packet->state);
 			print_to(dbg_str);
+			sprintf(dbg_str,"DEV ERROR CODE: 0x%02X\r\n", packet->dev_error_code);
+			print_to(dbg_str);
 			sprintf(dbg_str,"CMD: 0x%02X\r\n", packet->cmd);
 			print_to(dbg_str);
 			sprintf(dbg_str,"VAR: 0x%02X\r\n", packet->var);
@@ -47,8 +49,6 @@ void print_pack_info(WL_Packet* packet){
 			print_to(dbg_str);
 			sprintf(dbg_str,"SRC ADDR: 0x%08X\r\n", packet->src_addr);
 			print_to(dbg_str);	
-//			sprintf(dbg_str,"STATE: 0x%02X\r\n", packet->state);
-//			print_to(dbg_str);
 			sprintf(dbg_str,"DESC: %s\r\n", packet->desc);
 			print_to(dbg_str);
 			sprintf(dbg_str,"CRC: 0x%08X\r\n", packet->crc);
@@ -114,6 +114,7 @@ uint8_t WL_Send_Packet(uint16_t PID, uint8_t pack_state, uint32_t dest_addr, uin
 	
 	TX_packet.src_addr =WL_ADDR.Val;
 	TX_packet.dest_addr=dest_addr;
+	TX_packet.dev_error_code=SysState.error_code;
 	
 	TX_packet.cmd=cmd;
 	TX_packet.var=var;
