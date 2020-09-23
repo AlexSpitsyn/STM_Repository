@@ -266,12 +266,13 @@ void parseCommand(char *buf) {
 								sprintf(answer, "Set SX1278 Bandwidth: %s kHz", SX1278_LoRaBandwidth_s[SX1278.BW]);
 								print_to(answer);
 							}
-							SX1278_defaultConfig();
-							SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
+							//SX1278_defaultConfig();
+							SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278.BW, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
 							SX1278_LoRaEntryRx( WL_PLOAD_WIDTH, 2000); 	
 							break;
 							
 						case 3://sf
+							
 							if(str_to_int32(pArg2,&pEnd,DEC_STR,&tmp,6, 12)){
 								print_to("Wrong SF value [6-12]");		
 							}else{
@@ -279,8 +280,8 @@ void parseCommand(char *buf) {
 								sprintf(answer, "Set SX1278 SF: %d", SX1278_SpreadFactor[SX1278.SF]);
 								print_to(answer);
 							}	
-							SX1278_defaultConfig();
-							SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
+							//SX1278_defaultConfig();
+							SX1278_init(SX1278_POWER_17DBM, SX1278.SF, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
 							SX1278_LoRaEntryRx( WL_PLOAD_WIDTH, 2000); 					
 							break;
 							
@@ -292,8 +293,8 @@ void parseCommand(char *buf) {
 								sprintf(answer, "Set SX1278 Coding Rate: %s", SX1278_CR_s[SX1278.CR]);
 								print_to(answer);
 							}
-							SX1278_defaultConfig();
-							SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
+							//SX1278_defaultConfig();
+							SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278.CR , WL_PLOAD_WIDTH);
 							SX1278_LoRaEntryRx( WL_PLOAD_WIDTH, 2000); 
 							break;		
 							

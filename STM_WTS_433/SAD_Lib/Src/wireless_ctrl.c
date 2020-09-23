@@ -21,7 +21,7 @@ uint8_t pack_cnt=0;
 
 uint8_t WL_Init(void){
 	uint8_t res;
-	SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_20_8KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
+	SX1278_init(SX1278_POWER_17DBM, SX1278_LORA_SF_8, SX1278_LORA_BW_125KHZ, SX1278_CR_4_5 , WL_PLOAD_WIDTH);
 
 	HAL_Delay(200);
 	
@@ -61,11 +61,11 @@ uint8_t state;
 	
 	if(var>= SYS_VAR_CNT){
 		*val=0;				
-		state=PS_VAR_NOT_SUPPORTED;
+		state=VAR_NOT_SUPPORTED;
 	}else{
 		*val=(int16_t)*SV[var].pVal;
 		strcpy((char*)desc, SV[var].name);	
-		state=PS_DONE;
+		state=CMD_DONE;
 					
 	}
 	
@@ -77,19 +77,19 @@ uint8_t WL_Set_Var(uint8_t var, uint16_t val, uint8_t* desc){
 uint8_t state;	
 	
 	if(var>= SYS_VAR_CNT){		
-		state=PS_VAR_NOT_SUPPORTED;
+		state=VAR_NOT_SUPPORTED;
 	}else{
 		if(SV[var].we){
 			if(val<=SV[var].vmax && val>=SV[var].vmin){
 				*SV[var].pVal = (uint16_t)val;	
 				strcpy((char*)desc, SV[var].name);	
-				state=PS_DONE;				
+				state=CMD_DONE;				
 			}else{
-				state=PS_VAL_NOT_SUPPORTED;
+				state=VAL_NOT_SUPPORTED;
 			}
 			
 		}else{
-			state=PS_CMD_NOT_SUPPORTED;
+			state=CMD_NOT_SUPPORTED;
 		}
 	}
 				
@@ -101,10 +101,12 @@ uint8_t state;
 uint8_t WL_Write_EEPROM(){
 	for(int i; i<SYS_VAR_CNT; i++){		
 		if (SV[i].mem_addr != 0){
-			SysVarRW(WR, &SV[i]);
+			if(SysVarRW(WR, &SV[i])){
+				return CMD_ERROR;
+			}				
 		}
 	}
-	return 0;
+	return CMD_DONE;
 }
 
 uint8_t WL_Send_Packet(uint16_t PID, uint8_t pack_state, uint32_t dest_addr, uint8_t cmd, uint8_t var, uint16_t val, uint8_t* desc){	
@@ -212,7 +214,7 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 	switch (cmd){
 				
 		case CMD_PRESENT:
-			state = PS_DONE;
+			state = CMD_DONE;
 		break;
 				
 		case CMD_GET: 
@@ -228,11 +230,11 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 		break;
 				
 		case CMD_ERR_CLR: 	
-				state = PS_CMD_NOT_SUPPORTED;			
+				state = CMD_NOT_SUPPORTED;			
 		break;
 				
 		default:
-			state = PS_CMD_NOT_SUPPORTED;
+			state = CMD_NOT_SUPPORTED;
 		break;		
 			
 	}
@@ -243,7 +245,7 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 
 void WL_Handler(void){
 	
-	uint8_t state=0;
+	uint8_t state=0, cmd_state;
 	
 		if(WL_RECEIVE){
 			WL_RECEIVE=0;	
@@ -255,9 +257,9 @@ void WL_Handler(void){
 			if((state==PS_ADDR_MATCH) && rx_handler){		
 				HAL_Delay(500);
 				
-				state = WL_Run_CMD(RX_packet.cmd);
+				cmd_state = WL_Run_CMD(RX_packet.cmd);
 				if(WL_DEBUG_PRINT){		
-						sprintf(dbg_str,"RUN CMD STATE: %s\r\n",PACK_STATE_STR[state]);
+						sprintf(dbg_str,"RUN CMD STATE: %s\r\n",CMD_STATE_STR[cmd_state]);
 						dbg_print(dbg_str);
 				}
 				state = WL_Send_Packet(RX_packet.pack_ID, state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val, RX_packet.desc);

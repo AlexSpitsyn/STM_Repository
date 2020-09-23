@@ -81,36 +81,44 @@ enum VAR{
 };
 
 enum PACK_STATE{
-	PS_NEW,									//0
-	PS_DONE,								//1
-	PS_SEND_OK,							//2
-	PS_ADDR_MATCH,					//3
-	PS_ADDR_MISMATCH,				//4
-	PS_CMD_NOT_SUPPORTED,		//5
-	PS_VAR_NOT_SUPPORTED,		//6
-	PS_VAL_NOT_SUPPORTED,		//7
-	PS_CRC_BAD,							//8
-	PS_CRC_OK,							//9
-	PS_TIMEOUT,							//10
-	PS_ERROR								//11
+	PS_NEW,									//0	
+	PS_SEND_OK,							//1
+	PS_ADDR_MATCH,					//2
+	PS_ADDR_MISMATCH,				//3	
+	PS_CRC_BAD,							//4
+	PS_CRC_OK,							//5
+	PS_TIMEOUT,							//6
+	PS_ERROR								//7
 };
 
-#define PACK_STATE_STR_CNT	13
+enum WL_CMD_STATE{								
+	CMD_DONE,							//1
+	CMD_NOT_SUPPORTED,		//2
+	VAR_NOT_SUPPORTED,		//3
+	VAL_NOT_SUPPORTED,		//4	
+	CMD_ERROR							//5
+};
+
+#define PACK_STATE_STR_CNT	8
 static const char* PACK_STATE_STR[PACK_STATE_STR_CNT] = { 
-		"NEW",
-		"DONE",
+		"NEW",		
 		"SEND OK",
 		"ADDR MATCH",
-		"ADDR MISMATCH",
-		"CMD NOT SUPPORTED",
-		"VAR NOT SUPPORTED",
-		"VAL NOT SUPPORTED",
+		"ADDR MISMATCH",		
 		"CRC BAD",	
 		"CRC OK",	
 		"TIMEOUT",
 		"ERROR"
 		};
-
+#define CMD_STATE_STR_CNT	5
+static const char* CMD_STATE_STR[PACK_STATE_STR_CNT] = { 		
+		"DONE",		
+		"CMD NOT SUPPORTED",
+		"VAR NOT SUPPORTED",
+		"VAL NOT SUPPORTED",		
+		"ERROR"
+		};
+		
 // struct packet_buf{
 
 //	 uint32_t dest_addr;

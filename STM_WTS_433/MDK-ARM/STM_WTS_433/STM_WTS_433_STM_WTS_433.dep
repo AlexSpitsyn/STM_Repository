@@ -55,7 +55,7 @@ I (../SAD_Lib/Inc/ds18b20.h)(0x5F102ACA)
 I (../SAD_Lib/Inc/1-wire.h)(0x5F086419)
 I (../SAD_Lib/Inc/uart_cmd_parser.h)(0x5F352906)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../SAD_Lib/Inc/SX1278.h)(0x5F101E11)
 F (../Src/main.c)(0x5F341FC5)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\main.o --omf_browse stm_wts_433\main.crf --depend stm_wts_433\main.d)
 I (../Inc/main.h)(0x5F33C6EB)
@@ -114,7 +114,7 @@ I (../SAD_Lib/Inc/eeprom.h)(0x5F0DA126)
 I (../SAD_Lib/Inc/ds18b20.h)(0x5F102ACA)
 I (../SAD_Lib/Inc/1-wire.h)(0x5F086419)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/system.h)(0x5F33CA83)
 I (../SAD_Lib/Inc/SX1278.h)(0x5F101E11)
 F (../Src/gpio.c)(0x5F33FEEB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\gpio.o --omf_browse stm_wts_433\gpio.crf --depend stm_wts_433\gpio.d)
@@ -570,7 +570,7 @@ I (../SAD_Lib/Inc/ds18b20.h)(0x5F102ACA)
 I (../SAD_Lib/Inc/1-wire.h)(0x5F086419)
 I (../SAD_Lib/Inc/uart_cmd_parser.h)(0x5F352906)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/system.h)(0x5F33CA83)
 F (../Src/stm32f1xx_hal_msp.c)(0x5F33C6EB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\stm32f1xx_hal_msp.o --omf_browse stm_wts_433\stm32f1xx_hal_msp.crf --depend stm_wts_433\stm32f1xx_hal_msp.d)
 I (../Inc/main.h)(0x5F33C6EB)
@@ -1522,7 +1522,7 @@ I (../SAD_Lib/Inc/eeprom.h)(0x5F0DA126)
 I (../SAD_Lib/Inc/ds18b20.h)(0x5F102ACA)
 I (../SAD_Lib/Inc/uart_cmd_parser.h)(0x5F352906)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/system.h)(0x5F33CA83)
 I (../SAD_Lib/Inc/SX1278.h)(0x5F101E11)
 F (..\SAD_Lib\Src\ds18b20.c)(0x5F102BF4)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\ds18b20.o --omf_browse stm_wts_433\ds18b20.crf --depend stm_wts_433\ds18b20.d)
@@ -1579,7 +1579,7 @@ I (../Inc/tim.h)(0x5F33C6E9)
 I (../SAD_Lib/Inc/eeprom.h)(0x5F0DA126)
 I (../SAD_Lib/Inc/uart_cmd_parser.h)(0x5F352906)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/system.h)(0x5F33CA83)
 I (../SAD_Lib/Inc/SX1278.h)(0x5F101E11)
 F (..\SAD_Lib\Src\eeprom.c)(0x5F3274F0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\eeprom.o --omf_browse stm_wts_433\eeprom.crf --depend stm_wts_433\eeprom.d)
@@ -1636,7 +1636,7 @@ I (../SAD_Lib/Inc/ds18b20.h)(0x5F102ACA)
 I (../SAD_Lib/Inc/1-wire.h)(0x5F086419)
 I (../SAD_Lib/Inc/uart_cmd_parser.h)(0x5F352906)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/system.h)(0x5F33CA83)
 I (../SAD_Lib/Inc/SX1278.h)(0x5F101E11)
 F (..\SAD_Lib\Src\hw_crc32.c)(0x5E39B420)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\hw_crc32.o --omf_browse stm_wts_433\hw_crc32.crf --depend stm_wts_433\hw_crc32.d)
@@ -1728,9 +1728,9 @@ I (../SAD_Lib/Inc/ds18b20.h)(0x5F102ACA)
 I (../SAD_Lib/Inc/1-wire.h)(0x5F086419)
 I (../SAD_Lib/Inc/uart_cmd_parser.h)(0x5F352906)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/system.h)(0x5F33CA83)
-F (..\SAD_Lib\Src\uart_cmd_parser.c)(0x5F49FD75)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\uart_cmd_parser.o --omf_browse stm_wts_433\uart_cmd_parser.crf --depend stm_wts_433\uart_cmd_parser.d)
+F (..\SAD_Lib\Src\uart_cmd_parser.c)(0x5F606E08)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\uart_cmd_parser.o --omf_browse stm_wts_433\uart_cmd_parser.crf --depend stm_wts_433\uart_cmd_parser.d)
 I (../SAD_Lib/Inc/uart_cmd_parser.h)(0x5F352906)
 I (../Inc/sys_config.h)(0x5F49F9EF)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEBC032)
@@ -1784,11 +1784,11 @@ I (../SAD_Lib/Inc/eeprom.h)(0x5F0DA126)
 I (../SAD_Lib/Inc/ds18b20.h)(0x5F102ACA)
 I (../SAD_Lib/Inc/1-wire.h)(0x5F086419)
 I (../SAD_Lib/Inc/hw_crc32.h)(0x5E39B420)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/system.h)(0x5F33CA83)
 I (../SAD_Lib/Inc/SX1278.h)(0x5F101E11)
-F (..\SAD_Lib\Src\wireless_ctrl.c)(0x5F49FE3C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\wireless_ctrl.o --omf_browse stm_wts_433\wireless_ctrl.crf --depend stm_wts_433\wireless_ctrl.d)
-I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F49FD6D)
+F (..\SAD_Lib\Src\wireless_ctrl.c)(0x5F6486C1)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../SAD_Lib/Inc-I.\RTE\_STM_WTS_433-IC:\Users\Alexander\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\Alexander\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o stm_wts_433\wireless_ctrl.o --omf_browse stm_wts_433\wireless_ctrl.crf --depend stm_wts_433\wireless_ctrl.d)
+I (../SAD_Lib/Inc/wireless_ctrl.h)(0x5F6486C1)
 I (../Inc/sys_config.h)(0x5F49F9EF)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEBC032)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEBC032)
