@@ -66,7 +66,7 @@ volatile SysCouners_t SysCnt={0};
 {"t_ctrl_time", 0, 5000, 	&SysState.t_ctrl_time, 				WE, vn_T_CTRL_TIME},
 {"t_updt_time", 0, 5000, 	&SysState.t_updt_time, 				WE, vn_T_UPDT_TIME},
 {"t_hyst", 			0, 10, 		&SysState.t_hyst, 						WE, vn_T_HYST},
-{"pump", 				0, 0x00FF,&SysState.pump, 							WE, vn_PUMP},
+{"pump", 				0, 0x01FF,&SysState.pump, 							WE, vn_PUMP},
 {"drv_pos", 		0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.pos, 									RO, vn_DRIVE_POS},
 {"drv_pos_max", 0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.max_pos, 							WE, vn_DRIVE_MAX_POS},
 {"drv_pos_dest",0, DRIVE_MAX_POS_LIMIT, 		&drv_m1.dest_pos, 						WE, vn_DRIVE_DRIVE_POS_DEST},

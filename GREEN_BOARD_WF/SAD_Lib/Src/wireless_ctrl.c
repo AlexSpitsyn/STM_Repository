@@ -262,7 +262,7 @@ void WL_Handler(void){
 						sprintf(dbg_str,"RUN CMD STATE: %s\r\n",CMD_STATE_STR[cmd_state]);
 						dbg_print(dbg_str);
 				}
-				state = WL_Send_Packet(RX_packet.pack_ID, state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val, RX_packet.desc);
+				state = WL_Send_Packet(RX_packet.pack_ID, cmd_state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val, RX_packet.desc);
 				if(WL_DEBUG_PRINT){		
 					sprintf(dbg_str,"SEND PACKET STATE: %s\r\n",PACK_STATE_STR[state]);
 					dbg_print(dbg_str);
