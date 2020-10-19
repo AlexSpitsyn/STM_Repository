@@ -102,9 +102,9 @@ int main(void)
   MX_CRC_Init();
   /* USER CODE BEGIN 2 */
 	
-
 	SysInit();
 
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,6 +112,7 @@ int main(void)
   while (1){
 
 		SystemTask();
+		
 		buttons_handler();
 		
 		//---------- BTN UP ------------
@@ -130,8 +131,7 @@ int main(void)
 		
 		//------- BTN DOWN -----------
 		if(BTN_DOWN==SHORT_PRESS){
-			BTN_DOWN=0;
-			//LED_TOGGLE(LED_BLUE); 			
+			BTN_DOWN=0;			
 			SetTemp();	        
 			SysCnt.temp_update = 0;
 			SysCnt.temp_ctrl = 0;

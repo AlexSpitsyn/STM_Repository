@@ -67,8 +67,6 @@ void buttons_handler(void){
 uint8_t state, i;
 	
 	if (btn_pressed_f) {
-		//PCF8574_ReadReg();
-		//if((~PCF8574_reg) & (BTN1_CODE | BTN2_CODE | BTN3_CODE | BTN4_CODE )){//only pressed state
 		if(BUTTON_DBG_PRINT_F){
 			sprintf(dbg_str, "PCF8574_reg: 0x%02X\r\n", PCF8574_reg);
 			dbg_print(dbg_str);
@@ -89,7 +87,7 @@ uint8_t state, i;
 				}					
 			}
 		}
-		//}
+		
 	}
 	for(i=0; i<BTN_CNT;i++){
 		if((HAL_GetTick()-buttons[i].press_time>LONG_PRESS_TIME) && (buttons[i].state)){

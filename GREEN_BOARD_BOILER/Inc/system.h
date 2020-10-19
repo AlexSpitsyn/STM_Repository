@@ -102,10 +102,10 @@ enum VarName{
 // ERROR CODE
 
 
-#define TEMP_SENSOR_READING_ERROR 	0x04
-#define IO_EXPANDER_READING_ERROR 	0x08
-#define EEPROM_READING_ERROR 				0x10
-
+#define TEMP_SENSOR_READING_ERROR 		0//1
+#define IO_EXPANDER_READING_ERROR 		1//2
+#define EEPROM_READING_ERROR 					2//4
+	
 #define ERROR_CHECK_TIME						100
 
 
@@ -115,7 +115,7 @@ void SystemTask(void);
 uint32_t SysVarRW(_Bool rw, SysVar* sv);
 void SetTemp(void);
 void SetMaxPosition(void);
-
+uint32_t EEPROM_restore(void);
 
 
 //==============================================================
@@ -131,13 +131,13 @@ void SetMaxPosition(void);
 //==============================================================
 //========================     PUMP/BURNER      ================
 //#define PUMP(x)							x ? PCF8574_PortSet(5): PCF8574_PortReset(5); SysState.pump1=x;
-
 //#define BURNER(x)						x ? PCF8574_PortSet(6): PCF8574_PortReset(6); SysState.burner=x;
 
+//#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
+//#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
 
-#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
-#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
-
+#define PUMP(x)							x ? HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_SET); SysState.pump=x;
+#define BURNER(x)						x ? HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_SET); SysState.burner=x;
 
 //==============================================================
 

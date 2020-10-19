@@ -27,9 +27,22 @@
 #include "SX1278.h"
 #include "buttons_io_exp.h"
 
+#define DEV_NAME 								"Boiler temp controller v.1\r\n> "
+
 //EEPROM 
 #define EEPROM_WL_ADDR 								0x40
 
+static uint8_t eeprom_dump[] ={
+	0x55, 0x00, 0x01, 0x00, 0x28, 0x00, 0xD0, 0x07, 
+	0xDC, 0x05, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x10, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+	0x42, 0x4F, 0x4C, 0x52, 0x00, 0xFF, 0xFF, 0xFF
+};
 
 
 
@@ -75,19 +88,19 @@
 #define LED_BLUE											4 //PCF8574 port
 
 // UART CONFIG
-//#define print_to(x)										printf(x)
+#define print_to(x)									printf(x)
 //#define print_to(x)									HAL_UART_Transmit(&huart1, (uint8_t*)x, strlen(x), 0xFFFF);
-#define print_to(x)										while(CDC_Transmit_FS( (uint8_t*)x, strlen(x))!=USBD_OK)
+//#define print_to(x)										while(CDC_Transmit_FS( (uint8_t*)x, strlen(x))!=USBD_OK)
 
 //	DEBUG
 //#define dbg_print(s) 									printf(s)
 #define dbg_print(s) 									print_to(s)
 extern char dbg_str[64];
 
-#define EEPROM_DBG_PRINT_F 						1
-#define PCF8574A_DBG_PRINT_F 					1
+#define EEPROM_DBG_PRINT_F 						0
+#define PCF8574A_DBG_PRINT_F 					0
 #define DS18B20_DBG_PRINT_F 					0
-#define BUTTON_DBG_PRINT_F						0
+#define BUTTON_DBG_PRINT_F						1
 #define SYS_DBG_PRINT_F								1
 
 #endif //__SYS_CONFIG_H__

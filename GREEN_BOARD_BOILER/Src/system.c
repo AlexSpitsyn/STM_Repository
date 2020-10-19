@@ -83,48 +83,65 @@ volatile SysCouners_t SysCnt={0};
 
 void SysInit(void) {
 	
-	
-	SevSeg_Init();
-	
-  SysState.error_code =0;
-	SysState.error_code |= EEPROM_IsDeviceReady()<< EEPROM_READING_ERROR;
-  SysState.error_code |= PCF8574_IsDeviceReady()<< IO_EXPANDER_READING_ERROR;  
-  SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
-	
 
-	ds18b20_Init(1,RESOLUTION_9BIT);
-  ds18b20_GetTemp(0);
+	
+	SysState.error_code = 0;
+	SysState.error_code |= EEPROM_IsDeviceReady()<< EEPROM_READING_ERROR;
+	SysState.error_code |= PCF8574_IsDeviceReady()<< IO_EXPANDER_READING_ERROR;  
+	SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
+
+	SevSeg_Init();
+	ds18b20_GetTemp(0);
 		
 	SysVarRW(RD,&SV[vn_T_CTRL_F]);	
 	SysVarRW(RD,&SV[vn_T_SET]);	
 	SysVarRW(RD,&SV[vn_T_CTRL_TIME]);
 	SysVarRW(RD,&SV[vn_T_UPDT_TIME]);
 	SysVarRW(RD,&SV[vn_T_HYST]);
-
 	SysVarRW(RD,&SV[vn_T_THRESHOLD]);
 
 	
 
-  //Start timer1 IT
-  HAL_TIM_Base_Start_IT( &htim1);
+	//Start timer1 IT
+	HAL_TIM_Base_Start_IT( &htim1);
 
-  //Start timer3 IT DRIVE ENCODER
-  //HAL_TIM_Encoder_Start( &htim3, TIM_CHANNEL_ALL);
-  //HAL_TIM_Base_Start_IT( &htim3);
 	
-  //Arm UART1
-  HAL_UART_Receive_IT( & huart1, & receive_val, 1);
-
-
+	//Arm UART1
+	HAL_UART_Receive_IT( & huart1, & receive_val, 1);
+	
+	//if eeprom need to restore
+	while(HAL_UART_Transmit(&huart1, "C" , 1, 0xFFFF)!=HAL_OK);
+	HAL_Delay(100);	
+	if (uart_rx_buf[0]=='C') {		
+		if (EEPROM_restore()) {						
+			print_to("EEPROM RESTORE: FAIL\r\n");
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_P);	
+			putcSS(SEV_SEG_1);	
+			SS_LATCH();
+		}else{
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_P);	
+			putcSS(SEV_SEG_0);	
+			SS_LATCH();
+			print_to("EEPROM RESTORE: DONE\r\n");
+		}			
+		HAL_Delay(1000);		
+	}
+//end restoring
+	
 	SysState.ss_update_f = 1;
 	Buttons_Init();			  
 	SysCnt.temp_ctrl = SysState.t_ctrl_time;
 
-			
 	PUMP(OFF);
 	BURNER(OFF);			
-
-
+	LED_OFF(LED_BLUE);
+	LED_OFF(LED_RED);
+			
+	
 	WL_Init();
 	if(SYS_DBG_PRINT_F){
 		dbg_print("===== INIT DONE ======\r\n");
@@ -135,7 +152,7 @@ void SystemTask(void) {
     // unsigned int i;
 
     //----------------      DISPLAY        --------------------------------------
-    	if (SysState.error_code) {
+  if (SysState.error_code) {
 		if (SysState.ss_update_f) {
 			SS_PRINT_ERROR_CODE(SysState.error_code);
 			SysState.ss_update_f = 0;
@@ -147,8 +164,7 @@ void SystemTask(void) {
 				if(SYS_DBG_PRINT_F){
 					dbg_print("SS update\r\n");
 				}
-				SS_PRINT_TEMP(DS18B20_TEMP);
-		
+				SS_PRINT_TEMP(DS18B20_TEMP);		
 			}	
 		}				
 		else{
@@ -157,66 +173,61 @@ void SystemTask(void) {
 	}	
     //----------------      TEMP UPDATE     --------------------------------------
 
-    if (!SysState.error_code) {
 
-      if (SysCnt.temp_update >= SysState.t_updt_time){
-				
-				if(SYS_DBG_PRINT_F){
-					dbg_print("TEMP update\r\n");
-				}
-        SysCnt.temp_update = 0;
-        SysState.ss_update_f = 1;
-				
-        LED_TOGGLE(LED_BLUE); 				
-
-
-		SysState.error_code |= ds18b20_GetTemp(0) << TEMP_SENSOR_READING_ERROR;  
-					
-		LED_TOGGLE(LED_BLUE); 			
-					
-        }
-      }
+	if (SysState.error_code==0) {
+		if (SysCnt.temp_update >= SysState.t_updt_time){				
+			if(SYS_DBG_PRINT_F){
+				dbg_print("TEMP update\r\n");
+			}
+			SysCnt.temp_update = 0;
+			SysState.ss_update_f = 1;				
+			LED_TOGGLE(LED_BLUE);
+			SysState.error_code |= ds18b20_GetTemp(0) << TEMP_SENSOR_READING_ERROR; 
+			LED_TOGGLE(LED_BLUE);
+		}
+	}
 
       //----------------      TEMP CONTROL     --------------------------------------
-      if (!SysState.error_code) {
-        if (SysState.temp_ctrl_f){
-					if (SysCnt.temp_ctrl >= SysState.t_ctrl_time) {
-						SysState.ss_update_f = 1;
-						SysCnt.temp_ctrl = 0;			
-						if(SYS_DBG_PRINT_F){
-							dbg_print("TEMP control\r\n");							
-						}
-						if ((DS18B20_TEMP < SysState.set_temp - SysState.t_hyst) & (SysState.burner == 0)) {	
-							if(SYS_DBG_PRINT_F){
-								dbg_print("BURNER(ON)\r\n");
-							}
-							BURNER(ON);
-						}														
-					
-						if ((DS18B20_TEMP > SysState.set_temp + SysState.t_hyst) & (SysState.burner == 1)) {
-							if(SYS_DBG_PRINT_F){
-								dbg_print("BURNER(OFF)\r\n");
-							}
-							BURNER(OFF);			
-						}	
-					}  
+      
+
+	if (SysState.error_code==0) {
+		if (SysState.temp_ctrl_f){
+			if (SysCnt.temp_ctrl >= SysState.t_ctrl_time) {
+				SysState.ss_update_f = 1;
+				SysCnt.temp_ctrl = 0;			
+				if(SYS_DBG_PRINT_F){
+					dbg_print("TEMP control\r\n");							
 				}
-			}
+				if ((DS18B20_TEMP < SysState.set_temp - SysState.t_hyst) & (SysState.burner == 0)) {	
+					if(SYS_DBG_PRINT_F){
+						dbg_print("BURNER(ON)\r\n");
+					}
+				BURNER(ON);
+				}
+				if ((DS18B20_TEMP > SysState.set_temp + SysState.t_hyst) & (SysState.burner == 1)) {
+					if(SYS_DBG_PRINT_F){
+						dbg_print("BURNER(OFF)\r\n");
+					}
+				BURNER(OFF);			
+				}	
+			}  
+		}
+	}
 
      
-			if((SysState.burner==1) &( SysState.pump==0)){
-				PUMP(ON);
-			
-			}
-			if(SysState.temp_ctrl_f==0){
-				BURNER(OFF);	
-			}
-			if(!SysState.temp_ctrl_f & SysState.pump & (DS18B20_TEMP<SysState.threshold_temp)){
-				PUMP(OFF);
-			}
-			if(DS18B20_TEMP>SysState.threshold_temp){
-				PUMP(ON);
-			}
+	if((SysState.burner==1) &( SysState.pump==0)){
+		PUMP(ON);
+
+	}
+	if(SysState.temp_ctrl_f==0){
+		BURNER(OFF);	
+	}
+	if(!SysState.temp_ctrl_f & SysState.pump & (DS18B20_TEMP<SysState.threshold_temp)){
+		PUMP(OFF);
+	}
+	if(DS18B20_TEMP>SysState.threshold_temp){
+		PUMP(ON);
+	}
 			
 				
 //			if((SysState.burner==0) & (SysState.pump1==1) & DS18B20_TEMP<20){
@@ -233,7 +244,7 @@ void SystemTask(void) {
 
 			//---------------------------   CDC --------------------------------
 			
-			if(HAL_GPIO_ReadPin(USB_INT_GPIO_Port, USB_INT_Pin) & (cdc_init==0)){
+			if(HAL_GPIO_ReadPin(USB_INT_GPIO_Port, USB_INT_Pin) && (cdc_init==0)){
 				HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
 				cdc_init=1;
 				
@@ -247,7 +258,7 @@ void SystemTask(void) {
 					parseCommand(vcp_rx_buf);						
 				}
 				vcp_rx_flag = 0;
-			}				
+			}					
 			
 			
 			
@@ -371,4 +382,15 @@ uint32_t SysVarRW(_Bool rw, SysVar* sv) {
 	}	
 }
 
- 
+ uint32_t EEPROM_restore(void) {
+	int len, res;
+	
+	len=EEPROM_DUMP_SIZE/8;
+	 
+	for( int i = 0; i<=len; i++){
+		res|=EEPROM_Write(i*8, 8, eeprom_dump+i*8);
+		HAL_Delay(100);
+	}
+	return res;
+		
+}

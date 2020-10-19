@@ -47,7 +47,7 @@ void uartInit(void) {
 #define DEC_STR 10
 #define HEX_STR 16
 
-#define CMD_CNT 10
+#define CMD_CNT 11
 static const char* commands[CMD_CNT] = {							
 		"help",         // 0                      
 		"init",     		// 1
@@ -58,7 +58,8 @@ static const char* commands[CMD_CNT] = {
 		"wl clear irq",	// 6
 		"rx handler",		// 7
 		"state",				// 8
-		"eeprom write"	// 9
+		"eeprom write",	// 9
+		"eeprom restore"
 											
 	}; 
 #define PRM_CNT 6
@@ -512,7 +513,16 @@ void parseCommand(char *buf) {
 				}
 			
 			break;
-		
+//===========================================================================			
+//==============================  WRITE RESTORE  =============================
+//===========================================================================				
+			case 10:  //eeprom	
+				if (EEPROM_Write(0, strlen((char*)eeprom_dump), eeprom_dump)) {						
+					print_to("EEPROM RESTORE: FAIL\r\n");
+				}else{
+					print_to("EEPROM RESTORE: DONE\r\n");
+				}
+			break;		
     
 			default:
 				print_to("command unknown");

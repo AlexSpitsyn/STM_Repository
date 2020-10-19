@@ -47,7 +47,7 @@ void uartInit(void) {
 #define DEC_STR 10
 #define HEX_STR 16
 
-#define CMD_CNT 10
+#define CMD_CNT 11
 static const char* commands[CMD_CNT] = {							
 		"help",         // 0                      
 		"init",     		// 1
@@ -58,7 +58,8 @@ static const char* commands[CMD_CNT] = {
 		"wl clear irq",	// 6
 		"rx handler",		// 7
 		"state",				// 8
-		"eeprom write"	// 9
+		"eeprom write",	// 9
+		"eeprom restore"
 											
 	}; 
 #define PRM_CNT 6
@@ -342,66 +343,86 @@ void parseCommand(char *buf) {
 //===========================================================================   
 			case 4://get
 				if (*(pArg1) != 0){
-					l=0;
-					for (i = 0; i < PRM_CNT; i++) {
-						if (strncmp(pArg1, param[i], strlen(param[i])) == 0) {
-							l = 1;
-							break;
-						}
-					}						
-					if(l){
-						switch (i){							
-							case 0://addr		
-									sprintf(answer, "WL ADDR: 0x%08X / %s", WL_ADDR.Val, WL_ADDR.S);
-									print_to(answer);								
-								break;
-								
-							case 1://power
-									sprintf(answer, "SX1278 POWER: %s dBm", SX1278_Power_s[SX1278.POWER]);
-									print_to(answer);								
-								break;
-								
-							case 2://bw
-									sprintf(answer, "Set SX1278 Bandwidth: %s kHz", SX1278_LoRaBandwidth_s[SX1278.BW]);
-									print_to(answer);
-								break;
-								
-							case 3://sf	
-									sprintf(answer, "SX1278 SF: %d", SX1278_SpreadFactor[SX1278.SF]);
-									print_to(answer);								
-								break;
-								
-							case 4://cr									
-									sprintf(answer, "SX1278 Coding Rate: %s", SX1278_CR_s[SX1278.CR]);
-									print_to(answer);							
-								break;
-							
-							case 5://all sv
-								for (i = 0; i < SYS_VAR_CNT; i++) {
-									sprintf(answer, "%s = %d\r\n", SV[i].name, *SV[i].pVal);
-									print_to(answer);	
-								}
-							break;
-								
-							default:
-								print_to("wrong param type");
-							break;					
-						}		
-					}else {						
+					if (strncmp(pArg1, "all", 3) == 0) {
+						sprintf(answer, "WL ADDR: 0x%08X / %s\r\n", WL_ADDR.Val, WL_ADDR.S);
+						print_to(answer);
+						sprintf(answer, "SX1278 POWER: %s dBm\r\n", SX1278_Power_s[SX1278.POWER]);
+						print_to(answer);
+						sprintf(answer, "SX1278 Bandwidth: %s kHz\r\n", SX1278_LoRaBandwidth_s[SX1278.BW]);
+						print_to(answer);
+						sprintf(answer, "SX1278 SF: %d\r\n", SX1278_SpreadFactor[SX1278.SF]);
+						print_to(answer);
+						sprintf(answer, "SX1278 Coding Rate: %s\r\n", SX1278_CR_s[SX1278.CR]);
+						print_to(answer);
 						for (i = 0; i < SYS_VAR_CNT; i++) {
-							if (strncmp(pArg1, SV[i].name, strlen(SV[i].name)) == 0) {
+							sprintf(answer, "%s = %d\r\n", SV[i].name, *SV[i].pVal);
+							print_to(answer);
+						}
+					}else{		
+					
+						l=0;
+						for (i = 0; i < PRM_CNT; i++) {
+							if (strncmp(pArg1, param[i], strlen(param[i])) == 0) {
 								l = 1;
 								break;
 							}
-						}
+						}						
 						if(l){
-							sprintf(answer, "%s = %d", SV[i].name, *SV[i].pVal);
-						print_to(answer);	
-						}else{
-							sprintf(answer, "Wrong var: %s",  pArg1);
+							switch (i){							
+								case 0://addr		
+										sprintf(answer, "WL ADDR: 0x%08X / %s", WL_ADDR.Val, WL_ADDR.S);
+										print_to(answer);								
+									break;
+									
+								case 1://power
+										sprintf(answer, "SX1278 POWER: %s dBm", SX1278_Power_s[SX1278.POWER]);
+										print_to(answer);								
+									break;
+									
+								case 2://bw
+										sprintf(answer, "SX1278 Bandwidth: %s kHz", SX1278_LoRaBandwidth_s[SX1278.BW]);
+										print_to(answer);
+									break;
+									
+								case 3://sf	
+										sprintf(answer, "SX1278 SF: %d", SX1278_SpreadFactor[SX1278.SF]);
+										print_to(answer);								
+									break;
+									
+								case 4://cr									
+										sprintf(answer, "SX1278 Coding Rate: %s", SX1278_CR_s[SX1278.CR]);
+										print_to(answer);							
+									break;
+								
+								case 5://all sv
+									for (i = 0; i < SYS_VAR_CNT; i++) {
+										sprintf(answer, "%s = %d\r\n", SV[i].name, *SV[i].pVal);
+										print_to(answer);	
+									}
+								break;
+									
+								default:
+									print_to("wrong param type");
+								break;					
+							}		
+						}else {						
+							for (i = 0; i < SYS_VAR_CNT; i++) {
+								if (strncmp(pArg1, SV[i].name, strlen(SV[i].name)) == 0) {
+									l = 1;
+									break;
+								}
+							}
+							if(l){
+								sprintf(answer, "%s = %d", SV[i].name, *SV[i].pVal);
 							print_to(answer);	
-						}
-					}  	
+							}else{
+								sprintf(answer, "Wrong var: %s",  pArg1);
+								print_to(answer);	
+							}
+						} 
+					}
+
+					
 				}else{
 					print_to("var not set");
 				}
@@ -465,9 +486,11 @@ void parseCommand(char *buf) {
 //===========================================================================			
 //==============================  STATE    ==================================
 //===========================================================================			
-			case 8:  //state		
-				sprintf(answer, "ERROR CODE: 0x%08X\r\n", SysState.error_code);
+			case 8:  //state	
+				print_to("\r\n----------------------\r\n");
+				sprintf(answer, "ERROR CODE: 0x%08X", SysState.error_code);
 				print_to(answer);	
+				print_to("\r\n----------------------\r\n");
 				print_to("\r\n-----  WL STATE  ----\r\n");	
 				sprintf(answer, "WL ADDR: 0x%08X / %s", WL_ADDR.Val, WL_ADDR.S);
 				print_to(answer);
@@ -487,7 +510,7 @@ void parseCommand(char *buf) {
 //===========================================================================			
 //==============================  WRITE EEPROM  =============================
 //===========================================================================				
-			case 9:  //eeprom			
+			case 9:  //eeprom	write	
 				tmp=0;
 				for (i = 0; i < SYS_VAR_CNT; i++) {	
 					if (SV[i].mem_addr != 0) {						
@@ -512,7 +535,16 @@ void parseCommand(char *buf) {
 				}
 			
 			break;
-		
+//===========================================================================			
+//==============================  EEPROM RESTORE  ===========================
+//===========================================================================				
+			case 10:  //eeprom	restore
+				if (EEPROM_restore()) {						
+					print_to("EEPROM RESTORE: FAIL\r\n");
+				}else{
+					print_to("EEPROM RESTORE: DONE\r\n");
+				}
+			break;		
     
 			default:
 				print_to("command unknown");

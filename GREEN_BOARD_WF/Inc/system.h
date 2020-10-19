@@ -113,7 +113,8 @@ void SystemTask(void);
 uint32_t SysVarRW(_Bool rw, SysVar* sv);
 void SetTemp(void);
 void SetMaxPosition(void);
- void pump_set(uint8_t channels);
+void pump_set(uint8_t channels);
+uint32_t EEPROM_restore(void);
 
 
 //==============================================================

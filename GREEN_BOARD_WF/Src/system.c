@@ -69,7 +69,7 @@ volatile SysCouners_t SysCnt={0};
 {"pump", 				0, 0x01FF,&SysState.pump, 							WE, vn_PUMP},
 {"drv_pos", 		0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.pos, 									RO, vn_DRIVE_POS},
 {"drv_pos_max", 0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.max_pos, 							WE, vn_DRIVE_MAX_POS},
-{"drv_pos_dest",0, DRIVE_MAX_POS_LIMIT, 		&drv_m1.dest_pos, 						WE, vn_DRIVE_DRIVE_POS_DEST},
+{"drv_pos_dest",0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.dest_pos, 						WE, vn_DRIVE_DRIVE_POS_DEST},
 {"drv_steps", 	0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.steps, 								WE, vn_DRIVE_STEPS }
 
 ////{"all", 0, 0, NULL, 0},
@@ -81,44 +81,71 @@ volatile SysCouners_t SysCnt={0};
 
 void SysInit(void) {
 	
-	PUMP(OFF);
 	SevSeg_Init();
-	
-  SysState.error_code =0;
+
+	SysState.error_code =0;
 	SysState.error_code |= EEPROM_IsDeviceReady()<< EEPROM_READING_ERROR;
-  SysState.error_code |= PCF8574_IsDeviceReady()<< IO_EXPANDER_READING_ERROR;  
-  SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
+	SysState.error_code |= PCF8574_IsDeviceReady()<< IO_EXPANDER_READING_ERROR;  
+	SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
 	SysState.error_code |= Drive_CheckRotation(1) << DRV_CLOSE_ERROR;
 	HAL_Delay(500);
-	SysState.error_code |= Drive_CheckRotation(0) << DRV_OPEN_ERROR;		
-	
+	SysState.error_code |= Drive_CheckRotation(0) << DRV_OPEN_ERROR;
 		
+	ds18b20_GetTemp(0);
+	
 	SysVarRW(RD,&SV[vn_T_CTRL_F]);	
 	SysVarRW(RD,&SV[vn_T_SET]);	
 	SysVarRW(RD,&SV[vn_T_CTRL_TIME]);
 	SysVarRW(RD,&SV[vn_T_UPDT_TIME]);
 	SysVarRW(RD,&SV[vn_T_HYST]);
 	SysVarRW(RD,&SV[vn_PUMP]);
-	//SysVarRW(RD,&SV[vn_DRIVE_POS]);
-	SysVarRW(RD,&SV[vn_DRIVE_MAX_POS]);
-	SysVarRW(RD,&SV[vn_DRIVE_DRIVE_POS_DEST]);
-	SysVarRW(RD,&SV[vn_DRIVE_STEPS]);
 	
+	
+	//SysVarRW(RD,&SV[vn_DRIVE_POS]);
+	//SysVarRW(RD,&SV[vn_DRIVE_MAX_POS]);
+	//SysVarRW(RD,&SV[vn_DRIVE_DRIVE_POS_DEST]);
+	//SysVarRW(RD,&SV[vn_DRIVE_STEPS]);
 	drv_m1.pos=0;
 	drv_m1.dest_pos=0;
-	//drv_m1.steps=DRIVE_STEPS;
+	drv_m1.steps=DRIVE_STEPS;
+	drv_m1.max_pos=DRIVE_MAX_POS_LIMIT;
+	
 	pump_set((uint8_t)SysState.pump);
 
-  //Start timer1 IT
-  HAL_TIM_Base_Start_IT( &htim1);
+	//Start timer1 IT
+	HAL_TIM_Base_Start_IT( &htim1);
 
-  //Start timer3 IT DRIVE ENCODER
-  //HAL_TIM_Encoder_Start( &htim3, TIM_CHANNEL_ALL);
-  //HAL_TIM_Base_Start_IT( &htim3);
+	//Start timer3 IT DRIVE ENCODER
+	//HAL_TIM_Encoder_Start( &htim3, TIM_CHANNEL_ALL);
+	//HAL_TIM_Base_Start_IT( &htim3);
+
+	//Arm UART1
+	HAL_UART_Receive_IT( & huart1, & receive_val, 1);
 	
-  //Arm UART1
-  HAL_UART_Receive_IT( & huart1, & receive_val, 1);
-
+	
+	
+	//if eeprom need to restore
+	while(HAL_UART_Transmit(&huart1, "C" , 1, 0xFFFF)!=HAL_OK);
+	HAL_Delay(100);	
+	if (uart_rx_buf[0]=='C') {		
+		if (EEPROM_restore()) {						
+			print_to("EEPROM RESTORE: FAIL\r\n");
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_P);	
+			putcSS(SEV_SEG_1);	
+			SS_LATCH();
+		}else{
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_E);	
+			putcSS(SEV_SEG_P);	
+			putcSS(SEV_SEG_0);	
+			SS_LATCH();
+			print_to("EEPROM RESTORE: DONE\r\n");
+		}			
+		HAL_Delay(1000);		
+	}
+//end restoring
 
 	SysState.ss_update_f = 1;
 	
@@ -137,13 +164,10 @@ void SysInit(void) {
 	ds18b20_GetTemp(0);
 	
 	SysCnt.temp_ctrl = SysState.t_ctrl_time;
-
 			
 	//PUMP(OFF);
 	HAL_SPI_Transmit(SS_SPI_PORT,(uint8_t*)SV[vn_PUMP].pVal, 1, 1000);
 	
-	
-
 
 	WL_Init();
 	if(SYS_DBG_PRINT_F){
@@ -322,9 +346,7 @@ void SystemTask(void) {
 				SysState.ss_update_f=1;
 			} 
 			
-//			if(SysState.error_f){
-//				
-//			}
+
 }
 		
 //========================     SYS TASK END    =====================
@@ -456,3 +478,15 @@ if (rw){
  }
 
 
+ uint32_t EEPROM_restore(void) {
+	int len, res;
+	
+	len=EEPROM_DUMP_SIZE/8;
+	 
+	for( int i = 0; i<=len; i++){
+		res|=EEPROM_Write(i*8, 8, eeprom_dump+i*8);
+		HAL_Delay(100);
+	}
+	return res;
+		
+}

@@ -120,7 +120,22 @@ void SysInit(void) {
 //	PUMP(OFF);
 //	BURNER(OFF);			
 
-
+	//if eeprom need to restore
+	while(HAL_UART_Transmit(&huart1, "C" , 1, 0xFFFF)!=HAL_OK);
+	HAL_Delay(100);	
+	if (uart_rx_buf[0]=='C') {
+		if (EEPROM_Write(0, strlen((char*)eeprom_dump), eeprom_dump)) {						
+			print_to("EEPROM RESTORE: FAIL\r\n");
+			LED_ON(LED_BLUE);			
+		}else{
+			print_to("EEPROM RESTORE: DONE\r\n");
+			LED_ON(LED_RED);
+		}			
+		HAL_Delay(1000);
+		LED_OFF(LED_BLUE);
+		LED_OFF(LED_RED);
+	}
+//end restoring
 	
 }
 

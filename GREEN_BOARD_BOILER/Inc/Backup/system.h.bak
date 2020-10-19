@@ -55,7 +55,7 @@ typedef struct {
 	int16_t 	burner;
   //				ERROR
   int8_t error_code;
-  _Bool error_f;
+//  _Bool error_f;
 	//				UART DBG
 	_Bool uart_en_f;
 	_Bool uart_dbg_f;
@@ -131,13 +131,13 @@ void SetMaxPosition(void);
 //==============================================================
 //========================     PUMP/BURNER      ================
 //#define PUMP(x)							x ? PCF8574_PortSet(5): PCF8574_PortReset(5); SysState.pump1=x;
-
 //#define BURNER(x)						x ? PCF8574_PortSet(6): PCF8574_PortReset(6); SysState.burner=x;
 
+//#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
+//#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
 
-#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
-#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
-
+#define PUMP(x)							x ? HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_SET); SysState.pump=x;
+#define BURNER(x)						x ? HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_SET); SysState.burner=x;
 
 //==============================================================
 
@@ -146,10 +146,10 @@ void SetMaxPosition(void);
 
 #define SS_BLINK_TIME 							10
 #define SS_VIEW_MODE_TIME 					120
-#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);PrintDecSevSeg(drv_m1.position);
-#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);PrintDecSevSeg(x);
-#define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); PrintDecSevSeg(x);
-#define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); PrintDecSevSeg(x);
+#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);SevSeg_PrintDec(drv_m1.position);
+#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);SevSeg_PrintDec(x);
+#define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); SevSeg_PrintDec(x);
+#define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); SevSeg_PrintDec(x);
 #define SS_PRINT_T_NONE() 					putcSS(SEV_SEG_t); putcSS(0); putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); SS_LATCH();
 #define SS_BLINK(x) 								SysState.ss_blink_f = x; SS_OE(x); SysCnt.blink=0;
 #define TEMP_VIEW 									0
