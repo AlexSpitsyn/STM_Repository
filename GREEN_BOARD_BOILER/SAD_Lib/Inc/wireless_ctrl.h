@@ -92,11 +92,11 @@ enum PACK_STATE{
 };
 
 enum WL_CMD_STATE{								
-	CMD_DONE,							//1
-	CMD_NOT_SUPPORTED,		//2
-	VAR_NOT_SUPPORTED,		//3
-	VAL_NOT_SUPPORTED,		//4	
-	CMD_ERROR							//5
+	CMD_DONE,							//0
+	CMD_NOT_SUPPORTED,		//1
+	VAR_NOT_SUPPORTED,		//2
+	VAL_NOT_SUPPORTED,		//3	
+	CMD_ERROR							//4
 };
 
 #define PACK_STATE_STR_CNT	8

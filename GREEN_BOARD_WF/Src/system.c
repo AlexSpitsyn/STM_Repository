@@ -176,7 +176,17 @@ void SysInit(void) {
 }
 
 void SystemTask(void) {
-    // unsigned int i;
+
+	int16_t old_temp_ctrl_f;
+	
+	 //Reset sys counters if temp_ctrl_f 0->1
+	if(old_temp_ctrl_f != SysState.temp_ctrl_f){
+		old_temp_ctrl_f = SysState.temp_ctrl_f;
+		if(SysState.temp_ctrl_f){
+			SysCnt.temp_update = SysState.t_updt_time;
+			SysCnt.temp_ctrl = SysState.t_ctrl_time;			
+		}
+	}
 	
 		
 		

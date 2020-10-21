@@ -149,8 +149,19 @@ void SysInit(void) {
 }
 
 void SystemTask(void) {
-    // unsigned int i;
 
+int16_t old_temp_ctrl_f;
+	
+	 //Reset sys counters if temp_ctrl_f 0->1
+	if(old_temp_ctrl_f != SysState.temp_ctrl_f){
+		old_temp_ctrl_f = SysState.temp_ctrl_f;
+		if(SysState.temp_ctrl_f){
+			SysCnt.temp_update = SysState.t_updt_time;
+			SysCnt.temp_ctrl = SysState.t_ctrl_time;			
+		}
+	}
+	
+	
     //----------------      DISPLAY        --------------------------------------
   if (SysState.error_code) {
 		if (SysState.ss_update_f) {
@@ -213,7 +224,7 @@ void SystemTask(void) {
 			}  
 		}
 	}
-
+      //----------------      PUMP & BURNER CONTROL     --------------------------------------
      
 	if((SysState.burner==1) &( SysState.pump==0)){
 		PUMP(ON);
@@ -228,7 +239,9 @@ void SystemTask(void) {
 	if(DS18B20_TEMP>SysState.threshold_temp){
 		PUMP(ON);
 	}
-			
+	
+
+	
 				
 //			if((SysState.burner==0) & (SysState.pump1==1) & DS18B20_TEMP<20){
 //			}
@@ -273,6 +286,8 @@ void SystemTask(void) {
 				SysState.ss_update_f=1;
 			}
 }
+
+
 		
 //========================     SYS TASK END    =====================
 		

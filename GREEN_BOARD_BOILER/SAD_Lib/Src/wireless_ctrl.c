@@ -81,9 +81,13 @@ uint8_t state;
 	}else{
 		if(SV[var].we){
 			if(val<=SV[var].vmax && val>=SV[var].vmin){
-				*SV[var].pVal = (uint16_t)val;	
-				strcpy((char*)desc, SV[var].name);	
-				state=CMD_DONE;				
+				*SV[var].pVal = (uint16_t)val;
+				strcpy((char*)desc, SV[var].name);
+				if(SysVarRW(WR, &SV[var])){
+					return CMD_ERROR;
+				}else{
+					state=CMD_DONE;
+				}					
 			}else{
 				state=VAL_NOT_SUPPORTED;
 			}
