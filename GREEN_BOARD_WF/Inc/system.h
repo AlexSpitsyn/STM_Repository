@@ -130,13 +130,13 @@ uint32_t EEPROM_restore(void);
 //==============================================================
 //========================     PUMP/BURNER      ================
 //#define PUMP(x)							x ? PCF8574_PortSet(5): PCF8574_PortReset(5); SysState.pump1=x;
-
 //#define BURNER(x)						x ? PCF8574_PortSet(6): PCF8574_PortReset(6); SysState.burner=x;
 
-
-#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
+//#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
 //#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
 
+#define WF_PUMP_ON()					SysState.pump|=0x0101;
+#define WF_PUMP_OFF()					SysState.pump&=0x00FE;SysState.pump|=0x0100;
 
 //==============================================================
 

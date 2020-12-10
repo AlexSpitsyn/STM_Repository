@@ -248,6 +248,15 @@ void WL_Handler(void){
 	uint8_t state=0, cmd_state;
 	
 		if(WL_RECEIVE){
+			
+			LED_TOGGLE(LED_BLUE); 
+			HAL_Delay(100);
+			LED_TOGGLE(LED_BLUE); 
+			HAL_Delay(100);
+			LED_TOGGLE(LED_BLUE); 
+			HAL_Delay(100);
+			LED_TOGGLE(LED_BLUE); 
+			
 			WL_RECEIVE=0;	
 			if(WL_DEBUG_PRINT){		
 				dbg_print("\r\n   Packet Received\r\n");
@@ -255,7 +264,7 @@ void WL_Handler(void){
 			state= WL_Check_Packet();
 			
 			if((state==PS_ADDR_MATCH) && rx_handler){		
-				HAL_Delay(500);
+				HAL_Delay(200);
 				
 				cmd_state = WL_Run_CMD(RX_packet.cmd);
 				if(WL_DEBUG_PRINT){		
@@ -268,6 +277,7 @@ void WL_Handler(void){
 					dbg_print(dbg_str);
 				}
 			}	
+			 
 		}		
 }
 

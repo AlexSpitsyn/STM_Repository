@@ -122,28 +122,38 @@ void SysInit(void) {
 	//Arm UART1
 	HAL_UART_Receive_IT( & huart1, & receive_val, 1);
 	
-	
+	Buttons_Init();	
+	LED_OFF(LED_BLUE);
+	LED_OFF(LED_RED);	
 	
 	//if eeprom need to restore
-	while(HAL_UART_Transmit(&huart1, "C" , 1, 0xFFFF)!=HAL_OK);
-	HAL_Delay(100);	
-	if (uart_rx_buf[0]=='C') {		
-		if (EEPROM_restore()) {						
-			print_to("EEPROM RESTORE: FAIL\r\n");
-			putcSS(SEV_SEG_E);	
-			putcSS(SEV_SEG_E);	
-			putcSS(SEV_SEG_P);	
-			putcSS(SEV_SEG_1);	
-			SS_LATCH();
-		}else{
-			putcSS(SEV_SEG_E);	
-			putcSS(SEV_SEG_E);	
-			putcSS(SEV_SEG_P);	
-			putcSS(SEV_SEG_0);	
-			SS_LATCH();
-			print_to("EEPROM RESTORE: DONE\r\n");
-		}			
-		HAL_Delay(1000);		
+	PCF8574_ReadReg();
+	if((PCF8574_reg&0x07) == 0x04){		
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		PCF8574_ReadReg();
+		if((PCF8574_reg&0x07) == 0x04){
+			if(EEPROM_restore()){
+				putcSS(SEV_SEG_F);				
+				putcSS(SEV_SEG_A);
+				putcSS(SEV_SEG_I);
+				putcSS(SEV_SEG_L);
+				SS_LATCH();
+				while(1);
+			}else{
+				trulala();
+			}
+		}
 	}
 //end restoring
 
@@ -159,7 +169,7 @@ void SysInit(void) {
 		DRV_OPEN();
 	}	
 	
-	Buttons_Init();
+	
 	
 	ds18b20_GetTemp(0);
 	
@@ -177,14 +187,17 @@ void SysInit(void) {
 
 void SystemTask(void) {
 
-	int16_t old_temp_ctrl_f;
+	static int16_t old_temp_ctrl_f;
 	
 	 //Reset sys counters if temp_ctrl_f 0->1
 	if(old_temp_ctrl_f != SysState.temp_ctrl_f){
 		old_temp_ctrl_f = SysState.temp_ctrl_f;
 		if(SysState.temp_ctrl_f){
 			SysCnt.temp_update = SysState.t_updt_time;
-			SysCnt.temp_ctrl = SysState.t_ctrl_time;			
+			SysCnt.temp_ctrl = SysState.t_ctrl_time;	
+			WF_PUMP_ON();
+		}else{
+			WF_PUMP_OFF();
 		}
 	}
 	

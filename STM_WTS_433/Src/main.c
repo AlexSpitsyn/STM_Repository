@@ -112,25 +112,17 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
-
-SysInit();
-
-
-
+	SysInit();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
- while (1){
-	
-//HAL_I2C_Mem_Write (EEPROM_I2C_PORT, (uint16_t) EEPROM_ADDR, 0, I2C_MEMADD_SIZE_8BIT, d, 4, HAL_MAX_DELAY);	
-	// EEPROM_Write(EEPROM_WL_ADDR, WL_ADR_WIDTH, d);
-		SystemTask();	
-	 
+
+while (1){
+	SystemTask();		 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
   }
   /* USER CODE END 3 */
 }

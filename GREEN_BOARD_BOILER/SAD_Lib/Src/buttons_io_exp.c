@@ -10,7 +10,7 @@ btn_t buttons[BTN_CNT];
 
 
  void Buttons_Init(void) {   
-	 PCF8574_Init(0xFF);
+	 PCF8574_Init(BTN1_CODE|BTN2_CODE|BTN3_CODE);
 	 PCF8574_ReadReg();
    btn_pressed_f = 0;
 	 	 

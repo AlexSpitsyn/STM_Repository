@@ -81,61 +81,73 @@ volatile SysCouners_t SysCnt={0};
 
 //========================     SYS TASK    =====================
 
-void SysInit(void) {
+void SysInit(void) {  
 	
+	//if eeprom need to restore
+	//Read DQ pin 
+	//if DQ=0 and then DQ=1 -> restoring
+	uint8_t wait_t=5, res;
+	uint8_t dq = ow_ReadBit();	
+	HAL_Delay(100);	
+		if (dq==0) {
+		while(wait_t--){
+			LED_ON(LED_RED);
+			HAL_Delay(500);
+			LED_OFF(LED_RED);
+			HAL_Delay(500);
+			dq = ow_ReadBit();
+			if (dq==1){
+				
+				res = EEPROM_Write(0, 16, eeprom_dump);
+				HAL_Delay(10);
+				res |= EEPROM_Write(16, 16, eeprom_dump+16);
+				HAL_Delay(10);
+				res |= EEPROM_Write(32, 16, eeprom_dump+32);
+				HAL_Delay(10);
+				res |= EEPROM_Write(48, 16, eeprom_dump+48);
+				HAL_Delay(10);
+				res |= EEPROM_Write(64, 8, eeprom_dump+64);
+				
+				if(res){				
+					while(1){
+						LED_ON(LED_RED);
+						HAL_Delay(100);
+						LED_OFF(LED_RED);
+						HAL_Delay(100);
+					}
+				}else{
+					wait_t=3;
+					while(wait_t--){
+						LED_ON(LED_BLUE);
+						HAL_Delay(100);
+						LED_OFF(LED_BLUE);
+						HAL_Delay(100);
+					}
+				break;
+				}
+			}
+		}
+	}
+//end restoring
 	
-  SysState.error_code =0;
+	SysState.error_code =0;
 	SysState.error_code |= EEPROM_IsDeviceReady()<< EEPROM_READING_ERROR; 
   SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
 	SysState.error_code |= WL_Init()<< WL_ERROR;
 	
-	ds18b20_Init(1,RESOLUTION_9BIT);
-  ds18b20_GetTemp(0);
-		
-//	SysVarRW(RD,&SV[vn_T_CTRL_F]);	
-//	SysVarRW(RD,&SV[vn_T_SET]);	
-//	SysVarRW(RD,&SV[vn_T_CTRL_TIME]);
 	SysVarRW(RD,&SV[vn_T_UPDT_TIME]);
-//	SysVarRW(RD,&SV[vn_T_HYST]);
-
-//	SysVarRW(RD,&SV[vn_T_THRESHOLD]);
-
 	
 
   //Start timer1 IT
   HAL_TIM_Base_Start_IT( &htim1);
 
-  //Start timer3 IT DRIVE ENCODER
-  //HAL_TIM_Encoder_Start( &htim3, TIM_CHANNEL_ALL);
-  //HAL_TIM_Base_Start_IT( &htim3);
-	
   //Arm UART1
   HAL_UART_Receive_IT( & huart1, & receive_val, 1);
 
 
-//	SysState.ss_update_f = 1;
-//	SysCnt.temp_ctrl = SysState.t_ctrl_time;
-
-			
-//	PUMP(OFF);
-//	BURNER(OFF);			
-
-	//if eeprom need to restore
-	while(HAL_UART_Transmit(&huart1, "C" , 1, 0xFFFF)!=HAL_OK);
-	HAL_Delay(100);	
-	if (uart_rx_buf[0]=='C') {
-		if (EEPROM_Write(0, strlen((char*)eeprom_dump), eeprom_dump)) {						
-			print_to("EEPROM RESTORE: FAIL\r\n");
-			LED_ON(LED_BLUE);			
-		}else{
-			print_to("EEPROM RESTORE: DONE\r\n");
-			LED_ON(LED_RED);
-		}			
-		HAL_Delay(1000);
-		LED_OFF(LED_BLUE);
-		LED_OFF(LED_RED);
-	}
-//end restoring
+	ds18b20_Init(1,RESOLUTION_9BIT);
+  ds18b20_GetTemp(0);
+	
 	
 }
 
@@ -154,12 +166,12 @@ void SystemTask(void) {
 				}
         SysCnt.temp_update = 0;        
 				
-        LED_TOGGLE(LED_BLUE); 				
+        //LED_TOGGLE(LED_BLUE); 				
 
 
 		SysState.error_code |= ds18b20_GetTemp(0) << TEMP_SENSOR_READING_ERROR;  
 					
-		LED_TOGGLE(LED_BLUE); 			
+		//LED_TOGGLE(LED_BLUE); 			
 					
         }
       }
@@ -201,15 +213,18 @@ void SystemTask(void) {
 			WL_Handler();	
 			
 //---------------------------   ERROR check --------------------------------
+//light error coding
+
 	if (SysState.error_code) {
 		SysState.error_f = 1;
-		LED_ON(LED_RED);
+		LED_ON(LED_RED);		
 	} else {
 		SysState.error_f = 0;
 		LED_OFF(LED_RED);
 	}
 	
 	if(SysState.error_f){
+		
 		SysErrorCheck();
 	}
 }
@@ -221,6 +236,8 @@ void SystemTask(void) {
 //---------------------------   ERROR check --------------------------------
 void SysErrorCheck(void){
 	if (SysCnt.error_check > ERROR_CHECK_TIME) {
+		//light error coding
+		
 		SysCnt.error_check = 0; 
 		
 		//Check temp sensor
@@ -243,6 +260,19 @@ void SysErrorCheck(void){
 				SysState.error_code &= ~(1<<EEPROM_READING_ERROR);				
 			}
 		}
+		
+		//light error coding
+		LED_OFF(LED_RED);
+		HAL_Delay(700);
+		uint8_t cnt = SysState.error_code;
+		while(cnt--){
+			LED_ON(LED_RED);
+			HAL_Delay(250);
+			LED_OFF(LED_RED);
+			HAL_Delay(250);
+		}
+		HAL_Delay(700);
+		
 	}
 }
 // --------------- END ERROR -------------------------------		

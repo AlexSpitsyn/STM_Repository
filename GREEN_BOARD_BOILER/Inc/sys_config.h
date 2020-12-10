@@ -94,14 +94,14 @@ static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
 #define print_to(x)										while(CDC_Transmit_FS( (uint8_t*)x, strlen(x))!=USBD_OK)
 
 //	DEBUG
-//#define dbg_print(s) 									printf(s)
-#define dbg_print(s) 									print_to(s)
+#define dbg_print(s) 									printf(s)
+//#define dbg_print(s) 									print_to(s)
 extern char dbg_str[64];
 
 #define EEPROM_DBG_PRINT_F 						0
 #define PCF8574A_DBG_PRINT_F 					1
 #define DS18B20_DBG_PRINT_F 					0
-#define BUTTON_DBG_PRINT_F						0
-#define SYS_DBG_PRINT_F								0
+#define BUTTON_DBG_PRINT_F						1
+#define SYS_DBG_PRINT_F								1
 
 #endif //__SYS_CONFIG_H__
