@@ -30,7 +30,7 @@
 
 
 #define DEV_NAME 								"Wireless Temp Sensor v.2\r\n> "
-#define WTS_NUM 								3
+#define WTS_NUM 								9
 #define EEPROM_DUMP_SIZE 								72
 static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
 	0x00, 0x55, 0xD0, 0x07, 0xFF, 0xFF, 0xFF, 0xFF, 

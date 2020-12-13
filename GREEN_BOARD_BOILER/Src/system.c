@@ -84,13 +84,45 @@ volatile SysCouners_t SysCnt={0};
 void SysInit(void) {
 	
 
+	SevSeg_Init();
+	
+	//	eeprom need to restore
+	PCF8574_ReadReg();
+	if((~PCF8574_reg) & 0x04){		
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		PCF8574_ReadReg();
+		if((~PCF8574_reg) & 0x04){ //Button SEL pressed		
+			if(EEPROM_restore()){
+				putcSS(SEV_SEG_F);				
+				putcSS(SEV_SEG_A);
+				putcSS(SEV_SEG_I);
+				putcSS(SEV_SEG_L);
+				SS_LATCH();
+				while(1);
+			}else{
+				trulala();
+			}			
+		}		
+	}
+//	end restoring
 	
 	SysState.error_code = 0;
 	SysState.error_code |= EEPROM_IsDeviceReady()<< EEPROM_READING_ERROR;
 	SysState.error_code |= PCF8574_IsDeviceReady()<< IO_EXPANDER_READING_ERROR;  
 	SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
 
-	SevSeg_Init();
+	
 	ds18b20_GetTemp(0);
 		
 	SysVarRW(RD,&SV[vn_T_CTRL_F]);	
@@ -111,36 +143,7 @@ void SysInit(void) {
 	Buttons_Init();	
 	LED_OFF(LED_BLUE);
 	LED_OFF(LED_RED);	
-//	eeprom need to restore
-	PCF8574_ReadReg();
-	if((PCF8574_reg&0x07) == 0x04){		
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		PCF8574_ReadReg();
-		if((PCF8574_reg&0x07) == 0x04){
-			if(EEPROM_restore()){
-				putcSS(SEV_SEG_F);				
-				putcSS(SEV_SEG_A);
-				putcSS(SEV_SEG_I);
-				putcSS(SEV_SEG_L);
-				SS_LATCH();
-				while(1);
-			}else{
-				trulala();
-			}			
-		}		
-	}
-//	end restoring
+
 	
 	SysState.ss_update_f = 1;
 

@@ -30,10 +30,9 @@ extern btn_t buttons[BTN_CNT];
 #define BTN4_CODE 									0x00
 
 
-
-#define BTN_SEL 										buttons[2].code
-#define BTN_UP 											buttons[1].code
-#define BTN_DOWN 										buttons[0].code
+#define BTN_DOWN 										buttons[0].code //BTN1_CODE
+#define BTN_UP 											buttons[1].code //BTN2_CODE
+#define BTN_SEL 										buttons[2].code //BTN3_CODE
 
 //ext triggers
 #define ETRG1_MASK 									0x20

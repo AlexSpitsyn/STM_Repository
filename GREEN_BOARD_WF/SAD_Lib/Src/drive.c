@@ -2,7 +2,7 @@
 
 drive_t drv_m1;
 
-void Drive_HomeInit(void){
+uint32_t Drive_HomeInit(void){
 	
 
 	if(drv_m1.max_sens_f & drv_m1.min_sens_f){
@@ -10,11 +10,13 @@ void Drive_HomeInit(void){
 		if(DRIVE_DEBUG_PRINT_F){
 			dbg_print("DRV: ERROR\r\n");
 		}
-		return;
+		return 1;
 	}else	if(drv_m1.min_sens_f){
 		DRV_POS=0;
-
-		return;
+		if(DRIVE_DEBUG_PRINT_F){
+			dbg_print("DRV HOME DETECT\r\n");
+		}
+		return 0;
 	}else{
 
 		
@@ -34,7 +36,7 @@ void Drive_HomeInit(void){
 					}
 					DRV_POS=0;
 					drv_m1.dest_pos=0;
-					return;
+					return 0;
 				}				
 				if(drv_m1.max_sens_f){
 					DRV_STOP();
@@ -44,12 +46,12 @@ void Drive_HomeInit(void){
 					DRV_POS=0;
 					drv_m1.dest_pos=0;
 					drv_m1.fail_f=1;
-					return;
+					return 1;
 				}				
-				if(drv_m1.fail_f){
+				if(drv_m1.fail_f){ //SysCnt.drv_move>DRIVE_ROTATION_TIMEOUT
 					DRV_POS=0;
 					drv_m1.dest_pos=0;
-					return;
+					return 1;
 				}
 				
 //				if(t!=DRV_POS){

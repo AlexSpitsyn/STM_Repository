@@ -103,6 +103,7 @@ enum VarName{
 #define EEPROM_READING_ERROR 					2
 #define DRV_OPEN_ERROR								3
 #define DRV_CLOSE_ERROR								4
+#define DRV_MIN_SENSOR_ERROR					5
 
 #define ERROR_CHECK_TIME						100
 
@@ -160,7 +161,7 @@ uint32_t EEPROM_restore(void);
 
 //========================     TEMP SENSOR======================
 
-#define TEMP_MAX_LIMIT 					45
+#define TEMP_MAX_LIMIT 					50
 #define TEMP_MIN_LIMIT 					0
 
 

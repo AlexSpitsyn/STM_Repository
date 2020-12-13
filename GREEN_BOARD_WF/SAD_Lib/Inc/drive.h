@@ -27,12 +27,12 @@ extern drive_t drv_m1;
 
 
 
-#define DRV_OPEN()			DRV_DIR=1;  HAL_GPIO_WritePin(M_DRV1_GPIO_Port,M_DRV1_Pin,GPIO_PIN_RESET);HAL_Delay(200); HAL_GPIO_WritePin(M_DRV2_GPIO_Port,M_DRV2_Pin,GPIO_PIN_SET); drv_m1.run_f=1;SysCnt.drv_move=0; 
-#define DRV_CLOSE()			DRV_DIR=0;  HAL_GPIO_WritePin(M_DRV2_GPIO_Port,M_DRV2_Pin,GPIO_PIN_RESET); HAL_Delay(200); HAL_GPIO_WritePin(M_DRV1_GPIO_Port,M_DRV1_Pin,GPIO_PIN_SET); drv_m1.run_f=1;	SysCnt.drv_move=0;
+#define DRV_OPEN()			DRV_DIR=1;  HAL_GPIO_WritePin(M_DRV2_GPIO_Port,M_DRV2_Pin,GPIO_PIN_RESET);HAL_Delay(200); HAL_GPIO_WritePin(M_DRV1_GPIO_Port,M_DRV1_Pin,GPIO_PIN_SET); drv_m1.run_f=1;SysCnt.drv_move=0; 
+#define DRV_CLOSE()			DRV_DIR=0;  HAL_GPIO_WritePin(M_DRV1_GPIO_Port,M_DRV1_Pin,GPIO_PIN_RESET); HAL_Delay(200); HAL_GPIO_WritePin(M_DRV2_GPIO_Port,M_DRV2_Pin,GPIO_PIN_SET); drv_m1.run_f=1;	SysCnt.drv_move=0;
 #define DRV_STOP()				HAL_GPIO_WritePin(M_DRV1_GPIO_Port,M_DRV1_Pin,GPIO_PIN_RESET); HAL_GPIO_WritePin(M_DRV2_GPIO_Port,M_DRV2_Pin,GPIO_PIN_RESET); drv_m1.run_f = 0; 
 
 
 
 _Bool Drive_CheckRotation(_Bool direction);
-void Drive_HomeInit(void);
+uint32_t Drive_HomeInit(void);
 #endif

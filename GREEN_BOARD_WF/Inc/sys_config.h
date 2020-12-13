@@ -47,6 +47,9 @@ static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	0x57, 0x46, 0x43, 0x52, 0x00, 0xFF, 0xFF, 0xFF
 };
+//	blanc 			/	T_CTRL_F 		/ T_SET 		/ T_CTRL_TIME
+//	T_UPDT_TIME / T_HYST PUMP / DRIVE_POS / DRIVE_MAX_POS
+//	DRIVE_DRIVE_POS_DEST /	DRIVE_STEPS
 
 //SEVEN SEGMENT CONFIG
 

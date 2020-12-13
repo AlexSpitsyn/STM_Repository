@@ -60,13 +60,13 @@ volatile SysCouners_t SysCnt={0};
 //};
 
  SysVar SV[SYS_VAR_CNT]= {//0};
-{"temp",		 		0, 0, 		(int16_t*)(&DS18B20_TEMP), 		RO, 0},
-{"t_ctrl", 			0, 1, 		&SysState.temp_ctrl_f, 				WE, vn_T_CTRL_F}, 
-{"t_set", 			0, 50, 		&SysState.set_temp, 					WE, vn_T_SET},		
-{"t_ctrl_time", 0, 5000, 	&SysState.t_ctrl_time, 				WE, vn_T_CTRL_TIME},
-{"t_updt_time", 0, 5000, 	&SysState.t_updt_time, 				WE, vn_T_UPDT_TIME},
-{"t_hyst", 			0, 10, 		&SysState.t_hyst, 						WE, vn_T_HYST},
-{"pump", 				0, 0x01FF,&SysState.pump, 							WE, vn_PUMP},
+{"temp",		 		0, 0, 										(int16_t*)(&DS18B20_TEMP), 		RO, 0},
+{"t_ctrl", 			0, 1, 										&SysState.temp_ctrl_f, 				WE, vn_T_CTRL_F}, 
+{"t_set", 			0, TEMP_MAX_LIMIT, 				&SysState.set_temp, 					WE, vn_T_SET},		
+{"t_ctrl_time", 0, 5000, 									&SysState.t_ctrl_time, 				WE, vn_T_CTRL_TIME},
+{"t_updt_time", 0, 5000, 									&SysState.t_updt_time, 				WE, vn_T_UPDT_TIME},
+{"t_hyst", 			0, 10, 										&SysState.t_hyst, 						WE, vn_T_HYST},
+{"pump", 				0, 0x01FF,								&SysState.pump, 							WE, vn_PUMP},
 {"drv_pos", 		0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.pos, 									RO, vn_DRIVE_POS},
 {"drv_pos_max", 0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.max_pos, 							WE, vn_DRIVE_MAX_POS},
 {"drv_pos_dest",0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.dest_pos, 						WE, vn_DRIVE_DRIVE_POS_DEST},
@@ -82,7 +82,39 @@ volatile SysCouners_t SysCnt={0};
 void SysInit(void) {
 	
 	SevSeg_Init();
-
+	
+	//if eeprom need to restore
+	PCF8574_ReadReg();
+	if((~PCF8574_reg) & 0x04){ //Button SEL pressed		
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		putcSS(SEV_SEG_DOT);
+		HAL_Delay(750);
+		SS_LATCH();
+		PCF8574_ReadReg();
+		if((~PCF8574_reg) & 0x04){
+			if(EEPROM_restore()){
+				putcSS(SEV_SEG_F);				
+				putcSS(SEV_SEG_A);
+				putcSS(SEV_SEG_I);
+				putcSS(SEV_SEG_L);
+				SS_LATCH();
+				while(1);
+			}else{
+				trulala();
+			}
+		}
+	}
+//end restoring
+	
+	
 	SysState.error_code =0;
 	SysState.error_code |= EEPROM_IsDeviceReady()<< EEPROM_READING_ERROR;
 	SysState.error_code |= PCF8574_IsDeviceReady()<< IO_EXPANDER_READING_ERROR;  
@@ -123,39 +155,12 @@ void SysInit(void) {
 	HAL_UART_Receive_IT( & huart1, & receive_val, 1);
 	
 	Buttons_Init();	
+	
 	LED_OFF(LED_BLUE);
 	LED_OFF(LED_RED);	
 	
-	//if eeprom need to restore
-	PCF8574_ReadReg();
-	if((PCF8574_reg&0x07) == 0x04){		
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		putcSS(SEV_SEG_DOT);
-		HAL_Delay(750);
-		SS_LATCH();
-		PCF8574_ReadReg();
-		if((PCF8574_reg&0x07) == 0x04){
-			if(EEPROM_restore()){
-				putcSS(SEV_SEG_F);				
-				putcSS(SEV_SEG_A);
-				putcSS(SEV_SEG_I);
-				putcSS(SEV_SEG_L);
-				SS_LATCH();
-				while(1);
-			}else{
-				trulala();
-			}
-		}
-	}
-//end restoring
+	
+	
 
 	SysState.ss_update_f = 1;
 	
@@ -163,8 +168,8 @@ void SysInit(void) {
 		if(SYS_DBG_PRINT_F){
 			dbg_print("DRIVE ROTATION ERROR\r\n");
 		}
-	}else{	
-		Drive_HomeInit();
+	}else{
+		SysState.error_code |= Drive_HomeInit() << DRV_MIN_SENSOR_ERROR;				
 		drv_m1.dest_pos=20;
 		DRV_OPEN();
 	}	
