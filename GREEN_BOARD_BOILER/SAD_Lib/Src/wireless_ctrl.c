@@ -250,30 +250,50 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 void WL_Handler(void){
 	
 	uint8_t state=0, cmd_state;
-	
-		if(WL_RECEIVE){
-			WL_RECEIVE=0;	
-			if(WL_DEBUG_PRINT){		
-				dbg_print("\r\n   Packet Received\r\n");
-			}
-			state= WL_Check_Packet();
+	static uint32_t wl_check_cnt=0;
+	//wl_check_cnt++;
+		
+	if(WL_RECEIVE){
+//		wl_check_cnt=0;
+		LED_TOGGLE(LED_BLUE); 
+		HAL_Delay(100);
+		LED_TOGGLE(LED_BLUE); 
+		HAL_Delay(100);
+		LED_TOGGLE(LED_BLUE); 
+		HAL_Delay(100);
+		LED_TOGGLE(LED_BLUE); 
+		
+		WL_RECEIVE=0;	
+		if(WL_DEBUG_PRINT){		
+			dbg_print("\r\n   Packet Received\r\n");
+		}
+		state= WL_Check_Packet();
+		
+		if((state==PS_ADDR_MATCH) && rx_handler){		
+			HAL_Delay(200);
 			
-			if((state==PS_ADDR_MATCH) && rx_handler){		
-				HAL_Delay(500);
-				
-				cmd_state = WL_Run_CMD(RX_packet.cmd);
-				if(WL_DEBUG_PRINT){		
-						sprintf(dbg_str,"RUN CMD STATE: %s\r\n",CMD_STATE_STR[cmd_state]);
-						dbg_print(dbg_str);
-				}
-				state = WL_Send_Packet(RX_packet.pack_ID, cmd_state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val, RX_packet.desc);
-				if(WL_DEBUG_PRINT){		
-					sprintf(dbg_str,"SEND PACKET STATE: %s\r\n",PACK_STATE_STR[state]);
+			cmd_state = WL_Run_CMD(RX_packet.cmd);
+			if(WL_DEBUG_PRINT){		
+					sprintf(dbg_str,"RUN CMD STATE: %s\r\n",CMD_STATE_STR[cmd_state]);
 					dbg_print(dbg_str);
-				}
-			}	
-		}		
+			}
+			state = WL_Send_Packet(RX_packet.pack_ID, cmd_state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val, RX_packet.desc);
+			if(WL_DEBUG_PRINT){		
+				sprintf(dbg_str,"SEND PACKET STATE: %s\r\n",PACK_STATE_STR[state]);
+				dbg_print(dbg_str);
+			}
+		}	
+//	}else{
+//		if(wl_check_cnt>=0x0FFFFFFFF){
+//			wl_check_cnt=0;
+//			if ((SX1278_SPIReadReg(LR_RegModemConfig1) == 0) || (SX1278_SPIReadReg(LR_RegModemConfig2) == 0)){
+//				if(WL_DEBUG_PRINT){		
+//					dbg_print("\r\n\t\t\t\tREG MODEM 0\r\n");
+//				}
+//				SX1278_LoRaEntryRx( WL_PLOAD_WIDTH, 2000);
+//			}				
+//		}			
+	}			
 }
-
 
 

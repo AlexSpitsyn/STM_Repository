@@ -146,7 +146,9 @@ int main(void)
 		
 		//---------- BTN SELECT -------------
 		if(BTN_SEL==SHORT_PRESS){
-			BTN_SEL=0;
+			BTN_SEL=0;		
+			SysCnt.temp_update = SysState.t_updt_time;
+			SysCnt.temp_ctrl = SysState.t_ctrl_time;
 //			for (uint8_t i = 0; i < SYS_VAR_CNT; i++) {	
 //					if (SV[i].mem_addr != 0) {						
 //						if(SysVarRW(WR, &SV[i])){							

@@ -136,8 +136,8 @@ uint32_t EEPROM_restore(void);
 //#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
 //#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
 
-#define PUMP(x)							x ? HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_SET); SysState.pump=x;
-#define BURNER(x)						x ? HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_SET); SysState.burner=x;
+#define PUMP(x)							!x ? HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_SET); SysState.pump=x;
+#define BURNER(x)						!x ? HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_SET); SysState.burner=x;
 
 //==============================================================
 
@@ -161,7 +161,7 @@ uint32_t EEPROM_restore(void);
 
 //========================     TEMP SENSOR======================
 
-#define TEMP_MAX_LIMIT 					45
+#define TEMP_MAX_LIMIT 					70
 #define TEMP_MIN_LIMIT 					0
 
 

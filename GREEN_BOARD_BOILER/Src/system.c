@@ -61,8 +61,8 @@ volatile SysCouners_t SysCnt={0};
 
  SysVar SV[SYS_VAR_CNT]= {//0};
 {"temp",		 		0, 0, 		(int16_t*)(&DS18B20_TEMP), 		RO, 0},
-{"t_ctrl", 			0, 1, 		&SysState.temp_ctrl_f, 				WE, vn_T_CTRL_F}, 
-{"t_set", 			0, 50, 		&SysState.set_temp, 					WE, vn_T_SET},		
+{"temp_ctrl", 	0, 1, 		&SysState.temp_ctrl_f, 				WE, vn_T_CTRL_F}, 
+{"t_set", 			0, TEMP_MAX_LIMIT, 		&SysState.set_temp, 					WE, vn_T_SET},		
 {"t_ctrl_time", 0, 5000, 	&SysState.t_ctrl_time, 				WE, vn_T_CTRL_TIME},
 {"t_updt_time", 0, 5000, 	&SysState.t_updt_time, 				WE, vn_T_UPDT_TIME},
 {"t_hyst", 			0, 10, 		&SysState.t_hyst, 						WE, vn_T_HYST},
@@ -205,9 +205,9 @@ static int16_t old_temp_ctrl_f;
 			}
 			SysCnt.temp_update = 0;
 			SysState.ss_update_f = 1;				
-			LED_TOGGLE(LED_BLUE);
+			//LED_TOGGLE(LED_BLUE);
 			SysState.error_code |= ds18b20_GetTemp(0) << TEMP_SENSOR_READING_ERROR; 
-			LED_TOGGLE(LED_BLUE);
+			//LED_TOGGLE(LED_BLUE);
 		}
 	}
 
@@ -224,15 +224,15 @@ static int16_t old_temp_ctrl_f;
 				}
 				if ((DS18B20_TEMP < SysState.set_temp - SysState.t_hyst) & (SysState.burner == 0)) {	
 					if(SYS_DBG_PRINT_F){
-						dbg_print("BURNER(ON)\r\n");
+						dbg_print("BURNER: ON\r\n");
 					}
-				BURNER(ON);
+					BURNER(ON);
 				}
 				if ((DS18B20_TEMP > SysState.set_temp + SysState.t_hyst) & (SysState.burner == 1)) {
 					if(SYS_DBG_PRINT_F){
-						dbg_print("BURNER(OFF)\r\n");
+						dbg_print("BURNER: OFF\r\n");
 					}
-				BURNER(OFF);			
+					BURNER(OFF);			
 				}	
 			}  
 		}
