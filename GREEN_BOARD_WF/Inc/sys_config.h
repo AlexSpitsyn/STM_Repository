@@ -9,7 +9,7 @@
 #include "main.h"
 #include "spi.h"
 #include "i2c.h"
-#include "usart.h"
+//#include "usart.h"
 
 
 #include "usbd_cdc_if.h"
@@ -27,7 +27,7 @@
 #include "SX1278.h"
 #include "buttons_io_exp.h"
 #include "drive.h"
-
+#include "mcp23s17.h"
 
 #define DEV_NAME 								"Water floor temp controller v.2\r\n> "
 
@@ -37,19 +37,29 @@
 
 #define EEPROM_DUMP_SIZE 								72
 static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
-	0x55, 0x00, 0x00, 0x00, 0x28, 0x00, 0x58, 0x02, 
-	0x2C, 0x01, 0x03, 0x00, 0x00, 0x00, 0x32, 0x00, 
-	0x00, 0x00, 0x04, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
+//ByteLow, ByteHigh
+	0x55, 0x00, //	blanc 
+	0x00, 0x00, //	T_CTRL_F
+	0x28, 0x00, // 	T_SET
+	0x58, 0x02, // 	T_CTRL_TIME
+	0x2C, 0x01, //	T_UPDT_TIME
+	0x03, 0x00, // 	T_HYST
+	0x00, 0x00, // 	PUMP
+	0x00, 0x00, // 	PUMP_SENS	- RO
+	0x00, 0x00, // 	DRIVE_POS	- not used
+	0x28, 0x00, //  DRIVE_MAX_POS - not used
+	0x00, 0x00, //	DRIVE_DRIVE_POS_DEST - not used
+	0x05, 0xFF, //	DRIVE_STEPS
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-	0x57, 0x46, 0x43, 0x52, 0x00, 0xFF, 0xFF, 0xFF
+	0x57, 0x46, 0x43, 0x52, 0x00, 0xFF, 0xFF, 0xFF	
 };
-//	blanc 				/	T_CTRL_F 		/ T_SET 		/ T_CTRL_TIME
-//	T_UPDT_TIME 	/ T_HYST 			/ PUMP 			/ DRIVE_POS 
-//  DRIVE_MAX_POS	/	DRIVE_DRIVE_POS_DEST /	DRIVE_STEPS
+				 		 		
+ 	 			 			 
+	 
 
 //SEVEN SEGMENT CONFIG
 
@@ -71,22 +81,34 @@ static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
 #define SX1278_DIO0_PIN								GPIO_PIN_0
 
 //SPI RELE CONFIG
-#define RELE_SPI_PORT 								&hspi1
-#define RELE_LA_PORT									GPIOB
-#define RELE_LA_PIN										GPIO_PIN_2
-#define RELE_RESET_PORT								GPIOA
-#define RELE_RESET_PIN								GPIO_PIN_3
-#define RELE_OE_PORT									GPIOB
-#define RELE_OE_PIN										GPIO_PIN_1
+//#define RELE_SPI_PORT 								&hspi1
+//#define RELE_LA_PORT									GPIOB
+//#define RELE_LA_PIN										GPIO_PIN_2
+//#define RELE_RESET_PORT								GPIOA
+//#define RELE_RESET_PIN								GPIO_PIN_3
+//#define RELE_OE_PORT									GPIOB
+//#define RELE_OE_PIN										GPIO_PIN_1
 
-#define RELE_ON_LEVEL									1
+#define RELE_ON_LEVEL									0
 
+
+////MCP23S17 CONFIG 
+#define MCP23S17_ADDRESS    					0x40
+#define MCP23S17_SPI_PORT 						&hspi1
+#define MCP23S17_NSS_PORT							XP9_5o_GPIO_Port
+#define MCP23S17_NSS_PIN							XP9_5o_Pin
+#define MCP23S17_RESET_PORT						XP9_6o_GPIO_Port
+#define MCP23S17_RESET_PIN						XP9_6o_Pin
+#define MCP23S17_IRQ_PORT							MCP_IRQ_GPIO_Port	
+#define MCP23S17_IRQ_PIN							MCP_IRQ_Pin
 
 // PCF8574A CONFIG
 #define PCF8574A_ADDR 								0x40
 #define PCF8574A_I2C_PORT 						&hi2c1
 
-
+// LEDS
+#define LED_RED												3 //PCF8574 port
+#define LED_BLUE											4 //PCF8574 port
 
 // EEPROM CONFIG
 #define EEPROM_ADDR 									0xA0
@@ -97,10 +119,7 @@ static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
 #define OW_PORT 											GPIOA
 #define OW_PIN												GPIO_PIN_0
 
-// LEDS
 
-#define LED_RED												3 //PCF8574 port
-#define LED_BLUE											4 //PCF8574 port
 
 // DRIVE
 

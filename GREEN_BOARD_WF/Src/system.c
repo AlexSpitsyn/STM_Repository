@@ -66,7 +66,7 @@ volatile SysCouners_t SysCnt={0};
 {"t_ctrl_time", 0, 5000, 									&SysState.t_ctrl_time, 				WE, vn_T_CTRL_TIME},
 {"t_updt_time", 0, 5000, 									&SysState.t_updt_time, 				WE, vn_T_UPDT_TIME},
 {"t_hyst", 			0, 10, 										&SysState.t_hyst, 						WE, vn_T_HYST},
-{"pump", 				0, 0x01FF,								&SysState.pump, 							WE, vn_PUMP},
+{"pump", 				0, 0x10FF,								&SysState.pump, 							WE, vn_PUMP},
 {"drv_pos", 		0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.pos, 									RO, vn_DRIVE_POS},
 {"drv_pos_max", 0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.max_pos, 							WE, vn_DRIVE_MAX_POS},
 {"drv_pos_dest",0, DRIVE_MAX_POS_LIMIT, 	&drv_m1.dest_pos, 						WE, vn_DRIVE_DRIVE_POS_DEST},
@@ -81,6 +81,7 @@ volatile SysCouners_t SysCnt={0};
 
 void SysInit(void) {
 	
+	WF_PUMP_OFF();
 	SevSeg_Init();
 	
 	//if eeprom need to restore
@@ -137,11 +138,22 @@ void SysInit(void) {
 	//SysVarRW(RD,&SV[vn_DRIVE_MAX_POS]);
 	//SysVarRW(RD,&SV[vn_DRIVE_DRIVE_POS_DEST]);
 	//SysVarRW(RD,&SV[vn_DRIVE_STEPS]);
+	
+	
 	drv_m1.pos=0;
 	drv_m1.dest_pos=0;
 	drv_m1.steps=DRIVE_STEPS;
 	drv_m1.max_pos=DRIVE_MAX_POS_LIMIT;
 	
+	MCP23S17_Init();	
+	MCP23S17_PortConfig(MCP_PORTA, 0x00);
+	MCP23S17_PortSet(MCP_PORTA, 0x00);
+	MCP23S17_PortConfig(MCP_PORTB, 0xFF);
+ 	MCP23S17_IRQen(MCP_PORTB, 0xFF);
+	MCP23S17_PortPUP(MCP_PORTB, 0xFF);
+	MCP23S17_PortGet(MCP_PORTB);
+
+
 	pump_set((uint8_t)SysState.pump);
 
 	//Start timer1 IT
@@ -152,13 +164,12 @@ void SysInit(void) {
 	//HAL_TIM_Base_Start_IT( &htim3);
 
 	//Arm UART1
-	HAL_UART_Receive_IT( & huart1, & receive_val, 1);
+//	HAL_UART_Receive_IT( & huart1, & receive_val, 1);
 	
 	Buttons_Init();	
 	
 	LED_OFF(LED_BLUE);
 	LED_OFF(LED_RED);	
-	
 	
 	
 
@@ -180,11 +191,13 @@ void SysInit(void) {
 	
 	SysCnt.temp_ctrl = SysState.t_ctrl_time;
 			
-	//PUMP(OFF);
-	HAL_SPI_Transmit(SS_SPI_PORT,(uint8_t*)SV[vn_PUMP].pVal, 1, 1000);
+		
+	
+	WL_Init();
+	
 	
 
-	WL_Init();
+	
 	if(SYS_DBG_PRINT_F){
 		dbg_print("===== INIT DONE ======\r\n");
 	}
@@ -192,6 +205,9 @@ void SysInit(void) {
 
 void SystemTask(void) {
 
+	//-----------------------------------------------------------------------------------    
+	//----------------      MAIN PUMP              --------------------------------------
+	//----------------------------------------------------------------------------------- 
 	static int16_t old_temp_ctrl_f;
 	
 	 //Reset sys counters if temp_ctrl_f 0->1
@@ -326,14 +342,26 @@ void SystemTask(void) {
 	//-----------------------------------------------------------------------------------
 
 
-	//SysState.pump 0x XX XX
-	//command to set---|	|--now on
+	//SysState.pump 0x XX X X
+	//command to   sens---|	|--set
 	if(SysState.pump>>8){		
-		SysState.pump&=0x00FF;
-		pump_set((uint8_t)SysState.pump);
+		
+		SysState.pump&=0x00FF; //reset flag (last bit)
+		pump_set((uint8_t)SysState.pump&0x000F);
 		SysVarRW(WR,&SV[vn_PUMP]);
 	}	
-
+	if(!HAL_GPIO_ReadPin(MCP_IRQ_GPIO_Port, MCP_IRQ_Pin)){
+//		volatile uint8_t pb = MCP23S17_PortGet(MCP_PORTB);
+//		pb = pb & 0x0F;
+//		pb = pb<<4;
+//		pb |= SysState.pump;
+		
+		
+		
+		SysState.pump&= 0x0F; //Reset sens bits
+		SysState.pump|=(MCP23S17_PortGet(MCP_PORTB)&0x0F)<<4;	
+		
+	}
 			
 				
 //			if((SysState.burner==0) & (SysState.pump1==1) & DS18B20_TEMP<20){
@@ -507,16 +535,27 @@ if (rw){
 	if(RELE_ON_LEVEL==0){ 
 		channels=~channels; 
 	}	
-	HAL_GPIO_WritePin(RELE_OE_PORT, RELE_OE_PIN, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(RELE_LA_PORT, RELE_LA_PIN, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(RELE_RESET_PORT, RELE_RESET_PIN, GPIO_PIN_RESET);
-	HAL_Delay(1);
-	HAL_GPIO_WritePin(RELE_RESET_PORT, RELE_RESET_PIN, GPIO_PIN_SET);
-	HAL_SPI_Transmit(RELE_SPI_PORT,&channels, 1, 1000);
-	HAL_GPIO_WritePin(RELE_LA_PORT, RELE_LA_PIN, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(RELE_LA_PORT, RELE_LA_PIN, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(RELE_OE_PORT, RELE_OE_PIN, GPIO_PIN_RESET);
+//	HAL_GPIO_WritePin(RELE_OE_PORT, RELE_OE_PIN, GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(RELE_LA_PORT, RELE_LA_PIN, GPIO_PIN_RESET);
+//	HAL_GPIO_WritePin(RELE_RESET_PORT, RELE_RESET_PIN, GPIO_PIN_RESET);
+//	HAL_Delay(1);
+//	HAL_GPIO_WritePin(RELE_RESET_PORT, RELE_RESET_PIN, GPIO_PIN_SET);
+//	HAL_SPI_Transmit(RELE_SPI_PORT,&channels, 1, 1000);
+//	HAL_GPIO_WritePin(RELE_LA_PORT, RELE_LA_PIN, GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(RELE_LA_PORT, RELE_LA_PIN, GPIO_PIN_RESET);
+//	HAL_GPIO_WritePin(RELE_OE_PORT, RELE_OE_PIN, GPIO_PIN_RESET);
 	
+
+	MCP23S17_PortSet(MCP_PORTA, channels);
+//	volatile uint8_t tx_data[24];
+//	volatile uint8_t 	rx_data[24];
+//	tx_data[0]=	MCP23S17_ADDRESS | 0x01;
+//	tx_data[1]=	0;
+//	 
+//	MCP23S17_NSS_RESET;		
+//	HAL_SPI_TransmitReceive(MCP23S17_SPI_PORT, tx_data, rx_data, 22, 1000);
+//	MCP23S17_NSS_SET;
+
  }
 
 

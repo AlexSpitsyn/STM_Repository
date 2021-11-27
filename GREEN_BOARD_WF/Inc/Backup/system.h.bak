@@ -48,15 +48,16 @@ typedef struct {
   //				TEMP
   int16_t set_temp;
   int16_t temp_ctrl_f;
-	int16_t threshold_temp;
+//	int16_t threshold_temp;
 	int16_t t_ctrl_time;
 	int16_t t_updt_time;
 	int16_t t_hyst;
 	int16_t 	pump;
+	int16_t 	pump_sens;
 	//int16_t 	burner;
   //				ERROR
   int8_t error_code;
-  _Bool error_f;
+  //_Bool error_f;
 	//				UART DBG
 	_Bool uart_en_f;
 	_Bool uart_dbg_f;
@@ -74,7 +75,7 @@ typedef struct {
 		int16_t mem_addr;  
 } SysVar;
 
-#define SYS_VAR_CNT										8
+#define SYS_VAR_CNT										12
 extern SysVar SV[SYS_VAR_CNT];
 
 enum VarName{
@@ -84,7 +85,12 @@ enum VarName{
 	vn_T_UPDT_TIME,
 	vn_T_HYST,
 	vn_PUMP,	
-	vn_T_THRESHOLD
+	vn_PUMP_SENS,	
+	vn_DRIVE_POS,
+	vn_DRIVE_MAX_POS,
+	vn_DRIVE_DRIVE_POS_DEST,
+	vn_DRIVE_STEPS
+	
 };
 
 
@@ -99,6 +105,7 @@ enum VarName{
 #define EEPROM_READING_ERROR 					2
 #define DRV_OPEN_ERROR								3
 #define DRV_CLOSE_ERROR								4
+#define DRV_MIN_SENSOR_ERROR					5
 
 #define ERROR_CHECK_TIME						100
 
@@ -109,7 +116,8 @@ void SystemTask(void);
 uint32_t SysVarRW(_Bool rw, SysVar* sv);
 void SetTemp(void);
 void SetMaxPosition(void);
- void pump_set(uint8_t channels);
+void pump_set(uint8_t channels);
+uint32_t EEPROM_restore(void);
 
 
 //==============================================================
@@ -125,13 +133,13 @@ void SetMaxPosition(void);
 //==============================================================
 //========================     PUMP/BURNER      ================
 //#define PUMP(x)							x ? PCF8574_PortSet(5): PCF8574_PortReset(5); SysState.pump1=x;
-
 //#define BURNER(x)						x ? PCF8574_PortSet(6): PCF8574_PortReset(6); SysState.burner=x;
 
-
-#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
+//#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
 //#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
 
+#define WF_PUMP_ON()					SysState.pump|=0x0101;
+#define WF_PUMP_OFF()					SysState.pump&=0x00FE;SysState.pump|=0x0100;
 
 //==============================================================
 
@@ -140,10 +148,10 @@ void SetMaxPosition(void);
 
 #define SS_BLINK_TIME 							10
 #define SS_VIEW_MODE_TIME 					120
-#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);PrintDecSevSeg(drv_m1.position);
-#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);PrintDecSevSeg(x);
-#define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); PrintDecSevSeg(x);
-#define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); PrintDecSevSeg(x);
+#define SS_PRINT_CUR_POS() 					putcSS(SEV_SEG_P);SevSeg_PrintDec(drv_m1.position);
+#define SS_PRINT_POS(x) 						putcSS(SEV_SEG_P);SevSeg_PrintDec(x);
+#define SS_PRINT_TEMP(x) 						putcSS(SEV_SEG_t); SevSeg_PrintDec(x);
+#define SS_PRINT_ERROR_CODE(x) 			putcSS(SEV_SEG_E); SevSeg_PrintDec(x);
 #define SS_PRINT_T_NONE() 					putcSS(SEV_SEG_t); putcSS(0); putcSS(SEV_SEG_NONE); putcSS(SEV_SEG_NONE); SS_LATCH();
 #define SS_BLINK(x) 								SysState.ss_blink_f = x; SS_OE(x); SysCnt.blink=0;
 #define TEMP_VIEW 									0
@@ -155,7 +163,7 @@ void SetMaxPosition(void);
 
 //========================     TEMP SENSOR======================
 
-#define TEMP_MAX_LIMIT 					45
+#define TEMP_MAX_LIMIT 					50
 #define TEMP_MIN_LIMIT 					0
 
 
@@ -182,8 +190,7 @@ void SetMaxPosition(void);
 
 
 
-//#define DRIVE_MAX_POS_LIMIT 					850
-//#define DRIVE_MIN_POS_LIMIT 					0
+
 
 
 //==============================================================

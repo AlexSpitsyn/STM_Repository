@@ -61,7 +61,7 @@ volatile SysCouners_t SysCnt={0};
 
  SysVar SV[SYS_VAR_CNT]= {//0};
 {"temp",		 		0, 0, 		(int16_t*)(&DS18B20_TEMP), 		RO, 0},
-//{"t_ctrl", 			0, 1, 		&SysState.temp_ctrl_f, 				WE, vn_T_CTRL_F}, 
+{"gpio", 				0, 1, 		&SysState.gpio, 							WE, 	vn_GPIO}, 
 //{"t_set", 			0, 50, 		&SysState.set_temp, 					WE, vn_T_SET},		
 //{"t_ctrl_time", 0, 5000, 	&SysState.t_ctrl_time, 				WE, vn_T_CTRL_TIME},
 {"t_updt_time", 0, 5000, 	&SysState.t_updt_time, 				WE, vn_T_UPDT_TIME}
@@ -135,14 +135,20 @@ void SysInit(void) {
   SysState.error_code |= ds18b20_Init(1, RESOLUTION_9BIT) << TEMP_SENSOR_READING_ERROR;  
 	SysState.error_code |= WL_Init()<< WL_ERROR;
 	
+	SysVarRW(RD,&SV[vn_GPIO]);
 	SysVarRW(RD,&SV[vn_T_UPDT_TIME]);
 	
+	HAL_GPIO_WritePin(TX_GPIO_Port, TX_Pin, SysState.gpio);
 
   //Start timer1 IT
   HAL_TIM_Base_Start_IT( &htim1);
+	
+#ifdef UART_EN
 
-  //Arm UART1
+	  //Arm UART1
   HAL_UART_Receive_IT( & huart1, & receive_val, 1);
+#endif
+
 
 
 	ds18b20_Init(1,RESOLUTION_9BIT);
@@ -153,7 +159,7 @@ void SysInit(void) {
 
 void SystemTask(void) {
 
-
+		HAL_GPIO_WritePin(TX_GPIO_Port, TX_Pin, SysState.gpio);
 
     //----------------      TEMP UPDATE     --------------------------------------
 
@@ -171,7 +177,8 @@ void SystemTask(void) {
 
 		SysState.error_code |= ds18b20_GetTemp(0) << TEMP_SENSOR_READING_ERROR;  
 					
-		//LED_TOGGLE(LED_BLUE); 			
+		//LED_TOGGLE(LED_BLUE); 		
+				
 					
         }
       }
@@ -179,6 +186,8 @@ void SystemTask(void) {
      
 
 			//---------------------------   UART --------------------------------
+#ifdef UART_EN
+
 //			if(SysState.uart_en_f){
 //			
 				if (uart1_rx_flag) {			
@@ -186,13 +195,13 @@ void SystemTask(void) {
 					uart1_rx_flag = 0;		
 				}
 //			}
-
+#endif
 			//---------------------------   CDC --------------------------------
 			
 			if(HAL_GPIO_ReadPin(USB_INT_GPIO_Port, USB_INT_Pin) & (cdc_init==0)){
 				HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
 				cdc_init=1;
-				
+								
 			}				
 			if (vcp_rx_flag) {
 				if(cdc_init==1){

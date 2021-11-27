@@ -9,8 +9,10 @@
 #include "main.h"
 #include "spi.h"
 #include "i2c.h"
-#include "usart.h"
 
+#ifdef UART_EN
+#include "usart.h"
+#endif
 
 #include "usbd_cdc_if.h"
 #include "tim.h"
@@ -30,10 +32,13 @@
 
 
 #define DEV_NAME 								"Wireless Temp Sensor v.2\r\n> "
-#define WTS_NUM 								9
+#define WTS_NUM 								2
 #define EEPROM_DUMP_SIZE 								72
 static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
-	0x00, 0x55, 0xD0, 0x07, 0xFF, 0xFF, 0xFF, 0xFF, 
+	0x00, 0x55, // blanc
+	0x00, 0x00, // GPIO
+	0xD0, 0x07, // T_UPDT_TIME
+	0xFF, 0xFF, 
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -93,6 +98,7 @@ static uint8_t eeprom_dump[EEPROM_DUMP_SIZE] ={
 //#define LED_BLUE											4 //PCF8574 port
 
 // UART CONFIG
+//#define UART_EN
 //#define print_to(x)										printf(x)
 //#define print_to(x)									HAL_UART_Transmit(&huart1, (uint8_t*)x, strlen(x), 0xFFFF);
 #define print_to(x)										while(CDC_Transmit_FS( (uint8_t*)x, strlen(x))!=USBD_OK)

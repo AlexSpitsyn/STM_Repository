@@ -17,14 +17,12 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "crc.h"
 #include "i2c.h"
 #include "spi.h"
 #include "tim.h"
-#include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
 
@@ -93,7 +91,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART1_UART_Init();
   MX_SPI1_Init();
   MX_SPI2_Init();
   MX_TIM1_Init();
@@ -101,12 +98,54 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_CRC_Init();
   /* USER CODE BEGIN 2 */
+//	volatile uint8_t r=0;
+//	MCP23S17_ReadSeq();
+
+//	MCP23S17_Init();
+	
+	
+	
+//	MCP23S17_PortConfig(MCP_PORTA, 0x00);	
+//	
+//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
+//	MCP23S17_PortSet(MCP_PORTA, 0x00);
+	
+	
+//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
+//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
+//	MCP23S17_PortSet(MCP_PORTA, 0xF0);
+//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
+//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
+//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
+//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
+//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
+//	MCP23S17_PortSet(MCP_PORTA, 0x00);
+//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
+//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
+//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
+//	MCP23S17_PortSet(MCP_PORTA, 0x00);
+//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
+//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
+//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
+//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
+//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
+//	uint8_t st=0, reg=0, v=0;
+//	while(1){
+//		if(st)
+//			MCP23S17_PortSet(MCP_PORTA, v);	
+//			
+//	}
+	
+	
 	SysInit();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	
+
   while (1){
+		
 		SystemTask();					
 		buttons_handler();
 		
@@ -186,7 +225,8 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -199,7 +239,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -245,7 +285,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

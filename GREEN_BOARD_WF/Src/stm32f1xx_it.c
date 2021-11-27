@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "buttons_io_exp.h"
 #include "wireless_ctrl.h"
+#include "mcp23s17.h"
 
 /* USER CODE END Includes */
 
@@ -61,13 +62,12 @@
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_FS;
 extern TIM_HandleTypeDef htim1;
-extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M3 Processor Interruption and Exception Handlers          */ 
+/*           Cortex-M3 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -221,7 +221,6 @@ void EXTI0_IRQHandler(void)
   */
 void EXTI4_IRQHandler(void)
 {
-	//HAL_Delay(20);
   /* USER CODE BEGIN EXTI4_IRQn 0 */
 	if(drv_m1.direction){
 		drv_m1.pos++;
@@ -309,20 +308,6 @@ void TIM1_UP_IRQHandler(void)
   /* USER CODE BEGIN TIM1_UP_IRQn 1 */
 
   /* USER CODE END TIM1_UP_IRQn 1 */
-}
-
-/**
-  * @brief This function handles USART1 global interrupt.
-  */
-void USART1_IRQHandler(void)
-{
-  /* USER CODE BEGIN USART1_IRQn 0 */
-
-  /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
-  /* USER CODE BEGIN USART1_IRQn 1 */
-
-  /* USER CODE END USART1_IRQn 1 */
 }
 
 /**

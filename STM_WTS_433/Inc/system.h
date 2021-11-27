@@ -49,7 +49,7 @@ typedef struct {
 //  int16_t set_temp;
 //  int16_t temp_ctrl_f;
 //	int16_t threshold_temp;
-//	int16_t t_ctrl_time;
+	int16_t gpio;
 	int16_t t_updt_time;
 //	int16_t t_hyst;
 //	int16_t 	pump;
@@ -74,14 +74,14 @@ typedef struct {
 		int16_t mem_addr;  
 } SysVar;
 
-#define SYS_VAR_CNT										2
+#define SYS_VAR_CNT										3
 extern SysVar SV[SYS_VAR_CNT];
 
 enum VarName{
 //	vn_T_CTRL_F=1,
 //	vn_T_SET,
-//	vn_T_CTRL_TIME,
-	vn_T_UPDT_TIME=1
+	vn_GPIO=1,
+	vn_T_UPDT_TIME
 //	vn_T_HYST,
 //	vn_PUMP,
 //	vn_BURNER,

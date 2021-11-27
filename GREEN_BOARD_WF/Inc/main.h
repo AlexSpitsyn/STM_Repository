@@ -71,8 +71,8 @@ void Error_Handler(void);
 #define LORA_IRQ_Pin GPIO_PIN_0
 #define LORA_IRQ_GPIO_Port GPIOB
 #define LORA_IRQ_EXTI_IRQn EXTI0_IRQn
-#define XP9_1o_Pin GPIO_PIN_1
-#define XP9_1o_GPIO_Port GPIOB
+#define MCP_IRQ_Pin GPIO_PIN_1
+#define MCP_IRQ_GPIO_Port GPIOB
 #define XP9_6o_Pin GPIO_PIN_2
 #define XP9_6o_GPIO_Port GPIOB
 #define LORA_RESET_Pin GPIO_PIN_10
@@ -84,8 +84,6 @@ void Error_Handler(void);
 #define SS_OE_GPIO_Port GPIOB
 #define SS_LE_Pin GPIO_PIN_8
 #define SS_LE_GPIO_Port GPIOA
-#define TRG6_Pin GPIO_PIN_15
-#define TRG6_GPIO_Port GPIOA
 #define PHOTO_SENS_Pin GPIO_PIN_4
 #define PHOTO_SENS_GPIO_Port GPIOB
 #define PHOTO_SENS_EXTI_IRQn EXTI4_IRQn

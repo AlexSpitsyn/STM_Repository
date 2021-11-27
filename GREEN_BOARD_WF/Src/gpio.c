@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * File Name          : gpio.c
-  * Description        : This file provides code for the configuration
-  *                      of all used GPIO pins.
+  * @file    gpio.c
+  * @brief   This file provides code for the configuration
+  *          of all used GPIO pins.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
+
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -30,9 +31,9 @@
 
 /* USER CODE END 1 */
 
-/** Configure pins as 
-        * Analog 
-        * Input 
+/** Configure pins as
+        * Analog
+        * Input
         * Output
         * EVENT_OUT
         * EXTI
@@ -48,24 +49,24 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, DQ_Pin|USB_PULLUP_Pin|XP9_5o_Pin|SPI1_NSS1_Pin 
-                          |SS_LE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, DQ_Pin|USB_PULLUP_Pin|XP9_5o_Pin|SPI1_NSS1_Pin
+                          |SS_LE_Pin|GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, XP9_1o_Pin|XP9_6o_Pin|LORA_RESET_Pin|SS_OE_Pin 
-                          |MOTO_DRV1_Pin|MOTO_DRV2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, XP9_6o_Pin|LORA_RESET_Pin|SS_OE_Pin|MOTO_DRV1_Pin
+                          |MOTO_DRV2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin PAPin 
-                           PAPin */
-  GPIO_InitStruct.Pin = DQ_Pin|USB_PULLUP_Pin|XP9_5o_Pin|SPI1_NSS1_Pin 
-                          |SS_LE_Pin;
+  /*Configure GPIO pins : PAPin PAPin PAPin PAPin
+                           PAPin PA9 */
+  GPIO_InitStruct.Pin = DQ_Pin|USB_PULLUP_Pin|XP9_5o_Pin|SPI1_NSS1_Pin
+                          |SS_LE_Pin|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin */
-  GPIO_InitStruct.Pin = USB_INT_Pin|TRG6_Pin;
+  /*Configure GPIO pins : PAPin PA15 */
+  GPIO_InitStruct.Pin = USB_INT_Pin|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -76,20 +77,21 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LORA_IRQ_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PBPin PBPin PBPin PBPin 
-                           PBPin PBPin */
-  GPIO_InitStruct.Pin = XP9_1o_Pin|XP9_6o_Pin|LORA_RESET_Pin|SS_OE_Pin ;
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = MCP_IRQ_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(MCP_IRQ_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PBPin PBPin PBPin PBPin
+                           PBPin */
+  GPIO_InitStruct.Pin = XP9_6o_Pin|LORA_RESET_Pin|SS_OE_Pin|MOTO_DRV1_Pin
+                          |MOTO_DRV2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  GPIO_InitStruct.Pin = MOTO_DRV1_Pin|MOTO_DRV2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-	
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = SW_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
@@ -99,7 +101,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = PHOTO_SENS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(PHOTO_SENS_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/

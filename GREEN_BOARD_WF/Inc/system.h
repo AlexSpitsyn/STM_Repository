@@ -53,6 +53,7 @@ typedef struct {
 	int16_t t_updt_time;
 	int16_t t_hyst;
 	int16_t 	pump;
+
 	//int16_t 	burner;
   //				ERROR
   int8_t error_code;
@@ -78,6 +79,7 @@ typedef struct {
 extern SysVar SV[SYS_VAR_CNT];
 
 enum VarName{
+	//TEMP = 0 
 	vn_T_CTRL_F=1,
 	vn_T_SET,
 	vn_T_CTRL_TIME,
@@ -136,8 +138,11 @@ uint32_t EEPROM_restore(void);
 //#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
 //#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
 
-#define WF_PUMP_ON()					SysState.pump|=0x0101;
-#define WF_PUMP_OFF()					SysState.pump&=0x00FE;SysState.pump|=0x0100;
+//#define WF_PUMP_ON()					SysState.pump|=0x0101;
+//#define WF_PUMP_OFF()					SysState.pump&=0x00FE;SysState.pump|=0x0100;
+
+#define WF_PUMP_ON()					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+#define WF_PUMP_OFF()					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
 
 //==============================================================
 

@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "buttons_io_exp.h"
 #include "wireless_ctrl.h"
+#include "mcp23s17.h"
 
 /* USER CODE END Includes */
 
@@ -67,7 +68,7 @@ extern UART_HandleTypeDef huart1;
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M3 Processor Interruption and Exception Handlers          */ 
+/*           Cortex-M3 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -217,6 +218,39 @@ void EXTI0_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles EXTI line4 interrupt.
+  */
+void EXTI4_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI4_IRQn 0 */
+	if(drv_m1.direction){
+		drv_m1.pos++;
+		SysCnt.drv_move=0;
+		if(IRQ_PRINT_F){
+			sprintf(dbg_str,"POS = %d\r\n", DRV_POS);
+			dbg_print(dbg_str);
+		}
+	}else{
+		drv_m1.pos--;
+		SysCnt.drv_move=0;
+		if(IRQ_PRINT_F){
+			sprintf(dbg_str,"POS = %d\r\n", DRV_POS);
+			dbg_print(dbg_str);
+		}
+	}
+	if(drv_m1.pos==drv_m1.dest_pos){
+		DRV_STOP();
+		drv_m1.dest_pos=drv_m1.pos;
+		
+	}
+  /* USER CODE END EXTI4_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
+  /* USER CODE BEGIN EXTI4_IRQn 1 */
+
+  /* USER CODE END EXTI4_IRQn 1 */
+}
+
+/**
   * @brief This function handles USB low priority or CAN RX0 interrupts.
   */
 void USB_LP_CAN1_RX0_IRQHandler(void)
@@ -231,38 +265,6 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles EXTI line[9:5] interrupts.
-  */
-void EXTI9_5_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-	
-	if(drv_m1.direction){
-		drv_m1.pos++;
-		SysCnt.drv_move=0;
-		if(DRIVE_DEBUG_PRINT_F){
-			dbg_print("pos+\r\n");
-		}
-	}else{
-		drv_m1.pos--;
-		SysCnt.drv_move=0;
-		if(DRIVE_DEBUG_PRINT_F){
-			dbg_print("pos-\r\n");
-		}
-	}
-	if(drv_m1.pos==drv_m1.dest_pos){
-		DRV_STOP();
-		drv_m1.dest_pos=drv_m1.pos;
-		
-	}
-  /* USER CODE END EXTI9_5_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
-  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
-
-  /* USER CODE END EXTI9_5_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM1 update interrupt.
   */
 void TIM1_UP_IRQHandler(void)
@@ -273,24 +275,7 @@ void TIM1_UP_IRQHandler(void)
   SysCnt.timeout++;
 	SysCnt.temp_ctrl++;
 	
-if(drv_m1.direction){
-		drv_m1.pos++;
-		SysCnt.drv_move=0;
-		if(DRIVE_DEBUG_PRINT_F){
-			dbg_print("pos+\r\n");
-		}
-	}else{
-		drv_m1.pos--;
-		SysCnt.drv_move=0;
-		if(DRIVE_DEBUG_PRINT_F){
-			dbg_print("pos-\r\n");
-		}
-	}
-	if(drv_m1.pos==drv_m1.dest_pos){
-		DRV_STOP();
-		drv_m1.dest_pos=drv_m1.pos;
-		
-	}
+
 
 	if (SysState.error_code)
 			SysCnt.error_check++;
@@ -348,7 +333,11 @@ void EXTI15_10_IRQHandler(void)
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
 	
 	btn_pressed_f=1;
+
 	PCF8574_ReadReg();
+	if(IRQ_PRINT_F){
+		dbg_print("===== READ REG ======\r\n");
+	}
 	extTrigger1=PCF8574_reg & ETRG1_MASK;
 	extTrigger2=PCF8574_reg & ETRG2_MASK;
 	extTrigger3=PCF8574_reg & ETRG3_MASK;
@@ -357,26 +346,34 @@ void EXTI15_10_IRQHandler(void)
 	//drv control
 	
 	if(extTrigger1){
-		//printf("IRQ MAX_SENS 1\r\n");
+		if(IRQ_PRINT_F){
+			dbg_print("IRQ MAX_SENS 1\r\n");
+		}
 		drv_m1.max_sens_f=1;
 		DRV_STOP();		
 		drv_m1.max_pos=drv_m1.pos;
-		drv_m1.dest_pos=drv_m1.pos;
+		drv_m1.dest_pos=drv_m1.pos;			
 	}else{
-		//printf("IRQ MAX_SENS 0\r\n");
-		drv_m1.max_sens_f=0;			
+		drv_m1.max_sens_f=0;
+	
+		if(IRQ_PRINT_F){
+			dbg_print("IRQ MAX_SENS 0\r\n");	
+		}			
 	}
 	
 	if(extTrigger2){
-		//printf("IRQ MIN_SENS 1\r\n");
+		if(IRQ_PRINT_F){
+			dbg_print("IRQ MIN_SENS 1\r\n");
+		}
 		drv_m1.min_sens_f=1;
-		DRV_STOP();
 		drv_m1.pos=0;
 		drv_m1.dest_pos=0;
-	}else{
-		//printf("IRQ MIN_SENS 0\r\n");
-		drv_m1.min_sens_f=0;
-		
+		DRV_STOP();
+	}else{	
+		if(IRQ_PRINT_F){
+			printf("IRQ MIN_SENS 0\r\n");
+		}
+		drv_m1.min_sens_f=0;		
 	}
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
