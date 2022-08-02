@@ -68,7 +68,9 @@ volatile SysCouners_t SysCnt={0};
 {"t_hyst", 			0, 10, 		&SysState.t_hyst, 						WE, vn_T_HYST},
 {"pump", 				0, 1, 		&SysState.pump, 							WE, vn_PUMP},
 {"burner", 			0, 1, 		&SysState.burner, 						RO, vn_BURNER},
-{"t_th", 				0, 30, 		&SysState.threshold_temp, 		WE, vn_T_THRESHOLD}
+{"t_th", 				0, 30, 		&SysState.threshold_temp, 		WE, vn_T_THRESHOLD},
+{"reset_cnt",		0, 10000,	&SysState.reset_cnt, 					WE, vn_RESET_CNT}
+
 ////{"drv_pos", 		0, 999, 	&drv_m1.position, 						WE, vn_DRIVE_POS*EEPROM_OFFSET},//EEPROM , when set drv_m1.position = drv_m1.dest_pos
 ////{"drv_pos_max", 0, 999, 	&drv_m1.max_pos, 							WE, vn_DRIVE_MAX_POS * EEPROM_OFFSET},//EEPROM 
 ////{"drv_pos_dest",0, 0, 		&drv_m1.dest_pos, 						WE, 0},
@@ -83,7 +85,8 @@ volatile SysCouners_t SysCnt={0};
 
 void SysInit(void) {
 	
-
+	SysCnt.wl_offline=0;
+	
 	SevSeg_Init();
 	
 	//	eeprom need to restore
@@ -130,9 +133,8 @@ void SysInit(void) {
 	SysVarRW(RD,&SV[vn_T_CTRL_TIME]);
 	SysVarRW(RD,&SV[vn_T_UPDT_TIME]);
 	SysVarRW(RD,&SV[vn_T_HYST]);
-	SysVarRW(RD,&SV[vn_T_THRESHOLD]);
-
-	
+	SysVarRW(RD,&SV[vn_T_THRESHOLD]);	
+	SysVarRW(RD,&SV[vn_RESET_CNT]);
 
 	//Start timer1 IT
 	HAL_TIM_Base_Start_IT( &htim1);
@@ -208,6 +210,24 @@ static int16_t old_temp_ctrl_f;
 			//LED_TOGGLE(LED_BLUE);
 			SysState.error_code |= ds18b20_GetTemp(0) << TEMP_SENSOR_READING_ERROR; 
 			//LED_TOGGLE(LED_BLUE);
+			
+			
+			      
+			//----------------      PUMP & BURNER CONTROL     --------------------------------------
+     
+			if((SysState.burner==1) &( SysState.pump==0)){
+				PUMP(ON);
+
+			}
+			if(SysState.temp_ctrl_f==0){
+				BURNER(OFF);	
+			}
+			if(!SysState.temp_ctrl_f & SysState.pump & (DS18B20_TEMP<SysState.threshold_temp)){
+				PUMP(OFF);
+			}
+			if(DS18B20_TEMP>SysState.threshold_temp){
+				PUMP(ON);
+			}
 		}
 	}
 
@@ -237,21 +257,7 @@ static int16_t old_temp_ctrl_f;
 			}  
 		}
 	}
-      //----------------      PUMP & BURNER CONTROL     --------------------------------------
-     
-	if((SysState.burner==1) &( SysState.pump==0)){
-		PUMP(ON);
 
-	}
-	if(SysState.temp_ctrl_f==0){
-		BURNER(OFF);	
-	}
-	if(!SysState.temp_ctrl_f & SysState.pump & (DS18B20_TEMP<SysState.threshold_temp)){
-		PUMP(OFF);
-	}
-	if(DS18B20_TEMP>SysState.threshold_temp){
-		PUMP(ON);
-	}
 	
 
 			//---------------------------   UART --------------------------------
@@ -284,7 +290,15 @@ static int16_t old_temp_ctrl_f;
 			
 			
 //---------------------------   SX1278 --------------------------------
-			
+			char answ[64];
+//			if (SysCnt.wl_offline >= 54000){ //45 min
+//				SysState.reset_cnt++;
+//				//SysCnt.wl_offline = 0;
+//				SysVarRW(WR,&SV[vn_RESET_CNT]);
+//				sprintf(answ, "RESET_CNT: %d\r\n", SysState.reset_cnt);		
+//				print_to(answ);		
+//				HAL_NVIC_SystemReset();	
+//			}
 			WL_Handler();	
 			
 //---------------------------   ERROR check --------------------------------
@@ -406,11 +420,12 @@ uint32_t SysVarRW(_Bool rw, SysVar* sv) {
 }
 
  uint32_t EEPROM_restore(void) {
-	int len, res;
+	int len, res=0;
 	
 	len=EEPROM_DUMP_SIZE/8;
 	 
 	for( int i = 0; i<=len; i++){
+		
 		res|=EEPROM_Write(i*8, 8, eeprom_dump+i*8);
 		HAL_Delay(100);
 	}

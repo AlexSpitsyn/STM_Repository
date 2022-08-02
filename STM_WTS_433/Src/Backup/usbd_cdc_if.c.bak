@@ -23,10 +23,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
-#ifdef UART_EN
-#include "usart.h"
-#endif
+//#include "usart.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -37,7 +34,8 @@
 /* Private variables ---------------------------------------------------------*/
 uint8_t vcp_rx_flag = 0;
 uint8_t vcp_csi_buf[16];
-char vcp_rx_buf[64];
+char vcp_rx_buf[128];
+uint8_t tempbuf[7];
 /* USER CODE END PV */
 
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
@@ -188,7 +186,7 @@ static int8_t CDC_DeInit_FS(void)
 static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 {
   /* USER CODE BEGIN 5 */
-	uint8_t tempbuf[7];
+	
   switch(cmd)
   {
     case CDC_SEND_ENCAPSULATED_COMMAND:
@@ -285,57 +283,38 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 	static uint8_t csi_rx_len = 0;
 	static uint8_t CSI = 0;
 	
- 
 	
-	//ECHO
+	//---------ECHO-------
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
 	CDC_Transmit_FS(Buf,*Len);
-	//usb_cdc = hUsbDeviceFS;	
+	//-------------------
+	
 	USBD_CDC_ReceivePacket(&hUsbDeviceFS);
 
-	//HAL_UART_Transmit(&huart1, (uint8_t*)Len, 2, 0xFFFF);
-	//char* ach=NULL;
-	//char tmp[16];
-
-	
-//	ach = strchr((char*)Buf, 13);
-//	
-//		 if (ach==NULL){
-//			// HAL_Delay(1000);
-//      CDC_Transmit_FS((uint8_t*)"\r\nNO\r\n\0", 10);
-//		
-//		 } else{
-//			 sprintf(tmp, "\r\npos = %d\r\n", ach-(char*)Buf+1);
-//			// HAL_Delay(1000);
-//      CDC_Transmit_FS((uint8_t*)tmp, strlen(tmp));
-//		 }
-
-//		if(strchr((char*)Buf, 13)){
-//			CDC_Transmit_FS((uint8_t*)"13\r\n\0", 5);
-//		}
-		
-		
 		
 	if (!CSI) {
-		if (Buf[0] == 13) { //recieve '/r'
-			vcp_rx_buf[vcp_rx_len++] = 0;
-			
-			//while(((USBD_CDC_HandleTypeDef*)(hUsbDeviceFS.pClassData))->TxState!=0);
-			uint32_t t=0xFFFF;
-			while(t--){
-				__NOP();
+		if (*Len==1){			
+			if (Buf[0] == 13) { //recieve '\r'
+				vcp_rx_buf[vcp_rx_len++] = 0;	
+				vcp_rx_len = 0;
+				vcp_rx_flag = 1;
+			} else if (Buf[0] == 27) { //recieve ESC sequence
+				CSI = 1;
+				vcp_csi_buf[csi_rx_len++] = Buf[0];
+			} else if (Buf[0] == 127) { //delete 
+				vcp_rx_len--;
+			} else {
+				vcp_rx_buf[vcp_rx_len++] = Buf[0];
 			}
-			
-			//CDC_Transmit_FS((uint8_t*)"\r\n>", 3);
-			vcp_rx_len = 0;
-			vcp_rx_flag = 1;
-		} else if (Buf[0] == 27) { //recieve ESC sequence
-			CSI = 1;
-			vcp_csi_buf[csi_rx_len++] = Buf[0];
-		} else if (Buf[0] == 127) { //delete 
-			vcp_rx_len--;
-		} else {
-			vcp_rx_buf[vcp_rx_len++] = Buf[0];
+		}else{
+			if(strchr(Buf, 13)){
+				memcpy(vcp_rx_buf, Buf, *Len);
+				vcp_rx_len = 0;
+				vcp_rx_flag = 1;
+			}else{
+				memcpy(vcp_rx_buf, Buf, *Len);
+				vcp_rx_len += *Len;				
+			}
 		}
 	} else {
 		if (64 <= Buf[0] && Buf[0] <= 126 && Buf[0] != 91) {

@@ -35,6 +35,8 @@ typedef struct {
   int16_t temp_ctrl;
   int16_t blink;
   int16_t view_mode;
+	int32_t wl_offline;
+	
 }SysCouners_t;
 
 extern volatile SysCouners_t SysCnt;
@@ -55,6 +57,7 @@ typedef struct {
 	int16_t 	burner;
   //				ERROR
   int8_t error_code;
+	int16_t reset_cnt;
 //  _Bool error_f;
 	//				UART DBG
 	_Bool uart_en_f;
@@ -73,7 +76,7 @@ typedef struct {
 		int16_t mem_addr;  
 } SysVar;
 
-#define SYS_VAR_CNT										9
+#define SYS_VAR_CNT										10
 extern SysVar SV[SYS_VAR_CNT];
 
 enum VarName{
@@ -84,7 +87,8 @@ enum VarName{
 	vn_T_HYST,
 	vn_PUMP,
 	vn_BURNER,
-	vn_T_THRESHOLD
+	vn_T_THRESHOLD,
+	vn_RESET_CNT
 };
 
 
@@ -130,14 +134,17 @@ uint32_t EEPROM_restore(void);
 
 //==============================================================
 //========================     PUMP/BURNER      ================
-//#define PUMP(x)							x ? PCF8574_PortSet(5): PCF8574_PortReset(5); SysState.pump1=x;
-//#define BURNER(x)						x ? PCF8574_PortSet(6): PCF8574_PortReset(6); SysState.burner=x;
+#define PUMP(x)							x ? PCF8574_PortReset(5): PCF8574_PortSet(5); SysState.pump=x;
+#define BURNER(x)						x ? PCF8574_PortReset(6): PCF8574_PortSet(6); SysState.burner=x;
 
 //#define PUMP(x)							x ? LED_ON(LED_BLUE): LED_OFF(LED_BLUE); SysState.pump=x;
 //#define BURNER(x)						x ? LED_ON(LED_RED): LED_OFF(LED_RED); SysState.burner=x;
 
-#define PUMP(x)							!x ? HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_SET); SysState.pump=x;
-#define BURNER(x)						!x ? HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_SET); SysState.burner=x;
+//#define PUMP(x)							!x ? HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_PUMP_GPIO_Port, RELEY_PUMP_Pin, GPIO_PIN_SET); SysState.pump=x;
+//#define BURNER(x)						!x ? HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_RESET): HAL_GPIO_WritePin(RELEY_BURNER_GPIO_Port, RELEY_BURNER_Pin, GPIO_PIN_SET); SysState.burner=x;
+
+//#define PUMP(x)							!x ? PCF8574_PortSet(1): PCF8574_PortReset(1); SysState.pump=x;
+//#define BURNER(x)						!x ? PCF8574_PortSet(2): PCF8574_PortReset(2); SysState.pump=x;
 
 //==============================================================
 

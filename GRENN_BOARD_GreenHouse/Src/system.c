@@ -417,7 +417,9 @@ void SysErrorCheck(void) {
 void SetMaxPosition(void) {
 #define SET_MODE_TIME 120
 	int16_t tmp = drv_m1.max_pos;
+	uint8_t steps = 10;//drv_m1.steps;
 
+	
 	SS_PRINT_POS(tmp);
 	SS_BLINK(ON);
 	SysCnt.timeout = 0;
@@ -426,8 +428,8 @@ void SetMaxPosition(void) {
 
 		if(BTN_UP ==SHORT_PRESS) {
 			BTN_UP =0;
-			if (tmp < DRIVE_MAX_POS_LIMIT - drv_m1.steps) {
-				tmp += drv_m1.steps;
+			if (tmp < DRIVE_MAX_POS_LIMIT - steps) {
+				tmp += steps;
 			} else {
 				tmp =DRIVE_MAX_POS_LIMIT;
 			}
@@ -437,8 +439,8 @@ void SetMaxPosition(void) {
 
 		if(BTN_DOWN ==SHORT_PRESS) {
 			BTN_DOWN =0;
-			if (tmp > DRIVE_MIN_POS_LIMIT + drv_m1.steps) {
-				tmp -= drv_m1.steps;
+			if (tmp > DRIVE_MIN_POS_LIMIT + steps) {
+				tmp -= steps;
 			} else {
 				tmp =DRIVE_MIN_POS_LIMIT;
 			}

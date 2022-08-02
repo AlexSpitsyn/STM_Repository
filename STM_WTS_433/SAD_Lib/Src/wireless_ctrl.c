@@ -81,9 +81,13 @@ uint8_t state;
 	}else{
 		if(SV[var].we){
 			if(val<=SV[var].vmax && val>=SV[var].vmin){
-				*SV[var].pVal = (uint16_t)val;	
-				strcpy((char*)desc, SV[var].name);	
-				state=CMD_DONE;				
+				*SV[var].pVal = (uint16_t)val;
+				strcpy((char*)desc, SV[var].name);
+				if(SysVarRW(WR, &SV[var])){
+					return CMD_ERROR;
+				}else{
+					state=CMD_DONE;
+				}					
 			}else{
 				state=VAL_NOT_SUPPORTED;
 			}
@@ -232,6 +236,10 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 		case CMD_ERR_CLR: 	
 				state = CMD_NOT_SUPPORTED;			
 		break;
+		
+		case CMD_RESET: 					
+				HAL_NVIC_SystemReset();			
+		break;
 				
 		default:
 			state = CMD_NOT_SUPPORTED;
@@ -246,40 +254,40 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 void WL_Handler(void){
 	
 	uint8_t state=0, cmd_state;
+	static uint32_t wl_check_cnt=0;
 	
-		if(WL_RECEIVE){
+		
+	if(WL_RECEIVE){	
+		LED_TOGGLE(LED_BLUE); 
+		HAL_Delay(100);
+		LED_TOGGLE(LED_BLUE); 
+		HAL_Delay(100);
+		LED_TOGGLE(LED_BLUE); 
+		HAL_Delay(100);
+		LED_TOGGLE(LED_BLUE); 
+		
+		WL_RECEIVE=0;	
+		if(WL_DEBUG_PRINT){		
+			dbg_print("\r\n   Packet Received\r\n");
+		}
+		state= WL_Check_Packet();
+		
+		if((state==PS_ADDR_MATCH) && rx_handler){		
+			HAL_Delay(200);
 			
-			LED_TOGGLE(LED_BLUE); 
-			HAL_Delay(100);
-			LED_TOGGLE(LED_BLUE); 
-			HAL_Delay(100);
-			LED_TOGGLE(LED_BLUE); 
-			HAL_Delay(100);
-			LED_TOGGLE(LED_BLUE); 
-			
-			WL_RECEIVE=0;	
+			cmd_state = WL_Run_CMD(RX_packet.cmd);
 			if(WL_DEBUG_PRINT){		
-				dbg_print("\r\n   Packet Received\r\n");
-			}
-			state= WL_Check_Packet();
-			
-			if((state==PS_ADDR_MATCH) && rx_handler){		
-				HAL_Delay(200);
-				
-				cmd_state = WL_Run_CMD(RX_packet.cmd);
-				if(WL_DEBUG_PRINT){		
-						sprintf(dbg_str,"RUN CMD STATE: %s\r\n",CMD_STATE_STR[cmd_state]);
-						dbg_print(dbg_str);
-				}
-				state = WL_Send_Packet(RX_packet.pack_ID, cmd_state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val, RX_packet.desc);
-				if(WL_DEBUG_PRINT){		
-					sprintf(dbg_str,"SEND PACKET STATE: %s\r\n",PACK_STATE_STR[state]);
+					sprintf(dbg_str,"RUN CMD STATE: %s\r\n",CMD_STATE_STR[cmd_state]);
 					dbg_print(dbg_str);
-				}
-			}	
-			 
-		}		
+			}
+			state = WL_Send_Packet(RX_packet.pack_ID, cmd_state ,RX_packet.src_addr, RX_packet.cmd, RX_packet.var, RX_packet.val, RX_packet.desc);
+			if(WL_DEBUG_PRINT){		
+				sprintf(dbg_str,"SEND PACKET STATE: %s\r\n",PACK_STATE_STR[state]);
+				dbg_print(dbg_str);
+			}
+		}	
+		
+	}			
 }
-
 
 

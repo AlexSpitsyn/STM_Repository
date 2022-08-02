@@ -201,7 +201,7 @@ void SystemTask(void) {
 			if(HAL_GPIO_ReadPin(USB_INT_GPIO_Port, USB_INT_Pin) & (cdc_init==0)){
 				HAL_GPIO_WritePin(USB_PULLUP_GPIO_Port, USB_PULLUP_Pin, GPIO_PIN_SET);
 				cdc_init=1;
-				
+								
 			}				
 			if (vcp_rx_flag) {
 				if(cdc_init==1){

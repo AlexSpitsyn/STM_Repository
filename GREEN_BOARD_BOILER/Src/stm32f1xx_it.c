@@ -209,6 +209,7 @@ void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
 	SX1278_IRQ_Callback();
+	
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
@@ -236,9 +237,11 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 void TIM1_UP_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_IRQn 0 */
+	// 20 Tick = 1 sec 
 	SysCnt.temp_update++;
   SysCnt.timeout++;
 	SysCnt.temp_ctrl++;
+	SysCnt.wl_offline++;
 	
 	//packet_handler_timer++;
 

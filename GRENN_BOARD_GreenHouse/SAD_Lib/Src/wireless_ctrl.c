@@ -236,6 +236,10 @@ uint8_t WL_Run_CMD(uint8_t cmd){
 		case CMD_ERR_CLR: 	
 				state = CMD_NOT_SUPPORTED;			
 		break;
+		
+		case CMD_RESET: 					
+				HAL_NVIC_SystemReset();			
+		break;
 				
 		default:
 			state = CMD_NOT_SUPPORTED;
@@ -253,8 +257,7 @@ void WL_Handler(void){
 	static uint32_t wl_check_cnt=0;
 	
 		
-	if(WL_RECEIVE){
-		wl_check_cnt=0;
+	if(WL_RECEIVE){	
 		LED_TOGGLE(LED_BLUE); 
 		HAL_Delay(100);
 		LED_TOGGLE(LED_BLUE); 
@@ -283,15 +286,8 @@ void WL_Handler(void){
 				dbg_print(dbg_str);
 			}
 		}	
-	}else{
-		if(wl_check_cnt>=0x0FFFFFFFF){
-			wl_check_cnt=0;
-			if ((SX1278_SPIReadReg(LR_RegModemConfig1) == 0) || (SX1278_SPIReadReg(LR_RegModemConfig2) == 0)){
-				SX1278_LoRaEntryRx( WL_PLOAD_WIDTH, 2000);
-			}				
-		}			
+		
 	}			
 }
-
 
 

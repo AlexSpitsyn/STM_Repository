@@ -47,7 +47,7 @@ void uartInit(void) {
 #define DEC_STR 10
 #define HEX_STR 16
 
-#define CMD_CNT 11
+#define CMD_CNT 12
 static const char* commands[CMD_CNT] = {							
 		"help",         // 0                      
 		"init",     		// 1
@@ -59,7 +59,8 @@ static const char* commands[CMD_CNT] = {
 		"rx handler",		// 7
 		"state",				// 8
 		"eeprom write",	// 9
-		"eeprom restore"
+		"eeprom restore", //10
+		"reset"
 											
 	}; 
 #define PRM_CNT 6
@@ -522,6 +523,15 @@ void parseCommand(char *buf) {
 				}else{
 					print_to("EEPROM RESTORE: DONE\r\n");
 				}
+			break;		
+
+//===========================================================================			
+//==============================  WRITE RESTORE  =============================
+//===========================================================================				
+			case 11:  //reset
+				print_to("SYSTEM RESET\r\n");
+				HAL_NVIC_SystemReset();
+
 			break;		
     
 			default:

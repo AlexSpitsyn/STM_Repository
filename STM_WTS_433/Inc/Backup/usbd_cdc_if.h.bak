@@ -93,7 +93,7 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
 /* USER CODE BEGIN EXPORTED_VARIABLES */
 extern uint8_t vcp_rx_flag;
 extern uint8_t vcp_csi_buf[16];
-extern char vcp_rx_buf[64];
+extern char vcp_rx_buf[128];
 /* USER CODE END EXPORTED_VARIABLES */
 
 /**
