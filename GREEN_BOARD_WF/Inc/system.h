@@ -105,7 +105,7 @@ enum VarName{
 #define EEPROM_READING_ERROR 					2
 #define DRV_OPEN_ERROR								3
 #define DRV_CLOSE_ERROR								4
-#define DRV_MIN_SENSOR_ERROR					5
+#define DRV_PHOTO_SENSOR_ERROR				5
 
 #define ERROR_CHECK_TIME						100
 
@@ -141,8 +141,13 @@ uint32_t EEPROM_restore(void);
 //#define WF_PUMP_ON()					SysState.pump|=0x0101;
 //#define WF_PUMP_OFF()					SysState.pump&=0x00FE;SysState.pump|=0x0100;
 
-#define WF_PUMP_ON()					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
-#define WF_PUMP_OFF()					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+#define WF_PUMP_ON()					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET)
+#define WF_PUMP_OFF()					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET)
+
+//======================================== ====================
+//========================     OPTOCUPLER CH B      ===========
+
+#define PHOTO_SENSOR_GET_STATE()		HAL_GPIO_ReadPin(PHOTOSENSOR_A_GPIO_Port, PHOTOSENSOR_A_Pin)
 
 //==============================================================
 

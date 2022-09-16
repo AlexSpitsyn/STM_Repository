@@ -98,43 +98,7 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_CRC_Init();
   /* USER CODE BEGIN 2 */
-//	volatile uint8_t r=0;
-//	MCP23S17_ReadSeq();
 
-//	MCP23S17_Init();
-	
-	
-	
-//	MCP23S17_PortConfig(MCP_PORTA, 0x00);	
-//	
-//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
-//	MCP23S17_PortSet(MCP_PORTA, 0x00);
-	
-	
-//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
-//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
-//	MCP23S17_PortSet(MCP_PORTA, 0xF0);
-//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
-//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
-//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
-//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
-//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
-//	MCP23S17_PortSet(MCP_PORTA, 0x00);
-//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
-//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
-//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
-//	MCP23S17_PortSet(MCP_PORTA, 0x00);
-//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
-//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
-//	MCP23S17_PortSet(MCP_PORTA, 0xFF);
-//	r=MCP23S17_ReadReg(MCP_PORTA, GPIO);
-//	r=MCP23S17_ReadReg(MCP_PORTA, OLAT);
-//	uint8_t st=0, reg=0, v=0;
-//	while(1){
-//		if(st)
-//			MCP23S17_PortSet(MCP_PORTA, v);	
-//			
-//	}
 	
 	
 	SysInit();
@@ -182,15 +146,6 @@ int main(void)
 			SysCnt.temp_update = SysState.t_updt_time;
 			SysCnt.temp_ctrl = SysState.t_ctrl_time;
 			
-//			for (uint8_t i = 0; i < SYS_VAR_CNT; i++) {	
-//					if (SV[i].mem_addr != 0) {						
-//						if(SysVarRW(WR, &SV[i])){							
-//							break;
-//						}
-//						HAL_Delay(50);
-//					}
-//			}
-			//printf("SEL short press\r\n");				
 		}
 		
 		if(BTN_SEL==LONG_PRESS){
@@ -239,6 +194,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -292,5 +248,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

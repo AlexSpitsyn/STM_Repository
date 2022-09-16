@@ -84,11 +84,12 @@ void Error_Handler(void);
 #define SS_OE_GPIO_Port GPIOB
 #define SS_LE_Pin GPIO_PIN_8
 #define SS_LE_GPIO_Port GPIOA
-#define TRG6_Pin GPIO_PIN_15
-#define TRG6_GPIO_Port GPIOA
-#define PHOTO_SENS_Pin GPIO_PIN_4
-#define PHOTO_SENS_GPIO_Port GPIOB
-#define PHOTO_SENS_EXTI_IRQn EXTI4_IRQn
+#define OPTOCUP_B_Pin GPIO_PIN_4
+#define OPTOCUP_B_GPIO_Port GPIOB
+#define OPTOCUP_B_EXTI_IRQn EXTI4_IRQn
+#define OPTOCUP_A_Pin GPIO_PIN_5
+#define OPTOCUP_A_GPIO_Port GPIOB
+#define OPTOCUP_A_EXTI_IRQn EXTI9_5_IRQn
 #define MOTO_DRV1_Pin GPIO_PIN_8
 #define MOTO_DRV1_GPIO_Port GPIOB
 #define MOTO_DRV2_Pin GPIO_PIN_9
@@ -102,5 +103,3 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

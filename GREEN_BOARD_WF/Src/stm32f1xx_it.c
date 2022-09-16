@@ -210,7 +210,7 @@ void EXTI0_IRQHandler(void)
   /* USER CODE BEGIN EXTI0_IRQn 0 */
 	SX1278_IRQ_Callback();
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  HAL_GPIO_EXTI_IRQHandler(LORA_IRQ_Pin);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
@@ -239,11 +239,12 @@ void EXTI4_IRQHandler(void)
 	}
 	if(drv_m1.pos==drv_m1.dest_pos){
 		DRV_STOP();
-		drv_m1.dest_pos=drv_m1.pos;
-		
+		//drv_m1.dest_pos=drv_m1.pos;		
 	}
+	
+
   /* USER CODE END EXTI4_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
+  HAL_GPIO_EXTI_IRQHandler(OPTOCUP_B_Pin);
   /* USER CODE BEGIN EXTI4_IRQn 1 */
 
   /* USER CODE END EXTI4_IRQn 1 */
@@ -255,12 +256,35 @@ void EXTI4_IRQHandler(void)
 void USB_LP_CAN1_RX0_IRQHandler(void)
 {
   /* USER CODE BEGIN USB_LP_CAN1_RX0_IRQn 0 */
-
+	
   /* USER CODE END USB_LP_CAN1_RX0_IRQn 0 */
   HAL_PCD_IRQHandler(&hpcd_USB_FS);
   /* USER CODE BEGIN USB_LP_CAN1_RX0_IRQn 1 */
 
   /* USER CODE END USB_LP_CAN1_RX0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line[9:5] interrupts.
+  */
+void EXTI9_5_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
+
+
+	DRV_STOP();			
+	if(drv_m1.direction){
+		drv_m1.max_pos=drv_m1.pos;	
+	}else{
+		drv_m1.pos=0;	
+	}
+	drv_m1.dest_pos=drv_m1.pos;
+	
+  /* USER CODE END EXTI9_5_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(OPTOCUP_A_Pin);
+  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
+
+  /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
 /**
@@ -299,7 +323,6 @@ void TIM1_UP_IRQHandler(void)
 		} else{
 			SysState.error_code |= 1<<DRV_OPEN_ERROR;
 		}				
-		//printf("DRV MOVE FAIL\r\n");
 	}
 
 	
@@ -327,41 +350,11 @@ void EXTI15_10_IRQHandler(void)
 	extTrigger2=PCF8574_reg & ETRG2_MASK;
 	extTrigger3=PCF8574_reg & ETRG3_MASK;
 	
+
 	
-	//drv control
 	
-	if(extTrigger1){
-		if(IRQ_PRINT_F){
-			dbg_print("IRQ MAX_SENS 1\r\n");
-		}
-		drv_m1.max_sens_f=1;
-		DRV_STOP();		
-		drv_m1.max_pos=drv_m1.pos;
-		drv_m1.dest_pos=drv_m1.pos;			
-	}else{
-		drv_m1.max_sens_f=0;
-	
-		if(IRQ_PRINT_F){
-			dbg_print("IRQ MAX_SENS 0\r\n");	
-		}			
-	}
-	
-	if(extTrigger2){
-		if(IRQ_PRINT_F){
-			dbg_print("IRQ MIN_SENS 1\r\n");
-		}
-		drv_m1.min_sens_f=1;
-		drv_m1.pos=0;
-		drv_m1.dest_pos=0;
-		DRV_STOP();
-	}else{	
-		if(IRQ_PRINT_F){
-			printf("IRQ MIN_SENS 0\r\n");
-		}
-		drv_m1.min_sens_f=0;		
-	}
   /* USER CODE END EXTI15_10_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+  HAL_GPIO_EXTI_IRQHandler(SW_INT_Pin);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
   /* USER CODE END EXTI15_10_IRQn 1 */
@@ -370,4 +363,3 @@ void EXTI15_10_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
