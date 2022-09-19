@@ -4,62 +4,80 @@ drive_t drv_m1;
 
 uint32_t Drive_HomeInit(void){
 	
-	int16_t temp_pos;
 
 	GPIO_PinState photo_sensor;
 	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 
+	// opredelaem peresekaet li plastina sensor
 	
-	if(PHOTO_SENSOR_GET_STATE()){
+	if(PHOTO_SENSOR_GET_STATE()){// 1 - peresekaet, 0 - ne peresekaet
+		//opredelaem perviy kray 
+		//+printf("1 peresekaet\r\n");
 		drv_m1.dest_pos=0;
 		drv_m1.pos=100;		
 		DRV_CLOSE();		
 	}else{
+		// probuem nayti ego v 5 shagah
+		//printf("1 ne peresekaet\r\n");
 		drv_m1.dest_pos=0;
 		drv_m1.pos=5;
 		DRV_CLOSE();
 		while(drv_m1.run_f){
-			if(drv_m1.fail_f)
-				HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+			if(drv_m1.fail_f)				
 				return 1;			
 		}
 		HAL_Delay(200);
+		//v druguyu storone 5 shagov
 		if(!PHOTO_SENSOR_GET_STATE()){			
 			drv_m1.dest_pos=10;
 			drv_m1.pos=0;
 			DRV_OPEN();
 			while(drv_m1.run_f){
-				if(drv_m1.fail_f)
-					HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+				if(drv_m1.fail_f)					
 					return 1;			
 			}
 		}
 
 	}	
 	
+	// elsi ne nashli to zapuskaem polniy oborot
 	photo_sensor=PHOTO_SENSOR_GET_STATE();
 	if(photo_sensor){
+		//printf("2 ishem nachalo\r\n");
 		drv_m1.dest_pos=0;
 		drv_m1.pos=40;
 		DRV_CLOSE();
 	}else{			
+			//printf("2 polniy oborot\r\n");
 			drv_m1.dest_pos=120;
 			drv_m1.pos=0;
 			DRV_OPEN();
-	}
-				
-	temp_pos=drv_m1.pos;	
-
+	}	
 	while(photo_sensor==PHOTO_SENSOR_GET_STATE()){					
 		if(drv_m1.fail_f | !drv_m1.run_f){		
 			return 1;			
 		}			
 	}	
+	
+	// opredelaem drugoy konec
+	//printf("3 opredelaem drugoy konec\r\n");
 	DRV_STOP();
-	drv_m1.pos=0;
-	drv_m1.dest_pos=0;
-
-	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+	drv_m1.pos=-1;
+	drv_m1.dest_pos=1;
+	DRV_OPEN();
+	while(drv_m1.run_f);
+	drv_m1.dest_pos=50;
+	DRV_OPEN();
+	while(PHOTO_SENSOR_GET_STATE()){					
+		if(drv_m1.fail_f | !drv_m1.run_f){		
+			return 1;			
+		}			
+	}	
+	DRV_STOP();
+	drv_m1.max_pos=drv_m1.pos-1;
+	drv_m1.dest_pos=drv_m1.max_pos/2;
+	DRV_CLOSE();
+	//HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 	return 0;
 
 

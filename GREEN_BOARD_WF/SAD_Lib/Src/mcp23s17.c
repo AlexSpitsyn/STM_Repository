@@ -102,11 +102,12 @@ void MCP23S17_WriteSeq(void) {
 }
 
 void MCP23S17_PortConfig(uint8_t port, uint8_t direction) {
+
 	MCP23S17_WriteReg(port, IODR, direction);
+	//MCP23S17_WriteReg(port, GPIO, 0x00);
 	
-	MCP23S17_WriteReg(port, GPIO, 0x00);
-	
-	MCP23S17_WriteReg(port, OLAT, 0x00);
+	//MCP23S17_WriteReg(port, OLAT, 0x00);
+
 }
 
 uint8_t MCP23S17_PortGet(uint8_t port) {

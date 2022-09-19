@@ -146,8 +146,11 @@ void SysInit(void) {
 	drv_m1.max_pos=DRIVE_MAX_POS_LIMIT;
 	
 	MCP23S17_Init();	
+	
+	
+	MCP23S17_PortSet(MCP_PORTA, 0xFF);
 	MCP23S17_PortConfig(MCP_PORTA, 0x00);
-	MCP23S17_PortSet(MCP_PORTA, 0x00);
+	
 	MCP23S17_PortConfig(MCP_PORTB, 0xFF);
  	MCP23S17_IRQen(MCP_PORTB, 0xFF);
 	MCP23S17_PortPUP(MCP_PORTB, 0xFF);
@@ -180,16 +183,8 @@ void SysInit(void) {
 			dbg_print("DRIVE ROTATION ERROR\r\n");
 		}
 	}else{
-		SysState.error_code |= Drive_HomeInit() << DRV_PHOTO_SENSOR_ERROR;				
-		drv_m1.dest_pos=drv_m1.max_pos/2;
-		dbg_print("     DRV INIT    \r\n");
-		sprintf(dbg_str,"Init POS = %d\r\n", drv_m1.pos);
-		dbg_print(dbg_str);
-		sprintf(dbg_str,"Init MAX POS = %d\r\n", drv_m1.max_pos);
-		dbg_print(dbg_str);
-		sprintf(dbg_str,"Init DEST POS = %d\r\n", drv_m1.dest_pos);
-		dbg_print(dbg_str);
-		DRV_OPEN();
+		SysState.error_code |= Drive_HomeInit() << DRV_HOME_INIT_ERROR;			
+
 	}	
 	
 	

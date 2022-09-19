@@ -105,7 +105,7 @@ enum VarName{
 #define EEPROM_READING_ERROR 					2
 #define DRV_OPEN_ERROR								3
 #define DRV_CLOSE_ERROR								4
-#define DRV_PHOTO_SENSOR_ERROR				5
+#define DRV_HOME_INIT_ERROR						5
 
 #define ERROR_CHECK_TIME						100
 

@@ -271,12 +271,14 @@ void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
 
-
+	printf("IRQ PHOTOSENS\r\n");
 	DRV_STOP();			
 	if(drv_m1.direction){
-		drv_m1.max_pos=drv_m1.pos;	
+		printf("\tDIR 1\r\n");
+		//drv_m1.max_pos=drv_m1.pos;	
 	}else{
-		drv_m1.pos=0;	
+		printf("\tDIR 0\r\n");
+		//drv_m1.pos=0;	
 	}
 	drv_m1.dest_pos=drv_m1.pos;
 	
